@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chakra Analysis · Travel 2 Transform</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--pink:#d4548a;--bg:#0f080c;--text:#f4e8ef;--border:rgba(212,84,138,0.15)}
+body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(212,84,138,.1) 0%,transparent 65%);pointer-events:none}
+.page{display:none}.page.active{display:block}
+.wrap{max-width:660px;margin:0 auto;padding:0 20px 80px}
+.back{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.3);font-size:13px;text-decoration:none;padding:20px 0;font-family:sans-serif;letter-spacing:1px;transition:color .2s}
+.back:hover{color:var(--pink)}
+.hdr{text-align:center;padding:20px 0 40px;border-bottom:1px solid var(--border);margin-bottom:44px}
+.ey{font-family:'Cinzel',serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--pink);opacity:.8;margin-bottom:14px}
+h1{font-size:clamp(28px,7vw,48px);font-weight:300;letter-spacing:2px;line-height:1.15}
+h1 em{font-style:italic;color:var(--pink)}
+.sub{margin-top:10px;font-size:15px;opacity:.4;font-style:italic}
+.card{background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:2px;padding:32px;margin-bottom:20px}
+.cgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin:28px 0 36px}
+.cpip{text-align:center}.cpip .ce{font-size:22px;margin-bottom:4px}.cpip .cn{font-size:9px;letter-spacing:1px;text-transform:uppercase;opacity:.45}
+@media(max-width:500px){.cgrid{grid-template-columns:repeat(4,1fr)}}
+.ptrak{display:flex;gap:3px;margin-bottom:10px}
+.ps{height:2px;flex:1;border-radius:1px;background:rgba(255,255,255,.07);transition:background .4s}
+.ps.done{background:rgba(212,84,138,.35)}.ps.active{background:var(--pink)}
+.plbl{font-size:11px;letter-spacing:3px;text-transform:uppercase;opacity:.3;margin-bottom:28px;font-family:sans-serif}
+.qt{font-size:clamp(18px,4vw,22px);font-weight:300;line-height:1.55;margin-bottom:6px}
+.qs{font-size:14px;font-style:italic;opacity:.4;margin-bottom:28px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:2px;padding:16px 22px;color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;font-size:16px;line-height:1.5;text-align:left;cursor:pointer;transition:all .22s}
+.opt:hover{border-color:rgba(212,84,138,.35);background:rgba(212,84,138,.04)}
+.opt.selected{border-color:var(--pink);background:rgba(212,84,138,.08)}
+.cbars{margin:28px 0}
+.crow{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.cico{font-size:20px;width:28px;text-align:center}
+.cinfo{flex:1}
+.clbl{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;opacity:.65}
+.ctrk{height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
+.cfill{height:100%;border-radius:3px;width:0;transition:width 1.2s cubic-bezier(.22,.68,0,1.2)}
+.rsum{background:rgba(212,84,138,.06);border:1px solid rgba(212,84,138,.15);border-radius:2px;padding:24px;margin-bottom:20px}
+.rst{font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:var(--pink);margin-bottom:12px}
+.rsx{font-size:16px;line-height:1.8;opacity:.8;font-style:italic}
+.pay{background:rgba(212,84,138,.04);border:1px solid rgba(212,84,138,.18);border-radius:2px;padding:36px;text-align:center;margin-top:8px}
+.why{background:rgba(212,84,138,.06);border:1px solid rgba(212,84,138,.15);border-radius:2px;padding:24px;margin:24px 0;text-align:left}
+.whyt{font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:var(--pink);margin-bottom:12px}
+.whyp{font-size:15px;line-height:1.8;opacity:.75;margin-bottom:12px}
+.jbox{display:flex;align-items:center;gap:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:2px;padding:20px;margin-bottom:28px;text-align:left}
+.jn{font-family:'Cinzel',serif;font-size:12px;letter-spacing:2px;color:var(--pink);margin-bottom:4px}
+.jd{font-size:14px;opacity:.7;line-height:1.6}
+.btn{display:inline-block;padding:14px 32px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;border-radius:2px;cursor:pointer;border:none;transition:all .2s;text-decoration:none}
+.btn-wa{display:inline-flex;align-items:center;gap:12px;background:#25d366;color:#fff;padding:16px 32px;border-radius:2px;text-decoration:none;font-family:'Cinzel',serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;font-weight:600;transition:all .2s;margin-bottom:12px}
+.btn-wa:hover{opacity:.88;transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.1)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.2)}
+.btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.wan{font-size:12px;opacity:.35;letter-spacing:1px;font-family:sans-serif}
+.cross{margin-top:40px;border-top:1px solid rgba(212,84,138,.12);padding-top:36px}
+.crt{font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--pink);opacity:.7;margin-bottom:16px}
+.crg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.crc{display:block;text-align:center;padding:18px 12px;border-radius:2px;text-decoration:none;transition:all .2s}
+.crc:hover{transform:translateY(-2px)}
+/* Language */
+.lang-bar{position:fixed;top:12px;right:16px;z-index:200;display:flex;background:rgba(212,84,138,.15);border-radius:50px;padding:3px;gap:2px}
+.lb{padding:5px 12px;border-radius:50px;border:none;background:transparent;cursor:pointer;font-size:12px;font-weight:500;letter-spacing:1px;color:rgba(244,232,239,.45);transition:all .2s;font-family:sans-serif}
+.lb.active{background:var(--pink);color:#0f080c}
+.de{display:none}.en{display:block}
+body.lang-de .de{display:block}body.lang-de .en{display:none}
+body.lang-en .de{display:none}body.lang-en .en{display:block}
+@keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fi{animation:fu .5s ease forwards}
+</style>
+</head>
+<body class="lang-en">
+
+<div class="lang-bar">
+  <button class="lb active" id="btn-en" onclick="setLang('en')">EN</button>
+  <button class="lb" id="btn-de" onclick="setLang('de')">DE</button>
+</div>
+
+<div id="page-intro" class="page active">
+  <div class="wrap">
+    <a href="index.html" class="back">← Travel 2 Transform</a>
+    <header class="hdr">
+      <div class="ey">Travel 2 Transform · <span class="en">Chakras</span><span class="de">Chakren</span></div>
+      <h1 class="en">Your <em>Chakra Analysis</em></h1>
+      <h1 class="de">Deine <em>Chakren-Analyse</em></h1>
+      <div class="sub en">Discover your energetic blockages</div>
+      <div class="sub de">Finde deine energetischen Blockaden</div>
+    </header>
+    <div class="card fi">
+      <p style="font-size:18px;line-height:1.85;font-weight:300;margin-bottom:12px" class="en">The seven main chakras are energy centres in your body. When one is blocked, you feel it – physically, emotionally and mentally.</p>
+      <p style="font-size:18px;line-height:1.85;font-weight:300;margin-bottom:12px" class="de">Die sieben Hauptchakren sind Energiezentren in deinem Körper. Wenn eines blockiert ist, spürt man das – körperlich, emotional und mental.</p>
+      <p style="font-size:16px;line-height:1.8;opacity:.55;margin-bottom:24px" class="en">Answer 14 questions and find out which chakras need attention – and how a personal Reiki treatment can help.</p>
+      <p style="font-size:16px;line-height:1.8;opacity:.55;margin-bottom:24px" class="de">Beantworte 14 Fragen und erfahre welche Chakren Aufmerksamkeit brauchen – und wie eine persönliche Reiki-Behandlung helfen kann.</p>
+      <div class="cgrid">
+        <div class="cpip"><div class="ce">🔴</div><div class="cn en">Root</div><div class="cn de">Wurzel</div></div>
+        <div class="cpip"><div class="ce">🟠</div><div class="cn en">Sacral</div><div class="cn de">Sakral</div></div>
+        <div class="cpip"><div class="ce">🟡</div><div class="cn en">Solar</div><div class="cn de">Solar</div></div>
+        <div class="cpip"><div class="ce">💚</div><div class="cn en">Heart</div><div class="cn de">Herz</div></div>
+        <div class="cpip"><div class="ce">🔵</div><div class="cn en">Throat</div><div class="cn de">Kehl</div></div>
+        <div class="cpip"><div class="ce">💙</div><div class="cn en">Third Eye</div><div class="cn de">Stirn</div></div>
+        <div class="cpip"><div class="ce">🟣</div><div class="cn en">Crown</div><div class="cn de">Krone</div></div>
+      </div>
+      <button class="btn" style="background:var(--pink);color:#0f080c;font-weight:600" onclick="startQuiz()">
+        <span class="en">Start Analysis →</span><span class="de">Analyse starten →</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="page-quiz" class="page">
+  <div class="wrap">
+    <a href="index.html" class="back">← <span class="en">Back</span><span class="de">Zurück</span></a>
+    <header class="hdr">
+      <div class="ey en">Chakra Analysis</div><div class="ey de">Chakren-Analyse</div>
+      <h1 class="en">Your <em>Energy Centres</em></h1>
+      <h1 class="de">Deine <em>Energiezentren</em></h1>
+    </header>
+    <div class="ptrak" id="ptrak"></div>
+    <div class="plbl" id="plbl"></div>
+    <div class="card fi">
+      <div class="qt" id="qt"></div>
+      <div class="qs" id="qs"></div>
+      <div class="opts" id="opts"></div>
+    </div>
+  </div>
+</div>
+
+<div id="page-result" class="page">
+  <div class="wrap">
+    <a href="index.html" class="back">← <span class="en">Back</span><span class="de">Zurück</span></a>
+    <header class="hdr">
+      <div class="ey en">Your Chakra Balance</div><div class="ey de">Deine Chakren-Balance</div>
+      <h1 class="en">Your <em>Result</em></h1><h1 class="de">Dein <em>Ergebnis</em></h1>
+    </header>
+    <div class="card fi">
+      <div class="cbars" id="cbars"></div>
+      <div class="rsum">
+        <div class="rst en">Your Key Insights</div><div class="rst de">Deine wichtigsten Erkenntnisse</div>
+        <p class="rsx" id="res-summary"></p>
+      </div>
+    </div>
+    <div class="pay fi">
+      <div style="font-size:40px;margin-bottom:16px">✨</div>
+      <div style="font-family:'Cinzel',serif;font-size:18px;letter-spacing:3px;margin-bottom:12px" class="en">Bring Your Chakras Into Balance</div>
+      <div style="font-family:'Cinzel',serif;font-size:18px;letter-spacing:3px;margin-bottom:12px" class="de">Bring deine Chakren ins Gleichgewicht</div>
+      <p style="font-size:16px;line-height:1.8;opacity:.6;margin-bottom:8px;font-style:italic" class="en">An analysis shows <em>where</em> blockages are – but only real Reiki energy can truly release them.</p>
+      <p style="font-size:16px;line-height:1.8;opacity:.6;margin-bottom:8px;font-style:italic" class="de">Eine Analyse zeigt <em>wo</em> die Blockaden sitzen – aber wirklich lösen kann sie nur echte Reiki-Energie.</p>
+      <div class="why">
+        <div class="whyt en">WHY REIKI?</div><div class="whyt de">WARUM REIKI?</div>
+        <p class="whyp en">Reiki is a centuries-old Japanese healing method in which universal life energy flows through the practitioner's hands – directed precisely into the blocked chakras.</p>
+        <p class="whyp de">Reiki ist eine jahrhundertealte japanische Heilmethode, bei der universelle Lebensenergie durch die Hände des Behandlers fließt – gezielt in die blockierten Chakren.</p>
+        <p class="whyp en">As a trained Reiki practitioner, I work in 1:1 online sessions directly with your energy centres – individually, mindfully and professionally.</p>
+        <p class="whyp de">Als ausgebildete Reiki-Praktikerin arbeite ich in 1:1 Online-Sessions direkt mit deinen Energiezentren – individuell, achtsam und professionell.</p>
+      </div>
+      <div class="jbox">
+        <div style="font-size:40px">🙏</div>
+        <div>
+          <div class="jn">JENNY WIERZBICKI</div>
+          <div class="jd en">Reiki Practitioner · Yoga Teacher · Ayurveda Consultant<br>Travel 2 Transform</div>
+          <div class="jd de">Reiki-Praktikerin · Yoga-Lehrerin · Ayurveda-Beraterin<br>Travel 2 Transform</div>
+        </div>
+      </div>
+      <a id="wa-btn" href="#" target="_blank" class="btn-wa">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="en">Book 1:1 Reiki Session</span><span class="de">1:1 Reiki-Session buchen</span>
+      </a>
+      <div class="wan en">Message Jenny directly on WhatsApp</div>
+      <div class="wan de">Schreib Jenny direkt auf WhatsApp</div>
+      <div class="btn-row" style="justify-content:center;margin-top:24px">
+        <button class="btn btn-ghost" onclick="reset()"><span class="en">Retake quiz</span><span class="de">Quiz wiederholen</span></button>
+      </div>
+      <div class="cross">
+        <div class="crt en">Complete your system</div><div class="crt de">Vervollständige dein System</div>
+        <p style="font-size:17px;line-height:1.8;font-weight:300;font-style:italic;margin-bottom:8px" class="en">Which <strong style="font-style:normal">yoga sequences</strong> support your chakras – and what <strong style="font-style:normal">nutrition</strong> strengthens your energy?</p>
+        <p style="font-size:17px;line-height:1.8;font-weight:300;font-style:italic;margin-bottom:8px" class="de">Welche <strong style="font-style:normal">Yoga-Sequenzen</strong> unterstützen deine Chakren – und welche <strong style="font-style:normal">Ernährung</strong> stärkt deine Energie?</p>
+        <div class="crg">
+          <a href="yoga-quiz.html" class="crc" style="border:1px solid rgba(58,153,144,.25);background:rgba(58,153,144,.04)">
+            <div style="font-size:26px;margin-bottom:8px">🧘</div>
+            <div style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:#3a9990;margin-bottom:4px">YOGA</div>
+            <div style="font-size:13px;opacity:.6;color:var(--text)" class="en">Your Yoga Plan</div>
+            <div style="font-size:13px;opacity:.6;color:var(--text)" class="de">Dein Yoga-Plan</div>
+          </a>
+          <a href="dosha-quiz.html" class="crc" style="border:1px solid rgba(200,169,110,.25);background:rgba(200,169,110,.04)">
+            <div style="font-size:26px;margin-bottom:8px">🌿</div>
+            <div style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:#c8a96e;margin-bottom:4px">AYURVEDA</div>
+            <div style="font-size:13px;opacity:.6;color:var(--text)" class="en">Dosha Analysis</div>
+            <div style="font-size:13px;opacity:.6;color:var(--text)" class="de">Dosha-Analyse</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentLang='en';
+function setLang(l){
+  currentLang=l;
+  document.body.className='lang-'+l;
+  document.getElementById('btn-en').classList.toggle('active',l==='en');
+  document.getElementById('btn-de').classList.toggle('active',l==='de');
+  localStorage.setItem('t2t-lang',l);
+  updateWALink();
+  if(cur>0&&cur<questions.length) renderQ();
+}
+
+function updateWALink(){
+  const msg=currentLang==='en'
+    ?'Hello%20Jenny!%20I%20just%20completed%20the%20Chakra%20Analysis%20and%20would%20love%20to%20book%20a%201%3A1%20Reiki%20session.'
+    :'Hallo%20Jenny!%20Ich%20habe%20gerade%20die%20Chakren-Analyse%20gemacht%20und%20m%C3%B6chte%20eine%201%3A1%20Reiki-Session%20buchen.';
+  const btn=document.getElementById('wa-btn');
+  if(btn)btn.href='https://wa.me/4917624238972?text='+msg;
+}
+
+const chakras={
+  en:[
+    {id:'root',name:'Root Chakra',emoji:'🔴',color:'#e74c3c',theme:'Safety, grounding, survival'},
+    {id:'sacral',name:'Sacral Chakra',emoji:'🟠',color:'#e67e22',theme:'Creativity, sexuality, emotions'},
+    {id:'solar',name:'Solar Plexus',emoji:'🟡',color:'#f1c40f',theme:'Self-worth, willpower, strength'},
+    {id:'heart',name:'Heart Chakra',emoji:'💚',color:'#2ecc71',theme:'Love, compassion, connection'},
+    {id:'throat',name:'Throat Chakra',emoji:'🔵',color:'#3498db',theme:'Communication, expression, truth'},
+    {id:'thirdeye',name:'Third Eye Chakra',emoji:'💙',color:'#8e44ad',theme:'Intuition, wisdom, clarity'},
+    {id:'crown',name:'Crown Chakra',emoji:'🟣',color:'#9b59b6',theme:'Spirituality, connection, enlightenment'}
+  ],
+  de:[
+    {id:'root',name:'Wurzelchakra',emoji:'🔴',color:'#e74c3c',theme:'Sicherheit, Erdung, Überleben'},
+    {id:'sacral',name:'Sakralchakra',emoji:'🟠',color:'#e67e22',theme:'Kreativität, Sexualität, Emotionen'},
+    {id:'solar',name:'Solarplexus',emoji:'🟡',color:'#f1c40f',theme:'Selbstwert, Willenskraft, Stärke'},
+    {id:'heart',name:'Herzchakra',emoji:'💚',color:'#2ecc71',theme:'Liebe, Mitgefühl, Verbindung'},
+    {id:'throat',name:'Kehlchakra',emoji:'🔵',color:'#3498db',theme:'Kommunikation, Ausdruck, Wahrheit'},
+    {id:'thirdeye',name:'Stirnchakra',emoji:'💙',color:'#8e44ad',theme:'Intuition, Weisheit, Klarheit'},
+    {id:'crown',name:'Kronenchakra',emoji:'🟣',color:'#9b59b6',theme:'Spiritualität, Verbindung, Erleuchtung'}
+  ]
+};
+
+const questions=[
+  {
+    en:{text:"Do you feel safe and grounded in daily life?",sub:"How stable do you feel fundamentally?"},
+    de:{text:"Fühlst du dich im Alltag sicher und geerdet?",sub:"Wie stabil fühlst du dich grundsätzlich?"},
+    options:[
+      {en:"Yes, I feel stable and secure",de:"Ja, ich fühle mich stabil und sicher",chakra:'root',score:3},
+      {en:"Sometimes, but I often feel insecure or anxious",de:"Manchmal, aber oft fühle ich mich unsicher oder ängstlich",chakra:'root',score:1},
+      {en:"Rarely – insecurity and anxiety are frequent companions",de:"Selten – Unsicherheit und Angst sind häufige Begleiter",chakra:'root',score:0}
+    ]
+  },
+  {
+    en:{text:"How do you handle your feelings and emotions?",sub:""},
+    de:{text:"Wie gehst du mit deinen Gefühlen und Emotionen um?",sub:""},
+    options:[
+      {en:"I allow emotions and let them flow through me",de:"Ich lasse Emotionen zu und fließen sie durch mich hindurch",chakra:'sacral',score:3},
+      {en:"I struggle to express or allow feelings",de:"Ich tue mich schwer damit, Gefühle auszudrücken oder zuzulassen",chakra:'sacral',score:1},
+      {en:"I frequently suppress emotions or feel emotionally numb",de:"Ich unterdrücke Emotionen häufig oder bin emotional taubig",chakra:'sacral',score:0}
+    ]
+  },
+  {
+    en:{text:"How strong is your self-confidence and sense of self-worth?",sub:""},
+    de:{text:"Wie stark ist dein Selbstvertrauen und Selbstwertgefühl?",sub:""},
+    options:[
+      {en:"Strong – I believe in myself and my abilities",de:"Stark – ich glaube an mich und meine Fähigkeiten",chakra:'solar',score:3},
+      {en:"Fluctuating – I sometimes doubt myself strongly",de:"Schwankend – manchmal zweifle ich stark an mir",chakra:'solar',score:1},
+      {en:"Low – I often feel not good enough",de:"Gering – ich fühle mich oft nicht gut genug",chakra:'solar',score:0}
+    ]
+  },
+  {
+    en:{text:"How openly can you love and receive love?",sub:"Both romantically and in friendships."},
+    de:{text:"Wie offen kannst du lieben und Liebe empfangen?",sub:"Sowohl romantisch als auch in Freundschaften."},
+    options:[
+      {en:"Very openly – love flows easily in both directions",de:"Sehr offen – Liebe fließt leicht in beide Richtungen",chakra:'heart',score:3},
+      {en:"Sometimes – old wounds make it difficult",de:"Manchmal – alte Wunden machen es schwer",chakra:'heart',score:1},
+      {en:"Difficult – I keep others at a distance",de:"Schwierig – ich halte andere auf Abstand",chakra:'heart',score:0}
+    ]
+  },
+  {
+    en:{text:"How easy is it to speak your mind and express your needs?",sub:""},
+    de:{text:"Wie fällt es dir, deine Meinung und Bedürfnisse auszusprechen?",sub:""},
+    options:[
+      {en:"Easy – I say what I think and feel, clearly and respectfully",de:"Leicht – ich sage was ich denke und fühle, klar und respektvoll",chakra:'throat',score:3},
+      {en:"Sometimes difficult – I swallow things down",de:"Manchmal schwierig – ich schlucke Dinge runter",chakra:'throat',score:1},
+      {en:"Very hard – I rarely say what I truly think",de:"Sehr schwer – ich sage selten was ich wirklich denke",chakra:'throat',score:0}
+    ]
+  },
+  {
+    en:{text:"Do you trust your intuition?",sub:""},
+    de:{text:"Vertraust du deiner Intuition?",sub:""},
+    options:[
+      {en:"Yes – I listen to my gut and it guides me well",de:"Ja – ich höre auf mein Bauchgefühl und es leitet mich gut",chakra:'thirdeye',score:3},
+      {en:"Sometimes – I'm unsure whether to trust it",de:"Manchmal – ich bin unsicher ob ich ihr trauen kann",chakra:'thirdeye',score:1},
+      {en:"Hardly – I rely only on rational analysis",de:"Kaum – ich verlasse mich nur auf rationale Analyse",chakra:'thirdeye',score:0}
+    ]
+  },
+  {
+    en:{text:"Do you feel a connection to something greater?",sub:"Nature, the universe, spirituality – however you name it."},
+    de:{text:"Fühlst du eine Verbindung zu etwas Größerem?",sub:"Natur, Universum, Spiritualität – wie du es nennst."},
+    options:[
+      {en:"Yes – I feel this connection regularly and deeply",de:"Ja – ich fühle diese Verbindung regelmäßig und tief",chakra:'crown',score:3},
+      {en:"Sometimes – in special moments",de:"Manchmal – in besonderen Momenten",chakra:'crown',score:1},
+      {en:"Barely – this topic feels foreign or empty to me",de:"Kaum – dieses Thema ist mir fremd oder fühlt sich leer an",chakra:'crown',score:0}
+    ]
+  },
+  {
+    en:{text:"How is your relationship with security and material wellbeing?",sub:""},
+    de:{text:"Wie ist dein Verhältnis zu Sicherheit und materiellem Wohlstand?",sub:""},
+    options:[
+      {en:"Stable – I trust that my basic needs will be met",de:"Stabil – ich vertraue dass meine Grundbedürfnisse erfüllt sind",chakra:'root',score:3},
+      {en:"Unsettled – financial worries or existential fears are present",de:"Unruhig – Geldsorgen oder Existenzängste sind präsent",chakra:'root',score:0},
+      {en:"I cling to possessions or fear loss",de:"Ich klammere mich an Besitz oder habe Angst vor Verlust",chakra:'root',score:1}
+    ]
+  },
+  {
+    en:{text:"Do you express your creativity?",sub:""},
+    de:{text:"Lebst du deine Kreativität aus?",sub:""},
+    options:[
+      {en:"Yes – creativity is an important part of my life",de:"Ja – Kreativität ist ein wichtiger Teil meines Lebens",chakra:'sacral',score:3},
+      {en:"Too little – I wish for more creative expression",de:"Zu wenig – ich wünschte mir mehr kreativen Ausdruck",chakra:'sacral',score:1},
+      {en:"Barely – I feel creatively blocked",de:"Kaum – ich fühle mich kreativ blockiert",chakra:'sacral',score:0}
+    ]
+  },
+  {
+    en:{text:"Do you take time for yourself and your own needs?",sub:""},
+    de:{text:"Nimmst du dir Zeit für dich selbst und deine eigenen Bedürfnisse?",sub:""},
+    options:[
+      {en:"Yes – self-care is important to me and I practise it",de:"Ja – Selbstfürsorge ist mir wichtig und ich praktiziere sie",chakra:'solar',score:3},
+      {en:"Sometimes – I often put others before myself",de:"Manchmal – ich stelle oft andere vor mich selbst",chakra:'solar',score:1},
+      {en:"Rarely – I frequently neglect myself",de:"Selten – ich vernachlässige mich selbst häufig",chakra:'solar',score:0}
+    ]
+  },
+  {
+    en:{text:"How well can you forgive yourself and others?",sub:""},
+    de:{text:"Wie gut kannst du dir selbst vergeben und andere vergeben?",sub:""},
+    options:[
+      {en:"Well – I don't carry heavy burdens of resentment",de:"Gut – ich trage keine schweren Groll-Lasten mit mir",chakra:'heart',score:3},
+      {en:"Difficult – old wounds run deep",de:"Schwierig – alte Wunden sitzen tief",chakra:'heart',score:1},
+      {en:"Very hard – guilt or resentment weighs on me",de:"Sehr schwer – Schuldgefühle oder Groll belasten mich",chakra:'heart',score:0}
+    ]
+  },
+  {
+    en:{text:"Do you listen to yourself – to your own dreams and wishes?",sub:""},
+    de:{text:"Hörst du dir selbst zu – deinen eigenen Träumen und Wünschen?",sub:""},
+    options:[
+      {en:"Yes – I know my dreams and work towards them",de:"Ja – ich kenne meine Träume und arbeite daran",chakra:'throat',score:3},
+      {en:"Sometimes – I often ignore what I truly want",de:"Manchmal – oft überhöre ich was ich wirklich will",chakra:'throat',score:1},
+      {en:"Barely – my own wishes fade into the background",de:"Kaum – meine eigenen Wünsche treten in den Hintergrund",chakra:'throat',score:0}
+    ]
+  },
+  {
+    en:{text:"How calm and clear is your mind?",sub:""},
+    de:{text:"Wie ruhig und klar ist dein Geist?",sub:""},
+    options:[
+      {en:"Mostly clear – thoughts flow without overwhelming me",de:"Meistens klar – Gedanken fließen ohne mich zu überwältigen",chakra:'thirdeye',score:3},
+      {en:"Sometimes restless – racing thoughts or mental fog",de:"Manchmal unruhig – Gedankenkarussell oder Nebel im Kopf",chakra:'thirdeye',score:1},
+      {en:"Often unclear or overwhelmed by thoughts",de:"Oft unklar oder überwältigt von Gedanken",chakra:'thirdeye',score:0}
+    ]
+  },
+  {
+    en:{text:"What is your relationship with stillness and inner quiet?",sub:""},
+    de:{text:"Wie ist deine Beziehung zu Stille und innerer Ruhe?",sub:""},
+    options:[
+      {en:"Good – I find stillness calming and seek it out",de:"Gut – ich finde Stille beruhigend und suche sie",chakra:'crown',score:3},
+      {en:"Mixed – stillness is sometimes uncomfortable",de:"Gemischt – Stille ist manchmal unangenehm",chakra:'crown',score:1},
+      {en:"Difficult – stillness frightens me or I avoid it",de:"Schwierig – Stille macht mir Angst oder ich meide sie",chakra:'crown',score:0}
+    ]
+  }
+];
+
+let cur=0,scores={},sel=null;
+['root','sacral','solar','heart','throat','thirdeye','crown'].forEach(id=>scores[id]=0);
+
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');window.scrollTo(0,0)}
+
+function startQuiz(){cur=0;['root','sacral','solar','heart','throat','thirdeye','crown'].forEach(id=>scores[id]=0);sel=null;buildTrack();renderQ();showPage('quiz')}
+
+function buildTrack(){const t=document.getElementById('ptrak');t.innerHTML='';questions.forEach((_,i)=>{const s=document.createElement('div');s.className='ps';s.id='ps'+i;t.appendChild(s)})}
+
+function renderQ(){
+  sel=null;const l=currentLang;
+  questions.forEach((_,i)=>{document.getElementById('ps'+i).className='ps'+(i<cur?' done':i===cur?' active':'')});
+  document.getElementById('plbl').textContent=l==='en'?`Question ${cur+1} of ${questions.length}`:`Frage ${cur+1} von ${questions.length}`;
+  const q=questions[cur];
+  document.getElementById('qt').textContent=q[l].text;
+  document.getElementById('qs').textContent=q[l].sub||'';
+  const o=document.getElementById('opts');o.innerHTML='';
+  q.options.forEach(opt=>{const b=document.createElement('button');b.className='opt';b.textContent=opt[l];b.onclick=()=>pick(opt,b);o.appendChild(b)})
+}
+
+function pick(opt,btn){
+  if(sel)return;sel=opt;btn.classList.add('selected');scores[opt.chakra]=(scores[opt.chakra]||0)+opt.score;
+  setTimeout(()=>{cur++;if(cur>=questions.length)showResult();else renderQ()},380)
+}
+
+function showResult(){
+  const l=currentLang;
+  const ch=chakras[l];
+  const bars=document.getElementById('cbars');bars.innerHTML='';
+  ch.forEach(c=>{
+    const rawChakra=chakras.en.find(x=>x.name===c.name||chakras.en.indexOf(chakras.en.find(x=>x.id===c.id))>=0);
+    const id=c.id;
+    const s=scores[id]||0;const pct=Math.round((s/6)*100);
+    const row=document.createElement('div');row.className='crow';
+    row.innerHTML=`<div class="cico">${c.emoji}</div><div class="cinfo"><div class="clbl"><span>${c.name}</span><span>${pct}%</span></div><div class="ctrk"><div class="cfill" id="cf-${id}" style="background:${c.color}"></div></div></div>`;
+    bars.appendChild(row)
+  });
+  setTimeout(()=>{ch.forEach(c=>{const pct=Math.round(((scores[c.id]||0)/6)*100);const el=document.getElementById('cf-'+c.id);if(el)el.style.width=pct+'%'})},200);
+
+  const sorted=[...ch].sort((a,b)=>(scores[a.id]||0)-(scores[b.id]||0));
+  const weak=sorted.slice(0,2);const strong=sorted.slice(-1)[0];
+
+  // Save for yoga quiz
+  sessionStorage.setItem('weakChakras',JSON.stringify(chakras.en.filter(c=>weak.some(w=>w.id===c.id))));
+  sessionStorage.setItem('strongChakra',JSON.stringify(chakras.en.find(c=>c.id===strong.id)));
+
+  if(l==='en'){
+    document.getElementById('res-summary').textContent=`Your ${weak[0].name} (${weak[0].theme}) and ${weak[1].name} (${weak[1].theme}) show the greatest need for Reiki energy. Your ${strong.name} is your strongest energy centre.`;
+  } else {
+    document.getElementById('res-summary').textContent=`Dein ${weak[0].name} (${weak[0].theme}) und ${weak[1].name} (${weak[1].theme}) zeigen den größten Bedarf nach Reiki-Energie. Dein ${strong.name} ist dein stärkstes Energiezentrum.`;
+  }
+  updateWALink();
+  showPage('result')
+}
+
+function reset(){showPage('intro')}
+
+const sl=localStorage.getItem('t2t-lang');
+if(sl)setLang(sl);else setLang('en');
+updateWALink();
+</script>
+</body>
+</html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chakra-based Yoga Plan · Travel 2 Transform</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--tl:#3a9990;--bg:#080f0d;--text:#e8f4f0;--border:rgba(58,153,144,0.15)}
+body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(45,122,114,.12) 0%,transparent 60%);pointer-events:none}
+.page{display:none}.page.active{display:block}
+.wrap{max-width:660px;margin:0 auto;padding:0 20px 80px}
+.back{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.3);font-size:13px;text-decoration:none;padding:20px 0;font-family:sans-serif;letter-spacing:1px;transition:color .2s}
+.back:hover{color:var(--tl)}
+.hdr{text-align:center;padding:20px 0 40px;border-bottom:1px solid var(--border);margin-bottom:44px}
+.ey{font-family:'Cinzel',serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--tl);opacity:.8;margin-bottom:14px}
+h1{font-size:clamp(28px,7vw,48px);font-weight:300;letter-spacing:2px;line-height:1.15}
+h1 em{font-style:italic;color:var(--tl)}
+.sub{margin-top:10px;font-size:15px;opacity:.4;font-style:italic}
+.card{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:2px;padding:32px;margin-bottom:20px}
+.det{background:rgba(58,153,144,.06);border:1px solid rgba(58,153,144,.2);border-radius:2px;padding:20px;margin-bottom:24px}
+.dett{font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:var(--tl);margin-bottom:12px}
+.detchips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:13px;padding:5px 14px;border-radius:1px;border:1px solid rgba(58,153,144,.3);color:var(--tl)}
+.ptrak{display:flex;gap:3px;margin-bottom:10px}
+.ps{height:2px;flex:1;border-radius:1px;background:rgba(255,255,255,.07);transition:background .4s}
+.ps.done{background:rgba(58,153,144,.4)}.ps.active{background:var(--tl)}
+.plbl{font-size:11px;letter-spacing:3px;text-transform:uppercase;opacity:.3;margin-bottom:28px;font-family:sans-serif}
+.qt{font-size:clamp(18px,4vw,22px);font-weight:300;line-height:1.55;margin-bottom:6px}
+.qs{font-size:14px;font-style:italic;opacity:.4;margin-bottom:28px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.09);border-radius:2px;padding:16px 20px;color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;font-size:16px;line-height:1.5;text-align:left;cursor:pointer;transition:all .22s}
+.opt:hover{border-color:rgba(58,153,144,.4);background:rgba(58,153,144,.05)}
+.opt.sel{border-color:var(--tl);background:rgba(58,153,144,.1)}
+.rh{text-align:center;padding:0 0 24px;border-bottom:1px solid var(--border);margin-bottom:24px}
+.ri{font-size:56px;margin-bottom:12px}
+.rt{font-family:'Cinzel',serif;font-size:clamp(18px,5vw,28px);letter-spacing:4px;color:var(--tl);margin-bottom:6px}
+.rs{font-size:13px;letter-spacing:3px;opacity:.4;text-transform:uppercase}
+.rd{font-size:17px;line-height:1.85;font-style:italic;opacity:.8;margin-bottom:20px}
+.cbox{background:rgba(58,153,144,.05);border:1px solid rgba(58,153,144,.18);border-radius:2px;padding:20px;margin-bottom:24px;white-space:pre-line}
+.cbt{font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:var(--tl);margin-bottom:10px}
+.cbc{font-size:15px;line-height:1.75;opacity:.75}
+.pay{background:rgba(58,153,144,.04);border:1px solid rgba(58,153,144,.2);border-radius:2px;padding:36px;text-align:center;margin-top:8px}
+.pl{list-style:none;margin:20px 0 24px;text-align:left;display:inline-block}
+.pl li{font-size:15px;padding:5px 0;opacity:.7;display:flex;align-items:center;gap:10px}
+.pl li::before{content:'✦';font-size:9px;opacity:.5}
+.pr{font-family:'Cinzel',serif;font-size:34px;letter-spacing:2px;margin-bottom:4px}
+.prs{font-size:12px;opacity:.35;margin-bottom:24px;letter-spacing:1px}
+.btn{display:inline-block;padding:14px 32px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;border-radius:2px;cursor:pointer;border:none;transition:all .2s;text-decoration:none}
+.btn-t{background:var(--tl);color:#080f0d;font-weight:600}.btn-t:hover{opacity:.88;transform:translateY(-1px)}
+.btn-s{background:#635bff;color:#fff;font-weight:600;font-size:13px;padding:15px 36px}.btn-s:hover{background:#5048e5;transform:translateY(-1px)}
+.btn-g{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.12)}.btn-g:hover{border-color:rgba(255,255,255,.25)}
+.brow{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.pltxt{white-space:pre-wrap;font-size:15px;line-height:1.95;opacity:.88}
+.ltxt{text-align:center;font-size:15px;opacity:.4;letter-spacing:2px;font-style:italic;margin-bottom:36px}
+.dots{display:flex;justify-content:center;gap:10px;padding:20px 0 48px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--tl);animation:dp 1.4s ease-in-out infinite}
+.dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
+@keyframes dp{0%,80%,100%{transform:scale(.5);opacity:.3}40%{transform:scale(1);opacity:1}}
+.snote{font-size:11px;opacity:.3;margin-top:12px;letter-spacing:1px;font-family:sans-serif}
+.cross{margin-top:40px;border-top:1px solid rgba(58,153,144,.15);padding-top:36px}
+.crt{font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--tl);opacity:.7;margin-bottom:16px}
+.crg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
+.crc{display:block;text-align:center;padding:18px 12px;border-radius:2px;text-decoration:none;transition:all .2s}
+.crc:hover{transform:translateY(-2px)}
+.lang-bar{position:fixed;top:12px;right:16px;z-index:200;display:flex;background:rgba(58,153,144,.15);border-radius:50px;padding:3px;gap:2px}
+.lb{padding:5px 12px;border-radius:50px;border:none;background:transparent;cursor:pointer;font-size:12px;font-weight:500;letter-spacing:1px;color:rgba(232,244,240,.45);transition:all .2s;font-family:sans-serif}
+.lb.active{background:var(--tl);color:#080f0d}
+.de{display:none}.en{display:block}
+body.lang-de .de{display:block}body.lang-de .en{display:none}
+body.lang-en .de{display:none}body.lang-en .en{display:block}
+@keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fi{animation:fu .5s ease forwards}
+</style>
+</head>
+<body class="lang-en">
+
+<div class="lang-bar">
+  <button class="lb active" id="btn-en" onclick="setLang('en')">EN</button>
+  <button class="lb" id="btn-de" onclick="setLang('de')">DE</button>
+</div>
+
+<div id="page-intro" class="page active">
+  <div class="wrap">
+    <a href="index.html" class="back">← Travel 2 Transform</a>
+    <header class="hdr">
+      <div class="ey">Travel 2 Transform · Yoga</div>
+      <h1 class="en">Your <em>chakra-based</em> Yoga Plan</h1>
+      <h1 class="de">Dein <em>chakren-basierter</em> Yoga-Plan</h1>
+      <div class="sub en">Individual · Targeted · Personalised</div>
+      <div class="sub de">Individuell · Gezielt · Personalisiert</div>
+    </header>
+    <div class="card fi">
+      <p style="font-size:18px;line-height:1.85;font-weight:300;margin-bottom:16px" class="en">This yoga plan is different. It's tailored not just to your goals – but directly to your <em>chakra balance</em>.</p>
+      <p style="font-size:18px;line-height:1.85;font-weight:300;margin-bottom:16px" class="de">Dieser Yoga-Plan ist anders. Er wird nicht nur auf deine Ziele abgestimmt – sondern direkt auf deine <em>Chakren-Balance</em>.</p>
+      <p style="font-size:15px;line-height:1.8;opacity:.55;margin-bottom:24px" class="en">Done the Chakra Analysis already? Then your blocked chakras will be specifically integrated into your plan.</p>
+      <p style="font-size:15px;line-height:1.8;opacity:.55;margin-bottom:24px" class="de">Hast du vorher die Chakren-Analyse gemacht? Dann werden deine blockierten Chakren gezielt in deinen Plan integriert.</p>
+      <div class="det" id="det-box" style="display:none">
+        <div class="dett en">✦ Chakra data detected – will be integrated into your plan</div>
+        <div class="dett de">✦ Chakren-Daten erkannt – werden in deinen Plan integriert</div>
+        <div class="detchips" id="det-chips"></div>
+      </div>
+      <div id="no-chakra" style="margin-bottom:24px">
+        <p style="font-size:14px;opacity:.45;font-style:italic" class="en">💡 Tip: Do the <a href="reiki-quiz.html" style="color:var(--tl);opacity:1">Chakra Analysis</a> first for an even more targeted plan.</p>
+        <p style="font-size:14px;opacity:.45;font-style:italic" class="de">💡 Tipp: Mach zuerst die <a href="reiki-quiz.html" style="color:var(--tl);opacity:1">Chakren-Analyse</a> für einen noch gezielteren Plan.</p>
+      </div>
+      <button class="btn btn-t" onclick="startQuiz()"><span class="en">Start Quiz →</span><span class="de">Quiz starten →</span></button>
+    </div>
+  </div>
+</div>
+
+<div id="page-quiz" class="page">
+  <div class="wrap">
+    <a href="index.html" class="back">← <span class="en">Back</span><span class="de">Zurück</span></a>
+    <header class="hdr">
+      <div class="ey en">Yoga Analysis</div><div class="ey de">Yoga-Analyse</div>
+      <h1 class="en">Your <em>Yoga Profile</em></h1><h1 class="de">Dein <em>Yoga-Profil</em></h1>
+    </header>
+    <div class="ptrak" id="ptrak"></div>
+    <div class="plbl" id="plbl"></div>
+    <div class="card fi">
+      <div class="qt" id="qt"></div>
+      <div class="qs" id="qs"></div>
+      <div class="opts" id="opts"></div>
+    </div>
+  </div>
+</div>
+
+<div id="page-result" class="page">
+  <div class="wrap">
+    <a href="index.html" class="back">← <span class="en">Back</span><span class="de">Zurück</span></a>
+    <header class="hdr">
+      <div class="ey en">Your Yoga Profile</div><div class="ey de">Dein Yoga-Profil</div>
+      <h1 class="en">Your <em>Result</em></h1><h1 class="de">Dein <em>Ergebnis</em></h1>
+    </header>
+    <div class="card fi">
+      <div class="rh"><div class="ri" id="ri"></div><div class="rt" id="rt"></div><div class="rs" id="rs"></div></div>
+      <p class="rd" id="rd"></p>
+      <div class="cbox" id="cbox" style="display:none"><div class="cbt" id="cbt"></div><div class="cbc" id="cbc"></div></div>
+    </div>
+    <div class="pay fi">
+      <div style="font-size:40px;margin-bottom:16px">🧘</div>
+      <div style="font-family:'Cinzel',serif;font-size:18px;letter-spacing:3px;margin-bottom:12px" class="en">Your 4-Week Yoga Plan</div>
+      <div style="font-family:'Cinzel',serif;font-size:18px;letter-spacing:3px;margin-bottom:12px" class="de">Dein 4-Wochen Yoga-Plan</div>
+      <p style="font-size:16px;line-height:1.8;opacity:.6;margin-bottom:8px;font-style:italic" class="en">Individually created – tailored to your profile <span id="pnote-en"></span>.</p>
+      <p style="font-size:16px;line-height:1.8;opacity:.6;margin-bottom:8px;font-style:italic" class="de">Individuell erstellt – auf dein Profil <span id="pnote-de"></span> abgestimmt.</p>
+      <ul class="pl en">
+        <li>4-week plan (Mon–Sun) with daily sequences</li>
+        <li>Targeted at your specific chakra blockages</li>
+        <li>Pranayama (breathing exercises) daily</li>
+        <li>Meditation guidance twice a week</li>
+        <li>Just a mat needed – practise at home</li>
+      </ul>
+      <ul class="pl de">
+        <li>4-Wochen-Plan (Mo–So) mit täglichen Sequenzen</li>
+        <li>Gezielt auf deine Chakren-Blockaden ausgerichtet</li>
+        <li>Pranayama (Atemübungen) täglich</li>
+        <li>Meditation 2x pro Woche</li>
+        <li>Nur Matte nötig – zuhause umsetzbar</li>
+      </ul>
+      <div class="pr">€9.99</div>
+      <div class="prs en">One-time payment · Instant access</div>
+      <div class="prs de">Einmalige Zahlung · Sofortiger Zugang</div>
+      <button class="btn btn-s" onclick="handlePay()">💳 &nbsp; <span class="en">Buy now & get your plan</span><span class="de">Jetzt kaufen & Plan erhalten</span></button>
+      <div class="snote en">Secure payment via Stripe · SSL encrypted</div>
+      <div class="snote de">Sichere Zahlung via Stripe · SSL-verschlüsselt</div>
+      <div class="brow" style="justify-content:center;margin-top:20px">
+        <button class="btn btn-g" onclick="reset()"><span class="en">Retake quiz</span><span class="de">Quiz wiederholen</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="page-plan" class="page">
+  <div class="wrap">
+    <a href="index.html" class="back">← Travel 2 Transform</a>
+    <header class="hdr">
+      <div class="ey en">Your Personal Plan</div><div class="ey de">Dein persönlicher Plan</div>
+      <h1>🧘 <span class="en">Your <em>Yoga Plan</em></span><span class="de">Dein <em>Yoga-Plan</em></span></h1>
+    </header>
+    <div class="card fi">
+      <div id="pload">
+        <div class="ltxt en">Your plan is being created …</div>
+        <div class="ltxt de">Dein Plan wird erstellt …</div>
+        <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+      </div>
+      <div id="ptxt" class="pltxt" style="display:none"></div>
+      <div id="pacts" class="brow" style="display:none">
+        <button class="btn btn-t" onclick="genPlan()"><span class="en">Generate new plan ↺</span><span class="de">Neuen Plan ↺</span></button>
+        <button class="btn btn-g" onclick="reset()"><span class="en">Retake quiz</span><span class="de">Quiz wiederholen</span></button>
+      </div>
+      <div id="cross" style="display:none" class="cross">
+        <div class="crt en">Complete your system</div><div class="crt de">Vervollständige dein System</div>
+        <p style="font-size:17px;line-height:1.8;font-weight:300;font-style:italic;margin-bottom:8px" class="en">Which <strong style="font-style:normal">nutrition</strong> supports your yoga and chakra balance?</p>
+        <p style="font-size:17px;line-height:1.8;font-weight:300;font-style:italic;margin-bottom:8px" class="de">Welche <strong style="font-style:normal">Ernährung</strong> unterstützt dein Yoga und deine Chakren-Balance?</p>
+        <div class="crg">
+          <a href="dosha-quiz.html" class="crc" style="border:1px solid rgba(200,169,110,.25);background:rgba(200,169,110,.04)">
+            <div style="font-size:26px;margin-bottom:8px">🌿</div>
+            <div style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:#c8a96e;margin-bottom:4px">AYURVEDA</div>
+            <div style="font-size:13px;opacity:.6;color:var(--text)" class="en">Dosha Analysis</div>
+            <div style="font-size:13px;opacity:.6;color:var(--text)" class="de">Dosha-Analyse</div>
+          </a>
+          <a href="reiki-quiz.html" class="crc" style="border:1px solid rgba(212,84,138,.25);background:rgba(212,84,138,.04)">
+            <div style="font-size:26px;margin-bottom:8px">✨</div>
+            <div style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:#d4548a;margin-bottom:4px">CHAKRAS</div>
+            <div style="font-size:13px;opacity:.6;color:var(--text)" class="en">1:1 Reiki Session</div>
+            <div style="font-size:13px;opacity:.6;color:var(--text)" class="de">1:1 Reiki-Session</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const STRIPE='https://buy.stripe.com/bJe7sL7F9bNQfl10NLaAw01';
+let currentLang='en';
+
+function setLang(l){
+  currentLang=l;
+  document.body.className='lang-'+l;
+  document.getElementById('btn-en').classList.toggle('active',l==='en');
+  document.getElementById('btn-de').classList.toggle('active',l==='de');
+  localStorage.setItem('t2t-lang',l);
+  if(cur>0&&cur<qs.length) renderQ();
+}
+
+const chakraYoga={
+  root:{en:{name:'Root Chakra',seq:'Grounding poses: Mountain, Warrior I & II, Tree, Child\'s Pose'},de:{name:'Wurzelchakra',seq:'Erdende Asanas: Bergpose, Krieger I & II, Baumpose, Kindpose'}},
+  sacral:{en:{name:'Sacral Chakra',seq:'Hip openers: Butterfly, Pigeon, Crescent Moon, Goddess Pose'},de:{name:'Sakralchakra',seq:'Hüftöffner: Schmetterling, Taube, Mondhalbmond, Göttin-Pose'}},
+  solar:{en:{name:'Solar Plexus',seq:'Strength: Boat Pose, Warrior III, Plank, Breath of Fire'},de:{name:'Solarplexus',seq:'Kraft: Bootpose, Krieger III, Planke, Feueratem'}},
+  heart:{en:{name:'Heart Chakra',seq:'Heart openers: Cobra, Camel, Fish Pose, Lying Figure Eight'},de:{name:'Herzchakra',seq:'Herzöffner: Kobra, Kamel, Fisch-Pose, Liegende Acht'}},
+  throat:{en:{name:'Throat Chakra',seq:'Neck openers: Fish Pose, Shoulder Bridge, Lion\'s Breath'},de:{name:'Kehlchakra',seq:'Halsöffner: Fisch-Pose, Schulterbrücke, Löwen-Atem'}},
+  thirdeye:{en:{name:'Third Eye Chakra',seq:'Inversions & stillness: Child\'s Pose, Shoulder Stand, Meditation'},de:{name:'Stirnchakra',seq:'Umkehr & Stille: Kindpose, Schulterstand, Meditation'}},
+  crown:{en:{name:'Crown Chakra',seq:'Stillness: Savasana, Yoga Nidra, seated meditation'},de:{name:'Kronenchakra',seq:'Stille: Savasana, Yoga Nidra, sitzende Meditation'}}
+};
+
+const qs=[
+  {
+    en:{t:"What is your main goal with yoga?",s:""},
+    de:{t:"Was ist dein Hauptziel mit Yoga?",s:""},
+    o:[
+      {en:"Reduce stress and find inner calm",de:"Stress abbauen und innere Ruhe finden",g:["Restorative","Yin"]},
+      {en:"Build strength, stability and fitness",de:"Kraft, Stabilität und Fitness aufbauen",g:["Vinyasa","Power"]},
+      {en:"Improve flexibility and mobility",de:"Flexibilität und Beweglichkeit verbessern",g:["Yin","Hatha"]},
+      {en:"Deepen spirituality and self-awareness",de:"Spiritualität und Selbsterkenntnis vertiefen",g:["Spiritual","Kundalini"]}
+    ]
+  },
+  {
+    en:{t:"How experienced are you with yoga?",s:""},
+    de:{t:"Wie erfahren bist du mit Yoga?",s:""},
+    o:[
+      {en:"Beginner – little or no experience",de:"Anfänger – kaum oder keine Erfahrung",g:["Beginner"]},
+      {en:"Occasional – I've tried it before",de:"Gelegentlich – habe schon etwas gemacht",g:["Building"]},
+      {en:"Regular – practising for months",de:"Regelmäßig – praktiziere seit Monaten",g:["Advanced"]},
+      {en:"Experienced – practising for years",de:"Erfahren – praktiziere schon Jahre",g:["Intensive"]}
+    ]
+  },
+  {
+    en:{t:"How much time do you have daily?",s:""},
+    de:{t:"Wie viel Zeit hast du täglich für Yoga?",s:""},
+    o:[
+      {en:"10–15 minutes",de:"10–15 Minuten",g:["Short"]},
+      {en:"20–30 minutes",de:"20–30 Minuten",g:["Medium"]},
+      {en:"45–60 minutes",de:"45–60 Minuten",g:["Full"]},
+      {en:"Over 60 minutes",de:"Über 60 Minuten",g:["Intensive"]}
+    ]
+  },
+  {
+    en:{t:"When do you prefer to practise?",s:""},
+    de:{t:"Wann praktizierst du am liebsten?",s:""},
+    o:[
+      {en:"Morning – to start the day",de:"Morgens – als Tageseinstieg",g:["Morning"]},
+      {en:"Midday – as an active break",de:"Mittags – als aktive Pause",g:["Midday"]},
+      {en:"Evening – to wind down",de:"Abends – zum Abschalten",g:["Evening","Restorative"]},
+      {en:"Flexible – whatever suits the day",de:"Flexibel – je nach Tag",g:["Flexible"]}
+    ]
+  },
+  {
+    en:{t:"Are there any physical limitations?",s:"So your plan stays safe."},
+    de:{t:"Gibt es körperliche Einschränkungen?",s:"Damit dein Plan sicher ist."},
+    o:[
+      {en:"None – I feel fit and well",de:"Keine – ich fühle mich fit",g:["Full"]},
+      {en:"Neck or shoulder tension",de:"Nacken oder Schultern verspannt",g:["Gentle-Upper"]},
+      {en:"Knee or hip issues",de:"Knie- oder Hüftbeschwerden",g:["Gentle-Lower"]},
+      {en:"Back problems",de:"Rückenprobleme",g:["Back-Gentle"]}
+    ]
+  },
+  {
+    en:{t:"What do you need most right now?",s:"Your most honest feeling."},
+    de:{t:"Was fehlt dir gerade am meisten?",s:"Dein ehrlichstes Gefühl."},
+    o:[
+      {en:"Peace and inner quiet",de:"Ruhe und innerer Frieden",g:["Yin","Restorative"]},
+      {en:"Energy and vitality",de:"Energie und Vitalität",g:["Vinyasa","Morning"]},
+      {en:"Strength and self-confidence",de:"Stärke und Selbstvertrauen",g:["Power","Strength"]},
+      {en:"Connection with myself",de:"Verbindung zu mir selbst",g:["Spiritual","Meditation"]}
+    ]
+  },
+  {
+    en:{t:"How is your stress level right now?",s:""},
+    de:{t:"Wie ist dein Stresslevel gerade?",s:""},
+    o:[
+      {en:"High – often stressed and exhausted",de:"Hoch – oft gestresst und erschöpft",g:["Restorative","Yin"]},
+      {en:"Medium – sometimes more, sometimes less",de:"Mittel – mal mehr, mal weniger",g:["Balance"]},
+      {en:"Low – I'm quite balanced",de:"Gering – ich bin ziemlich ausgeglichen",g:["Building"]},
+      {en:"I'm looking for activation, not relaxation",de:"Ich suche Aktivierung, keine Entspannung",g:["Energetic","Power"]}
+    ]
+  },
+  {
+    en:{t:"What kind of movement do you enjoy?",s:""},
+    de:{t:"Welche Art von Bewegung magst du?",s:""},
+    o:[
+      {en:"Flowing and meditative",de:"Fließend und meditativ",g:["Yin","Flow"]},
+      {en:"Dynamic and powerful",de:"Dynamisch und kraftvoll",g:["Vinyasa","Power"]},
+      {en:"Precise and structured",de:"Präzise und strukturiert",g:["Hatha"]},
+      {en:"Playful and intuitive",de:"Spielerisch und intuitiv",g:["Flow","Free"]}
+    ]
+  },
+  {
+    en:{t:"Do you have experience with meditation?",s:""},
+    de:{t:"Hast du Erfahrung mit Meditation?",s:""},
+    o:[
+      {en:"Barely – this is new territory",de:"Kaum – das ist Neuland",g:["Basic-Med"]},
+      {en:"A little – I've tried it",de:"Ein bisschen – habe es probiert",g:["Building-Med"]},
+      {en:"Yes – I meditate occasionally",de:"Ja – ich meditiere gelegentlich",g:["Deepening"]},
+      {en:"Regularly – part of my routine",de:"Regelmäßig – Teil meiner Routine",g:["Extended"]}
+    ]
+  },
+  {
+    en:{t:"How important is spirituality in your yoga?",s:""},
+    de:{t:"Wie wichtig ist dir Spiritualität beim Yoga?",s:""},
+    o:[
+      {en:"Not important – purely physical",de:"Nicht wichtig – rein körperlich",g:["Physical"]},
+      {en:"I'm open to it",de:"Ich bin offen dafür",g:["Open"]},
+      {en:"Important – yoga is self-discovery",de:"Wichtig – Yoga ist Selbsterkenntnis",g:["Spiritual"]},
+      {en:"Very important – the deep dimension matters",de:"Sehr wichtig – die tiefe Dimension zählt",g:["Kundalini","Spiritual"]}
+    ]
+  },
+  {
+    en:{t:"How are you sleeping at the moment?",s:""},
+    de:{t:"Wie schläfst du zurzeit?",s:""},
+    o:[
+      {en:"Poorly – restless or trouble falling asleep",de:"Schlecht – unruhig oder Einschlafprobleme",g:["Sleep","Restorative"]},
+      {en:"Moderately – sometimes good, sometimes not",de:"Mittelmäßig – mal gut, mal weniger",g:["Balance"]},
+      {en:"Well – mostly sleeping through",de:"Gut – meistens durchgeschlafen",g:["Maintaining"]},
+      {en:"Very well – no problems",de:"Sehr gut – kein Problem",g:["Energy"]}
+    ]
+  },
+  {
+    en:{t:"What should your plan mainly achieve?",s:"Your most important goal."},
+    de:{t:"Was soll dein Plan hauptsächlich bewirken?",s:"Dein wichtigstes Ziel."},
+    o:[
+      {en:"Build a daily routine – just stay consistent",de:"Tägliche Routine aufbauen – einfach dranblieben",g:["Routine"]},
+      {en:"Noticeable physical change",de:"Spürbare körperliche Veränderung",g:["Physical","Strength"]},
+      {en:"Inner calm and emotional balance",de:"Innere Ruhe und emotionale Balance",g:["Emotional","Restorative"]},
+      {en:"Deeper practice – beyond the physical",de:"Tiefere Praxis – über das Physische hinaus",g:["Spiritual"]}
+    ]
+  }
+];
+
+const types={
+  restorative:{
+    en:{icon:'🌙',title:'The Seeker of Calm',sub:'Restorative & Yin Yoga',desc:'Your body and mind long for deep rest. Gentle long holds, breathwork and relaxation sequences – the perfect counterbalance to your daily life.'},
+    de:{icon:'🌙',title:'Der Ruhesuchende',sub:'Restorative & Yin Yoga',desc:'Dein Körper und Geist sehnen sich nach tiefer Erholung. Sanfte lange Haltungen, Atemarbeit und Entspannungssequenzen – die perfekte Gegenbewegung zu deinem Alltag.'}
+  },
+  strength:{
+    en:{icon:'🔥',title:'The Strength Seeker',sub:'Vinyasa & Power Yoga',desc:'You want to feel yourself working. Dynamic flows, strength sequences and progressive build – you\'ll discover how strong you truly are in 4 weeks.'},
+    de:{icon:'🔥',title:'Der Kraftsucher',sub:'Vinyasa & Power Yoga',desc:'Du willst spüren dass du arbeitest. Dynamische Flows, Kraftsequenzen und progressiver Aufbau – du wirst in 4 Wochen merken wie stark du bist.'}
+  },
+  balance:{
+    en:{icon:'⚖️',title:'The Balancer',sub:'Hatha & Balance Yoga',desc:'You seek the golden middle way. Your plan alternates between activating and regenerative sessions, bringing real balance to your daily life.'},
+    de:{icon:'⚖️',title:'Der Ausgleicher',sub:'Hatha & Balance Yoga',desc:'Du suchst den goldenen Mittelweg. Dein Plan wechselt zwischen aktivierenden und regenerativen Einheiten und bringt echten Ausgleich in deinen Alltag.'}
+  },
+  spiritual:{
+    en:{icon:'✨',title:'The Soul Seeker',sub:'Kundalini & Meditation',desc:'For you yoga is more than physical work. Meditation, pranayama and spiritual practices alongside the asanas – a plan that truly goes deep.'},
+    de:{icon:'✨',title:'Der Seelensucher',sub:'Kundalini & Meditation',desc:'Yoga ist für dich mehr als Körperarbeit. Meditation, Pranayama und spirituelle Praktiken neben den Asanas – ein Plan der wirklich in die Tiefe geht.'}
+  }
+};
+
+let cur=0,ans=[],sel=null,profileKey=null,wChakras=[];
+
+function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');window.scrollTo(0,0)}
+
+window.addEventListener('load',()=>{
+  try{
+    const wc=sessionStorage.getItem('weakChakras');
+    if(wc){
+      wChakras=JSON.parse(wc);
+      document.getElementById('det-box').style.display='block';
+      document.getElementById('no-chakra').style.display='none';
+      const chips=document.getElementById('det-chips');
+      wChakras.forEach(c=>{const sp=document.createElement('span');sp.className='chip';sp.textContent=c.emoji+' '+c.name;chips.appendChild(sp)});
+    }
+  }catch(e){}
+  const p=new URLSearchParams(window.location.search);
+  if(p.get('success')==='true'){const sp=sessionStorage.getItem('yps');if(sp){profileKey=sp;showPlan()}}
+});
+
+function startQuiz(){cur=0;ans=[];sel=null;buildT();renderQ();showPage('quiz')}
+
+function buildT(){const t=document.getElementById('ptrak');t.innerHTML='';qs.forEach((_,i)=>{const s=document.createElement('div');s.className='ps';s.id='ps'+i;t.appendChild(s)})}
+
+function renderQ(){
+  sel=null;const l=currentLang;
+  qs.forEach((_,i)=>{document.getElementById('ps'+i).className='ps'+(i<cur?' done':i===cur?' active':'')});
+  document.getElementById('plbl').textContent=l==='en'?`Question ${cur+1} of ${qs.length}`:`Frage ${cur+1} von ${qs.length}`;
+  const q=qs[cur];
+  document.getElementById('qt').textContent=q[l].t;
+  document.getElementById('qs').textContent=q[l].s||'';
+  const o=document.getElementById('opts');o.innerHTML='';
+  q.o.forEach(opt=>{const b=document.createElement('button');b.className='opt';b.textContent=opt[l];b.onclick=()=>pick(opt,b);o.appendChild(b)})
+}
+
+function pick(opt,btn){
+  if(sel)return;sel=opt;btn.classList.add('sel');ans.push(opt);
+  setTimeout(()=>{cur++;if(cur>=qs.length)showResult();else renderQ()},380)
+}
+
+function showResult(){
+  const tags=ans.flatMap(a=>a.g);const cnt={};tags.forEach(t=>cnt[t]=(cnt[t]||0)+1);
+  let tp='balance';
+  if((cnt['Restorative']||0)+(cnt['Yin']||0)>4)tp='restorative';
+  else if((cnt['Vinyasa']||0)+(cnt['Power']||0)+(cnt['Strength']||0)>3)tp='strength';
+  else if((cnt['Spiritual']||0)+(cnt['Kundalini']||0)>3)tp='spiritual';
+  profileKey=tp;
+  const l=currentLang;const p=types[tp][l];
+  document.getElementById('ri').textContent=p.icon;
+  document.getElementById('rt').textContent=p.title;
+  document.getElementById('rs').textContent=p.sub;
+  document.getElementById('rd').textContent=p.desc;
+  if(wChakras.length>0){
+    document.getElementById('cbox').style.display='block';
+    const cbt=document.getElementById('cbt');
+    cbt.textContent=l==='en'?'✦ These chakras will be integrated into your plan':'✦ Diese Chakren werden in deinen Plan integriert';
+    const lines=wChakras.map(c=>{const cy=chakraYoga[c.id];return cy?`${c.emoji} ${cy[l].name}: ${cy[l].seq}`:''}).filter(Boolean).join('\n');
+    document.getElementById('cbc').textContent=lines;
+    const pnoteEn=document.getElementById('pnote-en');
+    const pnoteDe=document.getElementById('pnote-de');
+    if(pnoteEn)pnoteEn.textContent=`and your chakras (${wChakras.map(c=>chakraYoga[c.id]?.en.name||c.name).join(', ')})`;
+    if(pnoteDe)pnoteDe.textContent=`und deine Chakren (${wChakras.map(c=>chakraYoga[c.id]?.de.name||c.name).join(', ')})`;
+  }
+  showPage('result')
+}
+
+function handlePay(){sessionStorage.setItem('yps',profileKey);window.location.href=STRIPE}
+
+function showPlan(){
+  document.getElementById('pload').style.display='block';
+  document.getElementById('ptxt').style.display='none';
+  document.getElementById('pacts').style.display='none';
+  document.getElementById('cross').style.display='none';
+  showPage('plan');genPlan()
+}
+
+async function genPlan(){
+  document.getElementById('pload').style.display='block';
+  document.getElementById('ptxt').style.display='none';
+  document.getElementById('pacts').style.display='none';
+  document.getElementById('cross').style.display='none';
+  const l=currentLang;
+  const p=types[profileKey][l];
+  const allTags=[...new Set(ans.flatMap(a=>a.g))].slice(0,8).join(', ');
+  const lang=l==='en'?'English':'German';
+  let chakraText='';
+  if(wChakras.length>0){
+    const lines=wChakras.map(c=>{const cy=chakraYoga[c.id];return cy?`- ${cy[l].name}: ${cy[l].seq}`:''}).filter(Boolean).join('\n');
+    chakraText=l==='en'
+      ?`\n\nCHAKRA INTEGRATION (REQUIRED): These chakras must be specifically addressed twice per week:\n${lines}\nMark with (✦ Chakra Focus).`
+      :`\n\nCHAKREN-INTEGRATION (PFLICHT): Diese Chakren müssen 2x pro Woche gezielt adressiert werden:\n${lines}\nMarkiere mit (✦ Chakra-Fokus).`;
+  }
+  const prompt=`You are an experienced yoga teacher. Create a personalised 4-week yoga plan in ${lang} for:\nProfile: ${p.title} (${p.sub}) – ${p.desc}\nQuiz answers: ${allTags}${chakraText}\n\nInclude:\n- Motivating intro\n- Weeks 1–4, Mon–Sun, per day: poses with names (Sanskrit in brackets), duration\n- Daily pranayama (3-5 min)\n- Meditation 2x/week (5 min)\n- Sunday: restorative rest day\n- Closing tips\n\nJust a mat needed. Write warmly and concretely.`;
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
+    const d=await r.json();
+    document.getElementById('ptxt').textContent=(d.content||[]).map(b=>b.text||'').join('\n')||'Error.';
+  }catch(e){document.getElementById('ptxt').textContent=l==='en'?'An error occurred. Please try again.':'Fehler. Bitte erneut versuchen.'}
+  document.getElementById('pload').style.display='none';
+  document.getElementById('ptxt').style.display='block';
+  document.getElementById('pacts').style.display='flex';
+  document.getElementById('cross').style.display='block'
+}
+
+function reset(){showPage('intro')}
+
+const sl=localStorage.getItem('t2t-lang');
+if(sl)setLang(sl);else setLang('en');
+</script>
+</body>
+</html>
