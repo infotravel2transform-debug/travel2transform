@@ -38,6 +38,8 @@ h1 em{font-style:italic;color:var(--gold)}
 .opt-btn.selected-vata{border-color:var(--gold);background:rgba(200,169,110,.08)}
 .opt-btn.selected-pitta{border-color:var(--fire);background:rgba(224,90,43,.08)}
 .opt-btn.selected-kapha{border-color:var(--earth);background:rgba(74,140,92,.08)}
+
+/* RESULT - free preview */
 .result-hero{text-align:center;padding:12px 0 28px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:28px}
 .result-emoji{font-size:56px;margin-bottom:12px}
 .result-name{font-family:'Cinzel',serif;font-size:clamp(40px,10vw,68px);font-weight:400;letter-spacing:6px;line-height:1;margin-bottom:8px}
@@ -50,36 +52,49 @@ h1 em{font-style:italic;color:var(--gold)}
 .score-meta{display:flex;justify-content:space-between;font-size:13px;opacity:.65;margin-bottom:5px}
 .score-track{height:5px;background:rgba(255,255,255,.07);border-radius:3px;overflow:hidden}
 .score-fill{height:100%;border-radius:3px;transition:width 1.2s cubic-bezier(.22,.68,0,1.2);width:0}
-.paywall-box{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:2px;padding:36px;text-align:center;margin-top:8px}
-.paywall-icon{font-size:44px;margin-bottom:16px}
-.paywall-title{font-family:'Cinzel',serif;font-size:20px;letter-spacing:3px;margin-bottom:12px}
-.paywall-desc{font-size:16px;line-height:1.8;opacity:.65;margin-bottom:8px;font-style:italic}
-.paywall-includes{list-style:none;margin:20px 0 28px;text-align:left;display:inline-block}
-.paywall-includes li{font-size:15px;padding:6px 0;opacity:.75;display:flex;align-items:center;gap:10px}
-.paywall-includes li::before{content:'✦';font-size:10px;opacity:.5}
-.price-tag{font-family:'Cinzel',serif;font-size:36px;letter-spacing:2px;margin-bottom:6px}
-.price-sub{font-size:13px;opacity:.4;margin-bottom:28px;letter-spacing:1px}
+
+/* PAYWALL */
+.paywall{background:linear-gradient(135deg,rgba(200,169,110,.08),rgba(200,169,110,.03));border:1px solid rgba(200,169,110,.25);border-radius:2px;padding:36px;text-align:center;margin-top:8px}
+.paywall-lock{font-size:36px;margin-bottom:12px}
+.paywall-title{font-family:'Cinzel',serif;font-size:18px;letter-spacing:3px;margin-bottom:10px;color:var(--gold)}
+.paywall-desc{font-size:16px;line-height:1.8;opacity:.7;margin-bottom:8px;font-style:italic}
+.paywall-includes{list-style:none;margin:20px 0 24px;text-align:left;display:inline-block}
+.paywall-includes li{font-size:15px;padding:6px 0;opacity:.8;display:flex;align-items:center;gap:10px}
+.paywall-includes li::before{content:'✦';font-size:9px;color:var(--gold);opacity:.7}
+.price-tag{font-family:'Cinzel',serif;font-size:38px;letter-spacing:2px;margin-bottom:4px;color:var(--text)}
+.price-sub{font-size:12px;opacity:.35;margin-bottom:28px;letter-spacing:1px;font-family:sans-serif}
+
+/* PLAN PAGE */
+.plan-section{margin-bottom:32px}
+.plan-section-title{font-family:'Cinzel',serif;font-size:14px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.08)}
+.plan-content{white-space:pre-wrap;font-size:15px;line-height:1.95;opacity:.88}
+.dosha-summary{background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.2);border-radius:2px;padding:28px;margin-bottom:24px}
+.loading-wrap{text-align:center;padding:48px 0}
+.loading-text{font-size:15px;opacity:.45;letter-spacing:2px;font-style:italic;margin-bottom:36px}
+.dots{display:flex;justify-content:center;gap:10px}
+.dot{width:9px;height:9px;border-radius:50%;animation:pulse 1.4s ease-in-out infinite;opacity:.7}
+.dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
+@keyframes pulse{0%,80%,100%{transform:scale(.6);opacity:.4}40%{transform:scale(1);opacity:1}}
+
+/* BUTTONS */
 .btn{display:inline-block;padding:14px 32px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:3px;text-transform:uppercase;border-radius:2px;cursor:pointer;border:none;transition:all .2s;text-decoration:none}
-.btn-primary{background:var(--gold);color:#0d0a08;font-weight:600}
-.btn-primary:hover{opacity:.88;transform:translateY(-1px)}
-.btn-stripe{background:#635bff;color:#fff;font-weight:600;font-size:13px;padding:15px 36px}
-.btn-stripe:hover{background:#5048e5;transform:translateY(-1px)}
+.btn-gold{background:var(--gold);color:#0d0a08;font-weight:600}
+.btn-gold:hover{opacity:.88;transform:translateY(-1px)}
+.btn-stripe{background:#635bff;color:#fff;font-weight:600;font-size:13px;padding:16px 40px;letter-spacing:2px}
+.btn-stripe:hover{background:#5048e5;transform:translateY(-1px);box-shadow:0 8px 24px rgba(99,91,255,.3)}
 .btn-ghost{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.15)}
 .btn-ghost:hover{border-color:rgba(255,255,255,.3)}
 .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.plan-content{white-space:pre-wrap;font-size:15px;line-height:1.95;opacity:.88}
-.loading-text{text-align:center;font-size:15px;opacity:.45;letter-spacing:2px;font-style:italic;margin-bottom:40px}
-.loading-dots{display:flex;justify-content:center;gap:8px}
-.dot{width:8px;height:8px;border-radius:50%;animation:pulse 1.4s ease-in-out infinite;opacity:.7}
-.dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
-@keyframes pulse{0%,80%,100%{transform:scale(.6);opacity:.4}40%{transform:scale(1);opacity:1}}
 .stripe-note{font-size:11px;opacity:.3;margin-top:12px;letter-spacing:1px;font-family:sans-serif}
-.cross{margin-top:40px;border-top:1px solid rgba(255,255,255,.08);padding-top:36px}
-.cross-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:16px}
-.cross-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
-.cross-card{display:block;text-align:center;padding:18px 12px;border-radius:2px;text-decoration:none;transition:all .2s}
+
+/* CROSS SELL */
+.cross{margin-top:44px;border-top:1px solid rgba(255,255,255,.08);padding-top:36px}
+.cross-eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:14px}
+.cross-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.cross-card{display:block;text-align:center;padding:20px 12px;border-radius:2px;text-decoration:none;transition:all .2s}
 .cross-card:hover{transform:translateY(-2px)}
-/* Language switcher */
+
+/* LANG */
 .lang-bar{position:fixed;top:12px;right:16px;z-index:200;display:flex;background:rgba(200,169,110,.15);border-radius:50px;padding:3px;gap:2px}
 .lb{padding:5px 12px;border-radius:50px;border:none;background:transparent;cursor:pointer;font-size:12px;font-weight:500;letter-spacing:1px;color:rgba(240,232,216,.45);transition:all .2s;font-family:sans-serif}
 .lb.active{background:var(--gold);color:#0d0a08}
@@ -97,6 +112,7 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
   <button class="lb" id="btn-de" onclick="setLang('de')">DE</button>
 </div>
 
+<!-- INTRO -->
 <div id="page-intro" class="page active">
   <div class="wrap">
     <a href="index.html" class="back">← Travel 2 Transform</a>
@@ -110,29 +126,33 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
     <div class="card fade-in">
       <p style="font-size:18px;line-height:1.85;font-weight:300;margin-bottom:12px" class="en">In Ayurveda, your personal <em>Dosha</em> determines how you best eat, sleep and live.</p>
       <p style="font-size:18px;line-height:1.85;font-weight:300;margin-bottom:12px" class="de">Im Ayurveda bestimmt dein persönliches <em>Dosha</em>, wie du dich am besten ernährst, schläfst und lebst.</p>
-      <p style="font-size:16px;line-height:1.8;opacity:.55;margin-bottom:24px" class="en">Answer 20 deep questions and discover your dominant Dosha and receive a personalised nutrition plan.</p>
-      <p style="font-size:16px;line-height:1.8;opacity:.55;margin-bottom:24px" class="de">Beantworte 20 tiefgehende Fragen und erhalte deinen personalisierten Ernährungsplan.</p>
+      <p style="font-size:15px;line-height:1.8;opacity:.55;margin-bottom:24px" class="en">Answer 20 questions. See your result for free. Then unlock your full personalised plan.</p>
+      <p style="font-size:15px;line-height:1.8;opacity:.55;margin-bottom:24px" class="de">Beantworte 20 Fragen. Sieh dein Ergebnis kostenlos. Schalte dann deinen vollständigen Plan frei.</p>
       <div class="dosha-trio">
         <div class="dosha-card vata"><div class="emoji">🌬️</div><div class="name">Vata</div><div class="element en">Air · Space</div><div class="element de">Luft · Raum</div></div>
         <div class="dosha-card pitta"><div class="emoji">🔥</div><div class="name">Pitta</div><div class="element en">Fire · Water</div><div class="element de">Feuer · Wasser</div></div>
         <div class="dosha-card kapha"><div class="emoji">🌿</div><div class="name">Kapha</div><div class="element en">Earth · Water</div><div class="element de">Erde · Wasser</div></div>
       </div>
-      <button class="btn btn-primary" onclick="startQuiz()"><span class="en">Start Quiz →</span><span class="de">Quiz starten →</span></button>
+      <button class="btn btn-gold" onclick="startQuiz()">
+        <span class="en">Start Free Quiz →</span><span class="de">Kostenloses Quiz starten →</span>
+      </button>
     </div>
   </div>
 </div>
 
+<!-- QUIZ -->
 <div id="page-quiz" class="page">
   <div class="wrap">
     <a href="index.html" class="back">← <span class="en">Back</span><span class="de">Zurück</span></a>
     <header class="site-header">
-      <div class="eyebrow">Dosha Analysis</div>
+      <div class="eyebrow en">Dosha Analysis · Free</div>
+      <div class="eyebrow de">Dosha-Analyse · Kostenlos</div>
       <h1 class="en">Find your <em>Dosha</em></h1>
       <h1 class="de">Finde dein <em>Dosha</em></h1>
     </header>
     <div class="progress-track" id="progress-track"></div>
     <div class="progress-label" id="progress-label"></div>
-    <div class="card fade-in" id="question-card">
+    <div class="card fade-in">
       <div class="question-text" id="q-text"></div>
       <div class="question-sub" id="q-sub"></div>
       <div class="options" id="q-options"></div>
@@ -140,14 +160,17 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
   </div>
 </div>
 
+<!-- RESULT (free) + PAYWALL -->
 <div id="page-result" class="page">
   <div class="wrap">
     <a href="index.html" class="back">← <span class="en">Back</span><span class="de">Zurück</span></a>
     <header class="site-header">
-      <div class="eyebrow en">Your Result</div>
-      <div class="eyebrow de">Dein Ergebnis</div>
+      <div class="eyebrow en">Your Free Result</div>
+      <div class="eyebrow de">Dein kostenloses Ergebnis</div>
       <h1 id="result-header"></h1>
     </header>
+
+    <!-- FREE: Dosha type shown -->
     <div class="card fade-in">
       <div class="result-hero">
         <div class="result-emoji" id="res-emoji"></div>
@@ -162,30 +185,38 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
         <div class="score-row"><div class="score-meta"><span>🌿 Kapha</span><span id="sc-kapha">0/20</span></div><div class="score-track"><div class="score-fill" id="sf-kapha" style="background:var(--earth)"></div></div></div>
       </div>
     </div>
-    <div class="paywall-box fade-in">
-      <div class="paywall-icon">📋</div>
-      <div class="paywall-title en">Your Personal Nutrition Plan</div>
-      <div class="paywall-title de">Dein persönlicher Ernährungsplan</div>
-      <p class="paywall-desc en">Receive a plan perfectly tailored to your <span id="pay-dosha-name"></span> Dosha.</p>
-      <p class="paywall-desc de">Erhalte einen Plan perfekt abgestimmt auf dein <span id="pay-dosha-name2"></span> Dosha.</p>
+
+    <!-- PAYWALL: unlock full plan -->
+    <div class="paywall fade-in">
+      <div class="paywall-lock">🔓</div>
+      <div class="paywall-title en">Unlock Your Full Plan</div>
+      <div class="paywall-title de">Vollständigen Plan freischalten</div>
+      <p class="paywall-desc en">You know your Dosha – now get everything you need to actually transform it into results.</p>
+      <p class="paywall-desc de">Du kennst dein Dosha – jetzt bekomme alles was du brauchst um es in echte Ergebnisse umzuwandeln.</p>
       <ul class="paywall-includes en">
-        <li>14-day nutrition plan (breakfast, lunch, dinner + snacks)</li>
-        <li>Ayurvedically matched recipe suggestions</li>
-        <li>Spices & preparation tips for your type</li>
-        <li>Eating habits & daily rhythm recommendations</li>
+        <li>Detailed Dosha analysis & what it means for you</li>
+        <li>Personalised 2-week nutrition plan (all meals)</li>
+        <li>Best foods, spices & herbs for your type</li>
+        <li>Foods to avoid & why</li>
+        <li>Daily rhythm & lifestyle tips</li>
+        <li>Immediate access after payment</li>
       </ul>
       <ul class="paywall-includes de">
-        <li>14-Tage-Ernährungsplan (Frühstück, Mittag, Abend + Snacks)</li>
-        <li>Ayurvedisch abgestimmte Rezeptvorschläge</li>
-        <li>Gewürze & Zubereitungstipps für deinen Typ</li>
-        <li>Essgewohnheiten & Tagesrhythmus-Empfehlungen</li>
+        <li>Detaillierte Dosha-Analyse & was sie für dich bedeutet</li>
+        <li>Personalisierter 2-Wochen-Ernährungsplan (alle Mahlzeiten)</li>
+        <li>Beste Lebensmittel, Gewürze & Kräuter für deinen Typ</li>
+        <li>Lebensmittel die du meiden solltest & warum</li>
+        <li>Tagesrhythmus & Lifestyle-Tipps</li>
+        <li>Sofortiger Zugang nach Zahlung</li>
       </ul>
       <div class="price-tag">€6.99</div>
-      <div class="price-sub en">One-time payment · Instant access</div>
-      <div class="price-sub de">Einmalige Zahlung · Sofortiger Zugang</div>
-      <button class="btn btn-stripe" onclick="handleStripeCheckout()">💳 &nbsp; <span class="en">Buy now & get your plan</span><span class="de">Jetzt kaufen & Plan erhalten</span></button>
-      <div class="stripe-note en">Secure payment via Stripe · SSL encrypted</div>
-      <div class="stripe-note de">Sichere Zahlung via Stripe · SSL-verschlüsselt</div>
+      <div class="price-sub en">One-time · Instant access · No subscription</div>
+      <div class="price-sub de">Einmalig · Sofortiger Zugang · Kein Abo</div>
+      <button class="btn btn-stripe" onclick="handleCheckout()">
+        💳 &nbsp;<span class="en">Buy Now & Get Your Plan</span><span class="de">Jetzt kaufen & Plan erhalten</span>
+      </button>
+      <div class="stripe-note en">Secure payment via Stripe · SSL encrypted · Instant delivery</div>
+      <div class="stripe-note de">Sichere Zahlung via Stripe · SSL-verschlüsselt · Sofortige Lieferung</div>
       <div class="btn-row" style="justify-content:center;margin-top:20px">
         <button class="btn btn-ghost" onclick="resetQuiz()"><span class="en">Retake quiz</span><span class="de">Quiz wiederholen</span></button>
       </div>
@@ -193,43 +224,65 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
   </div>
 </div>
 
+<!-- PLAN (after payment) -->
 <div id="page-plan" class="page">
   <div class="wrap">
     <a href="index.html" class="back">← Travel 2 Transform</a>
     <header class="site-header">
-      <div class="eyebrow en">Your Personal Plan</div>
-      <div class="eyebrow de">Dein persönlicher Plan</div>
+      <div class="eyebrow en">Your Complete Plan</div>
+      <div class="eyebrow de">Dein vollständiger Plan</div>
       <h1 id="plan-header"></h1>
     </header>
-    <div class="card fade-in">
-      <div id="plan-loading">
-        <div class="loading-text en">Your plan is being created …</div>
-        <div class="loading-text de">Dein Plan wird erstellt …</div>
-        <div class="loading-dots"><div class="dot" id="d1"></div><div class="dot" id="d2"></div><div class="dot" id="d3"></div></div>
+
+    <div class="card fade-in" id="plan-card">
+      <!-- Loading state -->
+      <div id="plan-loading" class="loading-wrap">
+        <div class="loading-text en">Creating your personalised plan …</div>
+        <div class="loading-text de">Dein persönlicher Plan wird erstellt …</div>
+        <div class="dots">
+          <div class="dot" id="d1"></div>
+          <div class="dot" id="d2"></div>
+          <div class="dot" id="d3"></div>
+        </div>
       </div>
-      <div id="plan-text" class="plan-content" style="display:none"></div>
-      <div id="plan-actions" class="btn-row" style="display:none">
-        <button class="btn btn-primary" onclick="generatePlan()"><span class="en">Generate new plan ↺</span><span class="de">Neuen Plan generieren ↺</span></button>
-        <button class="btn btn-ghost" onclick="resetQuiz()"><span class="en">Retake quiz</span><span class="de">Quiz wiederholen</span></button>
-      </div>
-      <div id="cross-sell" style="display:none" class="cross">
-        <div class="cross-title en">Complete your system</div>
-        <div class="cross-title de">Vervollständige dein System</div>
-        <p style="font-size:18px;line-height:1.8;font-weight:300;font-style:italic;margin-bottom:8px" class="en">Your Dosha shows your constitution – but do you know which <strong style="font-style:normal">chakras</strong> are out of balance?</p>
-        <p style="font-size:18px;line-height:1.8;font-weight:300;font-style:italic;margin-bottom:8px" class="de">Dein Dosha zeigt die Konstitution – aber weißt du auch welche <strong style="font-style:normal">Chakren</strong> aus dem Gleichgewicht sind?</p>
-        <div class="cross-grid">
-          <a href="reiki-quiz.html" class="cross-card" style="border:1px solid rgba(212,84,138,.3);background:rgba(212,84,138,.05)">
-            <div style="font-size:26px;margin-bottom:8px">✨</div>
-            <div style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:#d4548a;margin-bottom:4px">CHAKRAS</div>
-            <div style="font-size:13px;opacity:.6;color:var(--text)" class="en">Chakra Analysis</div>
-            <div style="font-size:13px;opacity:.6;color:var(--text)" class="de">Chakren-Analyse</div>
-          </a>
-          <a href="yoga-quiz.html" class="cross-card" style="border:1px solid rgba(58,153,144,.3);background:rgba(58,153,144,.05)">
-            <div style="font-size:26px;margin-bottom:8px">🧘</div>
-            <div style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:#3a9990;margin-bottom:4px">YOGA</div>
-            <div style="font-size:13px;opacity:.6;color:var(--text)" class="en">Your Yoga Plan</div>
-            <div style="font-size:13px;opacity:.6;color:var(--text)" class="de">Dein Yoga-Plan</div>
-          </a>
+
+      <!-- Plan content -->
+      <div id="plan-content" style="display:none">
+        <!-- Dosha Summary -->
+        <div class="dosha-summary" id="plan-dosha-summary"></div>
+
+        <!-- Nutrition Plan -->
+        <div class="plan-section">
+          <div class="plan-section-title en">✦ Your 2-Week Nutrition Plan</div>
+          <div class="plan-section-title de">✦ Dein 2-Wochen-Ernährungsplan</div>
+          <div class="plan-content" id="plan-text"></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-gold" onclick="generatePlan()"><span class="en">Generate New Plan ↺</span><span class="de">Neuen Plan ↺</span></button>
+          <button class="btn btn-ghost" onclick="resetQuiz()"><span class="en">Retake Quiz</span><span class="de">Quiz wiederholen</span></button>
+        </div>
+
+        <!-- Cross sell -->
+        <div class="cross">
+          <div class="cross-eyebrow en">Complete Your System</div>
+          <div class="cross-eyebrow de">Vervollständige dein System</div>
+          <p style="font-size:17px;line-height:1.8;font-weight:300;font-style:italic;margin-bottom:8px" class="en">Your Dosha shows your constitution – now find out which <strong style="font-style:normal">chakras</strong> are blocking your energy.</p>
+          <p style="font-size:17px;line-height:1.8;font-weight:300;font-style:italic;margin-bottom:8px" class="de">Dein Dosha zeigt die Konstitution – jetzt herausfinden welche <strong style="font-style:normal">Chakren</strong> deine Energie blockieren.</p>
+          <div class="cross-grid">
+            <a href="reiki-quiz.html" class="cross-card" style="border:1px solid rgba(212,84,138,.3);background:rgba(212,84,138,.05)">
+              <div style="font-size:28px;margin-bottom:8px">✨</div>
+              <div style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:#d4548a;margin-bottom:4px">CHAKRAS</div>
+              <div style="font-size:13px;opacity:.6" class="en">Chakra Analysis →</div>
+              <div style="font-size:13px;opacity:.6" class="de">Chakren-Analyse →</div>
+            </a>
+            <a href="yoga-quiz.html" class="cross-card" style="border:1px solid rgba(58,153,144,.3);background:rgba(58,153,144,.05)">
+              <div style="font-size:28px;margin-bottom:8px">🧘</div>
+              <div style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:#3a9990;margin-bottom:4px">YOGA</div>
+              <div style="font-size:13px;opacity:.6" class="en">Yoga Plan →</div>
+              <div style="font-size:13px;opacity:.6" class="de">Yoga-Plan →</div>
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -237,8 +290,8 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
 </div>
 
 <script>
-const STRIPE_PAYMENT_LINK='https://buy.stripe.com/14AbJ12kPaJM7Sz1RPaAw00';
-let currentLang='en';
+const STRIPE='https://buy.stripe.com/14AbJ12kPaJM7Sz1RPaAw00';
+let currentLang='en', currentQ=0, scores={vata:0,pitta:0,kapha:0}, dominantDosha=null, selectedOpt=null;
 
 function setLang(l){
   currentLang=l;
@@ -246,303 +299,169 @@ function setLang(l){
   document.getElementById('btn-en').classList.toggle('active',l==='en');
   document.getElementById('btn-de').classList.toggle('active',l==='de');
   localStorage.setItem('t2t-lang',l);
-  if(currentQ>=0&&currentQ<questions.length) renderQuestion();
+  if(currentQ>0&&currentQ<questions.length) renderQuestion();
 }
 
 const questions=[
-  {
-    en:{text:"How would you describe your natural body frame?",sub:"Think of your basic constitution, not current weight."},
-    de:{text:"Wie würdest du deinen natürlichen Körperbau beschreiben?",sub:"Denke an deine Grundkonstitution, nicht an aktuelles Gewicht."},
-    options:[
-      {en:"Slim and slight, hard to gain weight",de:"Schlank und zierlich, schwer zuzunehmen",d:"vata"},
-      {en:"Medium build, well-proportioned",de:"Mittelkräftig, gut proportioniert",d:"pitta"},
-      {en:"Sturdy build, tend to gain weight easily",de:"Kräftig gebaut, neige zur Gewichtszunahme",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"How is your skin naturally?",sub:"Without special care or external influences."},
-    de:{text:"Wie ist deine Haut von Natur aus?",sub:"Ohne besondere Pflege oder äußere Einflüsse."},
-    options:[
-      {en:"Dry, rough, prone to cracking",de:"Trocken, rau, neigt zu Rissen",d:"vata"},
-      {en:"Oily or warm, prone to spots or inflammation",de:"Ölig oder warm, neigt zu Pickeln oder Entzündungen",d:"pitta"},
-      {en:"Moist, cool, soft and smooth",de:"Feucht, kühl, weich und glatt",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"How does your body react to cold?",sub:""},
-    de:{text:"Wie reagiert dein Körper auf Kälte?",sub:""},
-    options:[
-      {en:"I get cold very easily and dislike cold weather",de:"Ich friere sehr leicht und mag keine Kälte",d:"vata"},
-      {en:"I tolerate cold well – I prefer cooler temperatures",de:"Ich vertrage Kälte gut – lieber kühler als warm",d:"pitta"},
-      {en:"I dislike both cold and dampness",de:"Ich mag weder Kälte noch Feuchtigkeit",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"How would you describe your physical endurance?",sub:""},
-    de:{text:"Wie würdest du deine körperliche Ausdauer beschreiben?",sub:""},
-    options:[
-      {en:"Short bursts of energy, I tire quickly",de:"Kurze Energieschübe, ich erschöpfe mich schnell",d:"vata"},
-      {en:"Moderate – I push through but need breaks",de:"Mittelstark – ich halte durch, brauche aber Pausen",d:"pitta"},
-      {en:"Very good – great stamina, but I start slowly",de:"Sehr gut – viel Ausdauer, starte aber träge",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"How do you typically sleep?",sub:""},
-    de:{text:"Wie schläfst du in der Regel?",sub:""},
-    options:[
-      {en:"Light and restless – I often wake up or struggle to fall asleep",de:"Leicht und unruhig – ich wache oft auf oder habe Einschlafprobleme",d:"vata"},
-      {en:"Moderate – I sleep well but wake early feeling refreshed",de:"Mittelmäßig – ich schlafe gut, wache aber früh und ausgeruht auf",d:"pitta"},
-      {en:"Deep and long – I could sleep for hours and struggle to get up",de:"Tief und lang – ich könnte stundenlang schlafen und komme schwer hoch",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"When are you most energetic?",sub:""},
-    de:{text:"Wann bist du am energiereichsten?",sub:""},
-    options:[
-      {en:"Irregularly – it varies greatly from day to day",de:"Unregelmäßig – es wechselt stark von Tag zu Tag",d:"vata"},
-      {en:"Morning and midday – I'm an early riser with clear focus",de:"Morgens und mittags – ich bin ein Frühaufsteher mit klarem Fokus",d:"pitta"},
-      {en:"After a warm-up period – most productive in the afternoon",de:"Nach einer Anlaufphase – nachmittags bin ich richtig produktiv",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"How is your appetite?",sub:""},
-    de:{text:"Wie ist dein Appetit?",sub:""},
-    options:[
-      {en:"Irregular – sometimes very hungry, sometimes not at all",de:"Unregelmäßig – manchmal viel Hunger, manchmal gar keiner",d:"vata"},
-      {en:"Strong and punctual – I get irritable if I miss meals",de:"Stark und pünktlich – wenn ich nicht esse, werde ich reizbar",d:"pitta"},
-      {en:"Moderate – I can easily skip meals without problems",de:"Gemäßigt – ich kann Mahlzeiten gut auslassen",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"How does your digestive system react?",sub:""},
-    de:{text:"Wie reagiert dein Verdauungssystem?",sub:""},
-    options:[
-      {en:"Irregular – bloating, constipation or alternating",de:"Unregelmäßig – Blähungen, Verstopfung oder wechselnd",d:"vata"},
-      {en:"Strong – sometimes heartburn, loose stools or acidity",de:"Stark – manchmal Sodbrennen, Durchfall oder Säure",d:"pitta"},
-      {en:"Slow but stable – rarely any issues",de:"Langsam aber stabil – kaum Beschwerden",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"Which foods do you naturally prefer?",sub:""},
-    de:{text:"Welche Speisen ziehst du von Natur aus vor?",sub:""},
-    options:[
-      {en:"Warm, hearty, buttery foods",de:"Warme, herzhafte, buttrige Speisen",d:"vata"},
-      {en:"Fresh, cool, light fare – too much spice troubles me",de:"Frische, kühle, leichte Kost – zu viel Schärfe macht mir zu schaffen",d:"pitta"},
-      {en:"Spicy, light meals – I tend towards fatty or sweet foods",de:"Würzige, leichte Speisen – ich neige zu fettem oder süßem Essen",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"How do you learn and remember things?",sub:""},
-    de:{text:"Wie lernst und merkst du dir Dinge?",sub:""},
-    options:[
-      {en:"Learn quickly and enthusiastically – but forget quickly too",de:"Lerne schnell und begeistert – vergesse aber auch schnell",d:"vata"},
-      {en:"Learn in a focused, structured way – good medium-term memory",de:"Lerne zielgerichtet und strukturiert – gutes Mittelzeitgedächtnis",d:"pitta"},
-      {en:"Need time to learn – but retain it very well",de:"Brauche Zeit zum Lernen – was ich weiß, behalte ich sehr gut",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"How do you handle stress?",sub:""},
-    de:{text:"Wie gehst du mit Stress um?",sub:""},
-    options:[
-      {en:"I become anxious, nervous or get a racing mind",de:"Ich werde ängstlich, nervös oder habe ein Gedankenkarussell",d:"vata"},
-      {en:"I become impatient, critical or irritable",de:"Ich werde ungeduldig, kritisch oder reizbar",d:"pitta"},
-      {en:"I withdraw, become stubborn or eat more than necessary",de:"Ich ziehe mich zurück, werde stur oder esse mehr als nötig",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"How do you make decisions?",sub:""},
-    de:{text:"Wie triffst du Entscheidungen?",sub:""},
-    options:[
-      {en:"Spontaneously and intuitively – but I often change my mind",de:"Spontan und intuitiv – ich ändere meine Meinung aber oft",d:"vata"},
-      {en:"Quickly and decisively – I'm confident in my opinions",de:"Schnell und entschlossen – ich bin von meiner Meinung überzeugt",d:"pitta"},
-      {en:"Slowly and carefully – I weigh everything up",de:"Langsam und bedacht – ich brauche Zeit und wäge alles ab",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"What best describes your basic mood?",sub:""},
-    de:{text:"Was beschreibt deine Grundstimmung am besten?",sub:""},
-    options:[
-      {en:"Lively, creative, sometimes inconsistent or scattered",de:"Lebendig, kreativ, manchmal unbeständig oder sprunghaft",d:"vata"},
-      {en:"Focused, ambitious, sometimes too critical or impatient",de:"Fokussiert, ehrgeizig, manchmal zu kritisch oder ungeduldig",d:"pitta"},
-      {en:"Calm, balanced, sometimes too passive or set in my ways",de:"Ruhig, ausgeglichen, manchmal zu passiv oder festgefahren",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"How are your joints and physique?",sub:""},
-    de:{text:"Wie sind deine Gelenke und dein Körperbau?",sub:""},
-    options:[
-      {en:"Narrow, bony, joints sometimes crack",de:"Schmal, knochig, Gelenke knacken manchmal",d:"vata"},
-      {en:"Moderate, good muscle structure, warm hands",de:"Mittelmäßig, gute Muskelstruktur, warme Hände",d:"pitta"},
-      {en:"Broad and stable, softer contours",de:"Breit und stabil, eher weiche Konturen",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"What is your hair like naturally?",sub:""},
-    de:{text:"Wie ist dein Haar von Natur aus?",sub:""},
-    options:[
-      {en:"Dry, brittle or fine – prone to breakage",de:"Trocken, spröde oder fein – neigt zum Brechen",d:"vata"},
-      {en:"Fine, smooth, tends to go grey early or thin",de:"Fein, glatt, neigt früh zu Grau oder Haarausfall",d:"pitta"},
-      {en:"Thick, wavy or oily – grows well and is strong",de:"Dick, wellig oder ölig – wächst gut und ist kräftig",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"Which season do you feel best in?",sub:""},
-    de:{text:"Zu welcher Jahreszeit fühlst du dich am wohlsten?",sub:""},
-    options:[
-      {en:"Summer – warmth suits me, cold and wind drain me",de:"Sommer – Wärme tut mir gut, Kälte und Wind belasten mich",d:"vata"},
-      {en:"Autumn or spring – I like moderate, cool temperatures",de:"Herbst oder Frühling – ich mag gemäßigte, kühle Temperaturen",d:"pitta"},
-      {en:"Summer or spring – as long as it's dry and warm",de:"Sommer oder Frühling – solange es trocken und warm ist",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"How do you react to change and travel?",sub:""},
-    de:{text:"Wie reagierst du auf Veränderungen und Reisen?",sub:""},
-    options:[
-      {en:"I love variety, but I'm easily thrown off rhythm",de:"Ich liebe Abwechslung, bin aber schnell aus dem Rhythmus",d:"vata"},
-      {en:"I like to plan, but I adapt well",de:"Ich plane gerne, kann mich aber gut anpassen",d:"pitta"},
-      {en:"I need routine – changes cost me energy",de:"Ich brauche Routine – Veränderungen kosten mich Energie",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"What drives you most in life?",sub:"Answer honestly and spontaneously."},
-    de:{text:"Was treibt dich im Leben am stärksten an?",sub:"Ehrlich und spontan antworten."},
-    options:[
-      {en:"Freedom, creativity and new experiences",de:"Freiheit, Kreativität und neue Erfahrungen",d:"vata"},
-      {en:"Achieving goals, demonstrating competence",de:"Ziele erreichen, Kompetenz zeigen",d:"pitta"},
-      {en:"Security, harmony, being there for others",de:"Sicherheit, Harmonie, für andere da sein",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"How do you speak and communicate?",sub:""},
-    de:{text:"Wie sprichst und kommunizierst du?",sub:""},
-    options:[
-      {en:"Quickly, jumping between topics, many ideas at once",de:"Schnell, sprunghaft, viele Ideen gleichzeitig",d:"vata"},
-      {en:"Precisely, directly, persuasively – sometimes too sharply",de:"Präzise, direkt, überzeugend – manchmal zu scharf",d:"pitta"},
-      {en:"Slowly, thoughtfully, warmly – I think before I speak",de:"Langsam, bedächtig, freundlich – ich denke erst nach",d:"kapha"}
-    ]
-  },
-  {
-    en:{text:"What is your greatest inner challenge?",sub:"Be honest – there's no wrong answer here."},
-    de:{text:"Was ist deine größte innere Herausforderung?",sub:"Sei ehrlich – hier gibt es keine falsche Antwort."},
-    options:[
-      {en:"Finding groundedness, finishing projects, staying calm",de:"Erdung finden, Projekte abschließen, ruhig bleiben",d:"vata"},
-      {en:"Letting go, relinquishing control, compassion over criticism",de:"Loslassen, Kontrolle abgeben, Mitgefühl statt Kritik",d:"pitta"},
-      {en:"Finding motivation, letting go, welcoming change",de:"Motivation finden, loslassen, Veränderungen willkommen heißen",d:"kapha"}
-    ]
-  }
+  {en:{text:"How would you describe your natural body frame?",sub:"Think of your basic constitution, not current weight."},de:{text:"Wie würdest du deinen natürlichen Körperbau beschreiben?",sub:"Denke an deine Grundkonstitution, nicht an aktuelles Gewicht."},options:[{en:"Slim and slight, hard to gain weight",de:"Schlank und zierlich, schwer zuzunehmen",d:"vata"},{en:"Medium build, well-proportioned",de:"Mittelkräftig, gut proportioniert",d:"pitta"},{en:"Sturdy build, tend to gain weight easily",de:"Kräftig gebaut, neige zur Gewichtszunahme",d:"kapha"}]},
+  {en:{text:"How is your skin naturally?",sub:"Without special care."},de:{text:"Wie ist deine Haut von Natur aus?",sub:"Ohne besondere Pflege."},options:[{en:"Dry, rough, prone to cracking",de:"Trocken, rau, neigt zu Rissen",d:"vata"},{en:"Oily or warm, prone to spots",de:"Ölig oder warm, neigt zu Pickeln",d:"pitta"},{en:"Moist, cool, soft and smooth",de:"Feucht, kühl, weich und glatt",d:"kapha"}]},
+  {en:{text:"How does your body react to cold?",sub:""},de:{text:"Wie reagiert dein Körper auf Kälte?",sub:""},options:[{en:"I get cold very easily",de:"Ich friere sehr leicht",d:"vata"},{en:"I tolerate cold well – I prefer cooler temperatures",de:"Ich vertrage Kälte gut",d:"pitta"},{en:"I dislike both cold and dampness",de:"Ich mag weder Kälte noch Feuchtigkeit",d:"kapha"}]},
+  {en:{text:"How would you describe your physical endurance?",sub:""},de:{text:"Wie würdest du deine körperliche Ausdauer beschreiben?",sub:""},options:[{en:"Short bursts of energy, I tire quickly",de:"Kurze Energieschübe, ich erschöpfe mich schnell",d:"vata"},{en:"Moderate – I push through but need breaks",de:"Mittelstark – ich halte durch, brauche aber Pausen",d:"pitta"},{en:"Very good – great stamina, but I start slowly",de:"Sehr gut – viel Ausdauer, starte aber träge",d:"kapha"}]},
+  {en:{text:"How do you typically sleep?",sub:""},de:{text:"Wie schläfst du in der Regel?",sub:""},options:[{en:"Light and restless – I often wake up",de:"Leicht und unruhig – ich wache oft auf",d:"vata"},{en:"Moderate – I sleep well but wake early",de:"Mittelmäßig – ich schlafe gut, wache aber früh auf",d:"pitta"},{en:"Deep and long – I struggle to get up",de:"Tief und lang – ich komme schwer hoch",d:"kapha"}]},
+  {en:{text:"When are you most energetic?",sub:""},de:{text:"Wann bist du am energiereichsten?",sub:""},options:[{en:"Irregularly – it varies greatly",de:"Unregelmäßig – es wechselt stark",d:"vata"},{en:"Morning and midday – clear focus",de:"Morgens und mittags – klarer Fokus",d:"pitta"},{en:"After a warm-up – most productive in the afternoon",de:"Nach einer Anlaufphase – nachmittags am produktivsten",d:"kapha"}]},
+  {en:{text:"How is your appetite?",sub:""},de:{text:"Wie ist dein Appetit?",sub:""},options:[{en:"Irregular – sometimes very hungry, sometimes not",de:"Unregelmäßig – manchmal viel Hunger, manchmal keiner",d:"vata"},{en:"Strong and punctual – I get irritable if I miss meals",de:"Stark und pünktlich – ich werde reizbar wenn ich nicht esse",d:"pitta"},{en:"Moderate – I can easily skip meals",de:"Gemäßigt – ich kann Mahlzeiten gut auslassen",d:"kapha"}]},
+  {en:{text:"How does your digestive system react?",sub:""},de:{text:"Wie reagiert dein Verdauungssystem?",sub:""},options:[{en:"Irregular – bloating, constipation or alternating",de:"Unregelmäßig – Blähungen, Verstopfung oder wechselnd",d:"vata"},{en:"Strong – sometimes heartburn or loose stools",de:"Stark – manchmal Sodbrennen oder Durchfall",d:"pitta"},{en:"Slow but stable – rarely any issues",de:"Langsam aber stabil – kaum Beschwerden",d:"kapha"}]},
+  {en:{text:"Which foods do you naturally prefer?",sub:""},de:{text:"Welche Speisen ziehst du vor?",sub:""},options:[{en:"Warm, hearty, buttery foods",de:"Warme, herzhafte, buttrige Speisen",d:"vata"},{en:"Fresh, cool, light fare",de:"Frische, kühle, leichte Kost",d:"pitta"},{en:"Spicy meals – I tend towards sweet or fatty foods",de:"Würzige Speisen – ich neige zu süßem oder fettem Essen",d:"kapha"}]},
+  {en:{text:"How do you learn and remember things?",sub:""},de:{text:"Wie lernst und merkst du dir Dinge?",sub:""},options:[{en:"Learn quickly – but forget quickly too",de:"Lerne schnell – vergesse aber auch schnell",d:"vata"},{en:"Learn in a focused way – good medium-term memory",de:"Lerne zielgerichtet – gutes Mittelzeitgedächtnis",d:"pitta"},{en:"Need time to learn – but retain it very well",de:"Brauche Zeit – was ich weiß, behalte ich sehr gut",d:"kapha"}]},
+  {en:{text:"How do you handle stress?",sub:""},de:{text:"Wie gehst du mit Stress um?",sub:""},options:[{en:"I become anxious, nervous or get a racing mind",de:"Ich werde ängstlich, nervös oder habe ein Gedankenkarussell",d:"vata"},{en:"I become impatient, critical or irritable",de:"Ich werde ungeduldig, kritisch oder reizbar",d:"pitta"},{en:"I withdraw, become stubborn or eat more",de:"Ich ziehe mich zurück, werde stur oder esse mehr",d:"kapha"}]},
+  {en:{text:"How do you make decisions?",sub:""},de:{text:"Wie triffst du Entscheidungen?",sub:""},options:[{en:"Spontaneously – but I often change my mind",de:"Spontan – aber ich ändere meine Meinung oft",d:"vata"},{en:"Quickly and decisively",de:"Schnell und entschlossen",d:"pitta"},{en:"Slowly and carefully – I weigh everything up",de:"Langsam und bedacht",d:"kapha"}]},
+  {en:{text:"What best describes your basic mood?",sub:""},de:{text:"Was beschreibt deine Grundstimmung?",sub:""},options:[{en:"Lively, creative, sometimes scattered",de:"Lebendig, kreativ, manchmal zerstreut",d:"vata"},{en:"Focused, ambitious, sometimes too critical",de:"Fokussiert, ehrgeizig, manchmal zu kritisch",d:"pitta"},{en:"Calm, balanced, sometimes too passive",de:"Ruhig, ausgeglichen, manchmal zu passiv",d:"kapha"}]},
+  {en:{text:"How are your joints and physique?",sub:""},de:{text:"Wie sind deine Gelenke und dein Körperbau?",sub:""},options:[{en:"Narrow, bony, joints sometimes crack",de:"Schmal, knochig, Gelenke knacken manchmal",d:"vata"},{en:"Moderate, good muscle structure, warm hands",de:"Mittelmäßig, gute Muskelstruktur, warme Hände",d:"pitta"},{en:"Broad and stable, softer contours",de:"Breit und stabil, weiche Konturen",d:"kapha"}]},
+  {en:{text:"What is your hair like naturally?",sub:""},de:{text:"Wie ist dein Haar von Natur aus?",sub:""},options:[{en:"Dry, brittle or fine",de:"Trocken, spröde oder fein",d:"vata"},{en:"Fine, smooth, tends to grey early",de:"Fein, glatt, neigt früh zu Grau",d:"pitta"},{en:"Thick, wavy or oily",de:"Dick, wellig oder ölig",d:"kapha"}]},
+  {en:{text:"Which season do you feel best in?",sub:""},de:{text:"Zu welcher Jahreszeit fühlst du dich am wohlsten?",sub:""},options:[{en:"Summer – warmth suits me",de:"Sommer – Wärme tut mir gut",d:"vata"},{en:"Autumn or spring – I like cool temperatures",de:"Herbst oder Frühling – ich mag kühle Temperaturen",d:"pitta"},{en:"Summer or spring – as long as it's dry",de:"Sommer oder Frühling – solange es trocken ist",d:"kapha"}]},
+  {en:{text:"How do you react to change and travel?",sub:""},de:{text:"Wie reagierst du auf Veränderungen und Reisen?",sub:""},options:[{en:"I love variety, but I'm easily thrown off rhythm",de:"Ich liebe Abwechslung, bin aber schnell aus dem Rhythmus",d:"vata"},{en:"I like to plan, but I adapt well",de:"Ich plane gerne, kann mich aber gut anpassen",d:"pitta"},{en:"I need routine – changes cost me energy",de:"Ich brauche Routine – Veränderungen kosten mich Energie",d:"kapha"}]},
+  {en:{text:"What drives you most in life?",sub:"Answer honestly."},de:{text:"Was treibt dich im Leben am stärksten an?",sub:"Ehrlich antworten."},options:[{en:"Freedom, creativity and new experiences",de:"Freiheit, Kreativität und neue Erfahrungen",d:"vata"},{en:"Achieving goals, making a difference",de:"Ziele erreichen, etwas bewegen",d:"pitta"},{en:"Security, harmony, being there for others",de:"Sicherheit, Harmonie, für andere da sein",d:"kapha"}]},
+  {en:{text:"How do you speak and communicate?",sub:""},de:{text:"Wie sprichst und kommunizierst du?",sub:""},options:[{en:"Quickly, jumping between topics",de:"Schnell, sprunghaft, viele Ideen gleichzeitig",d:"vata"},{en:"Precisely, directly, persuasively",de:"Präzise, direkt, überzeugend",d:"pitta"},{en:"Slowly, thoughtfully, warmly",de:"Langsam, bedächtig, freundlich",d:"kapha"}]},
+  {en:{text:"What is your greatest inner challenge?",sub:"Be honest – no wrong answer."},de:{text:"Was ist deine größte innere Herausforderung?",sub:"Sei ehrlich – es gibt keine falsche Antwort."},options:[{en:"Finding groundedness, finishing projects",de:"Erdung finden, Projekte abschließen",d:"vata"},{en:"Letting go, relinquishing control",de:"Loslassen, Kontrolle abgeben",d:"pitta"},{en:"Finding motivation, welcoming change",de:"Motivation finden, Veränderungen willkommen heißen",d:"kapha"}]}
 ];
 
 const doshaData={
   vata:{
-    en:{name:"Vata",element:"Air · Space",desc:"Vata types are creative, lively and mobile – like the wind. You think quickly, love novelty and are full of ideas. Your body and mind benefit most from warmth, regularity and grounding rituals.",keywords:["Creative","Mobile","Sensitive","Vivid","Intuitive"]},
-    de:{name:"Vata",element:"Luft · Raum",desc:"Vata-Typen sind kreativ, lebendig und beweglich – wie der Wind. Du denkst schnell, liebst Neues und bist voller Ideen. Dein Körper und Geist profitieren von Wärme, Regelmäßigkeit und erdenden Ritualen.",keywords:["Kreativ","Beweglich","Sensibel","Lebhaft","Intuitiv"]},
+    en:{name:"Vata",element:"Air · Space",desc:"Vata types are creative, lively and mobile – like the wind. You think quickly, love novelty and are full of ideas. Your body and mind benefit most from warmth, regularity and grounding rituals.",keywords:["Creative","Mobile","Sensitive","Vivid","Intuitive"],
+      nutrition:"Vata types thrive on warm, oily, nourishing foods. Regular meal times are essential. Avoid cold, raw and dry foods."},
+    de:{name:"Vata",element:"Luft · Raum",desc:"Vata-Typen sind kreativ, lebendig und beweglich – wie der Wind. Du denkst schnell, liebst Neues und bist voller Ideen. Dein Körper und Geist profitieren von Wärme, Regelmäßigkeit und erdenden Ritualen.",keywords:["Kreativ","Beweglich","Sensibel","Lebhaft","Intuitiv"],
+      nutrition:"Vata-Typen gedeihen bei warmen, öligen, nährenden Speisen. Regelmäßige Mahlzeiten sind wichtig. Kalte, rohe und trockene Lebensmittel meiden."},
     emoji:"🌬️",color:"#c8a96e"
   },
   pitta:{
-    en:{name:"Pitta",element:"Fire · Water",desc:"Pitta types are focused, ambitious and passionate – like fire. You pursue goals with determination and have strong inner drive. Your body and mind need cooling, relaxation and balancing nutrition.",keywords:["Ambitious","Focused","Passionate","Decisive","Warm"]},
-    de:{name:"Pitta",element:"Feuer · Wasser",desc:"Pitta-Typen sind fokussiert, ehrgeizig und leidenschaftlich – wie Feuer. Du verfolgst Ziele mit Entschlossenheit. Dein Körper und Geist brauchen Kühlung, Entspannung und ausgleichende Nahrung.",keywords:["Ehrgeizig","Fokussiert","Leidenschaftlich","Entschlossen","Warm"]},
+    en:{name:"Pitta",element:"Fire · Water",desc:"Pitta types are focused, ambitious and passionate – like fire. You pursue goals with determination and have strong inner drive. Your body and mind need cooling, relaxation and balancing nutrition.",keywords:["Ambitious","Focused","Passionate","Decisive","Warm"],
+      nutrition:"Pitta types benefit from cooling, sweet and bitter foods. Avoid spicy, sour and salty foods. Regular meals are important – skipping meals leads to irritability."},
+    de:{name:"Pitta",element:"Feuer · Wasser",desc:"Pitta-Typen sind fokussiert, ehrgeizig und leidenschaftlich – wie Feuer. Du verfolgst Ziele mit Entschlossenheit. Dein Körper und Geist brauchen Kühlung, Entspannung und ausgleichende Nahrung.",keywords:["Ehrgeizig","Fokussiert","Leidenschaftlich","Entschlossen","Warm"],
+      nutrition:"Pitta-Typen profitieren von kühlenden, süßen und bitteren Lebensmitteln. Scharfe, saure und salzige Speisen meiden. Regelmäßige Mahlzeiten sind wichtig."},
     emoji:"🔥",color:"#e05a2b"
   },
   kapha:{
-    en:{name:"Kapha",element:"Earth · Water",desc:"Kapha types are stable, loving and enduring – like the earth. You are reliable, patient and have deep inner calm. Your body and mind need stimulation, lightness and warming, invigorating foods.",keywords:["Stable","Patient","Caring","Enduring","Loyal"]},
-    de:{name:"Kapha",element:"Erde · Wasser",desc:"Kapha-Typen sind stabil, liebevoll und ausdauernd – wie die Erde. Du bist zuverlässig, geduldig und hast tiefe innere Ruhe. Dein Körper und Geist brauchen Anregung, Leichtigkeit und wärmende Speisen.",keywords:["Stabil","Geduldig","Fürsorglich","Ausdauernd","Treu"]},
+    en:{name:"Kapha",element:"Earth · Water",desc:"Kapha types are stable, loving and enduring – like the earth. You are reliable, patient and have deep inner calm. Your body and mind need stimulation, lightness and warming, invigorating foods.",keywords:["Stable","Patient","Caring","Enduring","Loyal"],
+      nutrition:"Kapha types benefit from light, spicy and warming foods. Avoid heavy, oily and sweet foods. Smaller portions and intermittent fasting can be beneficial."},
+    de:{name:"Kapha",element:"Erde · Wasser",desc:"Kapha-Typen sind stabil, liebevoll und ausdauernd – wie die Erde. Du bist zuverlässig, geduldig und hast tiefe innere Ruhe. Dein Körper und Geist brauchen Anregung, Leichtigkeit und wärmende Speisen.",keywords:["Stabil","Geduldig","Fürsorglich","Ausdauernd","Treu"],
+      nutrition:"Kapha-Typen profitieren von leichten, würzigen und wärmenden Lebensmitteln. Schwere, ölige und süße Speisen meiden. Kleinere Portionen und gelegentliches Fasten können hilfreich sein."},
     emoji:"🌿",color:"#4a8c5c"
   }
 };
 
-let currentQ=0,scores={vata:0,pitta:0,kapha:0},dominantDosha=null,selectedOpt=null;
-
 function showPage(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');window.scrollTo(0,0)}
-
-function startQuiz(){currentQ=0;scores={vata:0,pitta:0,kapha:0};selectedOpt=null;buildProgressTrack();renderQuestion();showPage('quiz')}
-
-function buildProgressTrack(){const t=document.getElementById('progress-track');t.innerHTML='';questions.forEach((_,i)=>{const s=document.createElement('div');s.className='progress-seg';s.id='seg-'+i;t.appendChild(s)})}
-
+function startQuiz(){currentQ=0;scores={vata:0,pitta:0,kapha:0};selectedOpt=null;buildTrack();renderQuestion();showPage('quiz')}
+function buildTrack(){const t=document.getElementById('progress-track');t.innerHTML='';questions.forEach((_,i)=>{const s=document.createElement('div');s.className='progress-seg';s.id='seg-'+i;t.appendChild(s)})}
 function renderQuestion(){
-  questions.forEach((_,i)=>{const s=document.getElementById('seg-'+i);s.className='progress-seg'+(i<currentQ?' done':i===currentQ?' active':'')});
   const l=currentLang;
-  document.getElementById('progress-label').textContent=l==='en'?`Question ${currentQ+1} of ${questions.length}`:`Frage ${currentQ+1} von ${questions.length}`;
+  questions.forEach((_,i)=>{document.getElementById('seg-'+i).className='progress-seg'+(i<currentQ?' done':i===currentQ?' active':'')});
+  document.getElementById('progress-label').textContent=l==='en'?`Question ${currentQ+1} of ${questions.length} · Free`:`Frage ${currentQ+1} von ${questions.length} · Kostenlos`;
   const q=questions[currentQ];
   document.getElementById('q-text').textContent=q[l].text;
   document.getElementById('q-sub').textContent=q[l].sub||'';
-  const opts=document.getElementById('q-options');opts.innerHTML='';
-  selectedOpt=null;
-  q.options.forEach(opt=>{
-    const btn=document.createElement('button');btn.className='opt-btn';btn.textContent=opt[l];
-    btn.onclick=()=>selectAnswer(opt.d,btn);opts.appendChild(btn)
-  })
+  const opts=document.getElementById('q-options');opts.innerHTML='';selectedOpt=null;
+  q.options.forEach(opt=>{const btn=document.createElement('button');btn.className='opt-btn';btn.textContent=opt[l];btn.onclick=()=>selectAnswer(opt.d,btn);opts.appendChild(btn)})
 }
-
 function selectAnswer(dosha,btn){
   if(selectedOpt)return;selectedOpt=dosha;btn.classList.add('selected-'+dosha);scores[dosha]++;
   setTimeout(()=>{currentQ++;if(currentQ>=questions.length)showResult();else renderQuestion()},380)
 }
-
 function showResult(){
   const sorted=Object.entries(scores).sort((a,b)=>b[1]-a[1]);dominantDosha=sorted[0][0];
   const d=doshaData[dominantDosha];const l=currentLang;const ld=d[l];
-  document.getElementById('result-header').innerHTML=`${l==='en'?'Your':'Dein'} Dosha: <em style="color:${d.color}">${ld.name}</em>`;
+  document.getElementById('result-header').innerHTML=`${d.emoji} ${l==='en'?'Your Dosha:':'Dein Dosha:'} <em style="color:${d.color}">${ld.name}</em>`;
   document.getElementById('res-emoji').textContent=d.emoji;
   document.getElementById('res-name').textContent=ld.name;document.getElementById('res-name').style.color=d.color;
   document.getElementById('res-element').textContent=ld.element;
   document.getElementById('res-desc').textContent=ld.desc;
-  document.getElementById('pay-dosha-name').textContent=ld.name;
-  document.getElementById('pay-dosha-name2').textContent=ld.name;
   const kw=document.getElementById('res-keywords');kw.innerHTML='';
   ld.keywords.forEach(k=>{const span=document.createElement('span');span.className='keyword';span.textContent=k;span.style.borderColor=d.color+'55';span.style.color=d.color;kw.appendChild(span)});
   setTimeout(()=>{const total=questions.length;['vata','pitta','kapha'].forEach(type=>{document.getElementById('sc-'+type).textContent=`${scores[type]}/${total}`;document.getElementById('sf-'+type).style.width=`${(scores[type]/total)*100}%`})},300);
+  // Save to session
+  sessionStorage.setItem('doshaResult',dominantDosha);
+  sessionStorage.setItem('doshaScores',JSON.stringify(scores));
+  sessionStorage.setItem('doshaLang',currentLang);
   showPage('result')
 }
-
-function handleStripeCheckout(){
-  sessionStorage.setItem('purchasedDosha',dominantDosha);
+function handleCheckout(){
+  sessionStorage.setItem('doshaResult',dominantDosha);
   sessionStorage.setItem('doshaScores',JSON.stringify(scores));
-  window.location.href=STRIPE_PAYMENT_LINK
+  sessionStorage.setItem('doshaLang',currentLang);
+  window.location.href=STRIPE
 }
-
 function showPlanPage(){
   const d=doshaData[dominantDosha];const l=currentLang;const ld=d[l];
-  document.getElementById('plan-header').innerHTML=`${d.emoji} ${ld.name} ${l==='en'?'Nutrition Plan':'Ernährungsplan'}`;
+  document.getElementById('plan-header').innerHTML=`${d.emoji} ${ld.name} ${l==='en'?'Plan':'Plan'}`;
   document.getElementById('plan-header').style.color=d.color;
-  ['d1','d2','d3'].forEach(id=>{document.getElementById(id).style.background=d.color});
-  document.getElementById('plan-loading').style.display='block';
-  document.getElementById('plan-text').style.display='none';
-  document.getElementById('plan-actions').style.display='none';
-  document.getElementById('cross-sell').style.display='none';
-  showPage('plan');generatePlan()
+  document.getElementById('d1').style.background=d.color;
+  document.getElementById('d2').style.background=d.color;
+  document.getElementById('d3').style.background=d.color;
+  showPage('plan');
+  generatePlan()
 }
-
 async function generatePlan(){
   document.getElementById('plan-loading').style.display='block';
-  document.getElementById('plan-text').style.display='none';
-  document.getElementById('plan-actions').style.display='none';
-  document.getElementById('cross-sell').style.display='none';
+  document.getElementById('plan-content').style.display='none';
   const d=doshaData[dominantDosha];const l=currentLang;const ld=d[l];
   const lang=l==='en'?'English':'German';
-  const prompt=`You are an experienced Ayurvedic nutrition consultant. Create a detailed personalised 2-week nutrition plan in ${lang} for a ${ld.name} type (${ld.element}). Description: ${ld.desc}. Include: motivating intro with key nutritional principles, recommended spices and foods, Week 1 (Mon-Sun) and Week 2 (Mon-Sun) each with breakfast, lunch, dinner and 1-2 snacks, closing tips on eating habits. Write warmly and concretely.`;
-  try{
-    const response=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
-    const data=await response.json();
-    document.getElementById('plan-text').textContent=(data.content||[]).map(b=>b.text||'').join('\n')||'Error.';
-  }catch(err){document.getElementById('plan-text').textContent=l==='en'?'An error occurred. Please try again.':'Ein Fehler ist aufgetreten. Bitte versuche es erneut.'}
-  document.getElementById('plan-loading').style.display='none';
-  document.getElementById('plan-text').style.display='block';
-  document.getElementById('plan-actions').style.display='flex';
-  document.getElementById('cross-sell').style.display='block'
-}
 
+  // Show dosha summary
+  const summary=document.getElementById('plan-dosha-summary');
+  summary.innerHTML=`<div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+    <div style="font-size:48px">${d.emoji}</div>
+    <div>
+      <div style="font-family:'Cinzel',serif;font-size:22px;letter-spacing:4px;color:${d.color}">${ld.name}</div>
+      <div style="font-size:13px;opacity:.5;letter-spacing:2px;text-transform:uppercase">${ld.element}</div>
+    </div>
+  </div>
+  <p style="font-size:16px;line-height:1.8;opacity:.8;font-style:italic;margin-bottom:12px">${ld.desc}</p>
+  <p style="font-size:14px;line-height:1.7;opacity:.65">${ld.nutrition}</p>`;
+
+  const prompt=`You are an experienced Ayurvedic nutrition consultant.
+
+Create a detailed, personalised 2-week nutrition plan in ${lang} for a ${ld.name} type (${ld.element}).
+
+Dosha description: ${ld.desc}
+Key nutrition principle: ${ld.nutrition}
+
+The plan must include:
+1. A short motivating introduction specific to this Dosha type
+2. Best foods, spices and herbs for this type (with brief explanations)
+3. Foods to avoid and why
+4. Week 1 (Monday to Sunday): Each day with Breakfast, Lunch, Dinner and 1-2 Snacks
+5. Week 2 (Monday to Sunday): Different meals from Week 1, equally varied
+6. Daily rhythm tips (best meal times, eating habits)
+7. Short closing motivation
+
+Make it practical, easy to prepare, and sourced from supermarkets. Write warmly and personally.`;
+
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
+    const data=await r.json();
+    document.getElementById('plan-text').textContent=(data.content||[]).map(b=>b.text||'').join('\n')||'Error generating plan.';
+  }catch(e){
+    document.getElementById('plan-text').textContent=l==='en'?'An error occurred. Please try again.':'Ein Fehler ist aufgetreten. Bitte versuche es erneut.'
+  }
+  document.getElementById('plan-loading').style.display='none';
+  document.getElementById('plan-content').style.display='block';
+}
 function resetQuiz(){showPage('intro')}
 
-// Init language
-const sl=localStorage.getItem('t2t-lang');
-if(sl)setLang(sl);else setLang('en');
+// Language init
+const sl=localStorage.getItem('t2t-lang');if(sl)setLang(sl);else setLang('en');
 
+// Check for Stripe success return
 window.addEventListener('load',()=>{
-  const params=new URLSearchParams(window.location.search);
-  if(params.get('success')==='true'){
-    dominantDosha=sessionStorage.getItem('purchasedDosha');
+  const p=new URLSearchParams(window.location.search);
+  if(p.get('success')==='true'){
+    dominantDosha=sessionStorage.getItem('doshaResult');
+    const savedLang=sessionStorage.getItem('doshaLang');
     const savedScores=sessionStorage.getItem('doshaScores');
-    if(dominantDosha&&savedScores){scores=JSON.parse(savedScores);showPlanPage()}
+    if(dominantDosha){
+      if(savedLang)setLang(savedLang);
+      if(savedScores)scores=JSON.parse(savedScores);
+      showPlanPage();
+    }
   }
 });
 </script>
