@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4-Week Journey · Travel 2 Transform</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#2d7a72;--tl:#3a9990;--pink:#d4548a;--gold:#c8a96e;--dark:#1a2e2c;--text:#2c3e3b;--muted:#6b8a87;--bg:#f8fbfa;--border:rgba(45,122,114,0.15)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;background:rgba(248,251,250,.97);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 32px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo{width:38px;height:38px;border-radius:50%;border:2px solid var(--teal);display:flex;align-items:center;justify-content:center;font-family:'Cinzel',serif;font-size:13px;color:var(--pink);font-weight:600;background:white;flex-shrink:0}
+.bname{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2.5px;color:var(--teal);text-transform:uppercase}
+.bname small{display:block;font-size:9px;color:var(--pink)}
+.lang-sw{display:flex;background:rgba(45,122,114,.08);border-radius:50px;padding:3px;gap:2px}
+.lb{padding:5px 12px;border-radius:50px;border:none;background:transparent;cursor:pointer;font-size:12px;font-weight:500;color:var(--muted);transition:all .2s;font-family:'DM Sans',sans-serif}
+.lb.active{background:var(--teal);color:white}
+@media(max-width:600px){nav{padding:0 16px}}
+/* Hero */
+.hero{min-height:100vh;display:flex;align-items:center;padding:80px 32px;background:linear-gradient(135deg,#f8fbfa 0%,#ecf6f4 40%,#fdf0f6 100%);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;right:-80px;top:50%;transform:translateY(-50%);width:420px;height:420px;border-radius:50%;border:1px solid rgba(45,122,114,.09);pointer-events:none}
+.hero-inner{max-width:640px;position:relative;z-index:2}
+.eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--pink);margin-bottom:16px}
+h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(38px,7vw,64px);font-weight:300;line-height:1.1;color:var(--dark);margin-bottom:24px;letter-spacing:1px}
+h1 em{font-style:italic;color:var(--teal)}
+.hero-sub{font-size:18px;color:var(--muted);font-weight:300;line-height:1.8;max-width:480px;margin-bottom:12px}
+.hero-price{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:var(--teal);margin:20px 0 4px}
+.hero-price-sub{font-size:13px;color:var(--muted);margin-bottom:32px;letter-spacing:.5px}
+.btn-primary{background:var(--teal);color:white;padding:16px 36px;border-radius:50px;font-size:15px;font-weight:500;text-decoration:none;border:none;cursor:pointer;transition:all .2s;display:inline-block}
+.btn-primary:hover{background:var(--tl);transform:translateY(-2px);box-shadow:0 8px 24px rgba(45,122,114,.2)}
+.btn-wa{display:inline-flex;align-items:center;gap:10px;background:#25d366;color:white;padding:15px 32px;border-radius:50px;font-size:14px;font-weight:500;text-decoration:none;transition:all .2s}
+.btn-wa:hover{opacity:.9;transform:translateY(-2px)}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+/* Sections */
+section{padding:88px 32px}
+.inner{max-width:1060px;margin:0 auto}
+.sec-ey{font-family:'Cinzel',serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--pink);margin-bottom:14px}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,48px);font-weight:300;color:var(--dark);line-height:1.2;margin-bottom:16px}
+.sec-title em{font-style:italic;color:var(--teal)}
+.sec-sub{font-size:17px;color:var(--muted);font-weight:300;line-height:1.8;max-width:560px}
+@media(max-width:600px){section{padding:60px 20px}.hero{padding:80px 20px}}
+/* What's included */
+#includes{background:white}
+.includes-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:52px}
+.inc-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:28px}
+.inc-icon{font-size:36px;margin-bottom:14px}
+.inc-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--dark);margin-bottom:8px}
+.inc-desc{font-size:14px;color:var(--muted);line-height:1.75}
+@media(max-width:680px){.includes-grid{grid-template-columns:1fr}}
+/* Journey weeks */
+#journey{background:var(--bg)}
+.weeks{display:flex;flex-direction:column;gap:20px;margin-top:52px}
+.week-card{background:white;border:1px solid var(--border);border-radius:16px;padding:28px;display:grid;grid-template-columns:72px 1fr;gap:24px;align-items:start}
+.week-num{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:var(--teal);line-height:1}
+.week-sub{font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+.week-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--dark);margin-bottom:8px}
+.week-desc{font-size:14px;color:var(--muted);line-height:1.75}
+.week-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.week-tag{font-size:11px;padding:4px 12px;border-radius:50px;border:1px solid var(--border);background:rgba(45,122,114,.06);color:var(--teal)}
+@media(max-width:500px){.week-card{grid-template-columns:1fr}}
+/* For whom */
+#whom{background:white}
+.whom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
+.whom-card{background:var(--bg);border:1px solid var(--border);border-radius:16px;padding:24px;text-align:center}
+.whom-icon{font-size:32px;margin-bottom:12px}
+.whom-text{font-size:15px;color:var(--text);line-height:1.7}
+@media(max-width:680px){.whom-grid{grid-template-columns:1fr}}
+/* Jenny */
+#jenny{background:var(--bg)}
+.jenny-grid{display:grid;grid-template-columns:280px 1fr;gap:64px;align-items:center}
+.jenny-img{aspect-ratio:3/4;background:linear-gradient(135deg,#e8f4f3,#fce8f0);border-radius:140px 140px 70px 70px;display:flex;align-items:center;justify-content:center;font-size:64px;border:1px solid var(--border)}
+.jenny-text p{font-size:16px;color:var(--muted);line-height:1.85;font-weight:300;margin-bottom:16px}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.pill{font-size:12px;padding:6px 16px;border-radius:50px;border:1px solid var(--border);background:#e8f4f3;color:var(--teal)}
+@media(max-width:720px){.jenny-grid{grid-template-columns:1fr;gap:40px}.jenny-img{max-width:220px;margin:0 auto}}
+/* CTA */
+#cta{background:linear-gradient(135deg,var(--teal) 0%,#1d5c56 100%);text-align:center}
+#cta .sec-title{color:white;max-width:600px;margin:0 auto 16px}
+#cta .sec-sub{color:rgba(255,255,255,.6);max-width:480px;margin:0 auto 12px;text-align:center}
+.cta-price{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;color:white;margin:20px 0 4px}
+.cta-price-sub{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:36px;letter-spacing:.5px}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-white{background:white;color:var(--teal);padding:16px 36px;border-radius:50px;font-size:15px;font-weight:600;text-decoration:none;transition:all .2s;display:inline-block}
+.btn-white:hover{background:#e8f4f3;transform:translateY(-2px)}
+/* FAQ */
+#faq{background:white}
+.faq-list{margin-top:48px;max-width:680px}
+.faq-item{border-bottom:1px solid var(--border);padding:20px 0}
+.faq-q{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--dark);margin-bottom:8px}
+.faq-a{font-size:15px;color:var(--muted);line-height:1.75}
+/* Footer */
+footer{background:var(--dark);color:rgba(255,255,255,.45);padding:40px 32px;text-align:center}
+.fbrand{font-family:'Cinzel',serif;font-size:13px;letter-spacing:4px;color:white;text-transform:uppercase;margin-bottom:6px}
+.ftag{font-size:12px;color:#3a9990;letter-spacing:2px;margin-bottom:20px}
+.fcopy{font-size:12px;opacity:.3}
+/* Lang */
+.de{display:none}.en{display:block}
+body.lang-de .de{display:block}body.lang-de .en{display:none}
+body.lang-en .de{display:none}body.lang-en .en{display:block}
+</style>
+</head>
+<body class="lang-en">
+
+<nav>
+  <a href="index.html" class="brand">
+    <div class="logo">2</div>
+    <div class="bname">Travel 2 Transform<small class="en">Holistic Wellbeing</small><small class="de">Ganzheitliches Wohlbefinden</small></div>
+  </a>
+  <div class="lang-sw">
+    <button class="lb active" id="btn-en" onclick="setLang('en')">EN</button>
+    <button class="lb" id="btn-de" onclick="setLang('de')">DE</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow en">4-Week 1:1 Journey</div>
+    <div class="eyebrow de">4-Wochen 1:1 Begleitung</div>
+    <h1 class="en">Transform deeply –<br><em>with personal guidance</em></h1>
+    <h1 class="de">Tiefgreifend transformieren –<br><em>mit persönlicher Begleitung</em></h1>
+    <p class="hero-sub en">Four weeks of complete, personalised support. Weekly Reiki & energy sessions, vision work, meditation and personalised yoga videos – all tailored to you.</p>
+    <p class="hero-sub de">Vier Wochen vollständige, personalisierte Begleitung. Wöchentliche Reiki- & Energiesessions, Visionsarbeit, Meditation und personalisierte Yoga-Videos – alles auf dich abgestimmt.</p>
+    <div class="hero-price">€297</div>
+    <div class="hero-price-sub en">Complete 4-week programme · Personal · Transformative</div>
+    <div class="hero-price-sub de">Vollständiges 4-Wochen-Programm · Persönlich · Transformativ</div>
+    <div class="hero-btns">
+      <a id="hero-wa" href="#" target="_blank" class="btn-wa">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="en">Apply via WhatsApp</span><span class="de">Per WhatsApp bewerben</span>
+      </a>
+      <a href="#includes" class="btn-primary en" style="background:transparent;border:1.5px solid var(--teal);color:var(--teal)">What's included ↓</a>
+      <a href="#includes" class="btn-primary de" style="background:transparent;border:1.5px solid var(--teal);color:var(--teal)">Was ist enthalten ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section id="includes">
+  <div class="inner">
+    <div class="sec-ey en">What's Included</div><div class="sec-ey de">Was ist enthalten</div>
+    <h2 class="sec-title en">Everything you need for <em>real transformation</em></h2>
+    <h2 class="sec-title de">Alles was du für <em>echte Transformation</em> brauchst</h2>
+    <div class="includes-grid">
+      <div class="inc-card">
+        <div class="inc-icon">✨</div>
+        <div class="inc-title en">4 Weekly Reiki & Energy Sessions</div>
+        <div class="inc-title de">4 Wöchentliche Reiki- & Energiesessions</div>
+        <p class="inc-desc en">One 60-minute 1:1 online session per week. Jenny works directly with your chakras, clears blockages and guides your energy towards healing and balance.</p>
+        <p class="inc-desc de">Eine 60-minütige 1:1 Online-Session pro Woche. Jenny arbeitet direkt mit deinen Chakren, löst Blockaden und lenkt deine Energie in Heilung und Balance.</p>
+      </div>
+      <div class="inc-card">
+        <div class="inc-icon">🎯</div>
+        <div class="inc-title en">Vision Work & Soul Mapping</div>
+        <div class="inc-title de">Visionsarbeit & Soul Mapping</div>
+        <p class="inc-desc en">Deep guided exercises to clarify your vision, reconnect with your purpose and create a roadmap for the life you truly want to live.</p>
+        <p class="inc-desc de">Tiefe geführte Übungen um deine Vision zu klären, dich mit deinem Zweck zu verbinden und einen Fahrplan für das Leben zu erstellen das du wirklich leben willst.</p>
+      </div>
+      <div class="inc-card">
+        <div class="inc-icon">🧘</div>
+        <div class="inc-title en">Personalised Yoga Videos</div>
+        <div class="inc-title de">Personalisierte Yoga-Videos</div>
+        <p class="inc-desc en">Custom yoga sequences filmed by Jenny, tailored to your Dosha, your chakra blockages and your current energy level. Yours to keep forever.</p>
+        <p class="inc-desc de">Individuelle Yoga-Sequenzen von Jenny gefilmt, abgestimmt auf dein Dosha, deine Chakren-Blockaden und dein aktuelles Energielevel. Für immer dein.</p>
+      </div>
+      <div class="inc-card">
+        <div class="inc-icon">🌙</div>
+        <div class="inc-title en">Guided Meditations</div>
+        <div class="inc-title de">Geführte Meditationen</div>
+        <p class="inc-desc en">Weekly personalised meditations to support your healing journey. Includes chakra-specific visualisations, breath meditations and body scans.</p>
+        <p class="inc-desc de">Wöchentliche personalisierte Meditationen zur Unterstützung deiner Heilungsreise. Chakren-spezifische Visualisierungen, Atemmeditationen und Body Scans.</p>
+      </div>
+      <div class="inc-card">
+        <div class="inc-icon">💬</div>
+        <div class="inc-title en">WhatsApp Support Between Sessions</div>
+        <div class="inc-title de">WhatsApp-Support zwischen den Sessions</div>
+        <p class="inc-desc en">Jenny is with you between sessions. Ask questions, share breakthroughs, get encouragement whenever you need it during the 4 weeks.</p>
+        <p class="inc-desc de">Jenny ist zwischen den Sessions bei dir. Fragen stellen, Durchbrüche teilen, Ermutigung bekommen wann immer du sie in den 4 Wochen brauchst.</p>
+      </div>
+      <div class="inc-card">
+        <div class="inc-icon">📋</div>
+        <div class="inc-title en">Full Dosha + Chakra Analysis</div>
+        <div class="inc-title de">Vollständige Dosha- + Chakren-Analyse</div>
+        <p class="inc-desc en">Before we begin, Jenny conducts a deep assessment of your Dosha and chakra status. Everything is tailored to your unique constitution from day one.</p>
+        <p class="inc-desc de">Bevor wir beginnen, führt Jenny eine tiefe Einschätzung deines Doshas und Chakren-Status durch. Alles wird von Tag eins auf deine einzigartige Konstitution abgestimmt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE JOURNEY -->
+<section id="journey">
+  <div class="inner">
+    <div class="sec-ey en">The Journey</div><div class="sec-ey de">Die Reise</div>
+    <h2 class="sec-title en">4 weeks, <em>4 transformations</em></h2>
+    <h2 class="sec-title de">4 Wochen, <em>4 Transformationen</em></h2>
+    <div class="weeks">
+      <div class="week-card">
+        <div><div class="week-num">01</div><div class="week-sub en">Week</div><div class="week-sub de">Woche</div></div>
+        <div>
+          <div class="week-title en">Foundation & Awareness</div>
+          <div class="week-title de">Fundament & Bewusstsein</div>
+          <p class="week-desc en">Deep Dosha and chakra assessment. First Reiki session to sense the energetic landscape. Establishing your daily morning ritual and setting intentions for the journey.</p>
+          <p class="week-desc de">Tiefe Dosha- und Chakren-Einschätzung. Erste Reiki-Session um die energetische Landschaft zu spüren. Etablierung deines täglichen Morgenrituals und Absichtssetzung für die Reise.</p>
+          <div class="week-tags"><span class="week-tag en">Reiki Session</span><span class="week-tag de">Reiki-Session</span><span class="week-tag en">Dosha Analysis</span><span class="week-tag de">Dosha-Analyse</span><span class="week-tag en">Morning Ritual</span><span class="week-tag de">Morgenritual</span></div>
+        </div>
+      </div>
+      <div class="week-card">
+        <div><div class="week-num">02</div><div class="week-sub en">Week</div><div class="week-sub de">Woche</div></div>
+        <div>
+          <div class="week-title en">Release & Clearing</div>
+          <div class="week-title de">Loslassen & Klären</div>
+          <p class="week-desc en">Focused Reiki work on your most blocked chakras. Vision work to identify what needs to be released. Personalised yoga sequence for your specific blockages.</p>
+          <p class="week-desc de">Gezielte Reiki-Arbeit an deinen meist blockierten Chakren. Visionsarbeit um zu identifizieren was losgelassen werden muss. Personalisierte Yoga-Sequenz für deine spezifischen Blockaden.</p>
+          <div class="week-tags"><span class="week-tag en">Reiki Session</span><span class="week-tag de">Reiki-Session</span><span class="week-tag en">Vision Work</span><span class="week-tag de">Visionsarbeit</span><span class="week-tag en">Yoga Video</span><span class="week-tag de">Yoga-Video</span></div>
+        </div>
+      </div>
+      <div class="week-card">
+        <div><div class="week-num">03</div><div class="week-sub en">Week</div><div class="week-sub de">Woche</div></div>
+        <div>
+          <div class="week-title en">Alignment & Integration</div>
+          <div class="week-title de">Ausrichtung & Integration</div>
+          <p class="week-desc en">Energy begins to flow more freely. Deep meditation work to integrate the shifts. Soul mapping session to clarify your authentic path forward.</p>
+          <p class="week-desc de">Energie beginnt freier zu fließen. Tiefe Meditationsarbeit um die Verschiebungen zu integrieren. Soul-Mapping-Session um deinen authentischen Weg nach vorne zu klären.</p>
+          <div class="week-tags"><span class="week-tag en">Reiki Session</span><span class="week-tag de">Reiki-Session</span><span class="week-tag en">Soul Mapping</span><span class="week-tag">Soul Mapping</span><span class="week-tag en">Meditation</span><span class="week-tag de">Meditation</span></div>
+        </div>
+      </div>
+      <div class="week-card">
+        <div><div class="week-num">04</div><div class="week-sub en">Week</div><div class="week-sub de">Woche</div></div>
+        <div>
+          <div class="week-title en">Embodiment & New Beginning</div>
+          <div class="week-title de">Verkörperung & Neuer Anfang</div>
+          <p class="week-desc en">Final Reiki session to seal the transformation. Creating your personal continuation plan. Celebrating how far you've come and anchoring the new you.</p>
+          <p class="week-desc de">Abschließende Reiki-Session um die Transformation zu verankern. Erstellung deines persönlichen Fortsetzungsplans. Feiern wie weit du gekommen bist und den neuen dich verankern.</p>
+          <div class="week-tags"><span class="week-tag en">Reiki Session</span><span class="week-tag de">Reiki-Session</span><span class="week-tag en">Continuation Plan</span><span class="week-tag de">Fortsetzungsplan</span><span class="week-tag en">Yoga Video</span><span class="week-tag de">Yoga-Video</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHOM -->
+<section id="whom">
+  <div class="inner">
+    <div class="sec-ey en">Is This For You?</div><div class="sec-ey de">Ist das für dich?</div>
+    <h2 class="sec-title en">This journey is for those who…</h2>
+    <h2 class="sec-title de">Diese Reise ist für Menschen die…</h2>
+    <div class="whom-grid">
+      <div class="whom-card">
+        <div class="whom-icon">💫</div>
+        <p class="whom-text en">Feel stuck and know something needs to change – but aren't sure what or how</p>
+        <p class="whom-text de">Sich festgefahren fühlen und wissen dass sich etwas ändern muss – aber nicht sicher sind was oder wie</p>
+      </div>
+      <div class="whom-card">
+        <div class="whom-icon">🌊</div>
+        <p class="whom-text en">Want to work on themselves deeply – not just physically but on an energetic and spiritual level</p>
+        <p class="whom-text de">Tief an sich arbeiten wollen – nicht nur körperlich sondern auf energetischer und spiritueller Ebene</p>
+      </div>
+      <div class="whom-card">
+        <div class="whom-icon">🎯</div>
+        <p class="whom-text en">Are ready for real commitment and want personal guidance rather than a one-size-fits-all programme</p>
+        <p class="whom-text de">Bereit für echtes Engagement sind und persönliche Begleitung statt eines Einheitsprogramms wollen</p>
+      </div>
+      <div class="whom-card">
+        <div class="whom-icon">🌿</div>
+        <p class="whom-text en">Already explored Ayurveda, Chakras or Yoga and want to go much deeper with expert support</p>
+        <p class="whom-text de">Ayurveda, Chakren oder Yoga bereits erkundet haben und mit Expertenbegleitung viel tiefer gehen wollen</p>
+      </div>
+      <div class="whom-card">
+        <div class="whom-icon">✨</div>
+        <p class="whom-text en">Believe in holistic healing and are open to working with energy, intuition and the power of the mind-body connection</p>
+        <p class="whom-text de">An ganzheitliche Heilung glauben und offen sind mit Energie, Intuition und der Kraft der Körper-Geist-Verbindung zu arbeiten</p>
+      </div>
+      <div class="whom-card">
+        <div class="whom-icon">🙏</div>
+        <p class="whom-text en">Are ready to invest in themselves – because they know their transformation is worth it</p>
+        <p class="whom-text de">Bereit sind in sich selbst zu investieren – weil sie wissen dass ihre Transformation es wert ist</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JENNY -->
+<section id="jenny">
+  <div class="inner">
+    <div class="jenny-grid">
+      <div class="jenny-img">🙏</div>
+      <div class="jenny-text">
+        <div class="sec-ey en">Your Guide</div><div class="sec-ey de">Deine Begleiterin</div>
+        <h2 class="sec-title en">Hi, I'm <em>Jenny</em> 🌿</h2>
+        <h2 class="sec-title de">Hallo, ich bin <em>Jenny</em> 🌿</h2>
+        <p class="en">I'm a certified Ayurveda nutrition consultant, yoga teacher and Reiki practitioner. For years I've been accompanying people on their transformation journeys – online and on retreat.</p>
+        <p class="de">Ich bin ausgebildete Ayurveda-Ernährungsberaterin, Yoga-Lehrerin und Reiki-Praktikerin. Seit Jahren begleite ich Menschen auf ihren Transformationsreisen – online und auf Retreats.</p>
+        <p class="en">What makes this programme different is that it's truly personal. I don't work from a script. Every session, every yoga video, every meditation is created specifically for you and where you are right now.</p>
+        <p class="de">Was dieses Programm anders macht ist dass es wirklich persönlich ist. Ich arbeite nicht nach Drehbuch. Jede Session, jedes Yoga-Video, jede Meditation wird speziell für dich und da wo du gerade bist erstellt.</p>
+        <p class="en">I've seen what's possible when someone commits to 4 weeks of deep work. The shifts are real. I can't wait to guide you through yours.</p>
+        <p class="de">Ich habe gesehen was möglich ist wenn jemand sich 4 Wochen tiefer Arbeit widmet. Die Verschiebungen sind real. Ich freue mich darauf dich durch deine zu begleiten.</p>
+        <div class="pills">
+          <span class="pill en">✦ Reiki Practitioner</span><span class="pill de">✦ Reiki-Praktikerin</span>
+          <span class="pill">✦ Yoga Teacher</span>
+          <span class="pill en">✦ Ayurveda Consultant</span><span class="pill de">✦ Ayurveda-Beraterin</span>
+          <span class="pill en">✦ Retreat Leader</span><span class="pill de">✦ Retreat-Leiterin</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="inner">
+    <div class="sec-ey en">Ready to Begin?</div><div class="sec-ey de">Bereit zu beginnen?</div>
+    <h2 class="sec-title en">Your 4-week <em>transformation</em> awaits</h2>
+    <h2 class="sec-title de">Deine 4-wöchige <em>Transformation</em> wartet</h2>
+    <p class="sec-sub en">Places are limited – Jenny works with a small number of clients at a time to ensure full personal attention.</p>
+    <p class="sec-sub de">Plätze sind begrenzt – Jenny arbeitet mit einer kleinen Anzahl von Klienten gleichzeitig um volle persönliche Aufmerksamkeit zu gewährleisten.</p>
+    <div class="cta-price">€297</div>
+    <div class="cta-price-sub en">Complete 4-week programme · Payment via WhatsApp</div>
+    <div class="cta-price-sub de">Vollständiges 4-Wochen-Programm · Zahlung via WhatsApp</div>
+    <div class="cta-btns">
+      <a id="cta-wa" href="#" target="_blank" class="btn-wa" style="font-size:15px;padding:16px 36px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="en">Apply Now via WhatsApp</span><span class="de">Jetzt per WhatsApp bewerben</span>
+      </a>
+      <a href="index.html" class="btn-white en">Back to Overview</a>
+      <a href="index.html" class="btn-white de">Zurück zur Übersicht</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="inner">
+    <div class="sec-ey">FAQ</div>
+    <h2 class="sec-title en">Questions & <em>Answers</em></h2>
+    <h2 class="sec-title de">Fragen & <em>Antworten</em></h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <p class="faq-q en">How does it work online?</p>
+        <p class="faq-q de">Wie funktioniert das online?</p>
+        <p class="faq-a en">All sessions take place via video call (Zoom or WhatsApp). Reiki energy works just as effectively at a distance – this is a well-established practice in energy healing.</p>
+        <p class="faq-a de">Alle Sessions finden per Videoanruf (Zoom oder WhatsApp) statt. Reiki-Energie wirkt ebenso effektiv auf Distanz – das ist eine etablierte Praxis in der Energieheilung.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q en">How much time do I need per week?</p>
+        <p class="faq-q de">Wie viel Zeit brauche ich pro Woche?</p>
+        <p class="faq-a en">Plan for approx. 90 minutes per week for the session, plus 15-20 minutes daily for the practices Jenny gives you. It's a commitment, and it's worth it.</p>
+        <p class="faq-a de">Plane ca. 90 Minuten pro Woche für die Session, plus 15-20 Minuten täglich für die Praktiken die Jenny dir gibt. Es ist ein Commitment – und es lohnt sich.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q en">Do I need prior experience with yoga or Reiki?</p>
+        <p class="faq-q de">Brauche ich Vorkenntnisse in Yoga oder Reiki?</p>
+        <p class="faq-a en">Not at all. The programme is tailored to wherever you are right now – whether you're completely new or already have experience.</p>
+        <p class="faq-a de">Überhaupt nicht. Das Programm wird darauf abgestimmt wo du gerade bist – egal ob du komplett neu bist oder schon Erfahrung hast.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q en">How do I pay?</p>
+        <p class="faq-q de">Wie bezahle ich?</p>
+        <p class="faq-a en">After your WhatsApp application, Jenny will send you a payment link. Payment is made in advance before the programme begins.</p>
+        <p class="faq-a de">Nach deiner WhatsApp-Bewerbung schickt dir Jenny einen Zahlungslink. Die Zahlung erfolgt im Voraus bevor das Programm beginnt.</p>
+      </div>
+      <div class="faq-item">
+        <p class="faq-q en">How many places are available?</p>
+        <p class="faq-q de">Wie viele Plätze gibt es?</p>
+        <p class="faq-a en">Jenny works with a maximum of 5 clients at a time for this programme. When spots are full, there's a waitlist.</p>
+        <p class="faq-a de">Jenny arbeitet für dieses Programm mit maximal 5 Klienten gleichzeitig. Wenn die Plätze voll sind gibt es eine Warteliste.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fbrand">Travel 2 Transform</div>
+  <div class="ftag">Ayurveda · Yoga · <span class="en">Chakras</span><span class="de">Chakren</span> · Reiki</div>
+  <div class="fcopy en">© 2026 Travel 2 Transform · Jenny Wierzbicki · All rights reserved</div>
+  <div class="fcopy de">© 2026 Travel 2 Transform · Jenny Wierzbicki · Alle Rechte vorbehalten</div>
+</footer>
+
+<script>
+function setLang(l){
+  document.body.className='lang-'+l;
+  document.getElementById('btn-en').classList.toggle('active',l==='en');
+  document.getElementById('btn-de').classList.toggle('active',l==='de');
+  localStorage.setItem('t2t-lang',l);
+  updateWA(l);
+}
+function updateWA(l){
+  const lang=l||document.body.className.replace('lang-','');
+  const msg=lang==='en'
+    ?'Hello%20Jenny!%20I%27m%20interested%20in%20the%204-Week%201%3A1%20Journey.%20Can%20you%20tell%20me%20more?'
+    :'Hallo%20Jenny!%20Ich%20interessiere%20mich%20für%20die%204-Wochen%201%3A1%20Begleitung.%20Kannst%20du%20mir%20mehr%20erzählen?';
+  const url='https://wa.me/4917624238972?text='+msg;
+  ['hero-wa','cta-wa'].forEach(id=>{const el=document.getElementById(id);if(el)el.href=url});
+}
+const sl=localStorage.getItem('t2t-lang');
+if(sl)setLang(sl);else setLang('en');
+</script>
+</body>
+</html>
