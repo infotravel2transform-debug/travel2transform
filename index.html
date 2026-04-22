@@ -504,6 +504,11 @@ footer{background:var(--dark);padding:2.5rem 5rem;display:flex;justify-content:s
   .panel{padding:2rem 1.2rem}
   .gr-img{height:220px !important;border-radius:10px}
   .gruppe-top{flex-direction:column !important;gap:1.5rem}
+  .gruppe-top img{height:480px !important}
+  .gruppe-ov{background:linear-gradient(to top,rgba(10,28,26,.97) 0%,rgba(10,28,26,.75) 50%,rgba(10,28,26,.35) 100%) !important;padding:1.6rem !important}
+  .gr-badge{font-size:.6rem !important;margin-bottom:.6rem !important}
+  .gr-hl{font-size:1.55rem !important;line-height:1.15 !important;margin-bottom:.4rem !important}
+  .gr-sub{font-size:.82rem !important;line-height:1.5 !important;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   .gr-txt{padding:0 !important}
   .pkg-grid{grid-template-columns:1fr !important}
   .fr-grid{grid-template-columns:1fr !important}
@@ -1137,12 +1142,11 @@ footer{background:var(--dark);padding:2.5rem 5rem;display:flex;justify-content:s
     <div>
       <p class="cf-t"><span class="de">Schreib uns</span><span class="en" style="display:none">Write to us</span></p>
       <p class="cf-s"><span class="de">Ich melde mich innerhalb von 24 Stunden.</span><span class="en" style="display:none">I&rsquo;ll get back to you within 24 hours.</span></p>
-      <form id="contact-form" action="https://formspree.io/f/xgvkvevq" method="POST">
-      <div class="fg"><label><span class="de">Name</span><span class="en" style="display:none">Name</span></label><input type="text" name="name" required placeholder="..."></div>
-      <div class="fg"><label>Email</label><input type="email" name="email" required placeholder="..."></div>
+      <div id="wa-form">
+      <div class="fg"><label><span class="de">Name</span><span class="en" style="display:none">Name</span></label><input type="text" id="wa-name" placeholder="..."></div>
       <div class="fg">
         <label><span class="de">Interesse</span><span class="en" style="display:none">Interest</span></label>
-        <select name="interesse">
+        <select id="wa-interesse">
           <option value="Gruppenreise mit Jenny">Gruppenreise mit Jenny</option>
           <option value="Safari">Safari</option>
           <option value="Private Tour">Private Tour</option>
@@ -1151,16 +1155,25 @@ footer{background:var(--dark);padding:2.5rem 5rem;display:flex;justify-content:s
           <option value="Ganzheitliches Wohlbefinden">Ganzheitliches Wohlbefinden</option>
         </select>
       </div>
-      <div class="fg"><label><span class="de">Nachricht</span><span class="en" style="display:none">Message</span></label><textarea name="nachricht" placeholder="..."></textarea></div>
-      <button type="submit" class="csend" id="submit-btn"><span class="de">Senden &#x2726;</span><span class="en" style="display:none">Send &#x2726;</span></button>
-      </form>
+      <div class="fg"><label><span class="de">Nachricht</span><span class="en" style="display:none">Message</span></label><textarea id="wa-nachricht" placeholder="..."></textarea></div>
+      <button class="csend" onclick="sendWhatsApp()"><span class="de">Über WhatsApp senden &#128172;</span><span class="en" style="display:none">Send via WhatsApp &#128172;</span></button>
+      </div>
       <script>
-      document.getElementById('contact-form').addEventListener('submit', function(e) {
-        var btn = document.getElementById('submit-btn');
-        btn.disabled = true;
-        btn.style.background = 'var(--teal)';
-        btn.textContent = '✓ Gesendet!';
-      });
+      function sendWhatsApp() {
+        var name = document.getElementById('wa-name').value.trim();
+        var interesse = document.getElementById('wa-interesse').value;
+        var nachricht = document.getElementById('wa-nachricht').value.trim();
+        if (!name || !nachricht) {
+          alert(document.documentElement.lang === 'en' ? 'Please fill in your name and message.' : 'Bitte Name und Nachricht ausfüllen.');
+          return;
+        }
+        var de = document.querySelector('.lb.on') ? document.querySelector('.lb.on').textContent.trim() === 'DE' : true;
+        var msg = de
+          ? 'Hallo Jenny! \n\nMein Name: ' + name + '\nInteresse: ' + interesse + '\n\nNachricht:\n' + nachricht + '\n\n(Anfrage über Travel2Transform Website)'
+          : 'Hello Jenny! \n\nMy name: ' + name + '\nInterest: ' + interesse + '\n\nMessage:\n' + nachricht + '\n\n(Enquiry via Travel2Transform Website)';
+        var url = 'https://wa.me/4917624238972?text=' + encodeURIComponent(msg);
+        window.open(url, '_blank');
+      }
       </script>
     </div>
   </div>
