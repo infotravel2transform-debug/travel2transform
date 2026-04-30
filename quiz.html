@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Transformation Test · Travel 2 Transform</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#2d7a72;--tl:#3a9990;--pink:#d4548a;--gold:#c8a96e;--dark:#1a2e2c;--text:#2c3e3b;--muted:#6b8a87;--bg:#f8fbfa;--tpale:#e8f4f3;--ppale:#fce8f0;--border:rgba(45,122,114,0.13)}
+body{background:var(--dark);color:#f0ece6;font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(45,122,114,.12) 0%,transparent 60%);pointer-events:none}
+
+.page{display:none}.page.active{display:block}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px 80px}
+
+/* LANG BAR */
+.lang-bar{position:fixed;top:14px;right:16px;z-index:200;display:flex;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:3px;gap:2px}
+.lb{padding:5px 14px;border-radius:50px;border:none;background:transparent;cursor:pointer;font-size:12px;font-weight:500;letter-spacing:1px;color:rgba(255,255,255,.4);transition:all .2s;font-family:'DM Sans',sans-serif}
+.lb.active{background:var(--teal);color:white}
+
+/* BACK */
+.back{display:inline-flex;align-items:center;gap:8px;color:rgba(255,255,255,.3);font-size:13px;text-decoration:none;padding:20px 0;letter-spacing:.5px;transition:color .2s}
+.back:hover{color:var(--gold)}
+
+/* INTRO PAGE */
+.intro-header{text-align:center;padding:28px 0 36px}
+.intro-tag{font-family:'Cinzel',serif;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);opacity:.8;margin-bottom:16px}
+.intro-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,8vw,52px);font-weight:300;line-height:1.1;margin-bottom:8px}
+.intro-h1 em{font-style:italic;color:var(--teal)}
+.intro-sub{font-size:16px;color:rgba(255,255,255,.45);line-height:1.8;font-weight:300;margin-top:8px}
+
+.intro-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:32px;margin-bottom:20px}
+.intro-steps{display:flex;flex-direction:column;gap:14px;margin:20px 0 28px}
+.intro-step{display:flex;align-items:center;gap:16px}
+.step-dot{width:36px;height:36px;border-radius:50%;background:rgba(45,122,114,.15);border:1px solid rgba(45,122,114,.3);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.step-info strong{display:block;font-size:14px;color:rgba(255,255,255,.85);margin-bottom:2px}
+.step-info span{font-size:13px;color:rgba(255,255,255,.4)}
+
+/* PROGRESS */
+.progress-wrap{margin-bottom:32px}
+.progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.progress-phase{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:.8}
+.progress-count{font-size:12px;color:rgba(255,255,255,.3);font-family:'DM Sans',sans-serif}
+.progress-bar{height:2px;background:rgba(255,255,255,.08);border-radius:1px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));border-radius:1px;transition:width .4s ease}
+
+/* QUESTION CARD */
+.q-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:32px;margin-bottom:16px}
+.q-text{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,4vw,24px);font-weight:300;line-height:1.5;margin-bottom:6px}
+.q-sub{font-size:14px;color:rgba(255,255,255,.35);font-style:italic;margin-bottom:24px}
+.options{display:flex;flex-direction:column;gap:10px}
+.opt{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:16px 20px;color:rgba(255,255,255,.8);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.5;text-align:left;cursor:pointer;transition:all .22s}
+.opt:hover{border-color:rgba(45,122,114,.5);background:rgba(45,122,114,.06)}
+.opt.chosen{border-color:var(--teal);background:rgba(45,122,114,.12);color:white}
+
+/* RESULT PAGE */
+.result-header{text-align:center;padding:24px 0 32px;border-bottom:1px solid rgba(255,255,255,.07);margin-bottom:28px}
+.result-emojis{font-size:42px;margin-bottom:12px;letter-spacing:4px}
+.result-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,6vw,40px);font-weight:300;line-height:1.2;margin-bottom:8px}
+.result-headline em{font-style:italic;color:var(--teal)}
+.result-sub{font-size:15px;color:rgba(255,255,255,.4);font-style:italic}
+
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.result-pill{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px 12px;text-align:center}
+.result-pill-icon{font-size:24px;margin-bottom:6px}
+.result-pill-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;opacity:.5;margin-bottom:4px}
+.result-pill-value{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400}
+
+.result-insight{background:rgba(45,122,114,.08);border:1px solid rgba(45,122,114,.2);border-radius:12px;padding:24px;margin-bottom:24px}
+.insight-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.insight-text{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;font-weight:300;line-height:1.75;color:rgba(255,255,255,.85)}
+
+/* BUNDLE CTA */
+.bundle-cta-box{background:linear-gradient(135deg,rgba(45,122,114,.15),rgba(212,84,138,.08));border:1px solid rgba(45,122,114,.25);border-radius:16px;padding:32px;text-align:center;margin-bottom:20px}
+.bcta-tag{font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.bcta-title{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,5vw,32px);font-weight:300;line-height:1.2;margin-bottom:10px}
+.bcta-title em{font-style:italic;color:var(--teal)}
+.bcta-desc{font-size:14px;color:rgba(255,255,255,.5);line-height:1.8;margin-bottom:20px}
+.bcta-items{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;text-align:left}
+.bcta-item{display:flex;align-items:center;gap:10px;font-size:14px;color:rgba(255,255,255,.7)}
+.bcta-item-icon{font-size:18px;flex-shrink:0}
+.bcta-price{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:white;line-height:1;margin-bottom:4px}
+.bcta-price-sub{font-size:12px;color:rgba(255,255,255,.35);margin-bottom:24px;letter-spacing:.5px}
+.btn-buy{display:block;background:var(--teal);color:white;padding:16px 32px;border-radius:50px;font-size:15px;font-weight:500;text-decoration:none;transition:all .2s;border:none;cursor:pointer;width:100%}
+.btn-buy:hover{background:var(--tl);transform:translateY(-1px)}
+.stripe-note{font-size:11px;color:rgba(255,255,255,.25);margin-top:10px;letter-spacing:.5px}
+
+/* RETREAT BRIDGE */
+.retreat-bridge{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:24px;margin-bottom:20px;text-align:center}
+.rb-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;font-weight:300;color:rgba(255,255,255,.8);margin-bottom:8px}
+.rb-desc{font-size:14px;color:rgba(255,255,255,.4);line-height:1.7;margin-bottom:16px}
+.rb-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.rb-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px;text-align:left;text-decoration:none;display:block;transition:all .2s}
+.rb-card:hover{background:rgba(255,255,255,.07)}
+.rb-flag{font-size:20px;margin-bottom:6px}
+.rb-dest{font-size:13px;color:rgba(255,255,255,.8);font-weight:500;margin-bottom:2px}
+.rb-when{font-size:11px;color:rgba(255,255,255,.3)}
+
+/* LOADING */
+.loading{text-align:center;padding:60px 0}
+.loading-text{font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:rgba(255,255,255,.4);margin-bottom:32px}
+.dots{display:flex;justify-content:center;gap:10px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--teal);animation:dp 1.4s ease-in-out infinite}
+.dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
+@keyframes dp{0%,80%,100%{transform:scale(.5);opacity:.3}40%{transform:scale(1);opacity:1}}
+
+/* BUTTONS */
+.btn-ghost{background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.12);padding:12px 24px;border-radius:50px;font-size:13px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+.btn-ghost:hover{border-color:rgba(255,255,255,.25);color:rgba(255,255,255,.8)}
+
+/* LANG */
+.de{display:none}.en{display:block}
+body.lang-de .de{display:block}body.lang-de .en{display:none}
+body.lang-en .de{display:none}body.lang-en .en{display:block}
+@keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.fi{animation:fu .4s ease forwards}
+</style>
+</head>
+<body class="lang-en">
+
+<div class="lang-bar">
+  <button class="lb active" id="btn-en" onclick="setLang('en')">EN</button>
+  <button class="lb" id="btn-de" onclick="setLang('de')">DE</button>
+</div>
+
+<!-- ══ INTRO ══════════════════════════════════════════════════ -->
+<div id="page-intro" class="page active">
+  <div class="wrap">
+    <a href="wellness.html" class="back">← Travel 2 Transform</a>
+    <div class="intro-header">
+      <div class="intro-tag en">Free · 2 Minutes · Personal</div>
+      <div class="intro-tag de">Kostenlos · 2 Minuten · Persönlich</div>
+      <h1 class="intro-h1 en">Find out what's<br><em>blocking you</em></h1>
+      <h1 class="intro-h1 de">Finde heraus was<br><em>dich blockiert</em></h1>
+      <p class="intro-sub en">A short test that reveals your Ayurvedic constitution, chakra balance and ideal yoga practice. The foundation for your personal transformation.</p>
+      <p class="intro-sub de">Ein kurzer Test der deine ayurvedische Konstitution, Chakren-Balance und ideale Yoga-Praxis zeigt. Die Grundlage für deine persönliche Transformation.</p>
+    </div>
+    <div class="intro-card fi">
+      <div class="intro-steps">
+        <div class="intro-step"><div class="step-dot">🌿</div><div class="step-info"><strong class="en">Part 1: Your Constitution</strong><strong class="de">Teil 1: Deine Konstitution</strong><span class="en">6 questions about your Dosha</span><span class="de">6 Fragen zu deinem Dosha</span></div></div>
+        <div class="intro-step"><div class="step-dot">✨</div><div class="step-info"><strong class="en">Part 2: Your Energy</strong><strong class="de">Teil 2: Deine Energie</strong><span class="en">7 questions about your chakras</span><span class="de">7 Fragen zu deinen Chakren</span></div></div>
+        <div class="intro-step"><div class="step-dot">🧘</div><div class="step-info"><strong class="en">Part 3: Your Movement</strong><strong class="de">Teil 3: Deine Bewegung</strong><span class="en">5 questions about your yoga style</span><span class="de">5 Fragen zu deinem Yoga-Stil</span></div></div>
+      </div>
+      <button class="btn-buy" onclick="startQuiz()">
+        <span class="en">Start free test →</span><span class="de">Kostenlosen Test starten →</span>
+      </button>
+      <p style="text-align:center;font-size:12px;color:rgba(255,255,255,.3);margin-top:12px" class="en">No registration · No email required</p>
+      <p style="text-align:center;font-size:12px;color:rgba(255,255,255,.3);margin-top:12px" class="de">Keine Registrierung · Keine E-Mail nötig</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ QUIZ ════════════════════════════════════════════════════ -->
+<div id="page-quiz" class="page">
+  <div class="wrap">
+    <a href="wellness.html" class="back">← <span class="en">Back</span><span class="de">Zurück</span></a>
+    <div class="progress-wrap">
+      <div class="progress-top">
+        <div class="progress-phase" id="phase-label"></div>
+        <div class="progress-count" id="prog-count"></div>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+    </div>
+    <div class="q-card fi">
+      <div class="q-text" id="q-text"></div>
+      <div class="q-sub" id="q-sub"></div>
+      <div class="options" id="q-opts"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ RESULT ══════════════════════════════════════════════════ -->
+<div id="page-result" class="page">
+  <div class="wrap">
+    <a href="wellness.html" class="back">← <span class="en">Back</span><span class="de">Zurück</span></a>
+
+    <div class="result-header fi">
+      <div class="result-emojis" id="res-emojis"></div>
+      <h1 class="result-headline" id="res-headline"></h1>
+      <p class="result-sub" id="res-sub"></p>
+    </div>
+
+    <div class="result-grid fi">
+      <div class="result-pill">
+        <div class="result-pill-icon">🌿</div>
+        <div class="result-pill-label">Dosha</div>
+        <div class="result-pill-value" id="res-dosha"></div>
+      </div>
+      <div class="result-pill">
+        <div class="result-pill-icon">✨</div>
+        <div class="result-pill-label en">Chakra Focus</div>
+        <div class="result-pill-label de">Chakren-Fokus</div>
+        <div class="result-pill-value" id="res-chakra"></div>
+      </div>
+      <div class="result-pill">
+        <div class="result-pill-icon">🧘</div>
+        <div class="result-pill-label en">Yoga Style</div>
+        <div class="result-pill-label de">Yoga-Stil</div>
+        <div class="result-pill-value" id="res-yoga"></div>
+      </div>
+    </div>
+
+    <div class="result-insight fi">
+      <div class="insight-label en">✦ Your personal insight</div>
+      <div class="insight-label de">✦ Deine persönliche Erkenntnis</div>
+      <p class="insight-text" id="res-insight"></p>
+    </div>
+
+    <!-- BUNDLE CTA -->
+    <div class="bundle-cta-box fi">
+      <div class="bcta-tag en">✦ Your Personal Reset Plan</div>
+      <div class="bcta-tag de">✦ Dein persönlicher Reset-Plan</div>
+      <h2 class="bcta-title en">Now get your<br><em>complete transformation plan</em></h2>
+      <h2 class="bcta-title de">Hol dir jetzt deinen<br><em>vollständigen Transformations-Plan</em></h2>
+      <p class="bcta-desc en">Based on your exact results: a complete bundle tailored specifically to you.</p>
+      <p class="bcta-desc de">Basierend auf deinen genauen Ergebnissen: ein vollständiges Bundle speziell auf dich zugeschnitten.</p>
+      <div class="bcta-items">
+        <div class="bcta-item"><div class="bcta-item-icon">🌿</div><span class="en">Your Dosha nutrition plan (2 weeks, daily variety)</span><span class="de">Dein Dosha-Ernährungsplan (2 Wochen, täglich abwechslungsreich)</span></div>
+        <div class="bcta-item"><div class="bcta-item-icon">✨</div><span class="en">Your chakra self-care plan (4 weeks, rituals + meditations)</span><span class="de">Dein Chakren-Selbstpflege-Plan (4 Wochen, Rituale + Meditationen)</span></div>
+        <div class="bcta-item"><div class="bcta-item-icon">🧘</div><span class="en">Your personal yoga plan (4 weeks, tailored to your profile)</span><span class="de">Dein persönlicher Yoga-Plan (4 Wochen, auf dein Profil abgestimmt)</span></div>
+        <div class="bcta-item"><div class="bcta-item-icon">🌍</div><span class="en">✦ Retreat recommendation: "This journey suits you"</span><span class="de">✦ Retreat-Empfehlung: "Diese Reise passt zu dir"</span></div>
+      </div>
+      <div class="bcta-price">€97</div>
+      <div class="bcta-price-sub en">One-time payment · Instant access · Yours forever</div>
+      <div class="bcta-price-sub de">Einmalige Zahlung · Sofortiger Zugang · Für immer deins</div>
+      <button class="btn-buy" onclick="handleBuy()">
+        💳 &nbsp;<span class="en">Buy now & get your plans</span><span class="de">Jetzt kaufen & Pläne erhalten</span>
+      </button>
+      <p class="stripe-note en">Secure payment via Stripe · SSL encrypted · Money-back guarantee</p>
+      <p class="stripe-note de">Sichere Zahlung via Stripe · SSL-verschlüsselt · Geld-zurück-Garantie</p>
+      <div style="margin-top:16px">
+        <button class="btn-ghost" onclick="reset()"><span class="en">Retake test</span><span class="de">Test wiederholen</span></button>
+      </div>
+    </div>
+
+    <!-- RETREAT BRIDGE -->
+    <div class="retreat-bridge fi">
+      <p class="rb-title en">"If you want not just to understand it, but to truly experience it…"</p>
+      <p class="rb-title de">"Wenn du es nicht nur verstehen, sondern wirklich erleben willst…"</p>
+      <p class="rb-desc en">Come on retreat with Jenny. Transform in real life what the plan has prepared you for.</p>
+      <p class="rb-desc de">Komm auf Retreat mit Jenny. Transformiere im echten Leben was der Plan vorbereitet hat.</p>
+      <div class="rb-cards">
+        <a href="https://wa.me/4917624238972?text=Hello%20Jenny!%20I%27d%20like%20to%20know%20more%20about%20the%20July%20Tanzania%20retreat." target="_blank" class="rb-card">
+          <div class="rb-flag">🌍</div>
+          <div class="rb-dest en">Tanzania & Zanzibar</div><div class="rb-dest de">Tansania & Sansibar</div>
+          <div class="rb-when">11 Jul – 25 Jul 2026</div>
+        </a>
+        <a href="https://wa.me/4917624238972?text=Hello%20Jenny!%20I%27d%20like%20to%20know%20more%20about%20the%20October%20retreat." target="_blank" class="rb-card">
+          <div class="rb-flag">🦁</div>
+          <div class="rb-dest en">Yoga meets Wilderness</div><div class="rb-dest de">Yoga trifft Wildnis</div>
+          <div class="rb-when">19 Oct – 23 Oct 2026</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SUCCESS (after payment) ═══════════════════════════════ -->
+<div id="page-success" class="page">
+  <div class="wrap">
+    <a href="wellness.html" class="back">← Travel 2 Transform</a>
+    <div class="loading" id="success-loading">
+      <p class="loading-text en">Your personal plans are being prepared…</p>
+      <p class="loading-text de">Deine persönlichen Pläne werden vorbereitet…</p>
+      <div class="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    </div>
+    <div id="success-content" style="display:none">
+      <div class="result-header fi" style="margin-top:20px">
+        <div class="result-emojis">🎉</div>
+        <h1 class="result-headline en">Your Reset Plan<br><em>is ready!</em></h1>
+        <h1 class="result-headline de">Dein Reset-Plan<br><em>ist bereit!</em></h1>
+      </div>
+      <div id="download-cards" class="fi"></div>
+      <!-- Retreat recommendation -->
+      <div class="retreat-bridge fi" style="margin-top:20px">
+        <p class="rb-title en">✦ Your personal retreat recommendation</p>
+        <p class="rb-title de">✦ Deine persönliche Retreat-Empfehlung</p>
+        <p class="rb-desc" id="retreat-rec-text"></p>
+        <div class="rb-cards">
+          <a href="https://wa.me/4917624238972?text=Hello%20Jenny!%20I%20just%20bought%20the%20Reset%20Plan%20and%20would%20love%20to%20hear%20about%20the%20Tanzania%20retreat." target="_blank" class="rb-card">
+            <div class="rb-flag">🌍</div>
+            <div class="rb-dest en">Tanzania & Zanzibar</div><div class="rb-dest de">Tansania & Sansibar</div>
+            <div class="rb-when">11 Jul – 25 Jul 2026</div>
+          </a>
+          <a href="https://wa.me/4917624238972?text=Hello%20Jenny!%20I%20just%20bought%20the%20Reset%20Plan%20and%20would%20love%20to%20hear%20about%20the%20October%20retreat." target="_blank" class="rb-card">
+            <div class="rb-flag">🦁</div>
+            <div class="rb-dest en">Yoga meets Wilderness</div><div class="rb-dest de">Yoga trifft Wildnis</div>
+            <div class="rb-when">19 Oct – 23 Oct 2026</div>
+          </a>
+        </div>
+        <a href="begleitung.html" style="display:inline-block;background:rgba(45,122,114,.15);color:var(--teal);padding:12px 24px;border-radius:50px;font-size:13px;text-decoration:none;border:1px solid rgba(45,122,114,.3);margin-top:12px" class="en">Or book the 4-week 1:1 journey →</a>
+        <a href="begleitung.html" style="display:inline-block;background:rgba(45,122,114,.15);color:var(--teal);padding:12px 24px;border-radius:50px;font-size:13px;text-decoration:none;border:1px solid rgba(45,122,114,.3);margin-top:12px" class="de">Oder 4-Wochen 1:1 Begleitung buchen →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── STRIPE LINK ────────────────────────────────────────────
+const STRIPE_BUNDLE = 'https://buy.stripe.com/6oUcN5aRlaJM5KrcwtaAw04';
+
+// ── PDF mapping ────────────────────────────────────────────
+const PDF_URLS = {
+  dosha: { vata: 'plan_vata', pitta: 'plan_pitta', kapha: 'plan_kapha' },
+  chakra: { lower: 'chakra_lower', middle: 'chakra_middle', upper: 'chakra_upper' },
+  yoga: { restorative: 'yoga_restorative', strength: 'yoga_vinyasa', balance: 'yoga_hatha', spiritual: 'yoga_kundalini' }
+};
+
+let currentLang = 'en';
+let answers = { dosha: {}, chakra: {}, yoga: {} };
+let results = {};
+
+function setLang(l) {
+  currentLang = l;
+  document.body.className = 'lang-' + l;
+  document.getElementById('btn-en').classList.toggle('active', l === 'en');
+  document.getElementById('btn-de').classList.toggle('active', l === 'de');
+  localStorage.setItem('t2t-lang', l);
+  if (curQ >= 0) renderQ();
+}
+
+// ── QUESTIONS ──────────────────────────────────────────────
+const questions = [
+  // DOSHA (6)
+  { phase: { en:'Part 1: Your Constitution', de:'Teil 1: Deine Konstitution' },
+    en: { t:'How would you describe your natural body frame?', s:'Think of your basic constitution.' },
+    de: { t:'Wie würdest du deinen natürlichen Körperbau beschreiben?', s:'Denke an deine Grundkonstitution.' },
+    opts: [
+      { en:'Slim and slight – hard to gain weight', de:'Schlank & zierlich – schwer zuzunehmen', d:'vata' },
+      { en:'Medium build, well-proportioned', de:'Mittelkräftig, gut proportioniert', d:'pitta' },
+      { en:'Sturdy build – I gain weight easily', de:'Kräftig gebaut – neige zur Gewichtszunahme', d:'kapha' }
+    ], type: 'dosha' },
+  { phase: { en:'Part 1: Your Constitution', de:'Teil 1: Deine Konstitution' },
+    en: { t:'How do you handle stress?', s:'' },
+    de: { t:'Wie gehst du mit Stress um?', s:'' },
+    opts: [
+      { en:'I become anxious and scattered', de:'Ich werde ängstlich und zerstreut', d:'vata' },
+      { en:'I become impatient and critical', de:'Ich werde ungeduldig und kritisch', d:'pitta' },
+      { en:'I withdraw and become stubborn', de:'Ich ziehe mich zurück und werde stur', d:'kapha' }
+    ], type: 'dosha' },
+  { phase: { en:'Part 1: Your Constitution', de:'Teil 1: Deine Konstitution' },
+    en: { t:'How is your digestion and appetite?', s:'' },
+    de: { t:'Wie sind Verdauung und Hunger bei dir?', s:'' },
+    opts: [
+      { en:'Irregular – sometimes very hungry, sometimes not at all', de:'Unregelmäßig – mal viel Hunger, mal keiner', d:'vata' },
+      { en:'Strong and punctual – irritable if I miss meals', de:'Stark & pünktlich – werde gereizt wenn ich nicht esse', d:'pitta' },
+      { en:'Moderate – can easily skip meals', de:'Gemäßigt – kann gut Mahlzeiten auslassen', d:'kapha' }
+    ], type: 'dosha' },
+  { phase: { en:'Part 1: Your Constitution', de:'Teil 1: Deine Konstitution' },
+    en: { t:'How do you sleep?', s:'' },
+    de: { t:'Wie schläfst du?', s:'' },
+    opts: [
+      { en:'Light and restless – often wake up', de:'Leicht & unruhig – wache oft auf', d:'vata' },
+      { en:'Moderate – wake early feeling refreshed', de:'Mittelmäßig – wache früh aber ausgeruht auf', d:'pitta' },
+      { en:'Deep and long – struggle to get up', de:'Tief & lang – komme schwer aus dem Bett', d:'kapha' }
+    ], type: 'dosha' },
+  { phase: { en:'Part 1: Your Constitution', de:'Teil 1: Deine Konstitution' },
+    en: { t:'What best describes your skin?', s:'' },
+    de: { t:'Was beschreibt deine Haut am besten?', s:'' },
+    opts: [
+      { en:'Dry, rough, sometimes cracking', de:'Trocken, rau, neigt zu Rissen', d:'vata' },
+      { en:'Oily or warm, prone to spots', de:'Ölig oder warm, neigt zu Pickeln', d:'pitta' },
+      { en:'Moist, cool, soft and smooth', de:'Feucht, kühl, weich und glatt', d:'kapha' }
+    ], type: 'dosha' },
+  { phase: { en:'Part 1: Your Constitution', de:'Teil 1: Deine Konstitution' },
+    en: { t:'What drives you most in life?', s:'Answer honestly and spontaneously.' },
+    de: { t:'Was treibt dich im Leben am stärksten an?', s:'Ehrlich und spontan antworten.' },
+    opts: [
+      { en:'Freedom, creativity and new experiences', de:'Freiheit, Kreativität und neue Erfahrungen', d:'vata' },
+      { en:'Achieving goals and demonstrating competence', de:'Ziele erreichen und Kompetenz zeigen', d:'pitta' },
+      { en:'Security, harmony and being there for others', de:'Sicherheit, Harmonie und für andere da sein', d:'kapha' }
+    ], type: 'dosha' },
+
+  // CHAKRA (7)
+  { phase: { en:'Part 2: Your Energy', de:'Teil 2: Deine Energie' },
+    en: { t:'Do you feel safe and grounded in daily life?', s:'' },
+    de: { t:'Fühlst du dich im Alltag sicher und geerdet?', s:'' },
+    opts: [
+      { en:'Yes, I feel stable and secure', de:'Ja, ich fühle mich stabil und sicher', c:'root', s:3 },
+      { en:'Sometimes, but I often feel anxious', de:'Manchmal, aber oft fühle ich mich ängstlich', c:'root', s:1 },
+      { en:'Rarely – insecurity is a constant companion', de:'Selten – Unsicherheit ist häufiger Begleiter', c:'root', s:0 }
+    ], type: 'chakra' },
+  { phase: { en:'Part 2: Your Energy', de:'Teil 2: Deine Energie' },
+    en: { t:'How easily can you express your feelings?', s:'' },
+    de: { t:'Wie leicht kannst du deine Gefühle ausdrücken?', s:'' },
+    opts: [
+      { en:'Easily – emotions flow freely', de:'Leicht – Emotionen fließen frei', c:'sacral', s:3 },
+      { en:'Sometimes difficult – I hold things back', de:'Manchmal schwierig – ich halte Dinge zurück', c:'sacral', s:1 },
+      { en:'Very hard – I frequently suppress feelings', de:'Sehr schwer – ich unterdrücke Gefühle häufig', c:'sacral', s:0 }
+    ], type: 'chakra' },
+  { phase: { en:'Part 2: Your Energy', de:'Teil 2: Deine Energie' },
+    en: { t:'How strong is your self-confidence?', s:'' },
+    de: { t:'Wie stark ist dein Selbstvertrauen?', s:'' },
+    opts: [
+      { en:'Strong – I believe in myself', de:'Stark – ich glaube an mich', c:'solar', s:3 },
+      { en:'Fluctuating – I sometimes doubt myself strongly', de:'Schwankend – manchmal zweifle ich stark', c:'solar', s:1 },
+      { en:'Low – I often feel not good enough', de:'Gering – ich fühle mich oft nicht gut genug', c:'solar', s:0 }
+    ], type: 'chakra' },
+  { phase: { en:'Part 2: Your Energy', de:'Teil 2: Deine Energie' },
+    en: { t:'How openly can you give and receive love?', s:'' },
+    de: { t:'Wie offen kannst du lieben und Liebe empfangen?', s:'' },
+    opts: [
+      { en:'Very openly – love flows easily both ways', de:'Sehr offen – Liebe fließt in beide Richtungen', c:'heart', s:3 },
+      { en:'Sometimes – old wounds make it difficult', de:'Manchmal – alte Wunden machen es schwer', c:'heart', s:1 },
+      { en:'Difficult – I keep people at a distance', de:'Schwierig – ich halte andere auf Abstand', c:'heart', s:0 }
+    ], type: 'chakra' },
+  { phase: { en:'Part 2: Your Energy', de:'Teil 2: Deine Energie' },
+    en: { t:'How easy is it to speak your truth?', s:'' },
+    de: { t:'Wie leicht fällt es dir, deine Wahrheit zu sagen?', s:'' },
+    opts: [
+      { en:'Easy – I say what I think and feel', de:'Leicht – ich sage was ich denke und fühle', c:'throat', s:3 },
+      { en:'Sometimes hard – I swallow things down', de:'Manchmal schwer – ich schlucke Dinge runter', c:'throat', s:1 },
+      { en:'Very hard – I rarely speak my mind', de:'Sehr schwer – ich sage selten was ich denke', c:'throat', s:0 }
+    ], type: 'chakra' },
+  { phase: { en:'Part 2: Your Energy', de:'Teil 2: Deine Energie' },
+    en: { t:'Do you trust your intuition?', s:'' },
+    de: { t:'Vertraust du deiner Intuition?', s:'' },
+    opts: [
+      { en:'Yes – my gut guides me well', de:'Ja – mein Bauchgefühl leitet mich gut', c:'thirdeye', s:3 },
+      { en:'Sometimes – I\'m unsure whether to trust it', de:'Manchmal – ich bin unsicher ob ich ihr traue', c:'thirdeye', s:1 },
+      { en:'Hardly – I rely on rational analysis only', de:'Kaum – ich verlasse mich nur auf rationale Analyse', c:'thirdeye', s:0 }
+    ], type: 'chakra' },
+  { phase: { en:'Part 2: Your Energy', de:'Teil 2: Deine Energie' },
+    en: { t:'Do you feel connected to something greater?', s:'Nature, universe, spirituality – however you name it.' },
+    de: { t:'Fühlst du eine Verbindung zu etwas Größerem?', s:'Natur, Universum, Spiritualität – wie du es nennst.' },
+    opts: [
+      { en:'Yes – I feel this connection regularly', de:'Ja – ich fühle diese Verbindung regelmäßig', c:'crown', s:3 },
+      { en:'Sometimes – in special moments', de:'Manchmal – in besonderen Momenten', c:'crown', s:1 },
+      { en:'Barely – it feels foreign to me', de:'Kaum – es fühlt sich mir fremd an', c:'crown', s:0 }
+    ], type: 'chakra' },
+
+  // YOGA (5)
+  { phase: { en:'Part 3: Your Movement', de:'Teil 3: Deine Bewegung' },
+    en: { t:'What is your main goal with yoga?', s:'' },
+    de: { t:'Was ist dein Hauptziel mit Yoga?', s:'' },
+    opts: [
+      { en:'Find inner calm and reduce stress', de:'Innere Ruhe finden und Stress abbauen', y:'restorative' },
+      { en:'Build strength, stability and fitness', de:'Kraft, Stabilität und Fitness aufbauen', y:'strength' },
+      { en:'Improve flexibility and find balance', de:'Flexibilität verbessern und Balance finden', y:'balance' },
+      { en:'Deepen spirituality and self-awareness', de:'Spiritualität und Selbsterkenntnis vertiefen', y:'spiritual' }
+    ], type: 'yoga' },
+  { phase: { en:'Part 3: Your Movement', de:'Teil 3: Deine Bewegung' },
+    en: { t:'How much time do you have daily for practice?', s:'' },
+    de: { t:'Wie viel Zeit hast du täglich für die Praxis?', s:'' },
+    opts: [
+      { en:'10–20 minutes', de:'10–20 Minuten', y:'restorative' },
+      { en:'20–40 minutes', de:'20–40 Minuten', y:'balance' },
+      { en:'45–60 minutes', de:'45–60 Minuten', y:'strength' },
+      { en:'More than 60 minutes', de:'Mehr als 60 Minuten', y:'spiritual' }
+    ], type: 'yoga' },
+  { phase: { en:'Part 3: Your Movement', de:'Teil 3: Deine Bewegung' },
+    en: { t:'What kind of movement feels right to you?', s:'' },
+    de: { t:'Welche Art von Bewegung fühlt sich für dich richtig an?', s:'' },
+    opts: [
+      { en:'Flowing and meditative', de:'Fließend und meditativ', y:'restorative' },
+      { en:'Dynamic and powerful', de:'Dynamisch und kraftvoll', y:'strength' },
+      { en:'Precise and structured', de:'Präzise und strukturiert', y:'balance' },
+      { en:'Deep and spiritual', de:'Tief und spirituell', y:'spiritual' }
+    ], type: 'yoga' },
+  { phase: { en:'Part 3: Your Movement', de:'Teil 3: Deine Bewegung' },
+    en: { t:'What do you need most right now?', s:'Your most honest feeling.' },
+    de: { t:'Was fehlt dir gerade am meisten?', s:'Dein ehrlichstes Gefühl.' },
+    opts: [
+      { en:'Peace and inner quiet', de:'Ruhe und innerer Frieden', y:'restorative' },
+      { en:'Energy and vitality', de:'Energie und Vitalität', y:'strength' },
+      { en:'Strength and self-confidence', de:'Stärke und Selbstvertrauen', y:'balance' },
+      { en:'Connection with myself', de:'Verbindung zu mir selbst', y:'spiritual' }
+    ], type: 'yoga' },
+  { phase: { en:'Part 3: Your Movement', de:'Teil 3: Deine Bewegung' },
+    en: { t:'How important is spirituality in your yoga?', s:'' },
+    de: { t:'Wie wichtig ist dir Spiritualität beim Yoga?', s:'' },
+    opts: [
+      { en:'Not important – purely physical for me', de:'Nicht wichtig – rein körperlich', y:'balance' },
+      { en:'I\'m open to it', de:'Ich bin offen dafür', y:'restorative' },
+      { en:'Important – yoga is self-discovery', de:'Wichtig – Yoga ist Selbsterkenntnis', y:'strength' },
+      { en:'Very important – the deep dimension matters', de:'Sehr wichtig – die tiefe Dimension zählt', y:'spiritual' }
+    ], type: 'yoga' },
+];
+
+const TOTAL = questions.length;
+let curQ = -1;
+let dScores = { vata:0, pitta:0, kapha:0 };
+let cScores = { root:0, sacral:0, solar:0, heart:0, throat:0, thirdeye:0, crown:0 };
+let yScores = { restorative:0, strength:0, balance:0, spiritual:0 };
+let selOpt = null;
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function startQuiz() {
+  curQ = 0; selOpt = null;
+  dScores = { vata:0, pitta:0, kapha:0 };
+  cScores = { root:0, sacral:0, solar:0, heart:0, throat:0, thirdeye:0, crown:0 };
+  yScores = { restorative:0, strength:0, balance:0, spiritual:0 };
+  renderQ(); showPage('quiz');
+}
+
+function renderQ() {
+  selOpt = null;
+  const q = questions[curQ];
+  const l = currentLang;
+  const pct = (curQ / TOTAL) * 100;
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('phase-label').textContent = q.phase[l];
+  document.getElementById('prog-count').textContent = l === 'en' ? `${curQ+1} / ${TOTAL}` : `${curQ+1} / ${TOTAL}`;
+  document.getElementById('q-text').textContent = q[l].t;
+  document.getElementById('q-sub').textContent = q[l].s || '';
+  const opts = document.getElementById('q-opts'); opts.innerHTML = '';
+  q.opts.forEach(opt => {
+    const b = document.createElement('button');
+    b.className = 'opt'; b.textContent = opt[l];
+    b.onclick = () => pick(opt, b);
+    opts.appendChild(b);
+  });
+}
+
+function pick(opt, btn) {
+  if (selOpt) return; selOpt = opt;
+  btn.classList.add('chosen');
+  const q = questions[curQ];
+  if (q.type === 'dosha') dScores[opt.d]++;
+  else if (q.type === 'chakra') cScores[opt.c] = (cScores[opt.c] || 0) + opt.s;
+  else if (q.type === 'yoga') yScores[opt.y]++;
+  setTimeout(() => { curQ++; if (curQ >= TOTAL) showResult(); else renderQ(); }, 360);
+}
+
+function showResult() {
+  const l = currentLang;
+
+  // Dosha
+  const dosha = Object.entries(dScores).sort((a,b)=>b[1]-a[1])[0][0];
+  const doshaNames = {
+    vata: { en:'Vata 🌬️', de:'Vata 🌬️' },
+    pitta: { en:'Pitta 🔥', de:'Pitta 🔥' },
+    kapha: { en:'Kapha 🌿', de:'Kapha 🌿' }
+  };
+
+  // Chakra (weakest)
+  const chakraOrder = ['root','sacral','solar','heart','throat','thirdeye','crown'];
+  const weakest = [...chakraOrder].sort((a,b)=>(cScores[a]||0)-(cScores[b]||0))[0];
+  const chakraMap = {
+    root: { en:'Root 🔴', de:'Wurzel 🔴', group:'lower' },
+    sacral: { en:'Sacral 🟠', de:'Sakral 🟠', group:'lower' },
+    solar: { en:'Solar Plexus 🟡', de:'Solarplexus 🟡', group:'lower' },
+    heart: { en:'Heart 💚', de:'Herz 💚', group:'middle' },
+    throat: { en:'Throat 🔵', de:'Kehl 🔵', group:'middle' },
+    thirdeye: { en:'Third Eye 💙', de:'Stirn 💙', group:'upper' },
+    crown: { en:'Crown 🟣', de:'Krone 🟣', group:'upper' }
+  };
+
+  // Yoga
+  const yoga = Object.entries(yScores).sort((a,b)=>b[1]-a[1])[0][0];
+  const yogaNames = {
+    restorative: { en:'Restorative 🌙', de:'Restorative 🌙' },
+    strength: { en:'Vinyasa 🔥', de:'Vinyasa 🔥' },
+    balance: { en:'Hatha ⚖️', de:'Hatha ⚖️' },
+    spiritual: { en:'Kundalini ✨', de:'Kundalini ✨' }
+  };
+
+  results = { dosha, chakra: weakest, chakraGroup: chakraMap[weakest].group, yoga };
+  sessionStorage.setItem('t2t-results', JSON.stringify(results));
+  sessionStorage.setItem('t2t-lang', l);
+
+  // Fill result page
+  document.getElementById('res-emojis').textContent = '🌿✨🧘';
+  document.getElementById('res-headline').innerHTML = l === 'en'
+    ? `You are <em>${doshaNames[dosha].en.replace(/\s*[🌬️🔥🌿]/,'')}</em>`
+    : `Du bist <em>${doshaNames[dosha].de.replace(/\s*[🌬️🔥🌿]/,'')}</em>`;
+  document.getElementById('res-sub').textContent = l === 'en'
+    ? 'Your personal reset plan is ready for you below.'
+    : 'Dein persönlicher Reset-Plan wartet unten auf dich.';
+  document.getElementById('res-dosha').textContent = doshaNames[dosha][l];
+  document.getElementById('res-chakra').textContent = chakraMap[weakest][l];
+  document.getElementById('res-yoga').textContent = yogaNames[yoga][l];
+
+  const insights = {
+    vata: { en: 'Your Vata energy loves creativity and movement – but can easily become scattered. Your root and sacral chakra need grounding. Restorative yoga and warm, nourishing foods will anchor you.',
+            de: 'Deine Vata-Energie liebt Kreativität und Bewegung – kann aber leicht zerstreut werden. Dein Wurzel- und Sakralchakra brauchen Erdung. Restorative Yoga und warme, nährende Speisen verankern dich.' },
+    pitta: { en: 'Your Pitta fire is your greatest strength – but it can burn too hot. Cooling practices, heart-opening yoga and mild nutrition will help you channel that passion constructively.',
+             de: 'Dein Pitta-Feuer ist deine größte Stärke – kann aber zu heiß brennen. Kühlende Praktiken, herzöffnendes Yoga und milde Ernährung helfen dir, diese Leidenschaft konstruktiv zu kanalisieren.' },
+    kapha: { en: 'Your Kapha ground is your gift – but can hold you back. Dynamic yoga, activating spices and stimulating practices will awaken your incredible inner power.',
+             de: 'Dein Kapha-Fundament ist dein Geschenk – kann dich aber auch zurückhalten. Dynamisches Yoga, aktivierende Gewürze und stimulierende Praktiken wecken deine unglaubliche innere Kraft.' }
+  };
+  document.getElementById('res-insight').textContent = insights[dosha][l];
+  showPage('result');
+}
+
+function handleBuy() {
+  sessionStorage.setItem('t2t-results', JSON.stringify(results));
+  sessionStorage.setItem('t2t-lang', currentLang);
+  window.location.href = STRIPE_BUNDLE;
+}
+
+function showSuccessPage() {
+  const res = JSON.parse(sessionStorage.getItem('t2t-results') || '{}');
+  const l = sessionStorage.getItem('t2t-lang') || currentLang;
+  if (l) setLang(l);
+  if (!res.dosha) { showPage('intro'); return; }
+
+  showPage('success');
+  setTimeout(() => {
+    document.getElementById('success-loading').style.display = 'none';
+    document.getElementById('success-content').style.display = 'block';
+
+    // Build download cards
+    const cards = document.getElementById('download-cards');
+    const baseUrl = 'https://www.travel2transform.de/';
+    const downloads = [
+      { icon:'🌿', title: l==='en'?'Your Dosha Nutrition Plan':'Dein Dosha-Ernährungsplan',
+        file: `${PDF_URLS.dosha[res.dosha]}_${l}.pdf` },
+      { icon:'✨', title: l==='en'?'Your Chakra Self-Care Plan':'Dein Chakren-Selbstpflege-Plan',
+        file: `${PDF_URLS.chakra[res.chakraGroup]}.pdf` },
+      { icon:'🧘', title: l==='en'?'Your Personal Yoga Plan':'Dein persönlicher Yoga-Plan',
+        file: `${PDF_URLS.yoga[res.yoga]}.pdf` },
+    ];
+    cards.innerHTML = downloads.map(d => `
+      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:20px;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:16px">
+        <div style="display:flex;align-items:center;gap:14px">
+          <span style="font-size:28px">${d.icon}</span>
+          <span style="font-size:14px;color:rgba(255,255,255,.8)">${d.title}</span>
+        </div>
+        <a href="${baseUrl}${d.file}" target="_blank" download style="background:var(--teal);color:white;padding:10px 20px;border-radius:50px;font-size:12px;font-weight:500;text-decoration:none;white-space:nowrap;flex-shrink:0">${l==='en'?'Download ↓':'Herunterladen ↓'}</a>
+      </div>`).join('');
+
+    // Retreat recommendation
+    const recTexts = {
+      vata: { en:'Your Vata nature craves grounding and new experiences. The Tanzania retreat combines yoga in nature with Reiki and Ayurvedic nutrition – perfect for you.',
+              de:'Deine Vata-Natur sehnt sich nach Erdung und neuen Erfahrungen. Das Tansania-Retreat verbindet Yoga in der Natur mit Reiki und ayurvedischer Ernährung – perfekt für dich.' },
+      pitta: { en:'Your Pitta fire needs the cooling power of nature. Both retreats offer exactly what you need: space, breath and transformation far from everyday pressure.',
+               de:'Dein Pitta-Feuer braucht die kühlende Kraft der Natur. Beide Retreats bieten genau was du brauchst: Raum, Atem und Transformation fernab vom Alltagsdruck.' },
+      kapha: { en:'Your Kapha energy will be activated and liberated by the retreat experience. Tanzania is a journey that will move you – in every sense.',
+               de:'Deine Kapha-Energie wird durch das Retreat-Erlebnis aktiviert und befreit. Tansania ist eine Reise die dich bewegen wird – in jedem Sinne.' }
+    };
+    const rt = document.getElementById('retreat-rec-text');
+    if (rt) rt.textContent = recTexts[res.dosha]?.[l] || '';
+  }, 2000);
+}
+
+function reset() { showPage('intro'); }
+
+// ── Init ──────────────────────────────────────────────────
+const sl = localStorage.getItem('t2t-lang');
+if (sl) setLang(sl); else setLang('en');
+
+window.addEventListener('load', () => {
+  const p = new URLSearchParams(window.location.search);
+  if (p.get('success') === 'true') showSuccessPage();
+});
+</script>
+</body>
+</html>

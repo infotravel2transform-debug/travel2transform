@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member Area · Travel 2 Transform</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#2d7a72;--tl:#3a9990;--pink:#d4548a;--gold:#c8a96e;--dark:#1a2e2c;--text:#2c3e3b;--muted:#6b8a87;--bg:#f8fbfa;--tpale:#e8f4f3;--ppale:#fce8f0;--border:rgba(45,122,114,0.13)}
+body{background:var(--dark);color:#e8f0ee;font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* SIDEBAR NAV */
+.layout{display:grid;grid-template-columns:280px 1fr;min-height:100vh}
+.sidebar{background:rgba(0,0,0,.25);border-right:1px solid rgba(255,255,255,.06);padding:0;position:sticky;top:0;height:100vh;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-brand{padding:24px 24px 20px;border-bottom:1px solid rgba(255,255,255,.06)}
+.s-logo{font-family:'Cinzel',serif;font-size:12px;letter-spacing:3px;color:var(--tl);text-transform:uppercase;margin-bottom:3px}
+.s-sub{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:1px}
+.sidebar-profile{padding:20px 24px;border-bottom:1px solid rgba(255,255,255,.06)}
+.s-profile-name{font-size:14px;color:rgba(255,255,255,.8);margin-bottom:2px}
+.s-profile-type{font-size:12px;color:var(--gold);opacity:.8}
+.sidebar-nav{padding:16px 12px;flex:1}
+.nav-section{font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.2);padding:12px 12px 6px}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;cursor:pointer;transition:all .2s;color:rgba(255,255,255,.45);font-size:14px;border:none;background:transparent;width:100%;text-align:left}
+.nav-item:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.8)}
+.nav-item.active{background:rgba(45,122,114,.15);color:var(--tl)}
+.nav-item.locked{opacity:.35;cursor:not-allowed}
+.nav-item .icon{font-size:16px;flex-shrink:0}
+.nav-item .lock{font-size:11px;margin-left:auto;opacity:.4}
+.sidebar-bottom{padding:16px 24px;border-top:1px solid rgba(255,255,255,.06)}
+.lang-sw{display:flex;background:rgba(255,255,255,.06);border-radius:50px;padding:3px;gap:2px}
+.lb{padding:5px 14px;border-radius:50px;border:none;background:transparent;cursor:pointer;font-size:12px;color:rgba(255,255,255,.4);transition:all .2s;font-family:'DM Sans',sans-serif}
+.lb.active{background:var(--teal);color:white}
+
+/* MAIN CONTENT */
+.main{padding:40px;overflow-y:auto}
+@media(max-width:768px){
+  .layout{grid-template-columns:1fr}
+  .sidebar{display:none;position:fixed;left:0;top:0;bottom:0;z-index:100;width:280px}
+  .sidebar.open{display:flex}
+  .mobile-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:rgba(0,0,0,.4);border-bottom:1px solid rgba(255,255,255,.06)}
+  .main{padding:20px}
+}
+@media(min-width:769px){.mobile-header{display:none}}
+
+/* PAGE header */
+.page-header{margin-bottom:36px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,.06)}
+.page-ey{font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--pink);opacity:.8;margin-bottom:10px}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,5vw,40px);font-weight:300;line-height:1.2;margin-bottom:8px}
+.page-title em{font-style:italic;color:var(--tl)}
+.page-sub{font-size:15px;color:rgba(255,255,255,.4);font-style:italic;font-family:'Cormorant Garamond',serif;line-height:1.6}
+
+/* CARDS */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-bottom:32px}
+.card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:24px;transition:all .25s}
+.card:hover{background:rgba(255,255,255,.07);transform:translateY(-2px)}
+.card.highlight{border-color:rgba(45,122,114,.3);background:rgba(45,122,114,.08)}
+.card.locked{opacity:.5;cursor:not-allowed;pointer-events:none}
+.card-icon{font-size:28px;margin-bottom:12px}
+.card-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:6px}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;margin-bottom:6px;line-height:1.3}
+.card-desc{font-size:13px;color:rgba(255,255,255,.4);line-height:1.6}
+.card-cta{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:13px;color:var(--tl);cursor:pointer;transition:color .2s;border:none;background:transparent;padding:0;font-family:'DM Sans',sans-serif}
+.card-cta:hover{color:white}
+.card-lock{font-size:12px;color:rgba(255,255,255,.2);margin-top:10px;display:block;font-style:italic}
+
+/* SECTION */
+.section{margin-bottom:40px}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;margin-bottom:4px}
+.section-title em{font-style:italic;color:var(--tl)}
+.section-sub{font-size:13px;color:rgba(255,255,255,.35);margin-bottom:20px;font-style:italic}
+
+/* EXERCISE CARD */
+.exercise{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:22px;margin-bottom:12px}
+.ex-num{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--teal);opacity:.7;margin-bottom:6px}
+.ex-title{font-size:15px;font-weight:500;color:rgba(255,255,255,.85);margin-bottom:8px}
+.ex-body{font-size:14px;color:rgba(255,255,255,.45);line-height:1.75}
+.ex-body em{color:rgba(255,255,255,.7);font-style:italic}
+.ex-time{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;color:rgba(45,153,144,.7);background:rgba(45,122,114,.1);border:1px solid rgba(45,122,114,.2);border-radius:50px;padding:4px 12px}
+
+/* REFLECTION */
+.reflection{background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.15);border-radius:12px;padding:22px;margin-bottom:12px}
+.ref-q{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;font-weight:300;color:rgba(255,255,255,.75);margin-bottom:10px;line-height:1.5}
+.ref-hint{font-size:12px;color:rgba(255,255,255,.3);font-style:italic}
+
+/* DOWNLOAD ROW */
+.dl-row{display:flex;align-items:center;justify-content:space-between;gap:16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:18px 22px;margin-bottom:10px;transition:all .2s}
+.dl-row:hover{background:rgba(255,255,255,.06)}
+.dl-left{display:flex;align-items:center;gap:14px}
+.dl-icon{font-size:26px}
+.dl-title{font-size:14px;color:rgba(255,255,255,.8);margin-bottom:2px}
+.dl-desc{font-size:12px;color:rgba(255,255,255,.35)}
+.dl-btn{background:var(--teal);color:white;padding:8px 18px;border-radius:50px;font-size:12px;font-weight:500;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:all .2s}
+.dl-btn:hover{background:var(--tl)}
+.dl-btn.locked{background:rgba(255,255,255,.06);color:rgba(255,255,255,.25);cursor:not-allowed;pointer-events:none}
+
+/* RETREAT UPGRADE */
+.upgrade-box{background:linear-gradient(135deg,rgba(45,122,114,.12),rgba(212,84,138,.08));border:1px solid rgba(45,122,114,.2);border-radius:16px;padding:28px;margin-top:8px}
+.ub-tag{font-family:'Cinzel',serif;font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.ub-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:8px}
+.ub-title em{font-style:italic;color:var(--tl)}
+.ub-body{font-size:14px;color:rgba(255,255,255,.45);line-height:1.75;margin-bottom:18px}
+.ub-btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:white;padding:12px 24px;border-radius:50px;font-size:13px;font-weight:500;text-decoration:none;transition:all .2s}
+.ub-btn:hover{background:var(--tl)}
+
+/* PROGRESS BAR */
+.progress-section{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:20px;margin-bottom:28px}
+.prog-label{font-size:13px;color:rgba(255,255,255,.5);margin-bottom:10px;display:flex;justify-content:space-between}
+.prog-bar{height:4px;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));border-radius:2px;transition:width 1s ease}
+
+/* TABS */
+.tabs{display:flex;gap:4px;background:rgba(255,255,255,.04);border-radius:10px;padding:4px;margin-bottom:28px;overflow-x:auto}
+.tab{padding:8px 18px;border-radius:8px;border:none;background:transparent;cursor:pointer;font-size:13px;color:rgba(255,255,255,.4);transition:all .2s;font-family:'DM Sans',sans-serif;white-space:nowrap}
+.tab.active{background:rgba(45,122,114,.2);color:var(--tl)}
+.tab-content{display:none}.tab-content.active{display:block}
+
+/* LANG */
+.de{display:none}.en{display:block}
+body.lang-de .de{display:block}body.lang-de .en{display:none}
+body.lang-en .de{display:none}body.lang-en .en{display:block}
+</style>
+</head>
+<body class="lang-en">
+
+<!-- MOBILE HEADER -->
+<div class="mobile-header">
+  <span style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--tl)">MEMBER AREA</span>
+  <button onclick="document.querySelector('.sidebar').classList.toggle('open')" style="background:none;border:none;color:rgba(255,255,255,.5);font-size:20px;cursor:pointer">☰</button>
+</div>
+
+
+<script>
+// Auth check – redirect to login if not authenticated
+(function(){
+  const auth = sessionStorage.getItem('t2t-member');
+  const ts = parseInt(sessionStorage.getItem('t2t-member-ts') || '0');
+  const age = Date.now() - ts;
+  const MAX_AGE = 24 * 60 * 60 * 1000; // 24 hours
+  if(!auth || age > MAX_AGE){
+    window.location.href = 'login.html';
+  }
+})();
+</script>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <div class="s-logo">Travel 2 Transform</div>
+    <div class="s-sub en">Member Area</div>
+    <div class="s-sub de">Mitgliederbereich</div>
+  </div>
+  <div class="sidebar-profile">
+    <div class="s-profile-name" id="profile-name">Welcome 🌿</div>
+    <div class="s-profile-type" id="profile-type"></div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section en">Your Journey</div>
+    <div class="nav-section de">Deine Reise</div>
+    <button class="nav-item active" onclick="showSection('welcome')"><span class="icon">🏠</span><span class="en">Welcome</span><span class="de">Willkommen</span></button>
+    <button class="nav-item" onclick="showSection('prepare')"><span class="icon">🧠</span><span class="en">Mental Preparation</span><span class="de">Mentale Vorbereitung</span></button>
+    <button class="nav-item" onclick="showSection('plans')"><span class="icon">📋</span><span class="en">Your Plans</span><span class="de">Deine Pläne</span></button>
+    <button class="nav-item" onclick="showSection('exercises')"><span class="icon">✨</span><span class="en">Exercises & Reflections</span><span class="de">Übungen & Reflexionen</span></button>
+
+    <div class="nav-section en" style="margin-top:8px">Before the Retreat</div>
+    <div class="nav-section de" style="margin-top:8px">Vor der Reise</div>
+    <button class="nav-item" onclick="showSection('pretravel')"><span class="icon">🌍</span><span class="en">Pre-Travel Experience</span><span class="de">Pre-Travel Erfahrung</span></button>
+    <button class="nav-item" onclick="showSection('checklist')"><span class="icon">✅</span><span class="en">Checklist & Packing</span><span class="de">Checkliste & Packliste</span></button>
+
+    <div class="nav-section en" style="margin-top:8px">Go Deeper</div>
+    <div class="nav-section de" style="margin-top:8px">Tiefer gehen</div>
+    <button class="nav-item" onclick="showSection('upgrade')"><span class="icon">🔥</span><span class="en">Retreat Upgrade</span><span class="de">Retreat-Upgrade</span></button>
+  </nav>
+  <div class="sidebar-bottom">
+    <div class="lang-sw">
+      <button class="lb active" id="btn-en" onclick="setLang('en')">EN</button>
+      <button class="lb" id="btn-de" onclick="setLang('de')">DE</button>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- ══ WELCOME ══════════════════════════════════════════════ -->
+  <div id="section-welcome" class="section-page active">
+    <div class="page-header">
+      <div class="page-ey en">Welcome</div><div class="page-ey de">Willkommen</div>
+      <h1 class="page-title en">You're already part of the journey –<br><em>before it begins.</em></h1>
+      <h1 class="page-title de">Du bist schon ein Teil der Reise –<br><em>bevor sie beginnt.</em></h1>
+      <p class="page-sub en">This isn't an info folder. This is the beginning of your transformation.</p>
+      <p class="page-sub de">Das hier ist kein Info-Ordner. Das ist der Beginn deiner Transformation.</p>
+    </div>
+
+    <div class="progress-section">
+      <div class="prog-label"><span class="en">Your progress</span><span class="de">Dein Fortschritt</span><span id="prog-pct">0%</span></div>
+      <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+    </div>
+
+    <div class="cards">
+      <div class="card highlight" onclick="showSection('prepare')">
+        <div class="card-icon">🧠</div>
+        <div class="card-label en">Start here</div><div class="card-label de">Hier starten</div>
+        <div class="card-title en">Mental Preparation</div><div class="card-title de">Mentale Vorbereitung</div>
+        <div class="card-desc en">What will change in you. What to expect. How to get the most from this.</div>
+        <div class="card-desc de">Was sich in dir verändern wird. Was dich erwartet. Wie du das Meiste herausholen kannst.</div>
+        <button class="card-cta en">Start →</button><button class="card-cta de">Starten →</button>
+      </div>
+      <div class="card" onclick="showSection('plans')">
+        <div class="card-icon">📋</div>
+        <div class="card-label en">Your plans</div><div class="card-label de">Deine Pläne</div>
+        <div class="card-title en">Download Your Plans</div><div class="card-title de">Pläne herunterladen</div>
+        <div class="card-desc en">Your personalised Dosha, Chakra and Yoga plans – ready to download.</div>
+        <div class="card-desc de">Deine personalisierten Dosha-, Chakren- und Yoga-Pläne – bereit zum Download.</div>
+        <button class="card-cta en">View plans →</button><button class="card-cta de">Pläne ansehen →</button>
+      </div>
+      <div class="card" onclick="showSection('exercises')">
+        <div class="card-icon">✨</div>
+        <div class="card-label en">Daily practice</div><div class="card-label de">Tägliche Praxis</div>
+        <div class="card-title en">Exercises & Reflections</div><div class="card-title de">Übungen & Reflexionen</div>
+        <div class="card-desc en">Small exercises and reflection questions that create real change over time.</div>
+        <div class="card-desc de">Kleine Übungen und Reflexionsfragen, die über Zeit echte Veränderung schaffen.</div>
+        <button class="card-cta en">View exercises →</button><button class="card-cta de">Übungen ansehen →</button>
+      </div>
+    </div>
+
+    <div class="upgrade-box">
+      <div class="ub-tag en">✦ Going on retreat?</div><div class="ub-tag de">✦ Auf Retreat?</div>
+      <h3 class="ub-title en">Prepare yourself –<br><em>before the journey even begins.</em></h3>
+      <h3 class="ub-title de">Bereite dich vor –<br><em>bevor die Reise überhaupt beginnt.</em></h3>
+      <p class="ub-body en">The Pre-Travel section helps you to arrive with an open mind, a clear intention – and get far more out of the retreat.</p>
+      <p class="ub-body de">Der Pre-Travel-Bereich hilft dir, mit offenem Geist, klarer Intention anzukommen – und weit mehr aus dem Retreat herauszuholen.</p>
+      <a href="#" onclick="showSection('pretravel');return false" class="ub-btn en">Open Pre-Travel Experience →</a>
+      <a href="#" onclick="showSection('pretravel');return false" class="ub-btn de">Pre-Travel Erfahrung öffnen →</a>
+    </div>
+  </div>
+
+  <!-- ══ MENTAL PREPARATION ════════════════════════════════════ -->
+  <div id="section-prepare" class="section-page" style="display:none">
+    <div class="page-header">
+      <div class="page-ey en">Mental Preparation</div><div class="page-ey de">Mentale Vorbereitung</div>
+      <h1 class="page-title en">What will <em>change in you.</em></h1>
+      <h1 class="page-title de">Was sich <em>in dir verändern wird.</em></h1>
+      <p class="page-sub en">Read this before you begin. It will help you understand what's ahead.</p>
+      <p class="page-sub de">Lies das bevor du anfängst. Es hilft dir zu verstehen was vor dir liegt.</p>
+    </div>
+
+    <div class="section">
+      <div class="exercise">
+        <div class="ex-num en">PART 1</div><div class="ex-num de">TEIL 1</div>
+        <div class="ex-title en">Why transformation feels uncomfortable at first</div>
+        <div class="ex-title de">Warum sich Transformation anfangs unangenehm anfühlt</div>
+        <div class="ex-body en">Real change doesn't happen when everything is comfortable. It happens in the moments when something old begins to loosen. You might notice: <em>restlessness, unexpected emotions, a feeling of "this is too much"</em>. That's not a sign that something is wrong. It's a sign that something is shifting. Stay with it.</div>
+        <div class="ex-body de">Echte Veränderung passiert nicht wenn alles bequem ist. Sie passiert in den Momenten, wenn etwas Altes anfängt sich zu lösen. Du wirst vielleicht merken: <em>Unruhe, unerwartete Emotionen, ein Gefühl von „das ist zu viel"</em>. Das ist kein Zeichen dass etwas falsch läuft. Es ist ein Zeichen dass sich etwas verschiebt. Bleib dabei.</div>
+      </div>
+      <div class="exercise">
+        <div class="ex-num en">PART 2</div><div class="ex-num de">TEIL 2</div>
+        <div class="ex-title en">What this process is asking of you</div>
+        <div class="ex-title de">Was dieser Prozess von dir verlangt</div>
+        <div class="ex-body en">Not perfection. Not doing everything every day. Just <em>honest presence</em>. Show up for yourself – even when it's inconvenient. Even when you don't feel like it. Especially then.</div>
+        <div class="ex-body de">Nicht Perfektion. Nicht alles jeden Tag machen. Nur <em>ehrliche Präsenz</em>. Erscheine für dich selbst – auch wenn es unbequem ist. Auch wenn du keine Lust hast. Besonders dann.</div>
+      </div>
+      <div class="exercise">
+        <div class="ex-num en">PART 3</div><div class="ex-num de">TEIL 3</div>
+        <div class="ex-title en">A note from Jenny</div>
+        <div class="ex-title de">Eine Nachricht von Jenny</div>
+        <div class="ex-body en"><em>"I created this system because I was once exactly where you are. The feeling that something needs to change – but not knowing where to start. What helped me most wasn't a perfect plan. It was the decision to start looking honestly. You've already made that decision. The rest will follow."</em></div>
+        <div class="ex-body de"><em>„Ich habe dieses System erschaffen, weil ich einmal genau da war, wo du jetzt bist. Das Gefühl dass sich etwas ändern muss – aber nicht zu wissen wo anfangen. Was mir am meisten geholfen hat, war kein perfekter Plan. Es war die Entscheidung, ehrlich hinzuschauen. Diese Entscheidung hast du bereits getroffen. Der Rest folgt."</em></div>
+        <div class="ex-time">🙏 <span class="en">Jenny Wierzbicki · Travel 2 Transform</span><span class="de">Jenny Wierzbicki · Travel 2 Transform</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title en">Before you start – <em>your intention</em></div>
+      <div class="section-title de">Bevor du beginnst – <em>deine Intention</em></div>
+      <div class="section-sub en">Take 3 minutes for this.</div>
+      <div class="section-sub de">Nimm dir 3 Minuten dafür.</div>
+      <div class="reflection">
+        <div class="ref-q en">"What am I hoping will shift in me through this process?"</div>
+        <div class="ref-q de">„Was hoffe ich wird sich durch diesen Prozess in mir verschieben?"</div>
+        <div class="ref-hint en">Write it down somewhere. Not to have the right answer – just to have an honest one.</div>
+        <div class="ref-hint de">Schreib es irgendwo auf. Nicht um die richtige Antwort zu haben – sondern um eine ehrliche zu haben.</div>
+      </div>
+      <div class="reflection">
+        <div class="ref-q en">"What have I been avoiding looking at?"</div>
+        <div class="ref-q de">„Was habe ich vermieden hinzuschauen?"</div>
+        <div class="ref-hint en">You don't have to answer this right now. Just notice what comes up.</div>
+        <div class="ref-hint de">Du musst das jetzt nicht beantworten. Bemerke einfach was auftaucht.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PLANS ════════════════════════════════════════════════ -->
+  <div id="section-plans" class="section-page" style="display:none">
+    <div class="page-header">
+      <div class="page-ey en">Your Plans</div><div class="page-ey de">Deine Pläne</div>
+      <h1 class="page-title en">Everything <em>tailored to you.</em></h1>
+      <h1 class="page-title de">Alles <em>auf dich abgestimmt.</em></h1>
+      <p class="page-sub en">Download your personalised plans here. They're built around your specific profile.</p>
+      <p class="page-sub de">Lade hier deine personalisierten Pläne herunter. Sie sind um dein spezifisches Profil herum gebaut.</p>
+    </div>
+    <div id="plan-downloads">
+      <!-- filled by JS based on results -->
+      <div class="dl-row">
+        <div class="dl-left"><div class="dl-icon">🌿</div><div><div class="dl-title en">Your Dosha Nutrition Plan</div><div class="dl-title de">Dein Dosha-Ernährungsplan</div><div class="dl-desc en">2-week daily meal plan · tailored to your constitution</div><div class="dl-desc de">2-Wochen täglicher Mahlzeitenplan · auf deine Konstitution abgestimmt</div></div></div>
+        <a id="dl-dosha" href="#" class="dl-btn" target="_blank" download><span class="en">Download</span><span class="de">Herunterladen</span></a>
+      </div>
+      <div class="dl-row">
+        <div class="dl-left"><div class="dl-icon">✨</div><div><div class="dl-title en">Your Chakra Self-Care Plan</div><div class="dl-title de">Dein Chakren-Selbstpflege-Plan</div><div class="dl-desc en">4-week plan · rituals, affirmations, meditations</div><div class="dl-desc de">4-Wochen-Plan · Rituale, Affirmationen, Meditationen</div></div></div>
+        <a id="dl-chakra" href="#" class="dl-btn" target="_blank" download><span class="en">Download</span><span class="de">Herunterladen</span></a>
+      </div>
+      <div class="dl-row">
+        <div class="dl-left"><div class="dl-icon">🧘</div><div><div class="dl-title en">Your Personal Yoga Plan</div><div class="dl-title de">Dein persönlicher Yoga-Plan</div><div class="dl-desc en">4-week plan · daily sequences for your style</div><div class="dl-desc de">4-Wochen-Plan · tägliche Sequenzen für deinen Stil</div></div></div>
+        <a id="dl-yoga" href="#" class="dl-btn" target="_blank" download><span class="en">Download</span><span class="de">Herunterladen</span></a>
+      </div>
+    </div>
+    <div style="margin-top:28px;padding:20px;background:rgba(45,122,114,.06);border:1px solid rgba(45,122,114,.15);border-radius:12px">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:rgba(255,255,255,.55);line-height:1.7" class="en">Questions about your plans? Something unclear? Write to Jenny directly.</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:rgba(255,255,255,.55);line-height:1.7" class="de">Fragen zu deinen Plänen? Etwas unklar? Schreib Jenny direkt.</p>
+      <a id="wa-questions" href="#" target="_blank" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;background:#25d366;color:white;padding:10px 20px;border-radius:50px;font-size:13px;font-weight:500;text-decoration:none;transition:all .2s">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="en">Write to Jenny on WhatsApp</span><span class="de">Jenny auf WhatsApp schreiben</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ══ EXERCISES ════════════════════════════════════════════ -->
+  <div id="section-exercises" class="section-page" style="display:none">
+    <div class="page-header">
+      <div class="page-ey en">Exercises & Reflections</div><div class="page-ey de">Übungen & Reflexionen</div>
+      <h1 class="page-title en">Small things that <em>create real change.</em></h1>
+      <h1 class="page-title de">Kleine Dinge, die <em>echte Veränderung schaffen.</em></h1>
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('tab-morning')"><span class="en">Morning</span><span class="de">Morgen</span></button>
+      <button class="tab" onclick="showTab('tab-chakra-ex')"><span class="en">Chakra Work</span><span class="de">Chakren-Arbeit</span></button>
+      <button class="tab" onclick="showTab('tab-reflection')"><span class="en">Reflections</span><span class="de">Reflexionen</span></button>
+      <button class="tab" onclick="showTab('tab-evening')"><span class="en">Evening</span><span class="de">Abend</span></button>
+    </div>
+
+    <div id="tab-morning" class="tab-content active">
+      <div class="exercise">
+        <div class="ex-num en">MORNING EXERCISE 1</div><div class="ex-num de">MORGENÜBUNG 1</div>
+        <div class="ex-title en">The 2-minute grounding</div><div class="ex-title de">Die 2-Minuten-Erdung</div>
+        <div class="ex-body en">Before reaching for your phone: both feet flat on the floor. Take 5 slow breaths. With every exhale – <em>let the night go</em>. With every inhale – <em>arrive in today</em>. That's it.</div>
+        <div class="ex-body de">Bevor du zum Handy greifst: beide Füße flach auf den Boden. 5 langsame Atemzüge. Mit jedem Ausatmen – <em>die Nacht loslassen</em>. Mit jedem Einatmen – <em>im Heute ankommen</em>. Das ist alles.</div>
+        <div class="ex-time">⏱ <span class="en">2 minutes</span><span class="de">2 Minuten</span></div>
+      </div>
+      <div class="exercise">
+        <div class="ex-num en">MORNING EXERCISE 2</div><div class="ex-num de">MORGENÜBUNG 2</div>
+        <div class="ex-title en">One honest sentence</div><div class="ex-title de">Ein ehrlicher Satz</div>
+        <div class="ex-body en">Before breakfast – finish this sentence: <em>"Today I feel… and what I really need is…"</em> Don't think about the answer. Write the first thing that comes.</div>
+        <div class="ex-body de">Vor dem Frühstück – beende diesen Satz: <em>„Heute fühle ich mich… und was ich wirklich brauche ist…"</em> Denke nicht lange nach. Schreib das Erste was kommt.</div>
+        <div class="ex-time">✍️ <span class="en">3 minutes</span><span class="de">3 Minuten</span></div>
+      </div>
+      <div class="exercise">
+        <div class="ex-num en">MORNING EXERCISE 3</div><div class="ex-num de">MORGENÜBUNG 3</div>
+        <div class="ex-title en">Warm water ritual</div><div class="ex-title de">Warmwasser-Ritual</div>
+        <div class="ex-body en">Before coffee: one glass of warm water with fresh ginger. <em>Slowly. Consciously.</em> This is medicine – especially for Vata and Kapha types. It wakes up digestion and signals to the body: today we're nourishing ourselves.</div>
+        <div class="ex-body de">Vor dem Kaffee: ein Glas warmes Wasser mit frischem Ingwer. <em>Langsam. Bewusst.</em> Das ist Medizin – besonders für Vata- und Kapha-Typen. Es weckt die Verdauung auf und signalisiert dem Körper: heute pflegen wir uns.</div>
+        <div class="ex-time">🫚 <span class="en">5 minutes</span><span class="de">5 Minuten</span></div>
+      </div>
+    </div>
+
+    <div id="tab-chakra-ex" class="tab-content">
+      <div class="exercise">
+        <div class="ex-num en">CHAKRA WORK 1</div><div class="ex-num de">CHAKREN-ARBEIT 1</div>
+        <div class="ex-title en">Feel your blocked chakra</div><div class="ex-title de">Dein blockiertes Chakra spüren</div>
+        <div class="ex-body en">Place your hand on the area of your most blocked chakra (you found it in the test). Take 5 deep breaths. Don't try to fix anything. Just feel <em>what is there</em>. Heaviness? Pressure? Emptiness? Just notice.</div>
+        <div class="ex-body de">Lege deine Hand auf den Bereich deines blockiertesten Chakras (das hast du im Test gefunden). Nimm 5 tiefe Atemzüge. Versuche nichts zu reparieren. Spüre einfach <em>was da ist</em>. Schwere? Druck? Leere? Nur bemerken.</div>
+        <div class="ex-time">⏱ <span class="en">5 minutes</span><span class="de">5 Minuten</span></div>
+      </div>
+      <div class="exercise">
+        <div class="ex-num en">CHAKRA WORK 2</div><div class="ex-num de">CHAKREN-ARBEIT 2</div>
+        <div class="ex-title en">Your daily affirmation</div><div class="ex-title de">Deine tägliche Affirmation</div>
+        <div class="ex-body en">Read your affirmation aloud each morning – not as a wish, but as a <em>statement of truth</em>. Root: "I am safe and grounded." Heart: "I am open to give and receive love." Solar: "I stand in my power." Throat: "My voice matters." Say it until you feel it.</div>
+        <div class="ex-body de">Sprich deine Affirmation jeden Morgen laut aus – nicht als Wunsch, sondern als <em>Wahrheitsaussage</em>. Wurzel: „Ich bin sicher und geerdet." Herz: „Ich bin offen Liebe zu geben und zu empfangen." Solar: „Ich stehe in meiner Kraft." Kehl: „Meine Stimme hat Bedeutung." Sag es bis du es fühlst.</div>
+        <div class="ex-time">🗣️ <span class="en">2 minutes</span><span class="de">2 Minuten</span></div>
+      </div>
+    </div>
+
+    <div id="tab-reflection" class="tab-content">
+      <div class="section-sub en" style="margin-bottom:20px">Weekly reflection questions. One per week is enough.</div>
+      <div class="section-sub de" style="margin-bottom:20px">Wöchentliche Reflexionsfragen. Eine pro Woche reicht.</div>
+      <div class="reflection">
+        <div class="ref-q en">Week 1: "What have I been carrying that isn't mine?"</div>
+        <div class="ref-q de">Woche 1: „Was trage ich mit mir, das nicht meins ist?"</div>
+        <div class="ref-hint en">Other people's expectations, old beliefs, fears that were taught to you…</div>
+        <div class="ref-hint de">Erwartungen anderer, alte Überzeugungen, Ängste die dir beigebracht wurden…</div>
+      </div>
+      <div class="reflection">
+        <div class="ref-q en">Week 2: "When do I feel most like myself?"</div>
+        <div class="ref-q de">Woche 2: „Wann fühle ich mich am meisten wie ich selbst?"</div>
+        <div class="ref-hint en">In those moments – what's different? What's present that's usually missing?</div>
+        <div class="ref-hint de">In diesen Momenten – was ist anders? Was ist präsent das sonst fehlt?</div>
+      </div>
+      <div class="reflection">
+        <div class="ref-q en">Week 3: "What would I do if I weren't afraid?"</div>
+        <div class="ref-q de">Woche 3: „Was würde ich tun wenn ich keine Angst hätte?"</div>
+        <div class="ref-hint en">Don't think practically. Just let the answer come.</div>
+        <div class="ref-hint de">Nicht praktisch denken. Lass die Antwort einfach kommen.</div>
+      </div>
+      <div class="reflection">
+        <div class="ref-q en">Week 4: "What has shifted in me in these 4 weeks?"</div>
+        <div class="ref-q de">Woche 4: „Was hat sich in diesen 4 Wochen in mir verschoben?"</div>
+        <div class="ref-hint en">Even small things count. Especially small things.</div>
+        <div class="ref-hint de">Auch kleine Dinge zählen. Besonders kleine Dinge.</div>
+      </div>
+    </div>
+
+    <div id="tab-evening" class="tab-content">
+      <div class="exercise">
+        <div class="ex-num en">EVENING EXERCISE 1</div><div class="ex-num de">ABENDÜBUNG 1</div>
+        <div class="ex-title en">The 3-thing practice</div><div class="ex-title de">Die 3-Dinge-Praxis</div>
+        <div class="ex-body en">Before sleep: 3 things that felt true or real today. Not "great" things. Just <em>real</em> ones. A moment of genuine connection. A decision that felt right. A breath you actually felt.</div>
+        <div class="ex-body de">Vor dem Schlafen: 3 Dinge die sich heute wahr oder echt angefühlt haben. Nicht „tolle" Dinge. Nur <em>echte</em>. Ein Moment echter Verbindung. Eine Entscheidung die sich richtig anfühlte. Ein Atemzug den du wirklich gespürt hast.</div>
+        <div class="ex-time">✍️ <span class="en">3 minutes</span><span class="de">3 Minuten</span></div>
+      </div>
+      <div class="exercise">
+        <div class="ex-num en">EVENING EXERCISE 2</div><div class="ex-num de">ABENDÜBUNG 2</div>
+        <div class="ex-title en">Letting go breath</div><div class="ex-title de">Loslassatem</div>
+        <div class="ex-body en">Lying in bed: breathe in for 4 counts. Hold for 4. Out for 8. <em>The long exhale signals your nervous system: it's safe to let go now.</em> Do this 5 times. Then let sleep come.</div>
+        <div class="ex-body de">Im Bett liegend: 4 Zählen einatmen. 4 Zählen halten. 8 Zählen ausatmen. <em>Der lange Ausatem signalisiert deinem Nervensystem: es ist sicher jetzt loszulassen.</em> 5-mal wiederholen. Dann den Schlaf kommen lassen.</div>
+        <div class="ex-time">🌙 <span class="en">5 minutes</span><span class="de">5 Minuten</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PRE-TRAVEL ════════════════════════════════════════════ -->
+  <div id="section-pretravel" class="section-page" style="display:none">
+    <div class="page-header">
+      <div class="page-ey en">Pre-Travel Experience</div><div class="page-ey de">Pre-Travel Erfahrung</div>
+      <h1 class="page-title en">You're already on the journey –<br><em>before it begins.</em></h1>
+      <h1 class="page-title de">Du bist schon unterwegs –<br><em>bevor es losgeht.</em></h1>
+      <p class="page-sub en">This section prepares you mentally and emotionally for the retreat. The more you arrive with an open mind, the more will happen once you're there.</p>
+      <p class="page-sub de">Dieser Bereich bereitet dich mental und emotional auf das Retreat vor. Je offener du ankommst, desto mehr wird passieren wenn du dort bist.</p>
+    </div>
+    <div class="exercise" style="border-color:rgba(200,169,110,.2)">
+      <div class="ex-num" style="color:var(--gold)">MINDSET SHIFT</div>
+      <div class="ex-title en">Why this journey is different</div><div class="ex-title de">Warum diese Reise anders ist</div>
+      <div class="ex-body en">Most holidays are <em>escaping from something</em>. This journey is <em>moving toward something</em>. That's a fundamental difference. You're not going to forget your life. You're going to understand it better.</div>
+      <div class="ex-body de">Die meisten Urlaube sind <em>Flucht vor etwas</em>. Diese Reise ist <em>Bewegung auf etwas zu</em>. Das ist ein fundamentaler Unterschied. Du gehst nicht hin um dein Leben zu vergessen. Du gehst hin um es besser zu verstehen.</div>
+    </div>
+    <div class="reflection">
+      <div class="ref-q en">"What do I want to leave behind on this journey?"</div>
+      <div class="ref-q de">„Was möchte ich auf dieser Reise zurücklassen?"</div>
+      <div class="ref-hint en">A pattern. A belief. A way of seeing yourself. Be specific.</div>
+      <div class="ref-hint de">Ein Muster. Eine Überzeugung. Eine Art sich selbst zu sehen. Sei konkret.</div>
+    </div>
+    <div class="reflection">
+      <div class="ref-q en">"And what do I want to bring back?"</div>
+      <div class="ref-q de">„Und was möchte ich mitbringen?"</div>
+      <div class="ref-hint en">Not things. Something internal. Clarity, courage, a sense of self…</div>
+      <div class="ref-hint de">Keine Dinge. Etwas Inneres. Klarheit, Mut, ein Gefühl von sich selbst…</div>
+    </div>
+    <div class="exercise">
+      <div class="ex-num en">PREPARATION EXERCISE</div><div class="ex-num de">VORBEREITUNGSÜBUNG</div>
+      <div class="ex-title en">The daily practice before departure</div><div class="ex-title de">Die tägliche Praxis vor der Abreise</div>
+      <div class="ex-body en">In the 2 weeks before the retreat: do at least one thing each day from your yoga or chakra plan. Not to be perfect. Just to <em>remind your body that it's being heard</em>. When you arrive, you'll feel the difference.</div>
+      <div class="ex-body de">In den 2 Wochen vor dem Retreat: mach jeden Tag mindestens eine Sache aus deinem Yoga- oder Chakren-Plan. Nicht um perfekt zu sein. Nur um <em>deinem Körper zu signalisieren dass er gehört wird</em>. Wenn du ankommst, wirst du den Unterschied spüren.</div>
+      <div class="ex-time">🌿 <span class="en">Daily · 10–20 minutes</span><span class="de">Täglich · 10–20 Minuten</span></div>
+    </div>
+  </div>
+
+  <!-- ══ CHECKLIST ══════════════════════════════════════════════ -->
+  <div id="section-checklist" class="section-page" style="display:none">
+    <div class="page-header">
+      <div class="page-ey en">Checklist & Packing</div><div class="page-ey de">Checkliste & Packliste</div>
+      <h1 class="page-title en">The practical stuff –<br><em>short & clear.</em></h1>
+      <h1 class="page-title de">Das Praktische –<br><em>kurz & klar.</em></h1>
+    </div>
+    <div class="section">
+      <div class="section-title en">Before departure <em>checklist</em></div>
+      <div class="section-title de">Vor der Abreise <em>Checkliste</em></div>
+      <div class="section-sub en">Everything you actually need – nothing more.</div>
+      <div class="section-sub de">Alles was du wirklich brauchst – nicht mehr.</div>
+      <div id="checklist-items"></div>
+    </div>
+    <div class="section" style="margin-top:32px">
+      <div class="section-title en">Packing list <em>essentials</em></div>
+      <div class="section-title de">Packliste <em>das Wichtigste</em></div>
+      <div id="packing-items"></div>
+    </div>
+  </div>
+
+  <!-- ══ UPGRADE ════════════════════════════════════════════════ -->
+  <div id="section-upgrade" class="section-page" style="display:none">
+    <div class="page-header">
+      <div class="page-ey en">Go Deeper</div><div class="page-ey de">Tiefer gehen</div>
+      <h1 class="page-title en">When the plan is <em>just the beginning.</em></h1>
+      <h1 class="page-title de">Wenn der Plan <em>erst der Anfang ist.</em></h1>
+    </div>
+    <div class="upgrade-box" style="margin-bottom:20px">
+      <div class="ub-tag en">✦ 4-Week 1:1 Journey</div><div class="ub-tag de">✦ 4-Wochen 1:1 Begleitung</div>
+      <h3 class="ub-title en">Work with Jenny <em>directly.</em></h3>
+      <h3 class="ub-title de">Direkt mit Jenny <em>arbeiten.</em></h3>
+      <p class="ub-body en">4 personal Reiki & energy sessions · Vision work · Personalised yoga videos · Meditations · WhatsApp support between sessions. For those who want to go deeper than a plan can take you.</p>
+      <p class="ub-body de">4 persönliche Reiki- & Energiesessions · Visionsarbeit · Personalisierte Yoga-Videos · Meditationen · WhatsApp-Support zwischen den Sessions. Für die die tiefer gehen wollen als ein Plan sie führen kann.</p>
+      <a href="begleitung.html" class="ub-btn en">Learn more about the 1:1 Journey →</a>
+      <a href="begleitung.html" class="ub-btn de">Mehr über die 1:1 Begleitung →</a>
+    </div>
+    <div class="upgrade-box">
+      <div class="ub-tag en">✦ Retreat Journeys</div><div class="ub-tag de">✦ Retreat-Reisen</div>
+      <h3 class="ub-title en">Come with me to <em>Tanzania.</em></h3>
+      <h3 class="ub-title de">Komm mit mir nach <em>Tansania.</em></h3>
+      <p class="ub-body en">"The plan showed me what I needed. Tanzania showed me who I am." – The retreat is the next level. For those who feel ready.</p>
+      <p class="ub-body de">"Der Plan hat mir gezeigt was ich brauche. Tansania hat mir gezeigt wer ich bin." – Das Retreat ist die nächste Stufe. Für die, die sich bereit fühlen.</p>
+      <a id="wa-retreat-upgrade" href="#" target="_blank" class="ub-btn en">Enquire via WhatsApp →</a>
+      <a id="wa-retreat-upgrade-de" href="#" target="_blank" class="ub-btn de">Anfragen via WhatsApp →</a>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<script>
+const BASE = 'https://www.travel2transform.de/';
+const PDF_MAP = {
+  dosha: { vata:'plan_vata', pitta:'plan_pitta', kapha:'plan_kapha' },
+  chakra: { lower:'chakra_lower', middle:'chakra_middle', upper:'chakra_upper' },
+  yoga: { restorative:'yoga_restorative', strength:'yoga_vinyasa', balance:'yoga_hatha', spiritual:'yoga_kundalini' }
+};
+
+let currentLang = 'en';
+
+function setLang(l) {
+  currentLang = l;
+  document.body.className = 'lang-' + l;
+  document.getElementById('btn-en').classList.toggle('active', l === 'en');
+  document.getElementById('btn-de').classList.toggle('active', l === 'de');
+  localStorage.setItem('t2t-lang', l);
+  updateWA(l);
+}
+
+function updateWA(l) {
+  const base = 'https://wa.me/4917624238972?text=';
+  const q = document.getElementById('wa-questions');
+  const ru = document.getElementById('wa-retreat-upgrade');
+  const rud = document.getElementById('wa-retreat-upgrade-de');
+  if (q) q.href = base + (l === 'en' ? 'Hello%20Jenny!%20I%20have%20a%20question%20about%20my%20reset%20plan.' : 'Hallo%20Jenny!%20Ich%20habe%20eine%20Frage%20zu%20meinem%20Reset-Plan.');
+  if (ru) ru.href = base + 'Hello%20Jenny!%20I%27d%20like%20to%20hear%20more%20about%20the%20Tanzania%20retreat.';
+  if (rud) rud.href = base + 'Hallo%20Jenny!%20Ich%20m%C3%B6chte%20mehr%20%C3%BCber%20das%20Tansania-Retreat%20erfahren.';
+}
+
+function showSection(id) {
+  document.querySelectorAll('.section-page').forEach(p => p.style.display = 'none');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('section-' + id).style.display = 'block';
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.getAttribute('onclick') && n.getAttribute('onclick').includes(id)) n.classList.add('active');
+  });
+  window.scrollTo(0, 0);
+  document.querySelector('.sidebar').classList.remove('open');
+}
+
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.closest('.tab').classList.add('active');
+}
+
+// Load results & set download links
+function loadResults() {
+  const res = JSON.parse(sessionStorage.getItem('t2t-results') || localStorage.getItem('t2t-results') || '{}');
+  const lang = sessionStorage.getItem('t2t-lang') || localStorage.getItem('t2t-lang') || 'en';
+  setLang(lang);
+
+  if (res.dosha) {
+    document.getElementById('profile-name').textContent = {vata:'Vata 🌬️', pitta:'Pitta 🔥', kapha:'Kapha 🌿'}[res.dosha] || 'Welcome 🌿';
+    document.getElementById('profile-type').textContent = {
+      restorative: lang === 'en' ? 'Restorative Yoga' : 'Restorative Yoga',
+      strength: 'Vinyasa Yoga',
+      balance: 'Hatha Yoga',
+      spiritual: 'Kundalini Yoga'
+    }[res.yoga] || '';
+
+    const dl = (id, key) => {
+      const el = document.getElementById(id);
+      if (el) el.href = BASE + PDF_MAP[key.split(':')[0]][res[key.split(':')[0]]] + '_' + lang + '.pdf';
+    };
+    const dd = document.getElementById('dl-dosha');
+    const dc = document.getElementById('dl-chakra');
+    const dy = document.getElementById('dl-yoga');
+    if (dd) dd.href = BASE + (PDF_MAP.dosha[res.dosha] || 'plan_vata') + '_' + lang + '.pdf';
+    if (dc) dc.href = BASE + (PDF_MAP.chakra[res.chakraGroup] || 'chakra_lower') + '.pdf';
+    if (dy) dy.href = BASE + (PDF_MAP.yoga[res.yoga] || 'yoga_hatha') + '.pdf';
+  }
+
+  // Build checklist
+  buildChecklist(lang);
+  buildPacking(lang);
+  updateProgress();
+}
+
+function buildChecklist(l) {
+  const items = l === 'en' ? [
+    'Flight / travel confirmed',
+    'Travel insurance organised',
+    'Vaccinations / health check done',
+    'Yoga mat organised (or info from Jenny about providing one)',
+    'Retreat payment completed',
+    'Jenny\'s WhatsApp contact saved',
+    'Pre-travel exercises started',
+    'Intention set for the journey',
+  ] : [
+    'Flug / Anreise bestätigt',
+    'Reiseversicherung organisiert',
+    'Impfungen / Gesundheitscheck erledigt',
+    'Yogamatte organisiert (oder Info von Jenny ob eine gestellt wird)',
+    'Retreat-Zahlung abgeschlossen',
+    'Jenny\'s WhatsApp-Kontakt gespeichert',
+    'Pre-Travel Übungen begonnen',
+    'Intention für die Reise gesetzt',
+  ];
+  const c = document.getElementById('checklist-items');
+  if (!c) return;
+  c.innerHTML = items.map((item, i) => `
+    <div style="display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.05);cursor:pointer" onclick="this.querySelector('.ck').style.background='var(--teal)';this.querySelector('.ck').textContent='✓'">
+      <div class="ck" style="width:22px;height:22px;border-radius:4px;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;transition:all .2s"></div>
+      <span style="font-size:14px;color:rgba(255,255,255,.65)">${item}</span>
+    </div>`).join('');
+}
+
+function buildPacking(l) {
+  const items = l === 'en' ? [
+    '2-3 yoga outfits (breathable)', 'Comfortable loose clothing for evenings',
+    'Light layers for nature / cooler evenings', 'Solid sun protection',
+    'Insect repellent', 'Reusable water bottle', 'Journal + pen',
+    'Any personal supplements or medications', 'Open mind 🌿',
+  ] : [
+    '2-3 Yoga-Outfits (atmungsaktiv)', 'Bequeme luftige Kleidung für Abende',
+    'Leichte Schichten für Natur / kühlere Abende', 'Guter Sonnenschutz',
+    'Insektenschutz', 'Wiederverwendbare Wasserflasche', 'Journal + Stift',
+    'Persönliche Nahrungsergänzungsmittel oder Medikamente', 'Offener Geist 🌿',
+  ];
+  const p = document.getElementById('packing-items');
+  if (!p) return;
+  p.innerHTML = items.map(item => `
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04)">
+      <span style="color:var(--teal);font-size:14px">✦</span>
+      <span style="font-size:14px;color:rgba(255,255,255,.6)">${item}</span>
+    </div>`).join('');
+}
+
+function updateProgress() {
+  const sections = ['welcome', 'prepare', 'plans', 'exercises'];
+  let done = 1; // welcome always counts
+  const prog = Math.round((done / sections.length) * 100);
+  const pf = document.getElementById('prog-fill');
+  const pp = document.getElementById('prog-pct');
+  if (pf) setTimeout(() => { pf.style.width = prog + '%'; }, 500);
+  if (pp) pp.textContent = prog + '%';
+}
+
+const sl = localStorage.getItem('t2t-lang');
+if (sl) setLang(sl);
+loadResults();
+updateWA(currentLang);
+</script>
+</body>
+</html>
