@@ -116,6 +116,33 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
 @keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
 .fi{animation:fu .4s ease forwards}
 </style>
+<style>
+/* ── MOBILE FIXES ──────────────────────────────── */
+@media(max-width:480px){
+  .wrap{padding:0 16px 60px}
+  .page-header{padding:16px 0 20px}
+  .result-grid{grid-template-columns:1fr}
+  .rb-cards{grid-template-columns:1fr}
+  .bundle-cta-box{padding:20px}
+  .bcta-price{font-size:38px}
+  .btn-buy{font-size:14px;padding:14px}
+  .opt{font-size:14px;padding:14px 16px}
+  .q-text{font-size:17px}
+  .intro-card{padding:24px}
+  .intro-step{gap:12px}
+  .step-dot{width:32px;height:32px;font-size:14px}
+  /* Password box */
+  #pw-reveal{padding:20px}
+  #pw-reveal div[style*="font-size:22px"]{font-size:18px!important;letter-spacing:2px!important}
+  /* Download rows */
+  .dl-row{flex-direction:column;align-items:flex-start;gap:10px}
+}
+@media(max-width:380px){
+  .bcta-items{gap:6px}
+  .bcta-item{font-size:13px}
+}
+</style>
+
 </head>
 <body class="lang-en">
 
