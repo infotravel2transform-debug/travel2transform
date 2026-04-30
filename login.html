@@ -116,7 +116,12 @@ function tryLogin(){
     sessionStorage.setItem('t2t-member', 'true');
     sessionStorage.setItem('t2t-member-ts', Date.now());
     // Redirect to member area
-    window.location.href = 'mitglieder.html';
+    // Check if onboarding already done
+    if(localStorage.getItem('t2t-profile')){
+      window.location.href = 'mitglieder.html';
+    } else {
+      window.location.href = 'onboarding.html';
+    }
   } else {
     err.style.display = 'block';
     document.querySelector('.card').classList.add('shake');

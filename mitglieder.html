@@ -168,10 +168,10 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
 <script>
 // Auth check – redirect to login if not authenticated
 (function(){
-  const auth = sessionStorage.getItem('t2t-member');
-  const ts = parseInt(sessionStorage.getItem('t2t-member-ts') || '0');
+  const auth = localStorage.getItem('t2t-member');
+  const ts = parseInt(localStorage.getItem('t2t-member-ts') || '0');
   const age = Date.now() - ts;
-  const MAX_AGE = 24 * 60 * 60 * 1000; // 24 hours
+  const MAX_AGE = 30 * 24 * 60 * 60 * 1000; // 30 days
   if(!auth || age > MAX_AGE){
     window.location.href = 'login.html';
   }
@@ -209,10 +209,16 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
     <button class="nav-item" onclick="showSection('upgrade')"><span class="icon">🔥</span><span class="en">Retreat Upgrade</span><span class="de">Retreat-Upgrade</span></button>
   </nav>
   <div class="sidebar-bottom">
-    <div class="lang-sw">
+    <div class="lang-sw" style="margin-bottom:12px">
       <button class="lb active" id="btn-en" onclick="setLang('en')">EN</button>
       <button class="lb" id="btn-de" onclick="setLang('de')">DE</button>
     </div>
+    <button onclick="changeProfile()" style="width:100%;background:transparent;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:9px;color:rgba(255,255,255,.3);font-size:12px;cursor:pointer;font-family:DM Sans,sans-serif;transition:all .2s;margin-bottom:6px" onmouseover="this.style.color='rgba(255,255,255,.6)'" onmouseout="this.style.color='rgba(255,255,255,.3)'">
+      <span class="en">✏️ Change profile</span><span class="de">✏️ Profil ändern</span>
+    </button>
+    <button onclick="logout()" style="width:100%;background:transparent;border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:9px;color:rgba(255,255,255,.3);font-size:12px;cursor:pointer;font-family:DM Sans,sans-serif;transition:all .2s" onmouseover="this.style.color='rgba(255,255,255,.6)'" onmouseout="this.style.color='rgba(255,255,255,.3)'">
+      <span class="en">🚪 Log out</span><span class="de">🚪 Ausloggen</span>
+    </button>
   </div>
 </aside>
 
@@ -599,33 +605,77 @@ function showTab(id) {
 }
 
 // Load results & set download links
+function changeProfile(){
+  localStorage.removeItem('t2t-profile');
+  window.location.href = 'onboarding.html';
+}
+
+function logout(){
+  localStorage.removeItem('t2t-member');
+  localStorage.removeItem('t2t-member-ts');
+  window.location.href = 'login.html';
+}
+
 function loadResults() {
-  const res = JSON.parse(sessionStorage.getItem('t2t-results') || localStorage.getItem('t2t-results') || '{}');
-  const lang = sessionStorage.getItem('t2t-lang') || localStorage.getItem('t2t-lang') || 'en';
+  const lang = localStorage.getItem('t2t-lang') || 'en';
   setLang(lang);
 
-  if (res.dosha) {
-    document.getElementById('profile-name').textContent = {vata:'Vata 🌬️', pitta:'Pitta 🔥', kapha:'Kapha 🌿'}[res.dosha] || 'Welcome 🌿';
-    document.getElementById('profile-type').textContent = {
-      restorative: lang === 'en' ? 'Restorative Yoga' : 'Restorative Yoga',
-      strength: 'Vinyasa Yoga',
-      balance: 'Hatha Yoga',
-      spiritual: 'Kundalini Yoga'
-    }[res.yoga] || '';
+  // Read from onboarding profile (primary) or quiz results (fallback)
+  const profile = JSON.parse(localStorage.getItem('t2t-profile') || '{}');
+  const quizRes = JSON.parse(sessionStorage.getItem('t2t-results') || '{}');
 
-    const dl = (id, key) => {
-      const el = document.getElementById(id);
-      if (el) el.href = BASE + PDF_MAP[key.split(':')[0]][res[key.split(':')[0]]] + '_' + lang + '.pdf';
-    };
-    const dd = document.getElementById('dl-dosha');
-    const dc = document.getElementById('dl-chakra');
-    const dy = document.getElementById('dl-yoga');
-    if (dd) dd.href = BASE + (PDF_MAP.dosha[res.dosha] || 'plan_vata') + '_' + lang + '.pdf';
-    if (dc) dc.href = BASE + (PDF_MAP.chakra[res.chakraGroup] || 'chakra_lower') + '.pdf';
-    if (dy) dy.href = BASE + (PDF_MAP.yoga[res.yoga] || 'yoga_hatha') + '.pdf';
+  const dosha = profile.dosha || quizRes.dosha || null;
+  const chakra = profile.chakra || (quizRes.chakraGroup ? quizRes.chakraGroup : null);
+  const yoga = profile.yoga || quizRes.yoga || null;
+
+  const doshaNames = { vata:'Vata 🌬️', pitta:'Pitta 🔥', kapha:'Kapha 🌿' };
+  const yogaNames = { restorative:'Restorative 🌙', strength:'Vinyasa 🔥', balance:'Hatha ⚖️', spiritual:'Kundalini ✨' };
+  const chakraNames = {
+    lower: lang==='en' ? 'Lower Chakras 🔴' : 'Untere Chakren 🔴',
+    middle: lang==='en' ? 'Heart & Throat 💚' : 'Herz & Kehl 💚',
+    upper: lang==='en' ? 'Upper Chakras 💙' : 'Obere Chakren 💙'
+  };
+
+  // Update sidebar profile
+  document.getElementById('profile-name').textContent = doshaNames[dosha] || 'Welcome 🌿';
+  document.getElementById('profile-type').textContent = yogaNames[yoga] || '';
+
+  // Add chakra badge if we have it
+  const profileType = document.getElementById('profile-type');
+  if (chakra && chakraNames[chakra]) {
+    profileType.textContent = (yogaNames[yoga] || '') + ' · ' + chakraNames[chakra];
   }
 
-  // Build checklist
+  const BASE = 'https://www.travel2transform.de/';
+
+  // Set download links
+  const dd = document.getElementById('dl-dosha');
+  const dc = document.getElementById('dl-chakra');
+  const dy = document.getElementById('dl-yoga');
+
+  if (dd && dosha && dosha !== 'unknown') {
+    dd.href = BASE + (PDF_MAP.dosha[dosha] || 'plan_vata') + '_' + lang + '.pdf';
+    dd.closest('.dl-row').querySelector('.dl-title').textContent =
+      lang==='en' ? `Your ${doshaNames[dosha].replace(/[🌬️🔥🌿]/g,'').trim()} Nutrition Plan`
+                  : `Dein ${doshaNames[dosha].replace(/[🌬️🔥🌿]/g,'').trim()}-Ernährungsplan`;
+  } else if (dd && dosha === 'unknown') {
+    dd.closest('.dl-row').querySelector('.dl-desc').textContent =
+      lang==='en' ? 'Take the quiz to get your personalised plan' : 'Mach den Quiz für deinen personalisierten Plan';
+    dd.href = 'quiz.html';
+    dd.textContent = lang==='en' ? 'Take quiz →' : 'Quiz machen →';
+  }
+
+  if (dc && chakra && chakra !== 'unknown') {
+    dc.href = BASE + (PDF_MAP.chakra[chakra] || 'chakra_lower') + '.pdf';
+  }
+
+  if (dy && yoga) {
+    dy.href = BASE + (PDF_MAP.yoga[yoga] || 'yoga_hatha') + '.pdf';
+    dy.closest('.dl-row').querySelector('.dl-title').textContent =
+      lang==='en' ? `Your ${yogaNames[yoga]?.replace(/[🌙🔥⚖️✨]/g,'').trim()} Plan`
+                  : `Dein ${yogaNames[yoga]?.replace(/[🌙🔥⚖️✨]/g,'').trim()}-Plan`;
+  }
+
   buildChecklist(lang);
   buildPacking(lang);
   updateProgress();

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dein Profil · Travel 2 Transform</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Cinzel:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#2d7a72;--tl:#3a9990;--pink:#d4548a;--gold:#c8a96e;--dark:#1a2e2c}
+body{background:var(--dark);color:#e8f0ee;font-family:'DM Sans',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(45,122,114,.12),transparent 60%);pointer-events:none}
+
+.wrap{width:100%;max-width:520px;position:relative;z-index:2}
+
+/* Progress */
+.progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.prog-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);opacity:.7}
+.prog-steps{font-size:12px;color:rgba(255,255,255,.3)}
+.prog-bar{height:2px;background:rgba(255,255,255,.08);border-radius:1px;margin-bottom:32px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));border-radius:1px;transition:width .5s ease}
+
+/* Page */
+.page{display:none}.page.active{display:block}
+
+/* Step card */
+.step-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:36px;margin-bottom:16px}
+.step-ey{font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--pink);opacity:.8;margin-bottom:12px;text-align:center}
+.step-title{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,6vw,32px);font-weight:300;text-align:center;margin-bottom:6px;line-height:1.2}
+.step-title em{font-style:italic;color:var(--teal)}
+.step-sub{font-size:14px;color:rgba(255,255,255,.35);text-align:center;margin-bottom:28px;font-style:italic;font-family:'Cormorant Garamond',serif;line-height:1.6}
+
+/* Choice buttons */
+.choices{display:flex;flex-direction:column;gap:10px}
+.choice{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:18px 20px;cursor:pointer;transition:all .22s;text-align:left;color:#e8f0ee;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:16px}
+.choice:hover{border-color:rgba(45,122,114,.4);background:rgba(45,122,114,.06)}
+.choice.selected{border-color:var(--teal);background:rgba(45,122,114,.12)}
+.choice-icon{font-size:28px;flex-shrink:0}
+.choice-info strong{display:block;font-size:15px;color:rgba(255,255,255,.85);margin-bottom:3px}
+.choice-info span{font-size:13px;color:rgba(255,255,255,.35);line-height:1.4}
+
+/* Welcome card */
+.welcome-card{background:linear-gradient(135deg,rgba(45,122,114,.12),rgba(200,169,110,.06));border:1px solid rgba(45,122,114,.2);border-radius:20px;padding:36px;text-align:center}
+.welcome-emoji{font-size:52px;margin-bottom:16px}
+.welcome-title{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,6vw,34px);font-weight:300;margin-bottom:8px;line-height:1.2}
+.welcome-title em{font-style:italic;color:var(--teal)}
+.profile-pills{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin:20px 0 24px}
+.profile-pill{font-size:12px;padding:6px 16px;border-radius:50px;border:1px solid rgba(45,122,114,.3);background:rgba(45,122,114,.08);color:var(--tl)}
+.welcome-body{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:rgba(255,255,255,.55);line-height:1.75;margin-bottom:28px}
+
+/* Button */
+.btn{width:100%;background:var(--teal);color:white;border:none;border-radius:50px;padding:15px;font-size:15px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;margin-top:8px}
+.btn:hover{background:var(--tl);transform:translateY(-1px)}
+.btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.45)}
+.btn-ghost:hover{border-color:rgba(255,255,255,.2);background:transparent}
+
+/* Lang */
+.lang-sw{display:flex;justify-content:center;gap:4px;margin-bottom:24px}
+.lb{padding:5px 14px;border-radius:50px;border:1px solid rgba(255,255,255,.1);background:transparent;cursor:pointer;font-size:12px;color:rgba(255,255,255,.3);font-family:'DM Sans',sans-serif;transition:all .2s}
+.lb.active{background:rgba(45,122,114,.2);color:var(--teal);border-color:rgba(45,122,114,.3)}
+.de{display:none}.en{display:block}
+body.lang-de .de{display:block}body.lang-de .en{display:none}
+body.lang-en .de{display:none}body.lang-en .en{display:block}
+
+@media(max-width:480px){
+  .step-card{padding:24px}
+  .welcome-card{padding:24px}
+  .choice{padding:14px 16px}
+  .choice-icon{font-size:24px}
+}
+</style>
+</head>
+<body class="lang-en">
+
+<div class="wrap">
+  <div class="lang-sw">
+    <button class="lb active" id="btn-en" onclick="setLang('en')">EN</button>
+    <button class="lb" id="btn-de" onclick="setLang('de')">DE</button>
+  </div>
+
+  <div class="progress-top">
+    <div class="prog-label" id="prog-label">Step 1 of 3</div>
+    <div class="prog-steps" id="prog-steps"></div>
+  </div>
+  <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:33%"></div></div>
+
+  <!-- STEP 1: DOSHA -->
+  <div id="page-1" class="page active">
+    <div class="step-card">
+      <div class="step-ey en">Step 1 · Your Constitution</div>
+      <div class="step-ey de">Schritt 1 · Deine Konstitution</div>
+      <h1 class="step-title en">What is your <em>Dosha?</em></h1>
+      <h1 class="step-title de">Was ist dein <em>Dosha?</em></h1>
+      <p class="step-sub en">If you took the quiz, choose your result here. If not – go with your gut.</p>
+      <p class="step-sub de">Wenn du den Quiz gemacht hast, wähle dein Ergebnis. Wenn nicht – folge deinem Gefühl.</p>
+      <div class="choices">
+        <button class="choice" onclick="select(this,'dosha','vata')">
+          <div class="choice-icon">🌬️</div>
+          <div class="choice-info">
+            <strong>Vata</strong>
+            <span class="en">Creative, lively, sensitive · Air & Ether</span>
+            <span class="de">Kreativ, lebendig, sensibel · Luft & Äther</span>
+          </div>
+        </button>
+        <button class="choice" onclick="select(this,'dosha','pitta')">
+          <div class="choice-icon">🔥</div>
+          <div class="choice-info">
+            <strong>Pitta</strong>
+            <span class="en">Passionate, focused, driven · Fire & Water</span>
+            <span class="de">Leidenschaftlich, fokussiert, ehrgeizig · Feuer & Wasser</span>
+          </div>
+        </button>
+        <button class="choice" onclick="select(this,'dosha','kapha')">
+          <div class="choice-icon">🌿</div>
+          <div class="choice-info">
+            <strong>Kapha</strong>
+            <span class="en">Stable, caring, enduring · Earth & Water</span>
+            <span class="de">Stabil, fürsorglich, ausdauernd · Erde & Wasser</span>
+          </div>
+        </button>
+        <button class="choice" onclick="select(this,'dosha','unknown')">
+          <div class="choice-icon">🤔</div>
+          <div class="choice-info">
+            <strong class="en">I don't know yet</strong>
+            <strong class="de">Ich weiß es noch nicht</strong>
+            <span class="en">Take the free quiz to find out</span>
+            <span class="de">Mach den kostenlosen Quiz um es herauszufinden</span>
+          </div>
+        </button>
+      </div>
+      <button class="btn" id="btn-1" onclick="nextStep(2)" disabled>
+        <span class="en">Next →</span><span class="de">Weiter →</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 2: CHAKRA -->
+  <div id="page-2" class="page">
+    <div class="step-card">
+      <div class="step-ey en">Step 2 · Your Energy</div>
+      <div class="step-ey de">Schritt 2 · Deine Energie</div>
+      <h1 class="step-title en">Which <em>chakra area</em><br>needs most attention?</h1>
+      <h1 class="step-title de">Welcher <em>Chakra-Bereich</em><br>braucht die meiste Aufmerksamkeit?</h1>
+      <p class="step-sub en">Be honest – your gut usually knows.</p>
+      <p class="step-sub de">Sei ehrlich – dein Bauchgefühl weiß es meistens.</p>
+      <div class="choices">
+        <button class="choice" onclick="select(this,'chakra','lower')">
+          <div class="choice-icon">🔴🟠🟡</div>
+          <div class="choice-info">
+            <strong class="en">Root, Sacral & Solar Plexus</strong>
+            <strong class="de">Wurzel-, Sakral- & Solarplexuschakra</strong>
+            <span class="en">Safety, creativity, self-worth</span>
+            <span class="de">Sicherheit, Kreativität, Selbstwert</span>
+          </div>
+        </button>
+        <button class="choice" onclick="select(this,'chakra','middle')">
+          <div class="choice-icon">💚🔵</div>
+          <div class="choice-info">
+            <strong class="en">Heart & Throat Chakra</strong>
+            <strong class="de">Herz- & Kehlchakra</strong>
+            <span class="en">Love, compassion, expression</span>
+            <span class="de">Liebe, Mitgefühl, Ausdruck</span>
+          </div>
+        </button>
+        <button class="choice" onclick="select(this,'chakra','upper')">
+          <div class="choice-icon">💙🟣</div>
+          <div class="choice-info">
+            <strong class="en">Third Eye & Crown</strong>
+            <strong class="de">Stirn- & Kronenchakra</strong>
+            <span class="en">Intuition, clarity, spiritual connection</span>
+            <span class="de">Intuition, Klarheit, spirituelle Verbindung</span>
+          </div>
+        </button>
+        <button class="choice" onclick="select(this,'chakra','unknown')">
+          <div class="choice-icon">🤔</div>
+          <div class="choice-info">
+            <strong class="en">Not sure yet</strong>
+            <strong class="de">Noch nicht sicher</strong>
+            <span class="en">I'll show you all three plans</span>
+            <span class="de">Ich zeige dir alle drei Pläne</span>
+          </div>
+        </button>
+      </div>
+      <button class="btn" id="btn-2" onclick="nextStep(3)" disabled>
+        <span class="en">Next →</span><span class="de">Weiter →</span>
+      </button>
+      <button class="btn btn-ghost" style="margin-top:8px" onclick="nextStep(1)">
+        <span class="en">← Back</span><span class="de">← Zurück</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- STEP 3: YOGA -->
+  <div id="page-3" class="page">
+    <div class="step-card">
+      <div class="step-ey en">Step 3 · Your Movement</div>
+      <div class="step-ey de">Schritt 3 · Deine Bewegung</div>
+      <h1 class="step-title en">Which <em>yoga style</em><br>suits you?</h1>
+      <h1 class="step-title de">Welcher <em>Yoga-Stil</em><br>passt zu dir?</h1>
+      <p class="step-sub en">Your yoga plan will be tailored exactly to this.</p>
+      <p class="step-sub de">Dein Yoga-Plan wird genau darauf abgestimmt.</p>
+      <div class="choices">
+        <button class="choice" onclick="select(this,'yoga','restorative')">
+          <div class="choice-icon">🌙</div>
+          <div class="choice-info">
+            <strong class="en">The Seeker of Calm</strong>
+            <strong class="de">Der Ruhesuchende</strong>
+            <span class="en">Restorative & Yin – deep rest and release</span>
+            <span class="de">Restorative & Yin – tiefe Ruhe und Lösung</span>
+          </div>
+        </button>
+        <button class="choice" onclick="select(this,'yoga','strength')">
+          <div class="choice-icon">🔥</div>
+          <div class="choice-info">
+            <strong class="en">The Strength Seeker</strong>
+            <strong class="de">Der Kraftsucher</strong>
+            <span class="en">Vinyasa & Power – dynamic and strong</span>
+            <span class="de">Vinyasa & Power – dynamisch und kraftvoll</span>
+          </div>
+        </button>
+        <button class="choice" onclick="select(this,'yoga','balance')">
+          <div class="choice-icon">⚖️</div>
+          <div class="choice-info">
+            <strong class="en">The Balancer</strong>
+            <strong class="de">Der Ausgleicher</strong>
+            <span class="en">Hatha – structured and balanced</span>
+            <span class="de">Hatha – strukturiert und ausgewogen</span>
+          </div>
+        </button>
+        <button class="choice" onclick="select(this,'yoga','spiritual')">
+          <div class="choice-icon">✨</div>
+          <div class="choice-info">
+            <strong class="en">The Soul Seeker</strong>
+            <strong class="de">Der Seelensucher</strong>
+            <span class="en">Kundalini – deep spiritual practice</span>
+            <span class="de">Kundalini – tiefe spirituelle Praxis</span>
+          </div>
+        </button>
+      </div>
+      <button class="btn" id="btn-3" onclick="saveProfile()" disabled>
+        <span class="en">Create my profile →</span>
+        <span class="de">Mein Profil erstellen →</span>
+      </button>
+      <button class="btn btn-ghost" style="margin-top:8px" onclick="nextStep(2)">
+        <span class="en">← Back</span><span class="de">← Zurück</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- WELCOME -->
+  <div id="page-welcome" class="page">
+    <div class="welcome-card">
+      <div class="welcome-emoji">🌿</div>
+      <h1 class="welcome-title en">Your profile<br>is <em>ready.</em></h1>
+      <h1 class="welcome-title de">Dein Profil<br>ist <em>bereit.</em></h1>
+      <div class="profile-pills" id="profile-pills"></div>
+      <p class="welcome-body en">Everything in your member area is now tailored specifically to you. Your plans, your downloads, your recommendations.</p>
+      <p class="welcome-body de">Alles in deinem Mitgliederbereich ist jetzt speziell auf dich abgestimmt. Deine Pläne, deine Downloads, deine Empfehlungen.</p>
+      <button class="btn" onclick="goToMember()">
+        <span class="en">Go to my member area →</span>
+        <span class="de">Zu meinem Mitgliederbereich →</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentLang = 'en';
+let profile = { dosha: null, chakra: null, yoga: null };
+
+const STEP_LABELS = {
+  en: ['Step 1 of 3', 'Step 2 of 3', 'Step 3 of 3', 'Done!'],
+  de: ['Schritt 1 von 3', 'Schritt 2 von 3', 'Schritt 3 von 3', 'Fertig!']
+};
+
+function setLang(l) {
+  currentLang = l;
+  document.body.className = 'lang-' + l;
+  document.getElementById('btn-en').classList.toggle('active', l === 'en');
+  document.getElementById('btn-de').classList.toggle('active', l === 'de');
+  localStorage.setItem('t2t-lang', l);
+}
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function updateProgress(step) {
+  const pct = { 1: 33, 2: 66, 3: 100, 'welcome': 100 };
+  document.getElementById('prog-fill').style.width = pct[step] + '%';
+  document.getElementById('prog-label').textContent = STEP_LABELS[currentLang][step - 1] || STEP_LABELS[currentLang][3];
+}
+
+function select(btn, type, value) {
+  // Deselect all in this step
+  btn.closest('.choices').querySelectorAll('.choice').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  profile[type] = value;
+  // Enable next button
+  const stepMap = { dosha: '1', chakra: '2', yoga: '3' };
+  const nextBtn = document.getElementById('btn-' + stepMap[type]);
+  if (nextBtn) nextBtn.disabled = false;
+}
+
+function nextStep(step) {
+  showPage(step);
+  updateProgress(step);
+}
+
+function saveProfile() {
+  // Save to localStorage
+  localStorage.setItem('t2t-profile', JSON.stringify(profile));
+
+  // Build welcome pills
+  const pills = document.getElementById('profile-pills');
+  const doshaNames = {
+    vata: '🌬️ Vata', pitta: '🔥 Pitta', kapha: '🌿 Kapha',
+    unknown: currentLang === 'en' ? '🌿 Discover Dosha' : '🌿 Dosha entdecken'
+  };
+  const chakraNames = {
+    lower: currentLang === 'en' ? '🔴 Lower Chakras' : '🔴 Untere Chakren',
+    middle: currentLang === 'en' ? '💚 Heart & Throat' : '💚 Herz & Kehl',
+    upper: currentLang === 'en' ? '💙 Upper Chakras' : '💙 Obere Chakren',
+    unknown: currentLang === 'en' ? '✨ All Chakras' : '✨ Alle Chakren'
+  };
+  const yogaNames = {
+    restorative: '🌙 Restorative',
+    strength: '🔥 Vinyasa',
+    balance: '⚖️ Hatha',
+    spiritual: '✨ Kundalini'
+  };
+
+  pills.innerHTML = [
+    doshaNames[profile.dosha] || '',
+    chakraNames[profile.chakra] || '',
+    yogaNames[profile.yoga] || ''
+  ].filter(Boolean).map(p =>
+    `<div class="profile-pill">${p}</div>`
+  ).join('');
+
+  showPage('welcome');
+  updateProgress('welcome');
+}
+
+function goToMember() {
+  window.location.href = 'mitglieder.html';
+}
+
+// Init
+const sl = localStorage.getItem('t2t-lang');
+if (sl) setLang(sl); else setLang('en');
+updateProgress(1);
+
+// If already has profile, skip to member area
+if (localStorage.getItem('t2t-profile')) {
+  window.location.href = 'mitglieder.html';
+}
+</script>
+</body>
+</html>
