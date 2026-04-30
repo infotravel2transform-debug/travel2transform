@@ -617,12 +617,37 @@ function showSuccessPage() {
   const res = JSON.parse(sessionStorage.getItem('t2t-results') || '{}');
   const l = sessionStorage.getItem('t2t-lang') || currentLang;
   if (l) setLang(l);
-  if (!res.dosha) { showPage('intro'); return; }
 
+  // Always show success page when ?success=true – even if sessionStorage is gone
   showPage('success');
   setTimeout(() => {
     document.getElementById('success-loading').style.display = 'none';
     document.getElementById('success-content').style.display = 'block';
+
+    // Always show password + member area button
+    const pwBox = document.getElementById('pw-reveal');
+    if (pwBox) pwBox.style.display = 'block';
+
+    // If no results in sessionStorage, show generic downloads
+    if (!res.dosha) {
+      const cards = document.getElementById('download-cards');
+      const baseUrl = 'https://www.travel2transform.de/';
+      const l2 = l || 'de';
+      cards.innerHTML = `
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:20px;margin-bottom:12px;text-align:center">
+          <p style="font-family:Cormorant Garamond,serif;font-size:17px;font-style:italic;color:rgba(255,255,255,.6);line-height:1.7" class="de">
+            Logge dich in den Mitgliederbereich ein –<br>dort findest du alle deine personalisierten Pläne.
+          </p>
+          <p style="font-family:Cormorant Garamond,serif;font-size:17px;font-style:italic;color:rgba(255,255,255,.6);line-height:1.7" class="en">
+            Log in to the member area –<br>all your personalised plans are waiting there for you.
+          </p>
+        </div>`;
+      const rt = document.getElementById('retreat-rec-text');
+      if (rt) rt.textContent = l2==='de'
+        ? 'Deine Reise beginnt jetzt. Die Retreats sind der nächste Schritt wenn du bereit bist.'
+        : 'Your journey starts now. The retreats are the next step when you feel ready.';
+      return;
+    }
 
     // Build download cards
     const cards = document.getElementById('download-cards');
