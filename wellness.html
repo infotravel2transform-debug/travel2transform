@@ -142,6 +142,18 @@ footer{background:var(--dark);color:rgba(255,255,255,.4);padding:48px 32px;text-
 .de{display:none}.en{display:block}
 body.lang-de .de{display:block}body.lang-de .en{display:none}
 body.lang-en .de{display:none}body.lang-en .en{display:block}
+
+.member-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--teal);color:white!important;
+  padding:9px 20px;border-radius:50px;
+  font-size:13px;font-weight:500;
+  text-decoration:none;white-space:nowrap;
+  transition:all .2s;border:2px solid var(--teal);
+  box-shadow:0 2px 12px rgba(45,122,114,.2)
+}
+.member-btn:hover{background:var(--tl);border-color:var(--tl);transform:translateY(-1px);box-shadow:0 4px 16px rgba(45,122,114,.3)}
+@media(max-width:480px){.member-btn{padding:8px 14px;font-size:12px}}
 </style>
 <style>
 /* ── MOBILE FIXES ──────────────────────────────── */
@@ -189,6 +201,8 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
     <div class="bname">Travel 2 Transform<small class="en">by Jenny Wierzbicki</small><small class="de">von Jenny Wierzbicki</small></div>
   </a>
   <div class="nav-right">
+    <a href="login.html" class="member-btn en">🔐 Member Area</a>
+    <a href="login.html" class="member-btn de">🔐 Mitgliederbereich</a>
     <div class="lang-sw">
       <button class="lb active" id="btn-en" onclick="setLang('en')">EN</button>
       <button class="lb" id="btn-de" onclick="setLang('de')">DE</button>
