@@ -171,8 +171,8 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
   const auth = localStorage.getItem('t2t-member');
   const ts = parseInt(localStorage.getItem('t2t-member-ts') || '0');
   const age = Date.now() - ts;
-  const MAX_AGE = 30 * 24 * 60 * 60 * 1000; // 30 days
-  if(!auth || age > MAX_AGE){
+  // No expiry - redirect to login only if never logged in
+  if(!auth){
     window.location.href = 'login.html';
   }
 })();

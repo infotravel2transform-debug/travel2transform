@@ -113,8 +113,8 @@ function tryLogin(){
   const err = document.getElementById('error-msg');
   if(val === PASSWORD){
     // Save auth in sessionStorage
-    sessionStorage.setItem('t2t-member', 'true');
-    sessionStorage.setItem('t2t-member-ts', Date.now());
+    localStorage.setItem('t2t-member', 'true');
+    // logged in permanently until logout
     // Redirect to member area
     // Check if onboarding already done
     if(localStorage.getItem('t2t-profile')){
