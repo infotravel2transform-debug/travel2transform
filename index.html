@@ -538,6 +538,34 @@ footer{background:var(--dark);padding:2.5rem 5rem;display:flex;justify-content:s
   #tourdaten div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr !important;max-width:100% !important}
   #tourdaten h2{font-size:1.5rem !important}
 }
+@media(max-width:900px){
+  .bridge-teaser{padding:3rem 1.4rem !important}
+  .bridge-inner{grid-template-columns:1fr !important;gap:2rem !important}
+}
+@media(max-width:600px){
+  .bridge-teaser{padding:2.5rem 1.2rem !important}
+  .bridge-inner{gap:1.5rem !important}
+  .bridge-teaser h2{font-size:1.6rem !important;line-height:1.2 !important}
+  .bridge-teaser .bd{font-size:.92rem !important;line-height:1.7 !important}
+  .bridge-teaser p.bd{font-size:.85rem !important}
+}
+@media(max-width:600px){
+  /* Bridge Teaser Karte ausblenden auf Handy – Text kommt zuerst */
+  .bridge-inner > div:last-child{display:none}
+  /* Breite auf vollen Bereich */
+  .bridge-inner > div:first-child{width:100%}
+  /* Allgemeine Schriftgrößen */
+  body{font-size:15px}
+  .ey{font-size:.68rem !important}
+  h2{font-size:1.55rem !important;line-height:1.2 !important}
+  /* S-Mission padding */
+  .s-mission{padding:2.5rem 1.2rem !important}
+  .mp-grid{grid-template-columns:1fr !important}
+  /* Contact */
+  .cgrid{grid-template-columns:1fr !important;gap:2rem !important}
+  footer{padding:1.5rem 1.2rem}
+  .fbot{padding:.75rem 1.2rem}
+}
 </style>
 </head>
 <body>
@@ -600,23 +628,37 @@ footer{background:var(--dark);padding:2.5rem 5rem;display:flex;justify-content:s
 </div>
 
 <!-- ═══ BRIDGE TEASER ═══ -->
-<section style="background:var(--sand2);padding:4rem 5rem">
-  <div style="max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center">
+<section class="bridge-teaser" style="background:var(--sand2);padding:4rem 5rem">
+  <div class="bridge-inner" style="max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center">
     <div>
-      <span class="ey">Dein Einstieg</span>
-      <h2 style="margin-bottom:.8rem">Du musst nicht sofort nach <em>Tansania</em> reisen.</h2>
+      <span class="ey"><span class="de">Dein Einstieg</span><span class="en" style="display:none">Your Starting Point</span></span>
+      <h2 style="margin-bottom:.8rem">
+        <span class="de">Du musst nicht sofort nach <em>Tansania</em> reisen.</span>
+        <span class="en" style="display:none">You don't have to travel to <em>Tanzania</em> right away.</span>
+      </h2>
       <div class="divl"></div>
-      <p class="bd" style="font-size:1.05rem;line-height:1.9">Aber du kannst anfangen. Deine Transformation beginnt nicht am Flughafen – sie beginnt in dem Moment, in dem du dich entscheidest, etwas zu verändern.</p>
-      <p class="bd" style="font-size:.9rem;color:var(--txt2);margin-top:1.2rem;font-style:italic">Viele starten beim Online Angebot – und enden dann in Tansania.</p>
-      <a href="wellness.html" class="btn-t" style="margin-top:1rem;display:inline-block">Online Angebote &rarr;</a>
+      <p class="bd" style="font-size:1.05rem;line-height:1.9">
+        <span class="de">Aber du kannst anfangen. Deine Transformation beginnt nicht am Flughafen – sie beginnt in dem Moment, in dem du dich entscheidest, etwas zu verändern.</span>
+        <span class="en" style="display:none">But you can begin. Your transformation doesn't start at the airport – it starts the moment you decide to change something.</span>
+      </p>
+      <p class="bd" style="font-size:.9rem;color:var(--txt2);margin-top:1.2rem;font-style:italic">
+        <span class="de">Viele starten beim Online Angebot – und enden dann in Tansania.</span>
+        <span class="en" style="display:none">Many start with the online offering – and end up in Tanzania.</span>
+      </p>
+      <a href="wellness.html" class="btn-t" style="margin-top:1rem;display:inline-block">
+        <span class="de">Online Angebote</span><span class="en" style="display:none">Online Offerings</span> &rarr;
+      </a>
     </div>
     <div style="background:#fff;border-radius:16px;padding:2.5rem;box-shadow:0 4px 32px rgba(26,58,56,.08);border-left:4px solid var(--teal)">
       <div style="font-size:2rem;margin-bottom:.8rem">🌱</div>
-      <p style="font-family:'Playfair Display',serif;font-size:1.25rem;color:#1A3A38;line-height:1.6;font-weight:400;font-style:italic;margin-bottom:1.2rem">"Der erste Schritt zur Reise bist du selbst."</p>
+      <p style="font-family:'Playfair Display',serif;font-size:1.25rem;color:#1A3A38;line-height:1.6;font-weight:400;font-style:italic;margin-bottom:1.2rem">
+        <span class="de">„Der erste Schritt zur Reise bist du selbst."</span>
+        <span class="en" style="display:none">"The first step of the journey is you yourself."</span>
+      </p>
       <div style="display:flex;flex-direction:column;gap:.7rem">
-        <div style="display:flex;align-items:center;gap:.8rem;font-size:.88rem;color:var(--txt2)"><span style="width:8px;height:8px;background:var(--teal);border-radius:50%;flex-shrink:0"></span>Online-Coaching &amp; Wellness-Begleitung</div>
-        <div style="display:flex;align-items:center;gap:.8rem;font-size:.88rem;color:var(--txt2)"><span style="width:8px;height:8px;background:var(--teal);border-radius:50%;flex-shrink:0"></span>Ohne Reise – direkt bei dir zuhause starten</div>
-        <div style="display:flex;align-items:center;gap:.8rem;font-size:.88rem;color:var(--txt2)"><span style="width:8px;height:8px;background:var(--pink);border-radius:50%;flex-shrink:0"></span>Oder: Gemeinsam nach Tansania reisen</div>
+        <div style="display:flex;align-items:center;gap:.8rem;font-size:.88rem;color:var(--txt2)"><span style="width:8px;height:8px;background:var(--teal);border-radius:50%;flex-shrink:0"></span><span class="de">Online-Coaching &amp; Wellness-Begleitung</span><span class="en" style="display:none">Online coaching &amp; wellness support</span></div>
+        <div style="display:flex;align-items:center;gap:.8rem;font-size:.88rem;color:var(--txt2)"><span style="width:8px;height:8px;background:var(--teal);border-radius:50%;flex-shrink:0"></span><span class="de">Ohne Reise – direkt bei dir zuhause starten</span><span class="en" style="display:none">No travel needed – start right at home</span></div>
+        <div style="display:flex;align-items:center;gap:.8rem;font-size:.88rem;color:var(--txt2)"><span style="width:8px;height:8px;background:var(--pink);border-radius:50%;flex-shrink:0"></span><span class="de">Oder: Gemeinsam nach Tansania reisen</span><span class="en" style="display:none">Or: travel to Tanzania together</span></div>
       </div>
     </div>
   </div>
