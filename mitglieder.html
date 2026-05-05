@@ -265,6 +265,16 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
   <p class="pg-sub en">These aren't generic plans. They're built around your specific Dosha and chakra blockages.</p>
   <p class="pg-sub de">Das sind keine generischen Pläne. Sie sind um dein spezifisches Dosha und deine Chakren-Blockaden herum gebaut.</p>
   <div class="pg-div"></div>
+
+  <!-- AYURVEDA EXPLANATION – here we go deeper -->
+  <div style="background:rgba(45,122,114,.06);border:1px solid rgba(45,122,114,.15);border-radius:14px;padding:22px;margin-bottom:20px">
+    <div style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px">✦ Was dahinter steckt</div>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:10px" id="dosha-reveal-de"></p>
+    <p style="font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:10px" id="dosha-reveal-en"></p>
+    <p style="font-size:13px;color:rgba(255,255,255,.4);line-height:1.7" class="de">Das ist der Ausgangspunkt deiner Pläne – sie sind genau darauf abgestimmt.</p>
+    <p style="font-size:13px;color:rgba(255,255,255,.4);line-height:1.7" class="en">This is the foundation of your plans – they are tailored exactly to this.</p>
+  </div>
+
   <div class="commit-box">
     <p class="en"><strong>"Most people download and never open."</strong><br>These plans only work if you actually use them. Even imperfectly. Even just one thing a day.</p>
     <p class="de"><strong>„Die meisten laden herunter und öffnen es nie."</strong><br>Diese Pläne funktionieren nur wenn du sie wirklich benutzt. Auch imperfekt. Auch nur eine Sache täglich.</p>
@@ -533,11 +543,32 @@ function buildChecklist(l){
 
 function toggleCk(i,el){const sv=JSON.parse(localStorage.getItem('t2t-cl')||'[]');const box=el.querySelector('.ck');if(sv.includes(i)){sv.splice(sv.indexOf(i),1);box.classList.remove('done');box.textContent='';}else{sv.push(i);box.classList.add('done');box.textContent='✓';}localStorage.setItem('t2t-cl',JSON.stringify(sv));}
 
+
+  // Reveal Ayurveda context in Step 2 (deeper explanation shown in member area)
+  function updateDoshaReveal(dosha) {
+    const doshaRevealDE = {
+      vata:  'Dein Zustand entspricht im Ayurveda dem Vata-Typ 🌬️ – Luft & Äther. Das erklärt die Unruhe, den vollen Kopf und die Schwierigkeit abzuschalten. Deine Pläne bringen Wärme, Erdung und Struktur.',
+      pitta: 'Dein Zustand entspricht im Ayurveda dem Pitta-Typ 🔥 – Feuer & Wasser. Das erklärt die Intensität, die Hitze und den Druck. Deine Pläne kühlen, beruhigen und öffnen.',
+      kapha: 'Dein Zustand entspricht im Ayurveda dem Kapha-Typ 🌿 – Erde & Wasser. Das erklärt die Schwere, die Trägheit und das Feststecken. Deine Pläne aktivieren, entzünden und bewegen.'
+    };
+    const doshaRevealEN = {
+      vata:  'In Ayurveda, your state corresponds to the Vata type 🌬️ – Air & Ether. This explains the restlessness, the busy mind and the difficulty switching off. Your plans bring warmth, grounding and structure.',
+      pitta: 'In Ayurveda, your state corresponds to the Pitta type 🔥 – Fire & Water. This explains the intensity, the heat and the pressure. Your plans cool, calm and open.',
+      kapha: 'In Ayurveda, your state corresponds to the Kapha type 🌿 – Earth & Water. This explains the heaviness, the sluggishness and feeling stuck. Your plans activate, ignite and move.'
+    };
+    const revDE = document.getElementById('dosha-reveal-de');
+    const revEN = document.getElementById('dosha-reveal-en');
+    if(revDE && dosha) revDE.textContent = doshaRevealDE[dosha] || '';
+    if(revEN && dosha) revEN.textContent = doshaRevealEN[dosha] || '';
+  }
+
 function changeProfile(){localStorage.removeItem('t2t-profile');window.location.href='onboarding.html';}
 function logout(){localStorage.removeItem('t2t-member');window.location.href='login.html';}
 
 const sl=localStorage.getItem('t2t-lang');if(sl)setLang(sl);else setLang('en');
-loadProfile();updateProgress();buildChecklist(currentLang);updateWA(currentLang);
+loadProfile();
+const _p=JSON.parse(localStorage.getItem('t2t-profile')||'{}');
+if(_p.dosha) updateDoshaReveal(_p.dosha);updateProgress();buildChecklist(currentLang);updateWA(currentLang);
 </script>
 </body>
 </html>
