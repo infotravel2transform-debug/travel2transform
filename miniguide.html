@@ -276,12 +276,18 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
         <span class="en">Audio exercise by Jenny · Release what no longer serves</span>
       </div>
     </div>
-    <audio controls style="width:100%;border-radius:8px;height:42px">
+    <audio controls style="width:100%;border-radius:8px;height:42px" preload="metadata">
+      <source src="Barrieren_senken-ausdehnen.m4a" type="audio/x-m4a">
       <source src="Barrieren_senken-ausdehnen.m4a" type="audio/mp4">
+      <source src="https://www.travel2transform.de/Barrieren_senken-ausdehnen.m4a" type="audio/x-m4a">
       <source src="https://www.travel2transform.de/Barrieren_senken-ausdehnen.m4a" type="audio/mp4">
     </audio>
     <p class="audio-note de">🎧 Kopfhörer empfohlen · Mach diese Übung erst nach Schritt 1</p>
     <p class="audio-note en">🎧 Headphones recommended · Do this exercise only after Step 1</p>
+    <p style="margin-top:8px;font-size:11px">
+      <a href="Barrieren_senken-ausdehnen.m4a" download style="color:rgba(200,169,110,.5);text-decoration:none;font-style:italic" class="de">↓ Audio direkt herunterladen</a>
+      <a href="Barrieren_senken-ausdehnen.m4a" download style="color:rgba(200,169,110,.5);text-decoration:none;font-style:italic" class="en">↓ Download audio directly</a>
+    </p>
   </div>
 
   <div class="tip-box">
@@ -314,13 +320,17 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
   </div>
 
   <div class="video-card">
-    <video controls>
-      <source src="VID-20250310-WA0011.mp4" type="video/mp4">
-      <source src="https://www.travel2transform.de/VID-20250310-WA0011.mp4" type="video/mp4">
+    <video controls preload="metadata" playsinline>
+      <source src="koerpertest.mp4" type="video/mp4">
+      <source src="https://www.travel2transform.de/koerpertest.mp4" type="video/mp4">
     </video>
     <div class="video-caption">
       <strong class="de">📹 Körpertest – Anleitung von Jenny</strong>
       <strong class="en">📹 Body Test – Guide by Jenny</strong>
+      <div style="margin-top:6px">
+        <a href="koerpertest.mp4" download style="font-size:11px;color:rgba(255,255,255,.25);text-decoration:none;font-style:italic" class="de">↓ Video direkt herunterladen</a>
+        <a href="koerpertest.mp4" download style="font-size:11px;color:rgba(255,255,255,.25);text-decoration:none;font-style:italic" class="en">↓ Download video directly</a>
+      </div>
     </div>
   </div>
 
@@ -386,12 +396,18 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
         <span class="en">Audio guide by Jenny · Into the creation space</span>
       </div>
     </div>
-    <audio controls style="width:100%;border-radius:8px;height:42px">
-      <source src="Deine_Welt_2_0.m4a" type="audio/mp4">
-      <source src="https://www.travel2transform.de/Deine_Welt_2_0.m4a" type="audio/mp4">
+    <audio controls style="width:100%;border-radius:8px;height:42px" preload="metadata">
+      <source src="Deine_Welt.m4a" type="audio/x-m4a">
+      <source src="Deine_Welt.m4a" type="audio/mp4">
+      <source src="https://www.travel2transform.de/Deine_Welt.m4a" type="audio/x-m4a">
+      <source src="https://www.travel2transform.de/Deine_Welt.m4a" type="audio/mp4">
     </audio>
     <p class="audio-note de">🎧 Mach diese Audio nach Schritt 1, 2 und 3 · Deine Vision liegt bereit</p>
     <p class="audio-note en">🎧 Do this audio after steps 1, 2 and 3 · Your vision is ready</p>
+    <p style="margin-top:8px;font-size:11px">
+      <a href="Deine_Welt.m4a" download style="color:rgba(200,169,110,.5);text-decoration:none;font-style:italic" class="de">↓ Audio direkt herunterladen</a>
+      <a href="Deine_Welt.m4a" download style="color:rgba(200,169,110,.5);text-decoration:none;font-style:italic" class="en">↓ Download audio directly</a>
+    </p>
   </div>
 
   <!-- Entscheidungen sofort treffen -->
@@ -470,5 +486,28 @@ const obs=new IntersectionObserver((entries)=>{
 },{threshold:0.35,rootMargin:'-100px 0px 0px 0px'});
 sections.forEach(id=>{const el=document.getElementById(id);if(el)obs.observe(el);});
 </script>
+
+<script>
+// Check if audio/video files are accessible
+window.addEventListener('load', function() {
+  // Try to load media - if it fails show helpful message
+  document.querySelectorAll('audio, video').forEach(function(el) {
+    el.addEventListener('error', function() {
+      const parent = el.closest('.audio-card, .video-card');
+      if (parent && !parent.querySelector('.media-error')) {
+        const msg = document.createElement('div');
+        msg.className = 'media-error';
+        msg.style.cssText = 'background:rgba(212,84,138,.08);border:1px solid rgba(212,84,138,.2);border-radius:8px;padding:12px;margin-top:10px;font-size:12px;color:rgba(212,84,138,.8);line-height:1.6';
+        const isDe = document.body.classList.contains('lang-de');
+        msg.innerHTML = isDe
+          ? '⚠️ Die Datei konnte nicht geladen werden. Stelle sicher dass <strong>alle Dateien bei GitHub hochgeladen</strong> sind (Deine_Welt.m4a, Barrieren_senken-ausdehnen.m4a, koerpertest.mp4) und nutze den Download-Link unten.'
+          : '⚠️ File could not be loaded. Make sure <strong>all files are uploaded to GitHub</strong> (Deine_Welt.m4a, Barrieren_senken-ausdehnen.m4a, koerpertest.mp4) and use the download link below.';
+        el.parentNode.insertBefore(msg, el.nextSibling);
+      }
+    }, true);
+  });
+});
+</script>
+
 </body>
 </html>
