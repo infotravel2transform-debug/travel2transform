@@ -1,485 +1,578 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mitgliederbereich · Travel 2 Transform</title>
+<title>Dein Bereich · Travel 2 Transform</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--teal:#2d7a72;--tl:#3a9990;--pink:#d4548a;--gold:#c8a96e;--dark:#1a2e2c}
-body{background:#0e1614;color:#e8f0ee;font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
-.layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+:root{--teal:#2d7a72;--tl:#3a9990;--pink:#d4548a;--gold:#c8a96e;--dark:#1a2e2c;--text:#2c3e3b;--muted:#6b8a87;--bg:#f8fbfa;--tpale:#e8f4f3;--ppale:#fce8f0;--border:rgba(45,122,114,0.13);--purple:#6b4c8c;--purpale:rgba(107,76,140,.08)}
+html{scroll-behavior:smooth}
+body{background:#0a0f0e;color:#e8f0ee;font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* ── LAYOUT ── */
+.layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
 @media(max-width:768px){.layout{grid-template-columns:1fr}}
-.sidebar{background:rgba(0,0,0,.3);border-right:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
-.sb-brand{padding:22px 20px 16px;border-bottom:1px solid rgba(255,255,255,.05)}
-.sb-logo{font-family:'Cinzel',serif;font-size:11px;letter-spacing:3px;color:var(--tl);text-transform:uppercase;margin-bottom:2px}
-.sb-sub{font-size:10px;color:rgba(255,255,255,.25);letter-spacing:1px}
-.sb-profile{padding:16px 20px;border-bottom:1px solid rgba(255,255,255,.05)}
-.sb-name{font-size:15px;color:rgba(255,255,255,.85);margin-bottom:2px;font-weight:500}
-.sb-type{font-size:11px;color:var(--gold);opacity:.8}
-.sb-steps{padding:16px 12px;flex:1}
-.sb-section{font-family:'Cinzel',serif;font-size:7px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.2);padding:10px 8px 4px;margin-top:4px}
-.sb-item{display:flex;align-items:center;gap:10px;padding:10px 8px;border-radius:8px;cursor:pointer;transition:all .2s;color:rgba(255,255,255,.4);font-size:13px;border:none;background:transparent;width:100%;text-align:left}
-.sb-item:hover{background:rgba(255,255,255,.05);color:rgba(255,255,255,.75)}
-.sb-item.active{background:rgba(45,122,114,.15);color:var(--tl)}
-.sb-item .sb-icon{font-size:16px;flex-shrink:0;width:20px;text-align:center}
-.sb-item .sn{width:18px;height:18px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0;font-family:'Cinzel',serif;transition:all .3s}
-.sb-item.active .sn{background:var(--teal);border-color:var(--teal);color:white}
-.sb-bottom{padding:14px 16px;border-top:1px solid rgba(255,255,255,.05)}
-.lang-sw{display:flex;background:rgba(255,255,255,.05);border-radius:50px;padding:3px;gap:2px;margin-bottom:8px}
+
+/* ── SIDEBAR ── */
+.sidebar{background:rgba(255,255,255,.02);border-right:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.sb-top{padding:20px 16px 14px;border-bottom:1px solid rgba(255,255,255,.05)}
+.sb-logo{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--tl);text-transform:uppercase;margin-bottom:2px}
+.sb-tagline{font-size:10px;color:rgba(255,255,255,.2);font-style:italic;font-family:'Cormorant Garamond',serif}
+.sb-state{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;transition:background .2s}
+.sb-state:hover{background:rgba(255,255,255,.03)}
+.sb-state-label{font-size:10px;color:rgba(255,255,255,.25);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.sb-state-val{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:white}
+.sb-nav{padding:12px 8px;flex:1}
+.sb-group{font-family:'Cinzel',serif;font-size:7px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);padding:10px 8px 4px}
+.sb-item{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:8px;cursor:pointer;transition:all .2s;color:rgba(255,255,255,.35);font-size:13px;border:none;background:transparent;width:100%;text-align:left;position:relative}
+.sb-item:hover{background:rgba(255,255,255,.04);color:rgba(255,255,255,.7)}
+.sb-item.active{background:rgba(45,122,114,.12);color:var(--tl)}
+.sb-item .ico{font-size:15px;flex-shrink:0;width:20px;text-align:center}
+.sb-bottom{padding:12px;border-top:1px solid rgba(255,255,255,.04)}
+.lang-sw{display:flex;background:rgba(255,255,255,.04);border-radius:50px;padding:3px;gap:2px;margin-bottom:8px}
 .lb{padding:4px 12px;border-radius:50px;border:none;background:transparent;cursor:pointer;font-size:11px;color:rgba(255,255,255,.3);transition:all .2s;font-family:'DM Sans',sans-serif}
 .lb.active{background:var(--teal);color:white}
-.sb-btn{width:100%;background:transparent;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:8px;color:rgba(255,255,255,.3);font-size:11px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;margin-bottom:4px}
-.sb-btn:hover{color:rgba(255,255,255,.6);border-color:rgba(255,255,255,.15)}
-.mobile-header{display:none;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(0,0,0,.4);border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;z-index:50}
-.mobile-brand{font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--tl)}
-.hamburger{background:none;border:none;color:rgba(255,255,255,.5);font-size:20px;cursor:pointer}
-@media(max-width:768px){.sidebar{display:none;position:fixed;left:0;top:0;bottom:0;z-index:200;width:260px;box-shadow:4px 0 24px rgba(0,0,0,.5)}.sidebar.open{display:flex}.mobile-header{display:flex}}
-.main{padding:32px;overflow-y:auto}
-@media(max-width:768px){.main{padding:20px 16px}}
-.sec{display:none}.sec.active{display:block}
-.pg-tag{font-family:'Cinzel',serif;font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--pink);opacity:.8;margin-bottom:10px}
-.pg-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,5vw,38px);font-weight:300;line-height:1.2;margin-bottom:6px}
+.sb-btn{width:100%;background:transparent;border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:7px;color:rgba(255,255,255,.25);font-size:11px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;margin-bottom:3px}
+.sb-btn:hover{color:rgba(255,255,255,.55);border-color:rgba(255,255,255,.12)}
+
+/* ── MOBILE HEADER ── */
+.mob-header{display:none;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(10,15,14,.97);border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;z-index:50;backdrop-filter:blur(8px)}
+.mob-brand{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--tl)}
+.hamburger{background:none;border:none;color:rgba(255,255,255,.4);font-size:20px;cursor:pointer}
+@media(max-width:768px){.sidebar{display:none;position:fixed;left:0;top:0;bottom:0;z-index:200;width:240px;box-shadow:4px 0 32px rgba(0,0,0,.6)}.sidebar.open{display:flex}.mob-header{display:flex}}
+
+/* ── MAIN ── */
+.main{overflow-y:auto}
+
+/* ── SECTIONS ── */
+.sec{display:none;min-height:100vh}.sec.active{display:block}
+
+/* ── HOME ── */
+.home-hero{padding:48px 32px 32px;background:linear-gradient(160deg,#0a0f0e 0%,#111a18 60%,#0e0a14 100%);position:relative;overflow:hidden;min-height:55vh;display:flex;flex-direction:column;justify-content:center}
+.home-hero::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(45,122,114,.07),transparent 65%);pointer-events:none}
+.home-hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(107,76,140,.06),transparent 65%);pointer-events:none}
+.home-tag{font-family:'Cinzel',serif;font-size:8px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;opacity:.7;position:relative;z-index:1}
+.home-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,6vw,54px);font-weight:300;line-height:1.1;color:white;margin-bottom:10px;position:relative;z-index:1}
+.home-h1 em{font-style:italic;color:var(--tl)}
+.home-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,3vw,20px);font-style:italic;color:rgba(255,255,255,.4);max-width:500px;line-height:1.8;position:relative;z-index:1}
+.home-content{padding:28px 32px}
+@media(max-width:768px){.home-hero{padding:32px 20px}.home-content{padding:24px 20px}}
+
+/* ── TOOL GRID ── */
+.tool-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:28px}
+.tool-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:20px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.tool-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--card-accent, rgba(45,122,114,.06)),transparent 60%);opacity:0;transition:opacity .3s}
+.tool-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.12)}.tool-card:hover::before{opacity:1}
+.tool-card.active-card{border-color:var(--card-accent-border, rgba(45,122,114,.3));background:rgba(45,122,114,.06)}
+.tc-emoji{font-size:28px;margin-bottom:10px;display:block}
+.tc-title{font-size:14px;font-weight:500;color:rgba(255,255,255,.85);margin-bottom:4px}
+.tc-desc{font-size:12px;color:rgba(255,255,255,.35);line-height:1.5}
+.tc-tag{position:absolute;top:12px;right:12px;font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.6}
+@media(max-width:480px){.tool-grid{grid-template-columns:1fr}}
+
+/* ── PAGE HEADER ── */
+.page-hero{padding:40px 32px 28px;background:linear-gradient(160deg,#0a0f0e,#111a18);border-bottom:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,var(--page-glow,rgba(45,122,114,.08)),transparent 65%);pointer-events:none}
+.pg-tag{font-family:'Cinzel',serif;font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--pink);margin-bottom:10px;opacity:.7}
+.pg-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,5vw,42px);font-weight:300;line-height:1.2;margin-bottom:6px;position:relative;z-index:1}
 .pg-h1 em{font-style:italic;color:var(--tl)}
-.pg-sub{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:rgba(255,255,255,.4);margin-bottom:28px;line-height:1.6}
-.pg-div{height:1px;background:rgba(255,255,255,.06);margin-bottom:28px}
-.next-step{background:linear-gradient(135deg,rgba(45,122,114,.15),rgba(45,122,114,.06));border:1px solid rgba(45,122,114,.3);border-radius:16px;padding:28px;margin-bottom:20px;cursor:pointer;transition:all .25s}
-.next-step:hover{transform:translateY(-2px);background:linear-gradient(135deg,rgba(45,122,114,.22),rgba(45,122,114,.1))}
-.ns-label{font-family:'Cinzel',serif;font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
-.ns-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;margin-bottom:4px}
-.ns-desc{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:14px}
-.ns-btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:white;padding:10px 22px;border-radius:50px;font-size:13px;font-weight:500;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
-.ns-btn:hover{background:var(--tl)}
-.prog-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:20px;margin-bottom:20px}
-.prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
-.prog-msg{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:rgba(255,255,255,.6)}
-.prog-pct{font-size:12px;color:rgba(255,255,255,.3)}
-.prog-bar{height:4px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden;margin-bottom:8px}
-.prog-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));border-radius:2px;transition:width 1s ease}
-.prog-sub{font-size:12px;color:rgba(255,255,255,.25);font-style:italic}
-.commit-box{background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.1);border-radius:12px;padding:20px;text-align:center;margin:16px 0}
-.commit-box p{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:rgba(255,255,255,.4);line-height:1.7}
-.commit-box strong{color:rgba(255,255,255,.65);font-style:normal}
-.js-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
-.js-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:20px;cursor:pointer;transition:all .2s}
-.js-card:hover{background:rgba(255,255,255,.06);transform:translateY(-2px)}
-.js-card.cur{border-color:rgba(45,122,114,.3);background:rgba(45,122,114,.08)}
-.js-num{font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:var(--gold);margin-bottom:8px}
-.js-icon{font-size:22px;margin-bottom:8px}
-.js-title{font-size:14px;font-weight:500;color:rgba(255,255,255,.8);margin-bottom:4px}
-.js-desc{font-size:12px;color:rgba(255,255,255,.35);line-height:1.5}
-@media(max-width:480px){.js-grid{grid-template-columns:1fr}}
-.ex-block{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:24px;margin-bottom:14px}
-.ex-why{background:rgba(200,169,110,.06);border-left:2px solid var(--gold);padding:10px 14px;border-radius:0 8px 8px 0;margin-bottom:16px}
-.ex-why p{font-size:12px;color:rgba(200,169,110,.8);font-style:italic;line-height:1.6}
-.ex-num{font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;color:var(--tl);opacity:.7;margin-bottom:6px}
-.ex-title{font-size:15px;font-weight:500;color:rgba(255,255,255,.85);margin-bottom:10px}
-.ex-body{font-size:14px;color:rgba(255,255,255,.5);line-height:1.8}
-.ex-body em{color:rgba(255,255,255,.75);font-style:italic}
-.ex-time{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-size:11px;color:rgba(45,153,144,.7);background:rgba(45,122,114,.1);border:1px solid rgba(45,122,114,.2);border-radius:50px;padding:4px 12px}
-.ex-after{background:rgba(212,84,138,.05);border:1px solid rgba(212,84,138,.15);border-radius:10px;padding:14px 16px;margin-top:14px}
-.ex-after p{font-size:13px;color:rgba(212,84,138,.75);font-style:italic;line-height:1.6}
-.ex-after strong{display:block;font-size:10px;color:rgba(212,84,138,.5);letter-spacing:1px;margin-bottom:4px;font-style:normal}
-.ex-after a{color:rgba(212,84,138,.8);text-decoration:none;border-bottom:1px solid rgba(212,84,138,.3)}
-.ex-success{background:rgba(45,122,114,.08);border-left:2px solid var(--teal);padding:10px 14px;margin-top:12px;border-radius:0 8px 8px 0}
-.ex-success p{font-size:12px;color:rgba(45,153,144,.75);font-style:italic}
-.reflection{background:rgba(200,169,110,.05);border:1px solid rgba(200,169,110,.12);border-radius:12px;padding:22px;margin-bottom:14px}
-.ref-q{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;font-weight:300;color:rgba(255,255,255,.75);margin-bottom:8px;line-height:1.5}
-.ref-why{font-size:12px;color:rgba(200,169,110,.6);margin-bottom:10px;font-style:italic}
-.ref-hint{font-size:12px;color:rgba(255,255,255,.3)}
-.ref-up{background:rgba(45,122,114,.08);border:1px solid rgba(45,122,114,.15);border-radius:8px;padding:12px 14px;margin-top:12px}
-.ref-up p{font-size:12px;color:rgba(45,153,144,.7);font-style:italic;line-height:1.6}
-.ref-up a{color:var(--tl);text-decoration:none;font-style:normal;border-bottom:1px solid rgba(45,153,144,.3)}
-.dl-row{display:flex;align-items:center;justify-content:space-between;gap:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px 20px;margin-bottom:10px;transition:all .2s}
-.dl-row:hover{background:rgba(255,255,255,.06)}
-.dl-left{display:flex;align-items:center;gap:12px}
-.dl-icon{font-size:24px}
-.dl-info strong{display:block;font-size:14px;color:rgba(255,255,255,.8);margin-bottom:2px}
-.dl-info span{font-size:12px;color:rgba(255,255,255,.35)}
-.dl-btn{background:var(--teal);color:white;padding:8px 18px;border-radius:50px;font-size:12px;font-weight:500;text-decoration:none;white-space:nowrap;flex-shrink:0;transition:all .2s}
-.dl-btn:hover{background:var(--tl)}
-@media(max-width:480px){.dl-row{flex-direction:column;align-items:flex-start;gap:10px}}
-.up-hint{display:flex;align-items:flex-start;gap:12px;background:rgba(212,84,138,.05);border:1px solid rgba(212,84,138,.12);border-radius:10px;padding:14px 16px;margin:16px 0}
-.up-hint .icon{font-size:18px;flex-shrink:0;margin-top:1px}
-.up-hint .text{font-size:13px;color:rgba(255,255,255,.5);line-height:1.6;font-style:italic}
-.up-hint .text a{color:rgba(212,84,138,.8);text-decoration:none;font-style:normal;border-bottom:1px solid rgba(212,84,138,.3)}
-.up-hint .text strong{color:rgba(255,255,255,.7);font-style:normal}
-.up-box{background:linear-gradient(135deg,rgba(45,122,114,.1),rgba(212,84,138,.06));border:1px solid rgba(45,122,114,.2);border-radius:16px;padding:28px;margin-bottom:14px}
-.up-tag{font-family:'Cinzel',serif;font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
-.up-h{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;margin-bottom:6px;line-height:1.3}
-.up-h em{font-style:italic;color:var(--tl)}
-.up-body{font-size:13px;color:rgba(255,255,255,.45);line-height:1.75;margin-bottom:16px}
-.up-btn{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:white;padding:11px 24px;border-radius:50px;font-size:13px;font-weight:500;text-decoration:none;transition:all .2s}
-.up-btn:hover{background:var(--tl)}
-.wa-btn{display:inline-flex;align-items:center;gap:10px;background:#25d366;color:white;padding:12px 24px;border-radius:50px;font-size:13px;font-weight:500;text-decoration:none;transition:all .2s}
+.pg-sub{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:rgba(255,255,255,.38);line-height:1.7;position:relative;z-index:1}
+.page-content{padding:28px 32px}
+@media(max-width:768px){.page-hero{padding:28px 20px}.page-content{padding:20px}}
+
+/* ── CONTENT BLOCKS ── */
+.block{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:22px;margin-bottom:14px;transition:all .2s}
+.block:hover{background:rgba(255,255,255,.04)}
+.block-tag{font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;opacity:.7}
+.block-h{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:white;margin-bottom:6px;line-height:1.3}
+.block-h em{font-style:italic;color:var(--tl)}
+.block-body{font-size:14px;color:rgba(255,255,255,.5);line-height:1.8}
+.block-body em{color:rgba(255,255,255,.75);font-style:italic}
+
+/* ── GOLD QUOTE ── */
+.gold-quote{background:rgba(200,169,110,.05);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:16px}
+.gold-quote p{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:rgba(200,169,110,.85);line-height:1.75}
+
+/* ── KREATION STEPS ── */
+.k-steps{display:flex;flex-direction:column;gap:8px;margin:16px 0}
+.k-step{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;transition:all .2s}
+.k-step:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}
+.ks-num{width:24px;height:24px;border-radius:50%;background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-size:10px;font-family:'Cinzel',serif;flex-shrink:0;margin-top:1px}
+.ks-text{font-size:14px;color:rgba(255,255,255,.6);line-height:1.65}
+.ks-text strong{color:rgba(255,255,255,.85)}
+.ks-text em{color:var(--tl);font-style:italic}
+
+/* ── AUDIO ── */
+.audio-block{background:rgba(45,122,114,.06);border:1px solid rgba(45,122,114,.18);border-radius:14px;padding:20px;margin:16px 0}
+.ab-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.ab-icon{font-size:28px}
+.ab-info strong{display:block;font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:white;margin-bottom:2px}
+.ab-info span{font-size:12px;color:rgba(255,255,255,.3)}
+.ab-player{width:100%;border-radius:8px;height:42px;outline:none}
+.ab-note{font-size:11px;color:rgba(255,255,255,.25);margin-top:8px;font-style:italic}
+
+/* ── VIDEO ── */
+.video-block{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.09);border-radius:14px;overflow:hidden;margin:16px 0}
+.video-block iframe{width:100%;display:block;aspect-ratio:9/16;border:none}
+.vb-cap{padding:14px 18px;border-top:1px solid rgba(255,255,255,.06)}
+.vb-cap strong{font-size:14px;color:rgba(255,255,255,.65);font-weight:400}
+
+/* ── UPGRADE HINT ── */
+.up-hint{display:flex;align-items:flex-start;gap:12px;background:rgba(212,84,138,.04);border:1px solid rgba(212,84,138,.12);border-radius:10px;padding:14px 16px;margin:14px 0}
+.up-hint .ico{font-size:18px;flex-shrink:0}
+.up-hint .txt{font-size:13px;color:rgba(255,255,255,.45);line-height:1.65;font-style:italic}
+.up-hint .txt a{color:rgba(212,84,138,.75);text-decoration:none;font-style:normal;border-bottom:1px solid rgba(212,84,138,.25)}
+.up-hint .txt strong{color:rgba(255,255,255,.7);font-style:normal}
+
+/* ── WA BUTTON ── */
+.wa-btn{display:inline-flex;align-items:center;gap:10px;background:#25d366;color:white;padding:13px 26px;border-radius:50px;font-size:13px;font-weight:500;text-decoration:none;transition:all .2s}
 .wa-btn:hover{opacity:.9;transform:translateY(-1px)}
-.wa-frame{text-align:center;padding:20px;border:1px solid rgba(255,255,255,.07);border-radius:14px;margin-bottom:14px}
-.wa-frame p{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:rgba(255,255,255,.5);margin-bottom:14px;line-height:1.6}
-.tabs{display:flex;gap:4px;background:rgba(255,255,255,.04);border-radius:10px;padding:4px;margin-bottom:24px;overflow-x:auto}
+.wa-frame{text-align:center;padding:24px;border:1px solid rgba(255,255,255,.06);border-radius:14px;margin:14px 0}
+.wa-frame p{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:rgba(255,255,255,.4);margin-bottom:14px;line-height:1.7}
+
+/* ── DOWNLOAD ROW ── */
+.dl-row{display:flex;align-items:center;justify-content:space-between;gap:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 18px;margin-bottom:10px;transition:all .2s}
+.dl-row:hover{background:rgba(255,255,255,.05)}
+.dl-left{display:flex;align-items:center;gap:12px}
+.dl-ico{font-size:22px}
+.dl-info strong{display:block;font-size:14px;color:rgba(255,255,255,.8);margin-bottom:2px}
+.dl-info span{font-size:12px;color:rgba(255,255,255,.3)}
+.dl-btn{background:var(--teal);color:white;padding:8px 18px;border-radius:50px;font-size:12px;font-weight:500;text-decoration:none;white-space:nowrap;transition:all .2s}
+.dl-btn:hover{background:var(--tl)}
+@media(max-width:480px){.dl-row{flex-direction:column;align-items:flex-start;gap:8px}}
+
+/* ── NEXT BTN ── */
+.next-btn{width:100%;background:var(--teal);color:white;border:none;border-radius:50px;padding:15px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;margin-top:16px;display:flex;align-items:center;justify-content:center;gap:8px}
+.next-btn:hover{background:var(--tl);transform:translateY(-1px)}
+
+/* ── QUIZ 2 TEASER ── */
+.quiz2-card{background:linear-gradient(135deg,rgba(107,76,140,.1),rgba(45,122,114,.08));border:1px solid rgba(107,76,140,.25);border-radius:16px;padding:26px;margin-bottom:16px;text-align:center;cursor:pointer;transition:all .25s}
+.quiz2-card:hover{transform:translateY(-2px);border-color:rgba(107,76,140,.4)}
+.q2-emoji{font-size:40px;margin-bottom:12px;display:block}
+.q2-h{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:white;margin-bottom:6px;line-height:1.3}
+.q2-h em{font-style:italic;color:#a07fd4}
+.q2-sub{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:16px;line-height:1.6}
+.q2-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(107,76,140,.2);color:#a07fd4;border:1px solid rgba(107,76,140,.3);padding:10px 24px;border-radius:50px;font-size:13px;font-weight:500;transition:all .2s;font-family:'DM Sans',sans-serif;cursor:pointer;border:none}
+.q2-btn:hover{background:rgba(107,76,140,.3)}
+
+/* ── TABS ── */
+.tabs{display:flex;gap:4px;background:rgba(255,255,255,.04);border-radius:10px;padding:4px;margin-bottom:22px;overflow-x:auto}
 .tab{padding:8px 16px;border-radius:7px;border:none;background:transparent;cursor:pointer;font-size:12px;color:rgba(255,255,255,.4);transition:all .2s;font-family:'DM Sans',sans-serif;white-space:nowrap}
 .tab.active{background:rgba(45,122,114,.2);color:var(--tl)}
 .tab-c{display:none}.tab-c.active{display:block}
-.check-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer}
-.ck{width:22px;height:22px;border-radius:5px;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;transition:all .2s}
-.ck.done{background:var(--teal);border-color:var(--teal)}
-.ck-text{font-size:14px;color:rgba(255,255,255,.6)}
-.next-btn{width:100%;background:var(--teal);color:white;border:none;border-radius:50px;padding:14px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;margin-top:16px;display:flex;align-items:center;justify-content:center;gap:8px}
-.next-btn:hover{background:var(--tl)}
+
+/* ── CHECKLIST ── */
+.ck-item{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer}
+.ck-box{width:20px;height:20px;border-radius:5px;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;transition:all .2s}
+.ck-box.done{background:var(--teal);border-color:var(--teal)}
+.ck-text{font-size:14px;color:rgba(255,255,255,.55)}
+
+/* ── LANG ── */
 .de{display:none}.en{display:block}
 body.lang-de .de{display:block}body.lang-de .en{display:none}
 body.lang-en .de{display:none}body.lang-en .en{display:block}
-@keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.fi{animation:fu .4s ease forwards}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.sec.active{animation:fadeUp .35s ease forwards}
+
+@media(max-width:480px){.home-h1{font-size:28px}}
 </style>
 </head>
-<body class="lang-en">
+<body class="lang-de">
 
-<div class="mobile-header">
-  <span class="mobile-brand">T2T · Member Area</span>
+<div class="mob-header">
+  <span class="mob-brand">T2T</span>
   <button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
 </div>
 
 <div class="layout">
+
+<!-- ══ SIDEBAR ══════════════════════════════════════════════ -->
 <aside class="sidebar">
-  <div class="sb-brand">
+  <div class="sb-top">
     <div class="sb-logo">Travel 2 Transform</div>
-    <div class="sb-sub en">Your member area</div><div class="sb-sub de">Dein Mitgliederbereich</div>
+    <div class="sb-tagline de">dein geiles Leben beginnt hier</div>
+    <div class="sb-tagline en">your amazing life starts here</div>
   </div>
-  <div class="sb-profile">
-    <div class="sb-name" id="sb-name">Welcome 🌿</div>
-    <div class="sb-type" id="sb-type"></div>
+  <div class="sb-state" onclick="show('profil')">
+    <div class="sb-state-label de">Dein Zustand</div>
+    <div class="sb-state-label en">Your state</div>
+    <div class="sb-state-val" id="sb-state">🌿</div>
   </div>
-  <nav class="sb-steps">
-    <div class="sb-section en">Your Journey</div><div class="sb-section de">Deine Reise</div>
-    <button class="sb-item active" onclick="show('home')"><span class="sb-icon">🏠</span><span class="en">Start</span><span class="de">Start</span></button>
-    <button class="sb-item" onclick="show('s1')"><span class="sn" id="sn1">1</span><span class="en">Mental Preparation</span><span class="de">Mentale Vorbereitung</span></button>
-    <button class="sb-item" onclick="show('s2')"><span class="sn" id="sn2">2</span><span class="en">Your Plans</span><span class="de">Deine Pläne</span></button>
-    <button class="sb-item" onclick="show('s3')"><span class="sn" id="sn3">3</span><span class="en">Daily Practice</span><span class="de">Tägliche Praxis</span></button>
-    <button class="sb-item" onclick="show('s4')"><span class="sn" id="sn4">4</span><span class="en">Go Deeper</span><span class="de">Tiefer gehen</span></button>
-    <div class="sb-section en" style="margin-top:8px">Before Retreat</div><div class="sb-section de" style="margin-top:8px">Vor der Reise</div>
-    <button class="sb-item" onclick="show('pretravel')"><span class="sb-icon">🌍</span><span class="en">Pre-Travel</span><span class="de">Pre-Travel</span></button>
-    <button class="sb-item" onclick="show('checklist')"><span class="sb-icon">✅</span><span class="en">Checklist</span><span class="de">Checkliste</span></button>
+  <nav class="sb-nav">
+    <div class="sb-group de">Start</div><div class="sb-group en">Start</div>
+    <button class="sb-item active" onclick="show('home')"><span class="ico">✨</span><span class="de">Kreiere dein Leben</span><span class="en">Create your life</span></button>
+
+    <div class="sb-group de">Deine Tools</div><div class="sb-group en">Your Tools</div>
+    <button class="sb-item" onclick="show('energie')"><span class="ico">⚡</span><span class="de">Energie-Arbeit</span><span class="en">Energy Work</span></button>
+    <button class="sb-item" onclick="show('koerper')"><span class="ico">🧭</span><span class="de">Körpertest & Entscheidungen</span><span class="en">Body Test & Decisions</span></button>
+    <button class="sb-item" onclick="show('kreation')"><span class="ico">🌍</span><span class="de">Kreationsraum</span><span class="en">Creation Space</span></button>
+    <button class="sb-item" onclick="show('plaene')"><span class="ico">📋</span><span class="de">Deine Pläne</span><span class="en">Your Plans</span></button>
+
+    <div class="sb-group de">Tiefer</div><div class="sb-group en">Deeper</div>
+    <button class="sb-item" onclick="show('begleitung-hint')"><span class="ico">🔥</span><span class="de">Begleitung</span><span class="en">Guidance</span></button>
+    <button class="sb-item" onclick="show('retreats')"><span class="ico">🌍</span><span class="de">Retreats</span><span class="en">Retreats</span></button>
   </nav>
   <div class="sb-bottom">
-    <div class="lang-sw"><button class="lb active" id="btn-en" onclick="setLang('en')">EN</button><button class="lb" id="btn-de" onclick="setLang('de')">DE</button></div>
-    <button class="sb-btn" onclick="changeProfile()"><span class="en">✏️ Change profile</span><span class="de">✏️ Profil ändern</span></button>
-    <button class="sb-btn" onclick="logout()"><span class="en">🚪 Log out</span><span class="de">🚪 Ausloggen</span></button>
+    <div class="lang-sw">
+      <button class="lb active" id="btn-de" onclick="setLang('de')">DE</button>
+      <button class="lb" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
+    <button class="sb-btn" onclick="changeProfile()"><span class="de">✏️ Profil ändern</span><span class="en">✏️ Change profile</span></button>
+    <button class="sb-btn" onclick="logout()"><span class="de">🚪 Ausloggen</span><span class="en">🚪 Log out</span></button>
   </div>
 </aside>
 
+<!-- ══ MAIN ══════════════════════════════════════════════════ -->
 <main class="main">
 
-<!-- HOME -->
-<div id="sec-home" class="sec active fi">
-  <div class="pg-tag en">Your member area</div><div class="pg-tag de">Dein Mitgliederbereich</div>
-  <h1 class="pg-h1 en">Your next step <em>today:</em></h1>
-  <h1 class="pg-h1 de">Dein nächster Schritt <em>heute:</em></h1>
-  <div class="pg-div"></div>
-  <div class="next-step" onclick="show('s1')">
-    <div class="ns-label en">✦ Start here · 5 minutes</div><div class="ns-label de">✦ Hier starten · 5 Minuten</div>
-    <div class="ns-title en">→ Do now: Mental Preparation</div><div class="ns-title de">→ Jetzt machen: Mentale Vorbereitung</div>
-    <div class="ns-desc en">This is where it begins. Not with a perfect plan – but with honest presence.</div>
-    <div class="ns-desc de">Hier beginnt es. Nicht mit einem perfekten Plan – sondern mit ehrlicher Präsenz.</div>
-    <button class="ns-btn"><span class="en">Start now →</span><span class="de">Jetzt starten →</span></button>
+<!-- ── HOME ──────────────────────────────────────────────── -->
+<div id="sec-home" class="sec active">
+  <div class="home-hero">
+    <div class="home-tag de">✦ Dein Bereich</div>
+    <div class="home-tag en">✦ Your space</div>
+    <h1 class="home-h1 de">Du bist hier,<br>um dein Leben<br><em>zu kreieren.</em></h1>
+    <h1 class="home-h1 en">You're here<br>to create your<br><em>amazing life.</em></h1>
+    <p class="home-sub de">Nicht irgendwann. Nicht wenn alles perfekt ist. Jetzt.</p>
+    <p class="home-sub en">Not someday. Not when everything is perfect. Now.</p>
   </div>
-  <div class="prog-card">
-    <div class="prog-top"><div class="prog-msg" id="pmsg"></div><div class="prog-pct" id="ppct">0%</div></div>
-    <div class="prog-bar"><div class="prog-fill" id="pfill" style="width:0%"></div></div>
-    <div class="prog-sub" id="psub"></div>
-  </div>
-  <div class="commit-box">
-    <p class="en"><strong>"Most people consume this without feeling it."</strong><br>Don't be one of them. Each step is designed to create a real shift – if you let it.</p>
-    <p class="de"><strong>„Die meisten konsumieren das nur – ohne es zu fühlen."</strong><br>Sei nicht einer davon. Jeder Schritt ist dafür gedacht eine echte Verschiebung zu schaffen – wenn du es zulässt.</p>
-  </div>
-  <div class="js-grid">
-    <div class="js-card cur" onclick="show('s1')"><div class="js-num en">STEP 1</div><div class="js-num de">SCHRITT 1</div><div class="js-icon">🧠</div><div class="js-title en">Mental Preparation</div><div class="js-title de">Mentale Vorbereitung</div><div class="js-desc en">Understand what this asks of you.</div><div class="js-desc de">Verstehe was das von dir verlangt.</div></div>
-    <div class="js-card" onclick="show('s2')"><div class="js-num en">STEP 2</div><div class="js-num de">SCHRITT 2</div><div class="js-icon">📋</div><div class="js-title en">Your Plans</div><div class="js-title de">Deine Pläne</div><div class="js-desc en">Your personalised plans.</div><div class="js-desc de">Deine personalisierten Pläne.</div></div>
-    <div class="js-card" onclick="show('s3')"><div class="js-num en">STEP 3</div><div class="js-num de">SCHRITT 3</div><div class="js-icon">✨</div><div class="js-title en">Daily Practice</div><div class="js-title de">Tägliche Praxis</div><div class="js-desc en">Small things, real change.</div><div class="js-desc de">Kleine Dinge, echte Veränderung.</div></div>
-    <div class="js-card" onclick="show('s4')"><div class="js-num en">STEP 4</div><div class="js-num de">SCHRITT 4</div><div class="js-icon">🔥</div><div class="js-title en">Go Deeper</div><div class="js-title de">Tiefer gehen</div><div class="js-desc en">When the plan is just the beginning.</div><div class="js-desc de">Wenn der Plan erst der Anfang ist.</div></div>
-  </div>
-  <div class="wa-frame">
-    <p class="en">"Write to me what's coming up for you right now.<br>I answer personally."</p>
-    <p class="de">„Schreib mir, was bei dir gerade hochkommt.<br>Ich antworte dir persönlich."</p>
-    <a class="wa-btn" id="wa-home" href="#" target="_blank">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      <span class="en">Write to Jenny</span><span class="de">Jenny schreiben</span>
-    </a>
-  </div>
-</div>
 
-<!-- STEP 1 -->
-<div id="sec-s1" class="sec fi">
-  <div class="pg-tag en">Step 1 · Mental Preparation</div><div class="pg-tag de">Schritt 1 · Mentale Vorbereitung</div>
-  <h1 class="pg-h1 en">What this process<br><em>is asking of you.</em></h1>
-  <h1 class="pg-h1 de">Was dieser Prozess<br><em>von dir verlangt.</em></h1>
-  <p class="pg-sub en">Read this before you begin anything else.</p>
-  <p class="pg-sub de">Lies das bevor du sonst etwas anfängst.</p>
-  <div class="pg-div"></div>
-  <div class="commit-box">
-    <p class="en"><strong>"Here's where most people stop."</strong><br>Not because it's hard. Because it asks you to be honest. If you're still reading – that means something.</p>
-    <p class="de"><strong>„Hier steigen die meisten aus."</strong><br>Nicht weil es schwer ist. Weil es ehrlich sein verlangt. Wenn du noch liest – bedeutet das etwas.</p>
-  </div>
-  <div class="ex-block">
-    <div class="ex-why"><p class="en">This matters right now – transformation doesn't start with a plan. It starts with understanding what's actually in the way.</p><p class="de">Das ist jetzt wichtig – Transformation beginnt nicht mit einem Plan. Sie beginnt mit dem Verstehen was wirklich im Weg steht.</p></div>
-    <div class="ex-num en">PART 1</div><div class="ex-num de">TEIL 1</div>
-    <div class="ex-title en">Why transformation feels uncomfortable at first</div><div class="ex-title de">Warum sich Transformation anfangs unangenehm anfühlt</div>
-    <div class="ex-body en">Real change doesn't happen when everything is comfortable. It happens when something old begins to loosen. You might notice: <em>restlessness, unexpected emotions, "this is too much"</em>. That's not a sign something is wrong. It's a sign something is shifting. Stay with it.</div>
-    <div class="ex-body de">Echte Veränderung passiert nicht wenn alles bequem ist. Sie passiert wenn etwas Altes anfängt sich zu lösen. Du wirst vielleicht merken: <em>Unruhe, unerwartete Emotionen, „das ist zu viel"</em>. Das ist kein Zeichen dass etwas falsch läuft. Es ist ein Zeichen dass sich etwas verschiebt. Bleib dabei.</div>
-    <div class="ex-success"><p class="en">→ "That was the most important step. Exactly how change begins."</p><p class="de">→ „Das war der wichtigste Schritt. Genau so beginnt Veränderung."</p></div>
-    <div class="ex-after">
-      <strong class="en">IF THIS TRIGGERS SOMETHING…</strong><strong class="de">WENN DICH DAS TRIGGERT…</strong>
-      <p class="en">"That's exactly the right place. <a href="#" id="wa-s1-trigger">Write to me what you're feeling →</a>"</p>
-      <p class="de">"Das ist genau der richtige Ort. <a href="#" id="wa-s1-trigger-de">Schreib mir was du spürst →</a>"</p>
+  <div class="home-content">
+
+    <!-- Quiz 2 Teaser -->
+    <div class="quiz2-card" onclick="show('quiz2')">
+      <span class="q2-emoji">🔮</span>
+      <h3 class="q2-h de">Lass uns <em>tiefer gehen.</em></h3>
+      <h3 class="q2-h en">Let's go <em>deeper.</em></h3>
+      <p class="q2-sub de">5 Fragen – damit deine Pläne und Tools genau auf dich abgestimmt sind.</p>
+      <p class="q2-sub en">5 questions – so your plans and tools are perfectly tailored to you.</p>
+      <button class="q2-btn de">Quiz starten →</button>
+      <button class="q2-btn en">Start quiz →</button>
     </div>
-    <div class="ex-time en">⏱ 5 minutes</div><div class="ex-time de">⏱ 5 Minuten</div>
-  </div>
-  <div class="ex-block">
-    <div class="ex-why"><p class="en">This exercise looks small – it's the moment where everything shifts. Don't skip it.</p><p class="de">Diese Übung wirkt klein – es ist der Moment wo sich alles verschiebt. Überspring sie nicht.</p></div>
-    <div class="ex-num en">PART 2 · Your Intention</div><div class="ex-num de">TEIL 2 · Deine Intention</div>
-    <div class="ex-title en">One honest sentence before you begin</div><div class="ex-title de">Ein ehrlicher Satz bevor du beginnst</div>
-    <div class="ex-body en">Finish this sentence out loud or on paper:<br><br><em>"What I'm really hoping changes through this process is…"</em><br><br>Don't think about the right answer. Write the first thing that comes.</div>
-    <div class="ex-body de">Beende diesen Satz laut oder auf Papier:<br><br><em>„Was ich wirklich hoffe dass sich durch diesen Prozess ändert ist…"</em><br><br>Denke nicht an die richtige Antwort. Schreib das Erste was kommt.</div>
-    <div class="ex-success"><p class="en">→ "You just did what most people never do: looked honestly."</p><p class="de">→ „Du hast gerade gemacht was die meisten nie tun: ehrlich hingeschaut."</p></div>
-    <div class="ex-time en">✍️ 3 minutes</div><div class="ex-time de">✍️ 3 Minuten</div>
-  </div>
-  <div class="ex-block">
-    <div class="ex-num en">A note from Jenny</div><div class="ex-num de">Eine Nachricht von Jenny</div>
-    <div class="ex-body en"><em>"I created this because I was once exactly where you are. What helped me most wasn't a perfect plan. It was the decision to start looking honestly. You've already made that decision. The rest will follow."</em></div>
-    <div class="ex-body de"><em>„Ich habe das erschaffen weil ich einmal genau da war wo du jetzt bist. Was mir am meisten geholfen hat war kein perfekter Plan. Es war die Entscheidung ehrlich hinzuschauen. Diese Entscheidung hast du bereits getroffen. Der Rest folgt."</em></div>
-    <div class="ex-time">🙏 Jenny</div>
-  </div>
-  <div class="up-hint">
-    <div class="icon">💬</div>
-    <div class="text en"><strong>Going solo is harder than it needs to be.</strong><br>"If you're feeling something – write to me. I answer personally." <a href="#" id="wa-s1">Write to Jenny →</a></div>
-    <div class="text de"><strong>Das alleine durchzugehen ist schwerer als nötig.</strong><br>„Wenn du etwas spürst – schreib mir. Ich antworte persönlich." <a href="#" id="wa-s1-de">Jenny schreiben →</a></div>
-  </div>
-  <button class="next-btn" onclick="markDone(1);show('s2')"><span class="en">Done → Next: Your Plans</span><span class="de">Fertig → Weiter: Deine Pläne</span></button>
-</div>
 
-<!-- STEP 2 -->
-<div id="sec-s2" class="sec fi">
-  <div class="pg-tag en">Step 2 · Your Plans</div><div class="pg-tag de">Schritt 2 · Deine Pläne</div>
-  <h1 class="pg-h1 en">Everything <em>tailored to you.</em></h1>
-  <h1 class="pg-h1 de">Alles <em>auf dich abgestimmt.</em></h1>
-  <p class="pg-sub en">These aren't generic plans. They're built around your specific Dosha and chakra blockages.</p>
-  <p class="pg-sub de">Das sind keine generischen Pläne. Sie sind um dein spezifisches Dosha und deine Chakren-Blockaden herum gebaut.</p>
-  <div class="pg-div"></div>
+    <!-- Tool Grid -->
+    <div style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:14px" class="de">Deine Tools</div>
+    <div style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:14px" class="en">Your Tools</div>
 
-  <!-- AYURVEDA EXPLANATION – here we go deeper -->
-  <div style="background:rgba(45,122,114,.06);border:1px solid rgba(45,122,114,.15);border-radius:14px;padding:22px;margin-bottom:20px">
-    <div style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:10px">✦ Was dahinter steckt</div>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:10px" id="dosha-reveal-de"></p>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:rgba(255,255,255,.75);line-height:1.7;margin-bottom:10px" id="dosha-reveal-en"></p>
-    <p style="font-size:13px;color:rgba(255,255,255,.4);line-height:1.7" class="de">Das ist der Ausgangspunkt deiner Pläne – sie sind genau darauf abgestimmt.</p>
-    <p style="font-size:13px;color:rgba(255,255,255,.4);line-height:1.7" class="en">This is the foundation of your plans – they are tailored exactly to this.</p>
-  </div>
-
-  <div class="commit-box">
-    <p class="en"><strong>"Most people download and never open."</strong><br>These plans only work if you actually use them. Even imperfectly. Even just one thing a day.</p>
-    <p class="de"><strong>„Die meisten laden herunter und öffnen es nie."</strong><br>Diese Pläne funktionieren nur wenn du sie wirklich benutzt. Auch imperfekt. Auch nur eine Sache täglich.</p>
-  </div>
-  <div class="dl-row"><div class="dl-left"><div class="dl-icon">🌿</div><div class="dl-info"><strong id="dl-dosha-t" class="en">Your Dosha Nutrition Plan</strong><strong id="dl-dosha-t-de" class="de">Dein Dosha-Ernährungsplan</strong><span class="en">2-week daily plan · your constitution</span><span class="de">2-Wochen täglicher Plan · deine Konstitution</span></div></div><a id="dl-dosha" href="#" class="dl-btn" target="_blank" download><span class="en">Download ↓</span><span class="de">Laden ↓</span></a></div>
-  <div class="dl-row"><div class="dl-left"><div class="dl-icon">✨</div><div class="dl-info"><strong class="en">Your Chakra Self-Care Plan</strong><strong class="de">Dein Chakren-Selbstpflege-Plan</strong><span class="en">4-week plan · rituals, affirmations, meditations</span><span class="de">4-Wochen-Plan · Rituale, Affirmationen, Meditationen</span></div></div><a id="dl-chakra" href="#" class="dl-btn" target="_blank" download><span class="en">Download ↓</span><span class="de">Laden ↓</span></a></div>
-  <div class="dl-row"><div class="dl-left"><div class="dl-icon">🧘</div><div class="dl-info"><strong id="dl-yoga-t" class="en">Your Yoga Plan</strong><strong id="dl-yoga-t-de" class="de">Dein Yoga-Plan</strong><span class="en">4-week plan · daily sequences</span><span class="de">4-Wochen-Plan · tägliche Sequenzen</span></div></div><a id="dl-yoga" href="#" class="dl-btn" target="_blank" download><span class="en">Download ↓</span><span class="de">Laden ↓</span></a></div>
-  <div class="dl-row" style="border-color:rgba(200,169,110,.2);background:rgba(200,169,110,.04)">
-    <div class="dl-left"><div class="dl-icon">📖</div><div class="dl-info"><strong class="en">Free Handbook</strong><strong class="de">Kostenloses Handbuch</strong><span class="en">Ayurveda · Chakras · Yoga · Reiki basics</span><span class="de">Ayurveda · Chakren · Yoga · Reiki Grundlagen</span></div></div>
-    <a id="mb-handbook" href="https://www.travel2transform.de/T2T_Handbook_EN.pdf" class="dl-btn" target="_blank" download style="background:rgba(200,169,110,.2);color:#c8a96e;border:1px solid rgba(200,169,110,.3)"><span class="en">Download ↓</span><span class="de">Laden ↓</span></a>
-  </div>
-  <div class="up-hint" style="margin-top:20px">
-    <div class="icon">🙏</div>
-    <div class="text en"><strong>Questions about your plans?</strong><br>"Something unclear? Write to me. I'll answer personally." <a href="#" id="wa-s2">Write to Jenny →</a></div>
-    <div class="text de"><strong>Fragen zu deinen Plänen?</strong><br>„Etwas unklar? Schreib mir. Ich antworte persönlich." <a href="#" id="wa-s2-de">Jenny schreiben →</a></div>
-  </div>
-  <div class="up-hint">
-    <div class="icon">✨</div>
-    <div class="text en">"The plans show you the <strong>what</strong>. The Begleitung shows you <strong>why it's not working yet</strong> – and changes it." <a href="begleitung.html">About the Begleitung →</a></div>
-    <div class="text de">„Die Pläne zeigen das <strong>Was</strong>. Die Begleitung zeigt <strong>warum es noch nicht klappt</strong> – und ändert es." <a href="begleitung.html">Über die Begleitung →</a></div>
-  </div>
-  <button class="next-btn" onclick="markDone(2);show('s3')"><span class="en">Done → Next: Daily Practice</span><span class="de">Fertig → Weiter: Tägliche Praxis</span></button>
-</div>
-
-<!-- STEP 3 -->
-<div id="sec-s3" class="sec fi">
-  <div class="pg-tag en">Step 3 · Daily Practice</div><div class="pg-tag de">Schritt 3 · Tägliche Praxis</div>
-  <h1 class="pg-h1 en">Small things that<br><em>create real change.</em></h1>
-  <h1 class="pg-h1 de">Kleine Dinge, die<br><em>echte Veränderung schaffen.</em></h1>
-  <div class="pg-div"></div>
-  <div class="tabs">
-    <button class="tab active" onclick="showTab('tm',this)"><span class="en">Morning</span><span class="de">Morgen</span></button>
-    <button class="tab" onclick="showTab('tc',this)"><span class="en">Chakra Work</span><span class="de">Chakren-Arbeit</span></button>
-    <button class="tab" onclick="showTab('tr',this)"><span class="en">Reflections</span><span class="de">Reflexionen</span></button>
-    <button class="tab" onclick="showTab('te',this)"><span class="en">Evening</span><span class="de">Abend</span></button>
-  </div>
-  <div id="tm" class="tab-c active">
-    <div class="ex-block">
-      <div class="ex-why"><p class="en">This seems tiny. It's not. The first 2 minutes of your day set the tone for everything.</p><p class="de">Das wirkt winzig. Ist es nicht. Die ersten 2 Minuten bestimmen den Ton für alles.</p></div>
-      <div class="ex-num en">MORNING 1</div><div class="ex-num de">MORGEN 1</div>
-      <div class="ex-title en">The 2-minute grounding</div><div class="ex-title de">Die 2-Minuten-Erdung</div>
-      <div class="ex-body en">Before reaching for your phone: both feet flat on the floor. Five slow breaths. With every exhale – <em>let the night go</em>. With every inhale – <em>arrive in today</em>.</div>
-      <div class="ex-body de">Bevor du zum Handy greifst: beide Füße flach auf den Boden. Fünf langsame Atemzüge. Mit jedem Ausatmen – <em>die Nacht loslassen</em>. Mit jedem Einatmen – <em>im Heute ankommen</em>.</div>
-      <div class="ex-success"><p class="en">→ "That was the most important 2 minutes of your day."</p><p class="de">→ „Das waren die wichtigsten 2 Minuten deines Tages."</p></div>
-      <div class="ex-time en">⏱ 2 minutes</div><div class="ex-time de">⏱ 2 Minuten</div>
-    </div>
-    <div class="ex-block">
-      <div class="ex-why"><p class="en">Warm water with ginger sounds boring. For Vata and Kapha types it's literally medicine. Try 7 days.</p><p class="de">Warmes Wasser mit Ingwer klingt langweilig. Für Vata- und Kapha-Typen ist es buchstäblich Medizin. 7 Tage versuchen.</p></div>
-      <div class="ex-num en">MORNING 2</div><div class="ex-num de">MORGEN 2</div>
-      <div class="ex-title en">Warm water ritual</div><div class="ex-title de">Warmwasser-Ritual</div>
-      <div class="ex-body en">Before coffee: warm water with fresh ginger. <em>Slowly. Consciously.</em> Signal to your body: today we're taking care of ourselves.</div>
-      <div class="ex-body de">Vor dem Kaffee: warmes Wasser mit frischem Ingwer. <em>Langsam. Bewusst.</em> Signal an deinen Körper: heute pflegen wir uns.</div>
-      <div class="ex-time">🫚 5 min</div>
-    </div>
-    <div class="up-hint">
-      <div class="icon">🔥</div>
-      <div class="text en">"<strong>In the Begleitung we build your exact routine together</strong> – based on your Dosha, your life, your real schedule." <a href="begleitung.html">Learn more →</a></div>
-      <div class="text de">„<strong>In der Begleitung bauen wir gemeinsam deine exakte Routine</strong> – auf dein Dosha, dein Leben, deinen echten Alltag." <a href="begleitung.html">Mehr erfahren →</a></div>
-    </div>
-  </div>
-  <div id="tc" class="tab-c">
-    <div class="ex-block">
-      <div class="ex-why"><p class="en">Before you can fix a chakra – you have to feel it. This is that step.</p><p class="de">Bevor du ein Chakra reparieren kannst – musst du es fühlen. Das ist dieser Schritt.</p></div>
-      <div class="ex-num en">CHAKRA WORK 1</div><div class="ex-num de">CHAKREN-ARBEIT 1</div>
-      <div class="ex-title en">Feel your blocked chakra</div><div class="ex-title de">Dein blockiertes Chakra spüren</div>
-      <div class="ex-body en">Place your hand on your most blocked chakra area. Five deep breaths. Don't try to fix anything. Just feel <em>what is there</em>. Heaviness? Pressure? Emptiness?</div>
-      <div class="ex-body de">Lege deine Hand auf den Bereich deines blockiertesten Chakras. Fünf tiefe Atemzüge. Versuche nichts zu reparieren. Spüre einfach <em>was da ist</em>. Schwere? Druck? Leere?</div>
-      <div class="ex-after">
-        <strong class="en">IF YOU FEEL SOMETHING STRONGLY…</strong><strong class="de">WENN DU HIER ETWAS STARK SPÜRST…</strong>
-        <p class="en">"That's exactly where Reiki goes deepest. Alone it's hard to release this. <a href="#" id="wa-chakra">Write to me what you're feeling →</a>"</p>
-        <p class="de">"Das ist genau wo Reiki am tiefsten wirkt. Alleine lässt sich das schwer lösen. <a href="#" id="wa-chakra-de">Schreib mir was du spürst →</a>"</p>
+    <div class="tool-grid">
+      <div class="tool-card" style="--card-accent:rgba(45,122,114,.06);--card-accent-border:rgba(45,122,114,.3)" onclick="show('energie')">
+        <span class="tc-emoji">⚡</span>
+        <div class="tc-title de">Energie-Arbeit</div><div class="tc-title en">Energy Work</div>
+        <div class="tc-desc de">Barrieren lösen. Ausdehnen. Sofort wirksam.</div>
+        <div class="tc-desc en">Release barriers. Expand. Works immediately.</div>
       </div>
-      <div class="ex-time">⏱ 5 min</div>
+      <div class="tool-card" style="--card-accent:rgba(107,76,140,.06);--card-accent-border:rgba(107,76,140,.3)" onclick="show('koerper')">
+        <span class="tc-emoji">🧭</span>
+        <div class="tc-title de">Körpertest</div><div class="tc-title en">Body Test</div>
+        <div class="tc-desc de">Raus aus dem Verstand. Entscheidungen sofort.</div>
+        <div class="tc-desc en">Out of the mind. Decisions immediately.</div>
+      </div>
+      <div class="tool-card" style="--card-accent:rgba(200,169,110,.06);--card-accent-border:rgba(200,169,110,.3)" onclick="show('kreation')">
+        <span class="tc-emoji">🌍</span>
+        <div class="tc-title de">Kreationsraum</div><div class="tc-title en">Creation Space</div>
+        <div class="tc-desc de">Dein Leben aktiv wählen. Jetzt.</div>
+        <div class="tc-desc en">Actively choose your life. Now.</div>
+      </div>
+      <div class="tool-card" style="--card-accent:rgba(212,84,138,.06);--card-accent-border:rgba(212,84,138,.3)" onclick="show('plaene')">
+        <span class="tc-emoji">📋</span>
+        <div class="tc-title de">Deine Pläne</div><div class="tc-title en">Your Plans</div>
+        <div class="tc-desc de">Ernährung, Energie, Bewegung – auf dich abgestimmt.</div>
+        <div class="tc-desc en">Nutrition, energy, movement – tailored to you.</div>
+      </div>
     </div>
-    <div class="ex-block">
-      <div class="ex-num en">CHAKRA WORK 2</div><div class="ex-num de">CHAKREN-ARBEIT 2</div>
-      <div class="ex-title en">Your daily affirmation – out loud</div><div class="ex-title de">Deine tägliche Affirmation – laut</div>
-      <div class="ex-body en">Not as a wish – as a <em>statement of truth</em>.<br><br>Root: <em>"I am safe."</em> · Heart: <em>"I am open to love."</em> · Solar: <em>"I stand in my power."</em> · Throat: <em>"My voice matters."</em> · Third Eye: <em>"I trust my inner knowing."</em><br><br>Say it until you feel it.</div>
-      <div class="ex-body de">Nicht als Wunsch – als <em>Wahrheitsaussage</em>.<br><br>Wurzel: <em>„Ich bin sicher."</em> · Herz: <em>„Ich bin offen für Liebe."</em> · Solar: <em>„Ich stehe in meiner Kraft."</em> · Kehl: <em>„Meine Stimme hat Bedeutung."</em> · Stirn: <em>„Ich vertraue mir."</em><br><br>Sag es bis du es fühlst.</div>
-      <div class="ex-success"><p class="en">→ "This is where something starts to shift. Even if you don't believe it yet."</p><p class="de">→ „Hier beginnt sich etwas zu verschieben. Auch wenn du es noch nicht glaubst."</p></div>
-      <div class="ex-time">🗣️ 3 min</div>
+
+    <!-- WA -->
+    <div class="wa-frame">
+      <p class="de">„Schreib mir was gerade hochkommt.<br>Ich antworte dir persönlich."</p>
+      <p class="en">"Write to me what's coming up.<br>I answer personally."</p>
+      <a class="wa-btn" id="wa-home" href="#" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="de">Jenny schreiben</span><span class="en">Write to Jenny</span>
+      </a>
     </div>
+  </div>
+</div>
+
+<!-- ── QUIZ 2 ──────────────────────────────────────────────── -->
+<div id="sec-quiz2" class="sec">
+  <div class="page-hero" style="--page-glow:rgba(107,76,140,.1)">
+    <div class="pg-tag de">Quiz 2 · Tiefer gehen</div>
+    <div class="pg-tag en">Quiz 2 · Go deeper</div>
+    <h1 class="pg-h1 de">5 Fragen,<br><em>die alles personalisieren.</em></h1>
+    <h1 class="pg-h1 en">5 questions that<br><em>personalise everything.</em></h1>
+    <p class="pg-sub de">Damit deine Pläne und Tools wirklich auf dich abgestimmt sind.</p>
+    <p class="pg-sub en">So your plans and tools are truly tailored to you.</p>
+  </div>
+  <div class="page-content">
+    <div id="q2-container">
+      <!-- Questions rendered by JS -->
+    </div>
+    <div id="q2-result" style="display:none">
+      <div class="gold-quote">
+        <p id="q2-result-text" class="de"></p>
+      </div>
+      <button class="next-btn" onclick="show('home')">
+        <span class="de">Weiter zum Bereich →</span><span class="en">Continue →</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ── ENERGIE-ARBEIT ─────────────────────────────────────── -->
+<div id="sec-energie" class="sec">
+  <div class="page-hero" style="--page-glow:rgba(45,122,114,.1)">
+    <div class="pg-tag de">Tool 1 · Energie-Arbeit</div>
+    <div class="pg-tag en">Tool 1 · Energy Work</div>
+    <h1 class="pg-h1 de">Lass los was<br><em>dich hält.</em></h1>
+    <h1 class="pg-h1 en">Release what<br><em>holds you.</em></h1>
+    <p class="pg-sub de">Nicht analysieren. Direkt ins Energiefeld. Sofort spürbar.</p>
+    <p class="pg-sub en">No analysing. Directly into the energy field. Immediately felt.</p>
+  </div>
+  <div class="page-content">
+    <div class="gold-quote">
+      <p class="de">Mach die Barrieren-Übung wenn du merkst: ich komme nicht weiter, ich stecke fest, etwas zieht mich zurück. Das ist der Moment.</p>
+      <p class="en">Do the barriers exercise when you notice: I'm not moving forward, I'm stuck, something is pulling me back. That's the moment.</p>
+    </div>
+
+    <div class="audio-block">
+      <div class="ab-header">
+        <span class="ab-icon">🎵</span>
+        <div class="ab-info">
+          <strong class="de">Barrieren senken & Ausdehnen</strong>
+          <strong class="en">Lower Barriers & Expand</strong>
+          <span class="de">Lass los was nicht mehr dient – dehne dich aus</span>
+          <span class="en">Release what no longer serves – expand</span>
+        </div>
+      </div>
+      <audio controls class="ab-player" preload="metadata">
+        <source src="Barrieren_senken-ausdehnen.m4a" type="audio/x-m4a">
+        <source src="https://www.travel2transform.de/Barrieren_senken-ausdehnen.m4a" type="audio/mp4">
+      </audio>
+      <p class="ab-note de">🎧 Leg dich hin · Kopfhörer · 15–20 Minuten</p>
+      <p class="ab-note en">🎧 Lie down · Headphones · 15–20 minutes</p>
+    </div>
+
+    <div class="block">
+      <div class="block-tag de">Danach</div><div class="block-tag en">After</div>
+      <div class="block-h de">Was jetzt <em>möglich ist.</em></div>
+      <div class="block-h en">What is now <em>possible.</em></div>
+      <div class="block-body de">Wenn sich etwas gelöst hat – geh direkt in den Kreationsraum. Jetzt ist dein Energiefeld offen. Jetzt kannst du wählen was rein kommt.</div>
+      <div class="block-body en">When something has released – go directly into the creation space. Now your energy field is open. Now you can choose what comes in.</div>
+    </div>
+
     <div class="up-hint">
-      <div class="icon">✨</div>
-      <div class="text en">"This is exactly the work we go deeper into in a personal Reiki session. <strong>Alone you can feel it. Together we can release it.</strong>" <a href="begleitung.html">About the Begleitung →</a></div>
-      <div class="text de">„Das ist genau die Arbeit die wir in einer persönlicher Reiki-Session vertiefen. <strong>Alleine kannst du es fühlen. Zusammen können wir es lösen.</strong>" <a href="begleitung.html">Über die Begleitung →</a></div>
+      <span class="ico">🔥</span>
+      <div class="txt de"><strong>Du willst das mit Jenny machen?</strong><br>In der Begleitung gehen wir direkt zusammen ins Energiefeld. <a href="begleitung.html">Zur Begleitung →</a></div>
+      <div class="txt en"><strong>Want to do this with Jenny?</strong><br>In the guidance we go directly into the energy field together. <a href="begleitung.html">About guidance →</a></div>
     </div>
-  </div>
-  <div id="tr" class="tab-c">
-    <p style="font-size:13px;color:rgba(255,255,255,.35);font-style:italic;margin-bottom:20px" class="en">One question per week. Don't rush.</p>
-    <p style="font-size:13px;color:rgba(255,255,255,.35);font-style:italic;margin-bottom:20px" class="de">Eine Frage pro Woche. Nicht rasen.</p>
-    <div class="reflection">
-      <div class="ref-q en">Week 1: "What have I been carrying that isn't mine?"</div><div class="ref-q de">Woche 1: „Was trage ich mit mir, das nicht meins ist?"</div>
-      <div class="ref-why en">Other people's expectations, old beliefs, fears that were taught to you…</div><div class="ref-why de">Erwartungen anderer, alte Überzeugungen, Ängste die dir beigebracht wurden…</div>
-      <div class="ref-hint en">Write whatever comes. Don't edit it.</div><div class="ref-hint de">Schreib was immer kommt. Nicht editieren.</div>
-      <div class="ref-up"><p class="en">"This is exactly the point where we go deeper in the Begleitung." <a href="begleitung.html">About the Begleitung →</a></p><p class="de">"Das ist genau der Punkt wo wir in der Begleitung tiefer gehen." <a href="begleitung.html">Über die Begleitung →</a></p></div>
-    </div>
-    <div class="reflection">
-      <div class="ref-q en">Week 2: "When do I feel most like myself?"</div><div class="ref-q de">Woche 2: „Wann fühle ich mich am meisten wie ich selbst?"</div>
-      <div class="ref-why en">In those moments – what's different? What's present that's usually missing?</div><div class="ref-why de">In diesen Momenten – was ist anders?</div>
-    </div>
-    <div class="reflection">
-      <div class="ref-q en">Week 3: "What would I do if I weren't afraid?"</div><div class="ref-q de">Woche 3: „Was würde ich tun wenn ich keine Angst hätte?"</div>
-      <div class="ref-why en">Don't think practically. Let the answer come.</div><div class="ref-why de">Nicht praktisch denken. Die Antwort kommen lassen.</div>
-      <div class="ref-up"><p class="en">"If you're unsure about the retreat – this question usually answers it." <a href="#" id="wa-ref3">Write to Jenny →</a></p><p class="de">"Wenn du unsicher bist ob du aufs Retreat gehen sollst – diese Frage beantwortet es." <a href="#" id="wa-ref3-de">Jenny schreiben →</a></p></div>
-    </div>
-    <div class="reflection">
-      <div class="ref-q en">Week 4: "What has shifted in me in these 4 weeks?"</div><div class="ref-q de">Woche 4: „Was hat sich in diesen 4 Wochen in mir verschoben?"</div>
-      <div class="ref-why en">Even small things count. Especially small things.</div><div class="ref-why de">Auch kleine Dinge zählen. Besonders kleine Dinge.</div>
-      <div class="ref-up"><p class="en">"This is usually the moment people feel ready for the next level." <a href="begleitung.html">See what's possible →</a></p><p class="de">"Das ist meistens der Moment wo die Leute merken dass sie bereit sind für die nächste Stufe." <a href="begleitung.html">Sieh was möglich ist →</a></p></div>
-    </div>
-  </div>
-  <div id="te" class="tab-c">
-    <div class="ex-block">
-      <div class="ex-why"><p class="en">Your nervous system doesn't automatically know the day is over. This tells it. The difference between sleeping and actually recovering.</p><p class="de">Dein Nervensystem weiß nicht automatisch dass der Tag vorbei ist. Das sagt es ihm. Der Unterschied zwischen schlafen und wirklich erholen.</p></div>
-      <div class="ex-num en">EVENING 1</div><div class="ex-num de">ABEND 1</div>
-      <div class="ex-title en">The letting-go breath</div><div class="ex-title de">Der Loslassatem</div>
-      <div class="ex-body en">In bed: 4 counts in, hold 4, out 8. <em>The long exhale signals your nervous system: safe to let go now.</em> 5 times.</div>
-      <div class="ex-body de">Im Bett: 4 einatmen, 4 halten, 8 ausatmen. <em>Der lange Ausatem signalisiert: es ist sicher jetzt loszulassen.</em> 5-mal.</div>
-      <div class="ex-success"><p class="en">→ "Your body needed that. Even if you didn't notice."</p><p class="de">→ „Dein Körper hat das gebraucht. Auch wenn du es nicht bemerkt hast."</p></div>
-      <div class="ex-time">🌙 5 min</div>
-    </div>
-    <div class="ex-block">
-      <div class="ex-num en">EVENING 2</div><div class="ex-num de">ABEND 2</div>
-      <div class="ex-title en">3 things that felt real today</div><div class="ex-title de">3 Dinge die sich heute echt angefühlt haben</div>
-      <div class="ex-body en">Not "great" things. Just <em>real</em> ones. A moment of connection. A decision that felt right. A breath you actually felt.</div>
-      <div class="ex-body de">Nicht „tolle" Dinge. Nur <em>echte</em>. Ein Moment der Verbindung. Eine Entscheidung die sich richtig anfühlte.</div>
-      <div class="ex-time">✍️ 3 min</div>
-    </div>
-  </div>
-  <button class="next-btn" onclick="markDone(3);show('s4')"><span class="en">Done → Next: Go Deeper</span><span class="de">Fertig → Weiter: Tiefer gehen</span></button>
-</div>
 
-<!-- STEP 4 -->
-<div id="sec-s4" class="sec fi">
-  <div class="pg-tag en">Step 4 · Go Deeper</div><div class="pg-tag de">Schritt 4 · Tiefer gehen</div>
-  <h1 class="pg-h1 en">When the plan is<br><em>just the beginning.</em></h1>
-  <h1 class="pg-h1 de">Wenn der Plan<br><em>erst der Anfang ist.</em></h1>
-  <p class="pg-sub en">You've done the work. Something has shifted. And now something in you is asking: what's next?</p>
-  <p class="pg-sub de">Du hast die Arbeit gemacht. Etwas hat sich verschoben. Und jetzt fragt etwas in dir: was kommt als nächstes?</p>
-  <div class="pg-div"></div>
-  <div class="up-box">
-    <div class="up-tag en">✦ 4-Week Begleitung</div><div class="up-tag de">✦ 4-Wochen Begleitung</div>
-    <h3 class="up-h en">Work with Jenny <em>directly.</em></h3><h3 class="up-h de">Direkt mit Jenny <em>arbeiten.</em></h3>
-    <p class="up-body en">4 personal Reiki & energy sessions · Vision work · Personalised yoga videos · Meditations · WhatsApp support. For those who want to go deeper than a plan can take you.</p>
-    <p class="up-body de">4 persönliche Reiki- & Energiesessions · Visionsarbeit · Personalisierte Yoga-Videos · Meditationen · WhatsApp-Support. Für die die tiefer gehen wollen als ein Plan sie führen kann.</p>
-    <a href="begleitung.html" class="up-btn en">Learn more about the Begleitung →</a>
-    <a href="begleitung.html" class="up-btn de">Mehr über die Begleitung →</a>
-  </div>
-  <div class="up-box">
-    <div class="up-tag en">✦ The Retreats</div><div class="up-tag de">✦ Die Retreats</div>
-    <h3 class="up-h en">Come with me.<br><em>To Tanzania.</em></h3><h3 class="up-h de">Komm mit mir.<br><em>Nach Tansania.</em></h3>
-    <p class="up-body en">"The plan showed me what I needed. Tanzania showed me who I am."<br><br>The retreat is where everything you've prepared becomes real. In nature. With people who feel like you do.</p>
-    <p class="up-body de">„Der Plan hat mir gezeigt was ich brauche. Tansania hat mir gezeigt wer ich bin."<br><br>Das Retreat ist der Ort wo alles was du vorbereitet hast wirklich wird. In der Natur. Mit Menschen die ähnlich fühlen wie du.</p>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px">
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 18px;flex:1;min-width:150px"><div style="font-size:20px;margin-bottom:6px">🌍</div><div style="font-size:13px;color:rgba(255,255,255,.7);font-weight:500" class="en">Tanzania & Zanzibar</div><div style="font-size:13px;color:rgba(255,255,255,.7);font-weight:500" class="de">Tansania & Sansibar</div><div style="font-size:11px;color:rgba(255,255,255,.3)">11 Jul – 25 Jul 2026</div></div>
-      <div style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 18px;flex:1;min-width:150px"><div style="font-size:20px;margin-bottom:6px">🦁</div><div style="font-size:13px;color:rgba(255,255,255,.7);font-weight:500" class="en">Yoga meets Wilderness</div><div style="font-size:13px;color:rgba(255,255,255,.7);font-weight:500" class="de">Yoga trifft Wildnis</div><div style="font-size:11px;color:rgba(255,255,255,.3)">19 Oct – 23 Oct 2026</div></div>
-    </div>
-    <a href="#" id="wa-retreat" class="up-btn en">Enquire via WhatsApp →</a>
-    <a href="#" id="wa-retreat-de" class="up-btn de">Anfragen via WhatsApp →</a>
-  </div>
-  <div class="wa-frame">
-    <p class="en">"If you're unsure whether this is the right next step – write to me. I answer personally. No pressure."</p>
-    <p class="de">"Wenn du unsicher bist ob das der richtige nächste Schritt ist – schreib mir. Ich antworte persönlich. Kein Druck."</p>
-    <a class="wa-btn" id="wa-s4" href="#" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span class="en">Write to Jenny</span><span class="de">Jenny schreiben</span></a>
+    <button class="next-btn" onclick="show('koerper')">
+      <span class="de">Weiter → Körpertest</span><span class="en">Next → Body Test</span>
+    </button>
   </div>
 </div>
 
-<!-- PRE-TRAVEL -->
-<div id="sec-pretravel" class="sec fi">
-  <div class="pg-tag en">Before the Retreat</div><div class="pg-tag de">Vor der Reise</div>
-  <h1 class="pg-h1 en">You're already on the journey –<br><em>before it begins.</em></h1>
-  <h1 class="pg-h1 de">Du bist schon unterwegs –<br><em>bevor es losgeht.</em></h1>
-  <p class="pg-sub en">The more open you arrive, the more will happen once you're there.</p>
-  <p class="pg-sub de">Je offener du ankommst, desto mehr wird passieren wenn du dort bist.</p>
-  <div class="pg-div"></div>
-  <div class="ex-block">
-    <div class="ex-why"><p class="en">Most people see a retreat as a holiday. It's not. This mindset shift is the most important preparation you can do.</p><p class="de">Die meisten sehen ein Retreat als Urlaub. Ist es nicht. Dieser Perspektivwechsel ist die wichtigste Vorbereitung.</p></div>
-    <div class="ex-title en">Why this journey is different</div><div class="ex-title de">Warum diese Reise anders ist</div>
-    <div class="ex-body en">Most holidays are <em>escaping from something</em>. This journey is <em>moving toward something</em>. You're not going to forget your life. You're going to understand it better.</div>
-    <div class="ex-body de">Die meisten Urlaube sind <em>Flucht vor etwas</em>. Diese Reise ist <em>Bewegung auf etwas zu</em>. Du gehst nicht hin um dein Leben zu vergessen. Du gehst hin um es besser zu verstehen.</div>
+<!-- ── KÖRPERTEST ─────────────────────────────────────────── -->
+<div id="sec-koerper" class="sec">
+  <div class="page-hero" style="--page-glow:rgba(107,76,140,.1)">
+    <div class="pg-tag de">Tool 2 · Körpertest</div>
+    <div class="pg-tag en">Tool 2 · Body Test</div>
+    <h1 class="pg-h1 de">Raus aus dem Verstand.<br><em>Rein in die Wahrheit.</em></h1>
+    <h1 class="pg-h1 en">Out of the mind.<br><em>Into the truth.</em></h1>
+    <p class="pg-sub de">Dein Körper weiß die Antwort. Immer. Du musst nur lernen wie du fragst.</p>
+    <p class="pg-sub en">Your body knows the answer. Always. You just need to learn how to ask.</p>
   </div>
-  <div class="reflection">
-    <div class="ref-q en">"What do I want to leave behind on this journey?"</div><div class="ref-q de">„Was möchte ich auf dieser Reise zurücklassen?"</div>
-    <div class="ref-why en">A pattern. A belief. A way of seeing yourself. Be specific.</div><div class="ref-why de">Ein Muster. Eine Überzeugung. Eine Art sich selbst zu sehen.</div>
-  </div>
-  <div class="reflection">
-    <div class="ref-q en">"And what do I want to bring back?"</div><div class="ref-q de">„Und was möchte ich mitbringen?"</div>
-    <div class="ref-why en">Not things. Something internal. Clarity, courage, a sense of self…</div><div class="ref-why de">Keine Dinge. Etwas Inneres. Klarheit, Mut, ein Gefühl von sich selbst…</div>
+  <div class="page-content">
+    <div class="gold-quote">
+      <p class="de">Nutze den Körpertest für jede Entscheidung – groß oder klein. Nicht nur einmal. Täglich.</p>
+      <p class="en">Use the body test for every decision – big or small. Not just once. Daily.</p>
+    </div>
+
+    <div class="video-block">
+      <iframe src="https://www.youtube.com/embed/ypP8mWpcTwY" title="Körpertest" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="vb-cap">
+        <strong class="de">📹 Körpertest – Anleitung von Jenny</strong>
+        <strong class="en">📹 Body Test – Guide by Jenny</strong>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="block-tag de">Entscheidungen sofort</div><div class="block-tag en">Instant decisions</div>
+      <div class="block-h de">So nutzt du ihn <em>täglich.</em></div>
+      <div class="block-h en">How to use it <em>daily.</em></div>
+      <div class="k-steps">
+        <div class="k-step"><span class="ks-num">1</span><div class="ks-text de">Entscheidung halten – <em>ohne nachzudenken</em></div><div class="ks-text en">Hold the decision – <em>without thinking</em></div></div>
+        <div class="k-step"><span class="ks-num">2</span><div class="ks-text de">Körper spüren: <strong>vorwärts = ja / zurück = nein</strong></div><div class="ks-text en">Feel the body: <strong>forward = yes / back = no</strong></div></div>
+        <div class="k-step"><span class="ks-num">3</span><div class="ks-text de">Sofort handeln – <em>kein Verstand dazwischen</em></div><div class="ks-text en">Act immediately – <em>no mind in between</em></div></div>
+      </div>
+    </div>
+
+    <button class="next-btn" onclick="show('kreation')">
+      <span class="de">Weiter → Kreationsraum</span><span class="en">Next → Creation Space</span>
+    </button>
   </div>
 </div>
 
-<!-- CHECKLIST -->
-<div id="sec-checklist" class="sec fi">
-  <div class="pg-tag en">Before the Retreat</div><div class="pg-tag de">Vor der Reise</div>
-  <h1 class="pg-h1 en">The practical stuff –<br><em>short & clear.</em></h1>
-  <h1 class="pg-h1 de">Das Praktische –<br><em>kurz & klar.</em></h1>
-  <div class="pg-div"></div>
-  <p style="font-size:13px;color:rgba(255,255,255,.4);margin-bottom:20px;font-style:italic" class="en">Click to check off.</p>
-  <p style="font-size:13px;color:rgba(255,255,255,.4);margin-bottom:20px;font-style:italic" class="de">Klicken zum Abhaken.</p>
-  <div id="cl-wrap"></div>
-  <div style="margin-top:24px;padding:20px;background:rgba(45,122,114,.06);border:1px solid rgba(45,122,114,.15);border-radius:12px">
-    <p style="font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:14px" class="en">Questions about the retreat? Write to Jenny.</p>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:rgba(255,255,255,.5);line-height:1.7;margin-bottom:14px" class="de">Fragen zum Retreat? Schreib Jenny.</p>
-    <a class="wa-btn" id="wa-cl" href="#" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg><span class="en">Write to Jenny</span><span class="de">Jenny schreiben</span></a>
+<!-- ── KREATIONSRAUM ──────────────────────────────────────── -->
+<div id="sec-kreation" class="sec">
+  <div class="page-hero" style="--page-glow:rgba(200,169,110,.08)">
+    <div class="pg-tag de">Tool 3 · Kreationsraum</div>
+    <div class="pg-tag en">Tool 3 · Creation Space</div>
+    <h1 class="pg-h1 de">Du kreierst dein Leben.<br><em>Jetzt. Hier. Sofort.</em></h1>
+    <h1 class="pg-h1 en">You create your life.<br><em>Now. Here. Immediately.</em></h1>
+    <p class="pg-sub de">Nicht warten bis sich etwas ändert. Du bist der Ursprung.</p>
+    <p class="pg-sub en">Not waiting for things to change. You are the source.</p>
+  </div>
+  <div class="page-content">
+    <div class="gold-quote">
+      <p class="de">Der Kreationsraum ist der Ort jenseits des Verstandes – wo Energie noch formbar ist. Hier triffst du echte Entscheidungen. Hier kreierst du.</p>
+      <p class="en">The creation space is the place beyond the mind – where energy is still shapeable. Here you make real decisions. Here you create.</p>
+    </div>
+
+    <div class="audio-block">
+      <div class="ab-header">
+        <span class="ab-icon">🎵</span>
+        <div class="ab-info">
+          <strong class="de">Deine Welt 2.0</strong>
+          <strong class="en">Your World 2.0</strong>
+          <span class="de">Rein in den Kreationsraum – dein geiles Leben kreieren</span>
+          <span class="en">Into the creation space – create your amazing life</span>
+        </div>
+      </div>
+      <audio controls class="ab-player" preload="metadata">
+        <source src="Deine_Welt.m4a" type="audio/x-m4a">
+        <source src="https://www.travel2transform.de/Deine_Welt.m4a" type="audio/mp4">
+      </audio>
+      <p class="ab-note de">🎧 Mach diese Audio nach der Barrieren-Übung · Deine Vision bereit haben</p>
+      <p class="ab-note en">🎧 Do this after the barriers exercise · Have your vision ready</p>
+    </div>
+
+    <div class="block">
+      <div class="block-tag de">Täglich</div><div class="block-tag en">Daily</div>
+      <div class="block-h de">So kreierst du <em>jeden Tag.</em></div>
+      <div class="block-h en">How to create <em>every day.</em></div>
+      <div class="k-steps">
+        <div class="k-step"><span class="ks-num">1</span><div class="ks-text de"><strong>Verstand aus</strong> – kein Analysieren, kein Abwägen</div><div class="ks-text en"><strong>Mind off</strong> – no analysing, no weighing up</div></div>
+        <div class="k-step"><span class="ks-num">2</span><div class="ks-text de"><strong>Vision rein</strong> – spür wie es wäre wenn es bereits so ist</div><div class="ks-text en"><strong>Vision in</strong> – feel how it would be if it's already so</div></div>
+        <div class="k-step"><span class="ks-num">3</span><div class="ks-text de"><strong>Wählen</strong> – laut sagen: „Ich wähle das. Ich bin bereit."</div><div class="ks-text en"><strong>Choose</strong> – say aloud: "I choose this. I am ready."</div></div>
+        <div class="k-step"><span class="ks-num">4</span><div class="ks-text de"><strong>Handle</strong> – als ob es bereits wahr ist</div><div class="ks-text en"><strong>Act</strong> – as if it is already true</div></div>
+      </div>
+    </div>
+
+    <button class="next-btn" onclick="show('plaene')">
+      <span class="de">Weiter → Deine Pläne</span><span class="en">Next → Your Plans</span>
+    </button>
+  </div>
+</div>
+
+<!-- ── PLÄNE ──────────────────────────────────────────────── -->
+<div id="sec-plaene" class="sec">
+  <div class="page-hero" style="--page-glow:rgba(212,84,138,.08)">
+    <div class="pg-tag de">Deine Pläne</div>
+    <div class="pg-tag en">Your Plans</div>
+    <h1 class="pg-h1 de">Alles auf<br><em>dich abgestimmt.</em></h1>
+    <h1 class="pg-h1 en">Everything tailored<br><em>to you.</em></h1>
+    <p class="pg-sub de" id="plans-ayurveda-note-de"></p>
+    <p class="pg-sub en" id="plans-ayurveda-note-en"></p>
+  </div>
+  <div class="page-content">
+    <div id="dl-dosha-row" class="dl-row">
+      <div class="dl-left"><div class="dl-ico">🌿</div><div class="dl-info"><strong id="dl-dosha-t-de" class="de">Dein Ernährungsplan</strong><strong id="dl-dosha-t-en" class="en">Your Nutrition Plan</strong><span class="de">2 Wochen · auf deinen Zustand abgestimmt</span><span class="en">2 weeks · tailored to your state</span></div></div>
+      <a id="dl-dosha" href="#" class="dl-btn" target="_blank" download><span class="de">Laden ↓</span><span class="en">Download ↓</span></a>
+    </div>
+    <div id="dl-chakra-row" class="dl-row">
+      <div class="dl-left"><div class="dl-ico">✨</div><div class="dl-info"><strong class="de">Dein Energie-Plan</strong><strong class="en">Your Energy Plan</strong><span class="de">4 Wochen · Rituale, Affirmationen</span><span class="en">4 weeks · rituals, affirmations</span></div></div>
+      <a id="dl-chakra" href="#" class="dl-btn" target="_blank" download><span class="de">Laden ↓</span><span class="en">Download ↓</span></a>
+    </div>
+    <div id="dl-yoga-row" class="dl-row">
+      <div class="dl-left"><div class="dl-ico">🧘</div><div class="dl-info"><strong id="dl-yoga-t-de" class="de">Dein Bewegungsplan</strong><strong id="dl-yoga-t-en" class="en">Your Movement Plan</strong><span class="de">4 Wochen · tägliche Sequenzen</span><span class="en">4 weeks · daily sequences</span></div></div>
+      <a id="dl-yoga" href="#" class="dl-btn" target="_blank" download><span class="de">Laden ↓</span><span class="en">Download ↓</span></a>
+    </div>
+    <div class="dl-row" style="border-color:rgba(200,169,110,.2);background:rgba(200,169,110,.04)">
+      <div class="dl-left"><div class="dl-ico">📖</div><div class="dl-info"><strong class="de">Mini-Guide</strong><strong class="en">Mini-Guide</strong><span class="de">Visionsarbeit · Audio · Video · Kreationsraum</span><span class="en">Vision work · Audio · Video · Creation Space</span></div></div>
+      <a href="miniguide.html" class="dl-btn" target="_blank" style="background:rgba(200,169,110,.2);color:var(--gold);border:1px solid rgba(200,169,110,.3)"><span class="de">Öffnen ↗</span><span class="en">Open ↗</span></a>
+    </div>
+
+    <div class="up-hint" style="margin-top:20px">
+      <span class="ico">✨</span>
+      <div class="txt de">„Die Pläne zeigen das <strong>Was</strong>. Die Begleitung zeigt warum es noch nicht klappt – und ändert es." <a href="begleitung.html">Zur Begleitung →</a></div>
+      <div class="txt en">"The plans show the <strong>what</strong>. The guidance shows why it's not working yet – and changes it." <a href="begleitung.html">About guidance →</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── BEGLEITUNG HINT ────────────────────────────────────── -->
+<div id="sec-begleitung-hint" class="sec">
+  <div class="page-hero" style="--page-glow:rgba(212,84,138,.1)">
+    <div class="pg-tag de">Tiefer gehen</div>
+    <div class="pg-tag en">Go deeper</div>
+    <h1 class="pg-h1 de">Wenn du bereit bist<br><em>wirklich loszulegen.</em></h1>
+    <h1 class="pg-h1 en">When you're ready<br><em>to truly go all in.</em></h1>
+    <p class="pg-sub de">4 Wochen direkte Begleitung. Energiearbeit. Persönlich.</p>
+    <p class="pg-sub en">4 weeks direct guidance. Energy work. Personal.</p>
+  </div>
+  <div class="page-content">
+    <div class="gold-quote">
+      <p class="de">„Alleine kannst du viel. Zusammen geht es schneller, tiefer und nachhaltiger."</p>
+      <p class="en">"Alone you can do a lot. Together it goes faster, deeper and more lasting."</p>
+    </div>
+    <div class="block">
+      <div class="block-tag">297€ · 4 Wochen</div>
+      <div class="block-h de">Was du <em>bekommst.</em></div>
+      <div class="block-h en">What you <em>get.</em></div>
+      <div class="k-steps" style="margin-top:12px">
+        <div class="k-step"><span class="ks-num">⚡</span><div class="ks-text de">Direkte Energiearbeit – wir gehen gemeinsam ins Energiefeld</div><div class="ks-text en">Direct energy work – we go into the energy field together</div></div>
+        <div class="k-step"><span class="ks-num">💬</span><div class="ks-text de">WhatsApp täglich – ich antworte persönlich, kein Skript</div><div class="ks-text en">WhatsApp daily – I answer personally, no script</div></div>
+        <div class="k-step"><span class="ks-num">🗺️</span><div class="ks-text de">Klare Struktur – du weißt immer was als nächstes kommt</div><div class="ks-text en">Clear structure – you always know what comes next</div></div>
+        <div class="k-step"><span class="ks-num">📞</span><div class="ks-text de">Optional: gemeinsamer Call – wenn du ihn brauchst</div><div class="ks-text en">Optional: shared call – when you need it</div></div>
+      </div>
+    </div>
+    <div class="wa-frame">
+      <p class="de">„Wenn du spürst: ja, ich bin bereit –<br>dann schreib mir einfach."</p>
+      <p class="en">"When you feel: yes, I'm ready –<br>just write to me."</p>
+      <a class="wa-btn" id="wa-beg" href="#" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="de">Jenny schreiben →</span><span class="en">Write to Jenny →</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ── RETREATS ───────────────────────────────────────────── -->
+<div id="sec-retreats" class="sec">
+  <div class="page-hero" style="--page-glow:rgba(45,122,114,.1)">
+    <div class="pg-tag">Retreats 2026</div>
+    <h1 class="pg-h1 de">Komm mit mir.<br><em>Raus. Weit weg. Tief rein.</em></h1>
+    <h1 class="pg-h1 en">Come with me.<br><em>Away. Far out. Deep in.</em></h1>
+    <p class="pg-sub de">Wenn du spürst dass dich das ruft – vertrau dem.</p>
+    <p class="pg-sub en">If you feel this calling you – trust that.</p>
+  </div>
+  <div class="page-content">
+    <div class="block" style="--card-accent:rgba(45,122,114,.06)">
+      <div class="tc-emoji" style="font-size:32px;margin-bottom:10px">🌍</div>
+      <div class="block-h de">Tansania & <em>Sansibar</em></div>
+      <div class="block-h en">Tanzania & <em>Zanzibar</em></div>
+      <div class="block-body de" style="margin:8px 0">11. Juli – 25. Juli 2026</div>
+      <div class="block-body en" style="margin:8px 0">11 Jul – 25 Jul 2026</div>
+    </div>
+    <div class="block">
+      <div class="tc-emoji" style="font-size:32px;margin-bottom:10px">🦁</div>
+      <div class="block-h de">Yoga trifft <em>Wildnis</em></div>
+      <div class="block-h en">Yoga meets <em>Wilderness</em></div>
+      <div class="block-body de" style="margin:8px 0">19. Oktober – 23. Oktober 2026</div>
+      <div class="block-body en" style="margin:8px 0">19 Oct – 23 Oct 2026</div>
+    </div>
+    <div class="wa-frame">
+      <p class="de">„Anfragen, Fragen, einfach melden –<br>ich antworte dir persönlich."</p>
+      <p class="en">"Questions, enquiries, just reach out –<br>I'll answer personally."</p>
+      <a class="wa-btn" id="wa-retreat" href="#" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="de">Retreat anfragen →</span><span class="en">Enquire about retreat →</span>
+      </a>
+    </div>
   </div>
 </div>
 
@@ -487,88 +580,186 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
 </div>
 
 <script>
-// AUTH
+// ── AUTH ────────────────────────────────────────────────────
 (function(){if(!localStorage.getItem('t2t-member')){window.location.href='login.html';}})();
 
 const BASE='https://www.travel2transform.de/';
 const PDF_MAP={dosha:{vata:'plan_vata',pitta:'plan_pitta',kapha:'plan_kapha'},chakra:{lower:'chakra_lower',middle:'chakra_middle',upper:'chakra_upper'},yoga:{restorative:'yoga_restorative',strength:'yoga_vinyasa',balance:'yoga_hatha',spiritual:'yoga_kundalini'}};
-let currentLang='en';
-let done=JSON.parse(localStorage.getItem('t2t-steps')||'[]');
+let lang='de';
 
-function setLang(l){currentLang=l;document.body.className='lang-'+l;document.getElementById('btn-en').classList.toggle('active',l==='en');document.getElementById('btn-de').classList.toggle('active',l==='de');localStorage.setItem('t2t-lang',l);updateWA(l);buildChecklist(l);}
+// ── LANG ────────────────────────────────────────────────────
+function setLang(l){lang=l;document.body.className='lang-'+l;document.getElementById('btn-de').classList.toggle('active',l==='de');document.getElementById('btn-en').classList.toggle('active',l==='en');localStorage.setItem('t2t-lang',l);updateWA();loadProfile();}
 
-function show(id){document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));document.getElementById('sec-'+id).classList.add('active');document.querySelectorAll('.sb-item').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.sb-item').forEach(b=>{if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes("'"+id+"'"))b.classList.add('active');});window.scrollTo(0,0);document.querySelector('.sidebar').classList.remove('open');}
-
-function showTab(id,btn){const p=btn.closest('.sec');p.querySelectorAll('.tab-c').forEach(t=>t.classList.remove('active'));p.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
-
-function markDone(step){if(!done.includes(step)){done.push(step);localStorage.setItem('t2t-steps',JSON.stringify(done));}updateProgress();}
-
-function updateProgress(){
-  const pct=Math.round((done.length/4)*100);
-  const f=document.getElementById('pfill');const p=document.getElementById('ppct');
-  if(f)setTimeout(()=>f.style.width=pct+'%',300);if(p)p.textContent=pct+'%';
-  const l=currentLang;
-  const msgs={en:['"You\'re further than most."',"Most people stop here. You didn't.",'"Something is already shifting."','The fact that you\'re here matters.','"You\'re doing the work most people only talk about."','This is what real change looks like.','"You\'ve come further than you know."','Now it\'s time to go even deeper.','"You\'ve done something most people never do."',"What's your next step?"],de:['„Du bist weiter als die meisten."','Die meisten hören hier auf. Du nicht.','„Etwas verschiebt sich bereits."','Die Tatsache dass du hier bist bedeutet etwas.','„Du machst die Arbeit über die die meisten nur reden."','So sieht echte Veränderung aus.','„Du bist weiter gekommen als du weißt."','Jetzt ist es Zeit noch tiefer zu gehen.','„Du hast etwas getan was die meisten nie tun."','Was ist dein nächster Schritt?']};
-  const i=Math.min(done.length,4)*2;
-  const m=document.getElementById('pmsg');const s=document.getElementById('psub');
-  if(m)m.textContent=msgs[l][i]||msgs[l][0];if(s)s.textContent=msgs[l][i+1]||msgs[l][1];
-  [1,2,3,4].forEach(n=>{const e=document.getElementById('sn'+n);if(e&&done.includes(n)){e.textContent='✓';e.style.background='rgba(45,122,114,.3)';e.style.borderColor='var(--tl)';e.style.color='var(--tl)';}});
+// ── NAV ─────────────────────────────────────────────────────
+function show(id){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
+  const el=document.getElementById('sec-'+id);
+  if(el){el.classList.add('active');el.scrollIntoView?el.scrollIntoView({block:'start'}):null;}
+  document.querySelectorAll('.sb-item').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(b=>{if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes("'"+id+"'"))b.classList.add('active');});
+  window.scrollTo(0,0);
+  document.querySelector('.sidebar').classList.remove('open');
 }
 
-function updateWA(l){
-  const b='https://wa.me/4917624238972?text=';
-  const map={'wa-home':l==='en'?'Hello%20Jenny!%20I%27m%20in%20my%20member%20area%20and%20wanted%20to%20share%20what%27s%20coming%20up%20for%20me.':'Hallo%20Jenny!%20Ich%20wollte%20teilen%20was%20bei%20mir%20gerade%20hochkommt.','wa-s1':l==='en'?'Hello%20Jenny!%20Something%20is%20coming%20up%20for%20me%20in%20the%20mental%20preparation.':'Hallo%20Jenny!%20Etwas%20kommt%20bei%20mir%20hoch.','wa-s1-de':l==='en'?'Hello%20Jenny!%20Something%20is%20coming%20up.':'Hallo%20Jenny!%20Etwas%20kommt%20bei%20mir%20hoch.','wa-s1-trigger':l==='en'?'Hello%20Jenny!%20Something%20was%20triggered%20for%20me.':'Hallo%20Jenny!%20Etwas%20wurde%20getriggert.','wa-s1-trigger-de':l==='en'?'Hello%20Jenny!%20Something%20was%20triggered.':'Hallo%20Jenny!%20Etwas%20wurde%20bei%20mir%20getriggert.','wa-s2':l==='en'?'Hello%20Jenny!%20I%20have%20a%20question%20about%20my%20plans.':'Hallo%20Jenny!%20Ich%20habe%20eine%20Frage%20zu%20meinen%20Pl%C3%A4nen.','wa-s2-de':l==='en'?'Hello%20Jenny!%20Question%20about%20plans.':'Hallo%20Jenny!%20Frage%20zu%20meinen%20Pl%C3%A4nen.','wa-chakra':l==='en'?'Hello%20Jenny!%20I%27m%20doing%20chakra%20work%20and%20something%20strong%20is%20coming%20up.':'Hallo%20Jenny!%20Ich%20mache%20Chakren-Arbeit%20und%20etwas%20Starkes%20kommt%20hoch.','wa-chakra-de':'Hallo%20Jenny!%20Etwas%20Starkes%20kommt%20bei%20der%20Chakren-Arbeit%20hoch.','wa-ref3':l==='en'?'Hello%20Jenny!%20I%27m%20reflecting%20on%20whether%20the%20retreat%20is%20right%20for%20me.':'Hallo%20Jenny!%20Ich%20reflektiere%20ob%20das%20Retreat%20das%20Richtige%20f%C3%BCr%20mich%20ist.','wa-ref3-de':'Hallo%20Jenny!%20Ich%20reflektiere%20%C3%BCber%20das%20Retreat.','wa-s4':l==='en'?'Hello%20Jenny!%20I%27d%20like%20to%20know%20more%20about%20going%20deeper.':'Hallo%20Jenny!%20Ich%20m%C3%B6chte%20mehr%20%C3%BCber%20das%20Tiefer-Gehen%20wissen.','wa-retreat':l==='en'?'Hello%20Jenny!%20I%27m%20interested%20in%20the%20Tanzania%20retreat.':'Hallo%20Jenny!%20Ich%20interessiere%20mich%20f%C3%BCr%20das%20Tansania-Retreat.','wa-retreat-de':'Hallo%20Jenny!%20Ich%20interessiere%20mich%20f%C3%BCr%20das%20Tansania-Retreat.','wa-cl':l==='en'?'Hello%20Jenny!%20I%20have%20a%20question%20about%20the%20retreat.':'Hallo%20Jenny!%20Frage%20zum%20Retreat.'};
-  Object.entries(map).forEach(([id,msg])=>{const e=document.getElementById(id);if(e)e.href=b+msg;});
+// ── QUIZ 2 ──────────────────────────────────────────────────
+const Q2 = [
+  {
+    de:'Wie bewegst du dich am liebsten?',
+    en:'How do you most love to move?',
+    opts:[
+      {de:'Sanft & fließend – ich brauche Ruhe',    en:'Soft & flowing – I need calm',      y:'restorative'},
+      {de:'Kraftvoll & intensiv – ich will schwitzen', en:'Powerful & intense – I want to sweat', y:'strength'},
+      {de:'Ruhig & präzise – mit Fokus',             en:'Calm & precise – with focus',        y:'balance'},
+      {de:'Spirituell & tief – Verbindung pur',      en:'Spiritual & deep – pure connection', y:'spiritual'},
+    ]
+  },
+  {
+    de:'Was brauchst du gerade am meisten?',
+    en:'What do you need most right now?',
+    opts:[
+      {de:'Erdung & Wärme',           en:'Grounding & warmth',        d:'vata'},
+      {de:'Abkühlung & Loslassen',    en:'Cooling & releasing',       d:'pitta'},
+      {de:'Aktivierung & Feuer',      en:'Activation & fire',         d:'kapha'},
+      {de:'Tiefe & Verbindung',       en:'Depth & connection',        d:'vata'},
+    ]
+  },
+  {
+    de:'Wie schläfst du?',
+    en:'How do you sleep?',
+    opts:[
+      {de:'Schlecht – viele Gedanken nachts',  en:'Badly – lots of thoughts at night', d:'vata'},
+      {de:'Zu heiß – ich wache schwitzig auf', en:'Too hot – I wake up sweaty',        d:'pitta'},
+      {de:'Zu viel – ich könnte ewig schlafen', en:'Too much – I could sleep forever', d:'kapha'},
+      {de:'Tief aber seltsame Träume',         en:'Deep but strange dreams',           d:'vata'},
+    ]
+  },
+  {
+    de:'Was passiert wenn du unter Stress stehst?',
+    en:'What happens when you\'re under stress?',
+    opts:[
+      {de:'Ich werde ängstlich & rastlos',    en:'I become anxious & restless',      d:'vata',  c:'root'},
+      {de:'Ich werde gereizt & kritisch',     en:'I become irritable & critical',    d:'pitta', c:'solar'},
+      {de:'Ich ziehe mich zurück & esse',     en:'I withdraw & eat',                 d:'kapha', c:'sacral'},
+      {de:'Ich verliere die Verbindung zu mir', en:'I lose connection to myself',     d:'vata',  c:'crown'},
+    ]
+  },
+  {
+    de:'Was zieht dich am meisten an?',
+    en:'What attracts you most?',
+    opts:[
+      {de:'Meditation & Stille',              en:'Meditation & silence',             c:'crown',   y:'spiritual'},
+      {de:'Bewegung & Schwitzen',             en:'Movement & sweating',              c:'solar',   y:'strength'},
+      {de:'Kreativität & Ausdruck',           en:'Creativity & expression',          c:'sacral',  y:'balance'},
+      {de:'Heilung & Verbindung',             en:'Healing & connection',             c:'heart',   y:'restorative'},
+    ]
+  },
+];
+
+let q2Idx=0;
+let q2Scores={vata:0,pitta:0,kapha:0,root:0,sacral:0,solar:0,heart:0,crown:0,restorative:0,strength:0,balance:0,spiritual:0};
+
+function renderQ2(){
+  const c=document.getElementById('q2-container');
+  if(!c)return;
+  if(q2Idx>=Q2.length){finishQ2();return;}
+  const q=Q2[q2Idx];
+  const l=lang;
+  c.innerHTML=`
+    <div style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--pink);margin-bottom:12px;opacity:.7">${q2Idx+1} / ${Q2.length}</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:white;margin-bottom:20px;line-height:1.3">${q[l]}</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      ${q.opts.map((o,i)=>`
+        <button onclick="pickQ2(${i})" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 18px;text-align:left;cursor:pointer;color:rgba(255,255,255,.65);font-size:14px;font-family:'DM Sans',sans-serif;transition:all .2s;line-height:1.5" onmouseover="this.style.background='rgba(45,122,114,.08)';this.style.borderColor='rgba(45,122,114,.25)'" onmouseout="this.style.background='rgba(255,255,255,.03)';this.style.borderColor='rgba(255,255,255,.08)'">${o[l]}</button>
+      `).join('')}
+    </div>`;
 }
 
+function pickQ2(i){
+  const q=Q2[q2Idx];
+  const o=q.opts[i];
+  if(o.d)q2Scores[o.d]=(q2Scores[o.d]||0)+1;
+  if(o.c)q2Scores[o.c]=(q2Scores[o.c]||0)+1;
+  if(o.y)q2Scores[o.y]=(q2Scores[o.y]||0)+1;
+  q2Idx++;
+  renderQ2();
+}
+
+function finishQ2(){
+  // Get top scores
+  const dosha=Object.entries({vata:q2Scores.vata,pitta:q2Scores.pitta,kapha:q2Scores.kapha}).sort((a,b)=>b[1]-a[1])[0][0];
+  const chakraMap={root:'lower',sacral:'lower',solar:'lower',heart:'middle',throat:'middle',thirdeye:'upper',crown:'upper'};
+  const chakra=Object.entries({root:q2Scores.root,sacral:q2Scores.sacral,solar:q2Scores.solar,heart:q2Scores.heart,crown:q2Scores.crown}).sort((a,b)=>b[1]-a[1])[0][0];
+  const yoga=Object.entries({restorative:q2Scores.restorative,strength:q2Scores.strength,balance:q2Scores.balance,spiritual:q2Scores.spiritual}).sort((a,b)=>b[1]-a[1])[0][0];
+
+  // Save to profile
+  const p=JSON.parse(localStorage.getItem('t2t-profile')||'{}');
+  p.dosha=dosha;p.chakra=chakra;p.chakraGroup=chakraMap[chakra]||'lower';p.yoga=yoga;
+  localStorage.setItem('t2t-profile',JSON.stringify(p));
+
+  document.getElementById('q2-container').style.display='none';
+  document.getElementById('q2-result').style.display='block';
+
+  const stateDE={vata:'Im Kopf 💭',pitta:'Trägt viel 🔥',kapha:'Energie aufwecken 🌿'};
+  const stateEN={vata:'In the head 💭',pitta:'Carrying a lot 🔥',kapha:'Energy needs a spark 🌿'};
+  document.getElementById('q2-result-text').textContent=lang==='de'
+    ?`Perfekt – deine Pläne sind jetzt auf dich abgestimmt. Dein Zustand: ${stateDE[dosha]}. Deine Pläne und Übungen passen jetzt genau dazu.`
+    :`Perfect – your plans are now tailored to you. Your state: ${stateEN[dosha]}. Your plans and exercises now fit exactly.`;
+
+  loadProfile();
+  updateSidebarState();
+}
+
+// ── PROFILE & DOWNLOADS ─────────────────────────────────────
 function loadProfile(){
   const p=JSON.parse(localStorage.getItem('t2t-profile')||'{}');
-  const l=localStorage.getItem('t2t-lang')||'en';
-  const dn={vata:'Vata 🌬️',pitta:'Pitta 🔥',kapha:'Kapha 🌿'};
-  const yn={restorative:'Restorative 🌙',strength:'Vinyasa 🔥',balance:'Hatha ⚖️',spiritual:'Kundalini ✨'};
-  document.getElementById('sb-name').textContent=dn[p.dosha]||'Welcome 🌿';
-  document.getElementById('sb-type').textContent=yn[p.yoga]||'';
-  const dd=document.getElementById('dl-dosha');const dc=document.getElementById('dl-chakra');const dy=document.getElementById('dl-yoga');
-  if(dd&&p.dosha&&p.dosha!=='unknown'){dd.href=BASE+PDF_MAP.dosha[p.dosha]+'_'+l+'.pdf';const t=document.getElementById('dl-dosha-t');const td=document.getElementById('dl-dosha-t-de');const n=p.dosha.charAt(0).toUpperCase()+p.dosha.slice(1);if(t)t.textContent='Your '+n+' Nutrition Plan';if(td)td.textContent='Dein '+n+'-Ernährungsplan';}
-  if(dc&&p.chakra&&p.chakra!=='unknown')dc.href=BASE+PDF_MAP.chakra[p.chakra]+'.pdf';
-  if(dy&&p.yoga){dy.href=BASE+PDF_MAP.yoga[p.yoga]+'.pdf';const n=yn[p.yoga]?.replace(/[🌙🔥⚖️✨]/g,'').trim()||'';const t=document.getElementById('dl-yoga-t');const td=document.getElementById('dl-yoga-t-de');if(t)t.textContent='Your '+n+' Plan';if(td)td.textContent='Dein '+n+'-Plan';}
+  const l=localStorage.getItem('t2t-lang')||'de';
+  if(!p.dosha)return;
+
+  // Update plan links
+  const dd=document.getElementById('dl-dosha');
+  const dc=document.getElementById('dl-chakra');
+  const dy=document.getElementById('dl-yoga');
+  if(dd&&p.dosha)dd.href=BASE+PDF_MAP.dosha[p.dosha]+'_'+l+'.pdf';
+  if(dc&&p.chakra)dc.href=BASE+(PDF_MAP.chakra[p.chakraGroup||'lower']||'chakra_lower')+'.pdf';
+  if(dy&&p.yoga)dy.href=BASE+PDF_MAP.yoga[p.yoga]+'.pdf';
+
+  // Ayurveda context note in plans
+  const noteDE={vata:'Dein Zustand entspricht dem Vata-Typ 🌬️ – Luft & Äther. Deine Pläne bringen Wärme, Erdung und Struktur.',pitta:'Dein Zustand entspricht dem Pitta-Typ 🔥 – Feuer & Wasser. Deine Pläne kühlen, beruhigen und öffnen.',kapha:'Dein Zustand entspricht dem Kapha-Typ 🌿 – Erde & Wasser. Deine Pläne aktivieren, entzünden und bewegen.'};
+  const noteEN={vata:'Your state corresponds to the Vata type 🌬️ – Air & Ether. Your plans bring warmth, grounding and structure.',pitta:'Your state corresponds to the Pitta type 🔥 – Fire & Water. Your plans cool, calm and open.',kapha:'Your state corresponds to the Kapha type 🌿 – Earth & Water. Your plans activate, ignite and move.'};
+  const nDE=document.getElementById('plans-ayurveda-note-de');
+  const nEN=document.getElementById('plans-ayurveda-note-en');
+  if(nDE&&p.dosha)nDE.textContent=noteDE[p.dosha]||'';
+  if(nEN&&p.dosha)nEN.textContent=noteEN[p.dosha]||'';
+
+  updateSidebarState();
 }
 
-function buildChecklist(l){
-  const items=l==='en'?['Flight / travel confirmed ✈️','Travel insurance organised 🛡️','Vaccinations / health check done 💉','Yoga mat confirmed with Jenny 🧘','Retreat payment completed ✅','Jenny\'s WhatsApp saved 📱','Pre-travel practice started 🌿','Intention for the journey set 🎯']:['Flug / Anreise bestätigt ✈️','Reiseversicherung organisiert 🛡️','Impfungen / Gesundheitscheck erledigt 💉','Yogamatte mit Jenny bestätigt 🧘','Retreat-Zahlung abgeschlossen ✅','Jenny\'s WhatsApp gespeichert 📱','Pre-Travel Praxis begonnen 🌿','Intention für die Reise gesetzt 🎯'];
-  const w=document.getElementById('cl-wrap');if(!w)return;
-  const sv=JSON.parse(localStorage.getItem('t2t-cl')||'[]');
-  w.innerHTML=items.map((item,i)=>`<div class="check-item" onclick="toggleCk(${i},this)"><div class="ck ${sv.includes(i)?'done':''}">${sv.includes(i)?'✓':''}</div><span class="ck-text">${item}</span></div>`).join('');
+function updateSidebarState(){
+  const p=JSON.parse(localStorage.getItem('t2t-profile')||'{}');
+  const l=lang;
+  const stateDE={vata:'Im Kopf 💭',pitta:'Trägt viel 🔥',kapha:'Energie aufwecken 🌿'};
+  const stateEN={vata:'In the head 💭',pitta:'Carrying a lot 🔥',kapha:'Energy needs a spark 🌿'};
+  const el=document.getElementById('sb-state');
+  if(el&&p.dosha)el.textContent=l==='de'?stateDE[p.dosha]:stateEN[p.dosha];
 }
 
-function toggleCk(i,el){const sv=JSON.parse(localStorage.getItem('t2t-cl')||'[]');const box=el.querySelector('.ck');if(sv.includes(i)){sv.splice(sv.indexOf(i),1);box.classList.remove('done');box.textContent='';}else{sv.push(i);box.classList.add('done');box.textContent='✓';}localStorage.setItem('t2t-cl',JSON.stringify(sv));}
+// ── WHATSAPP ────────────────────────────────────────────────
+function updateWA(){
+  const b='https://wa.me/4917624238972?text=';
+  const ids={'wa-home':lang==='de'?'Hallo%20Jenny!%20Ich%20wollte%20teilen%20was%20gerade%20hochkommt.':'Hello%20Jenny!%20I%20wanted%20to%20share%20what%27s%20coming%20up%20for%20me.','wa-beg':lang==='de'?'Hallo%20Jenny!%20Ich%20bin%20bereit%20f%C3%BCr%20die%20Begleitung.':'Hello%20Jenny!%20I%27m%20ready%20for%20the%20guidance.','wa-retreat':lang==='de'?'Hallo%20Jenny!%20Ich%20interessiere%20mich%20f%C3%BCr%20das%20Retreat.':'Hello%20Jenny!%20I%27m%20interested%20in%20the%20retreat.'};
+  Object.entries(ids).forEach(([id,msg])=>{const el=document.getElementById(id);if(el)el.href=b+msg;});
+}
 
-
-  // Reveal Ayurveda context in Step 2 (deeper explanation shown in member area)
-  function updateDoshaReveal(dosha) {
-    const doshaRevealDE = {
-      vata:  'Dein Zustand entspricht im Ayurveda dem Vata-Typ 🌬️ – Luft & Äther. Das erklärt die Unruhe, den vollen Kopf und die Schwierigkeit abzuschalten. Deine Pläne bringen Wärme, Erdung und Struktur.',
-      pitta: 'Dein Zustand entspricht im Ayurveda dem Pitta-Typ 🔥 – Feuer & Wasser. Das erklärt die Intensität, die Hitze und den Druck. Deine Pläne kühlen, beruhigen und öffnen.',
-      kapha: 'Dein Zustand entspricht im Ayurveda dem Kapha-Typ 🌿 – Erde & Wasser. Das erklärt die Schwere, die Trägheit und das Feststecken. Deine Pläne aktivieren, entzünden und bewegen.'
-    };
-    const doshaRevealEN = {
-      vata:  'In Ayurveda, your state corresponds to the Vata type 🌬️ – Air & Ether. This explains the restlessness, the busy mind and the difficulty switching off. Your plans bring warmth, grounding and structure.',
-      pitta: 'In Ayurveda, your state corresponds to the Pitta type 🔥 – Fire & Water. This explains the intensity, the heat and the pressure. Your plans cool, calm and open.',
-      kapha: 'In Ayurveda, your state corresponds to the Kapha type 🌿 – Earth & Water. This explains the heaviness, the sluggishness and feeling stuck. Your plans activate, ignite and move.'
-    };
-    const revDE = document.getElementById('dosha-reveal-de');
-    const revEN = document.getElementById('dosha-reveal-en');
-    if(revDE && dosha) revDE.textContent = doshaRevealDE[dosha] || '';
-    if(revEN && dosha) revEN.textContent = doshaRevealEN[dosha] || '';
-  }
-
-function changeProfile(){localStorage.removeItem('t2t-profile');window.location.href='onboarding.html';}
+function changeProfile(){localStorage.removeItem('t2t-profile');q2Idx=0;q2Scores={vata:0,pitta:0,kapha:0,root:0,sacral:0,solar:0,heart:0,crown:0,restorative:0,strength:0,balance:0,spiritual:0};show('quiz2');renderQ2();}
 function logout(){localStorage.removeItem('t2t-member');window.location.href='login.html';}
 
-const sl=localStorage.getItem('t2t-lang');if(sl)setLang(sl);else setLang('en');
-loadProfile();
-const _p=JSON.parse(localStorage.getItem('t2t-profile')||'{}');
-if(_p.dosha) updateDoshaReveal(_p.dosha);updateProgress();buildChecklist(currentLang);updateWA(currentLang);
+// ── INIT ────────────────────────────────────────────────────
+const sl=localStorage.getItem('t2t-lang');if(sl)setLang(sl);else setLang('de');
+loadProfile();updateWA();
+
+// Render Quiz 2 if no profile yet
+const profile=JSON.parse(localStorage.getItem('t2t-profile')||'{}');
+if(!profile.dosha){show('quiz2');renderQ2();}
 </script>
 </body>
 </html>
