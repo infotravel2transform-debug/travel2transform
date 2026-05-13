@@ -158,16 +158,16 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
     <div class="intro-header">
       <div class="intro-tag en">Free · 2 Minutes · Personal</div>
       <div class="intro-tag de">Kostenlos · 2 Minuten · Persönlich</div>
-      <h1 class="intro-h1 en">Find out what's going on<br><em>inside you right now.</em></h1>
-      <h1 class="intro-h1 de">Finde heraus was gerade<br><em>wirklich in dir vorgeht.</em></h1>
-      <p class="intro-sub en">A short test that shows you what's really going on inside you right now – and what you need.</p>
-      <p class="intro-sub de">Ein kurzer Test der deine ayurvedische Konstitution, Chakren-Balance und ideale Yoga-Praxis zeigt. Die Grundlage für deine persönliche Transformation.</p>
+      <h1 class="intro-h1 en">Creating your life<br><em>starts here.</em></h1>
+      <h1 class="intro-h1 de">Dein Leben kreieren<br><em>beginnt hier.</em></h1>
+      <p class="intro-sub en">6 honest questions. No expertise needed. Find out where you are right now – and what's stopping you from creating your amazing life.</p>
+      <p class="intro-sub de">6 ehrliche Fragen. Kein Fachwissen. Du findest heraus wo du gerade stehst – und was dich zurückhält dein geiles Leben zu kreieren.</p>
     </div>
     <div class="intro-card fi">
       <div class="intro-steps">
-        <div class="intro-step"><div class="step-dot">🌿</div><div class="step-info"><strong class="en">Part 1: Your Constitution</strong><strong class="de">Teil 1: Deine Konstitution</strong><span class="en">6 questions about your Dosha</span><span class="de">6 Fragen zu deinem Dosha</span></div></div>
-        <div class="intro-step"><div class="step-dot">✨</div><div class="step-info"><strong class="en">Part 2: Your Energy</strong><strong class="de">Teil 2: Deine Energie</strong><span class="en">7 questions about your chakras</span><span class="de">7 Fragen zu deinen Chakren</span></div></div>
-        <div class="intro-step"><div class="step-dot">🧘</div><div class="step-info"><strong class="en">Part 3: Your Movement</strong><strong class="de">Teil 3: Deine Bewegung</strong><span class="en">5 questions about your yoga style</span><span class="de">5 Fragen zu deinem Yoga-Stil</span></div></div>
+        <div class="intro-step"><div class="step-dot">🌿</div><div class="step-info"><strong class="en">Where are you right now?</strong><strong class="de">Wo stehst du gerade?</strong><span class="en">How you feel, what you carry</span><span class="de">Wie du dich fühlst, was du trägst</span></div></div>
+        <div class="intro-step"><div class="step-dot">✨</div><div class="step-info"><strong class="en">Your energy & vibration</strong><strong class="de">Deine Energie & Vibration</strong><span class="en">What lights you up, what blocks you</span><span class="de">Was dich entzündet, was dich hält</span></div></div>
+        <div class="intro-step"><div class="step-dot">✨</div><div class="step-info"><strong class="en">Your next step</strong><strong class="de">Dein nächster Schritt</strong><span class="en">What you want to create</span><span class="de">Was du kreieren willst</span></div></div>
       </div>
       <button class="btn-buy" onclick="startQuiz()">
         <span class="en">Start free test →</span><span class="de">Kostenlosen Test starten →</span>
@@ -620,9 +620,9 @@ function showSuccessPage() {
     const cards = document.getElementById('download-cards');
     const baseUrl = 'https://www.travel2transform.de/';
     const downloads = [
-      { icon:'🌿', title: l==='en'?'Your Dosha Nutrition Plan':'Dein Dosha-Ernährungsplan',
+      { icon:'🌿', title: l==='en'?'Your Personal Nutrition Plan':'Dein persönlicher Ernährungsplan',
         file: `${PDF_URLS.dosha[res.dosha]}_${l}.pdf` },
-      { icon:'✨', title: l==='en'?'Your Chakra Self-Care Plan':'Dein Chakren-Selbstpflege-Plan',
+      { icon:'✨', title: l==='en'?'Your Energy Self-Care Plan':'Dein Energie-Selbstpflege-Plan',
         file: `${PDF_URLS.chakra[res.chakraGroup]}.pdf` },
       { icon:'🧘', title: l==='en'?'Your Personal Yoga Plan':'Dein persönlicher Yoga-Plan',
         file: `${PDF_URLS.yoga[res.yoga]}.pdf` },
