@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tansania Packliste – Travel 2 Transform</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --petrol:#1a7a6e;
+    --petrol-dark:#0f5a51;
+    --petrol-mid:#2a9d8f;
+    --petrol-light:#e0f2ef;
+    --petrol-xlight:#f0faf8;
+    --pink:#e8829a;
+    --pink-light:#fdf0f3;
+    --cream:#faf8f5;
+    --dark:#1a2e2a;
+  }
+  body{font-family:'Lato',sans-serif;background:var(--cream);color:#333;line-height:1.6}
+
+  /* HEADER */
+  header{background:var(--petrol-dark);padding:28px 40px;text-align:center;position:relative}
+  header::after{content:'';display:block;width:100%;height:5px;background:var(--pink);position:absolute;bottom:0;left:0}
+  .brand{font-family:'Lato',sans-serif;font-size:13px;letter-spacing:4px;color:rgba(255,255,255,0.65);margin-bottom:6px}
+  .brand span{color:var(--pink);font-weight:700}
+  header h1{font-family:'Playfair Display',serif;font-size:36px;color:#fff;font-style:italic;line-height:1.2}
+  header h1 em{color:#7de8d8;font-style:normal}
+  header p{color:rgba(255,255,255,0.65);font-size:14px;margin-top:8px;font-style:italic}
+
+  /* HERO QUOTE */
+  .hero-quote{background:var(--petrol-mid);padding:32px 40px;text-align:center}
+  .hero-quote blockquote{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;color:#fff;max-width:700px;margin:0 auto 10px;line-height:1.7}
+  .hero-quote cite{font-size:12px;color:rgba(255,255,255,0.55);letter-spacing:2px;text-transform:uppercase}
+
+  /* MOOD BAR */
+  .mood-bar{background:#fff;border-bottom:1px solid #e5eeec;padding:14px 40px;display:flex;justify-content:center;gap:40px;flex-wrap:wrap}
+  .mood-item{font-size:12px;color:var(--petrol-mid);font-weight:700;letter-spacing:1px;text-transform:uppercase}
+  .mood-item span{color:var(--pink)}
+
+  /* PROGRESS */
+  .progress-section{background:var(--petrol-xlight);padding:20px 40px;text-align:center;border-bottom:1px solid #d0eae6}
+  .progress-label{font-size:13px;color:var(--petrol);margin-bottom:10px;font-weight:700;letter-spacing:1px}
+  .progress-bar-wrap{background:#d0eae6;border-radius:20px;height:12px;max-width:400px;margin:0 auto 6px;overflow:hidden}
+  .progress-bar{background:var(--pink);height:12px;border-radius:20px;transition:width 0.4s ease;width:0%}
+  .progress-count{font-size:13px;color:#888;font-style:italic}
+
+  /* MAIN */
+  main{max-width:1100px;margin:0 auto;padding:40px 20px}
+
+  /* SECTION */
+  .section{margin-bottom:40px}
+  .section-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--petrol-light)}
+  .section-icon{font-size:28px}
+  .section-title{font-family:'Playfair Display',serif;font-size:24px;color:var(--dark);font-weight:700}
+  .section-count{font-size:12px;color:#aaa;margin-left:auto;font-style:italic}
+
+  /* GRID */
+  .items-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+
+  /* ITEM */
+  .item{background:#fff;border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:all 0.2s;border:1.5px solid transparent;box-shadow:0 1px 6px rgba(0,0,0,0.05)}
+  .item:hover{border-color:var(--petrol-mid);box-shadow:0 3px 14px rgba(42,157,143,0.12)}
+  .item.checked{background:var(--petrol-xlight);border-color:var(--petrol-mid)}
+  .item.checked .item-text{text-decoration:line-through;color:#aaa}
+  .checkbox{width:22px;height:22px;border-radius:6px;border:2px solid #ccc;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.2s;background:#fff}
+  .item.checked .checkbox{background:var(--petrol-mid);border-color:var(--petrol-mid)}
+  .checkmark{display:none;color:#fff;font-size:14px;font-weight:700}
+  .item.checked .checkmark{display:block}
+  .item-text{font-size:14px;color:#444;line-height:1.4;flex:1}
+
+  /* RESET BTN */
+  .actions{text-align:center;margin:30px 0 10px}
+  .btn-reset{background:transparent;border:2px solid var(--petrol-mid);color:var(--petrol-mid);padding:10px 28px;border-radius:20px;font-size:13px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase;transition:all 0.2s}
+  .btn-reset:hover{background:var(--petrol-mid);color:#fff}
+
+  /* FOOTER */
+  footer{background:var(--petrol-dark);padding:32px 40px;text-align:center}
+  footer p{color:rgba(255,255,255,0.55);font-size:13px;margin-bottom:4px}
+  footer a{color:#7de8d8;text-decoration:none}
+  footer::before{content:'';display:block;width:100%;height:4px;background:var(--pink);margin-bottom:24px}
+
+  @media(max-width:600px){
+    header{padding:20px}
+    header h1{font-size:26px}
+    .items-grid{grid-template-columns:1fr}
+    main{padding:24px 16px}
+    .mood-bar{gap:20px;padding:14px 20px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">TRAVEL <span>2</span> TRANSFORM</div>
+  <h1>Tansania <em>Packliste</em></h1>
+  <p>Safari · Sansibar · Soul-Vibes — Alles, was du brauchst ✨</p>
+</header>
+
+<div class="hero-quote">
+  <blockquote>„Jede Reise verändert dich – nicht, weil du neue Orte siehst, sondern weil du mit neuen Augen zurückkehrst."</blockquote>
+  <cite>— Jenny Wierzbicki · Travel 2 Transform</cite>
+</div>
+
+<div class="mood-bar">
+  <div class="mood-item"><span>Reiseziel:</span> Tansania</div>
+  <div class="mood-item"><span>Highlights:</span> Safari · Sansibar · Kultur</div>
+  <div class="mood-item"><span>Mood:</span> Wild. Warm. Wundervoll.</div>
+</div>
+
+<div class="progress-section">
+  <div class="progress-label">DEIN FORTSCHRITT</div>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+  <div class="progress-count" id="progressCount">0 von <span id="totalCount">0</span> Dinge eingepackt</div>
+</div>
+
+<main>
+
+  <!-- SANSIBAR -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🏝</span>
+      <span class="section-title">Sansibar – Beach, City & Chillen</span>
+      <span class="section-count" id="count-sansibar"></span>
+    </div>
+    <div class="items-grid" id="sansibar">
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Schwimmsachen</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Badeschuhe & Wasserschuhe</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Leichte Kleidung für abends</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Mückenspray</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Sonnencreme & Sonnenhut</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Sandspielsachen (Kinder)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Schwimmärmel (Kinder)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Leichte, atmungsaktive Kleidung (Leinen/Baumwolle)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Lange Hosen & Tücher für Moscheen/Dörfer</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Badebekleidung + Strandkleid</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Regenjacke (falls Regenzeit)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Bequeme Sandalen & Flip-Flops</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Feste Schuhe für Ausflüge</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Sonnenbrille & Hut/Kappe</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Strandtuch oder Sarong</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Strandtasche</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Leichter Seidenschal (Abendbrise / Moscheenbesuch)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">After-Sun Lotion oder Aloe Vera Gel</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Wasserdichte Handyhülle (Bootsfahrten)</span></div>
+    </div>
+  </div>
+
+  <!-- SAFARI -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🐘</span>
+      <span class="section-title">Safari – Abenteuer & Wildnis</span>
+      <span class="section-count" id="count-safari"></span>
+    </div>
+    <div class="items-grid" id="safari">
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Leichte, atmungsaktive Kleidung (Beige, Khaki, Olivgrün – keine grellen Farben)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Langärmlige Shirts & lange Hosen (gegen Moskitos & Sonne)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Leichte Fleecejacke/Pullover (morgens & abends kühl)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Bequeme Wanderschuhe oder feste Sneaker</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Sandalen/Flip-Flops (für Lodge/Campsite)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Kopfbedeckung (Hut/Kappe gegen Sonne)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Sonnenbrille</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Regenjacke (falls Regenzeit)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Badebekleidung (Pools in Lodges / Wasserfälle)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Fernglas</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Trockenshampoo (bei Camping)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Reisehandtuch (klein, schnell trocknend)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Mini-Taschenlampe oder Stirnlampe</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Reise-Wäscheset (Waschmittel + Leine)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Kleines Erste-Hilfe-Set</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Notizbuch oder Reisetagebuch</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Mehrweg-Wasserflasche mit Filter (z. B. Lifestraw)</span></div>
+    </div>
+  </div>
+
+  <!-- DOKUMENTE -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">💼</span>
+      <span class="section-title">Dokumente & Technik</span>
+      <span class="section-count" id="count-dokumente"></span>
+    </div>
+    <div class="items-grid" id="dokumente">
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Reisepass (mind. 6 Monate gültig)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Visum (online oder am Flughafen erhältlich)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Kreditkarte + Bargeld (US-Dollar)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Auslandskrankenversicherung</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Impfpass</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Sansibar Krankenversicherung</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Personalausweis als Ersatz</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Digitaler Scan aller Dokumente (Handy/Cloud)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Backup-Kreditkarte (getrennt aufbewahren)</span></div>
+    </div>
+  </div>
+
+  <!-- GESUNDHEIT -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🧼</span>
+      <span class="section-title">Gesundheit & Hygiene</span>
+      <span class="section-count" id="count-gesundheit"></span>
+    </div>
+    <div class="items-grid" id="gesundheit">
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Moskitospray (Antibrumm)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Malaria-Prophylaxe (ärztlich beraten lassen)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Reiseapotheke (Durchfalltabletten, Schmerzmittel, Pflaster, Desinfektion)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Feuchttücher & Handdesinfektion</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Eigene Hygieneartikel (lokale Produkte begrenzt)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Lippenbalsam & Handcreme (trockene Luft)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Wund- und Heilsalbe (Sonnenbrand/Mückenstiche)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Durchsichtige Zip-Beutel (Flüssigkeiten & Ordnung)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Reise-Desinfektionsspray (Toiletten, Hotelzimmer)</span></div>
+    </div>
+  </div>
+
+  <!-- TECHNIK -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🔌</span>
+      <span class="section-title">Technik & Sonstiges</span>
+      <span class="section-count" id="count-technik"></span>
+    </div>
+    <div class="items-grid" id="technik">
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Adapter (Steckdosen Typ D & G, oft britischer Standard)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Powerbank (Stromausfälle möglich)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Kamera/GoPro für Unterwasseraufnahmen</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Leichte Reisetasche oder Rucksack für Ausflüge</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Ladekabel für das Handy</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">E-Reader oder Buch (entspannte Stunden)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Noise-Cancelling-Kopfhörer (Flüge & Fährfahrten)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Musikbox/kleiner Bluetooth-Speaker (Beach-Vibes!)</span></div>
+    </div>
+  </div>
+
+  <!-- EXTRA TIPPS -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🍃</span>
+      <span class="section-title">Extra-Tipps von Jenny</span>
+      <span class="section-count" id="count-tipps"></span>
+    </div>
+    <div class="items-grid" id="tipps">
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Kein Leitungswasser trinken! (Nur Flaschenwasser)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Respektvolle Kleidung in Städten & Dörfern tragen</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">US-Dollar mitnehmen (kleine Scheine für Trinkgeld)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Zwei Geldbeutel (nicht immer alles dabei haben)</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Leichtigkeit und Geduld mit ins Gepäck packen 🌿</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Keine SIM-Karte am Straßenrand kaufen</span></div>
+      <div class="item" onclick="toggle(this)"><div class="checkbox"><span class="checkmark">✓</span></div><span class="item-text">Seitliche Straßen am Abend (im Dunkeln) meiden</span></div>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-reset" onclick="resetAll()">Alle zurücksetzen</button>
+  </div>
+
+</main>
+
+<footer>
+  <p>© 2025 Travel 2 Transform · Jenny Wierzbicki</p>
+  <p><a href="https://www.travel2transform.de">www.travel2transform.de</a> · <a href="mailto:infotravel2transform@gmail.com">infotravel2transform@gmail.com</a></p>
+</footer>
+
+<script>
+  const sections = ['sansibar','safari','dokumente','gesundheit','technik','tipps'];
+
+  function updateProgress(){
+    const all = document.querySelectorAll('.item');
+    const checked = document.querySelectorAll('.item.checked');
+    const total = all.length;
+    const done = checked.length;
+    document.getElementById('totalCount').textContent = total;
+    document.getElementById('progressCount').textContent = done + ' von ' + total + ' Dinge eingepackt';
+    document.getElementById('progressBar').style.width = (total ? (done/total*100) : 0) + '%';
+
+    sections.forEach(id => {
+      const sec = document.getElementById(id);
+      if(!sec) return;
+      const t = sec.querySelectorAll('.item').length;
+      const d = sec.querySelectorAll('.item.checked').length;
+      const el = document.getElementById('count-'+id);
+      if(el) el.textContent = d + '/' + t + ' erledigt';
+    });
+  }
+
+  function toggle(el){
+    el.classList.toggle('checked');
+    updateProgress();
+  }
+
+  function resetAll(){
+    document.querySelectorAll('.item.checked').forEach(el => el.classList.remove('checked'));
+    updateProgress();
+  }
+
+  updateProgress();
+</script>
+</body>
+</html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tanzania Travel Guide – Travel 2 Transform</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--petrol:#1a7a6e;--petrol-dark:#0f5a51;--petrol-mid:#2a9d8f;--petrol-light:#e0f2ef;--petrol-xlight:#f0faf8;--pink:#e8829a;--pink-light:#fdf0f3;--cream:#faf8f5;--dark:#1a2e2a}
+body{font-family:'Lato',sans-serif;background:var(--cream);color:#333;line-height:1.7;font-size:15px}
+a{text-decoration:none;color:inherit}
+
+/* HEADER */
+header{background:var(--petrol-dark);padding:32px 48px;position:relative;overflow:hidden}
+header::before{content:'';position:absolute;top:-60px;right:-60px;width:240px;height:240px;border-radius:50%;border:40px solid rgba(125,232,216,0.1)}
+header::after{content:'';display:block;width:100%;height:5px;background:var(--pink);position:absolute;bottom:0;left:0}
+.brand{font-size:13px;letter-spacing:4px;color:rgba(255,255,255,0.55);margin-bottom:8px}.brand span{color:var(--pink);font-weight:700}
+header h1{font-family:'Playfair Display',serif;font-size:52px;color:#fff;line-height:1.1;margin-bottom:10px}
+header h1 em{color:#7de8d8;font-style:italic}
+header p{color:rgba(255,255,255,0.65);font-size:15px;font-style:italic;max-width:600px}
+.header-meta{display:flex;gap:16px;margin-top:20px;flex-wrap:wrap}
+.meta-badge{background:rgba(255,255,255,0.1);border:1px solid rgba(125,232,216,0.3);border-radius:20px;padding:6px 16px;font-size:12px;color:rgba(255,255,255,0.7);letter-spacing:1px}
+
+/* NAV */
+.sticky-nav{position:sticky;top:0;z-index:100;background:rgba(15,90,81,0.97);backdrop-filter:blur(8px);border-bottom:3px solid var(--pink);overflow-x:auto;white-space:nowrap}
+.sticky-nav ul{display:flex;list-style:none;padding:0 16px;gap:2px}
+.sticky-nav li a{display:block;padding:13px 14px;font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:0.5px;transition:color 0.2s;font-weight:700}
+.sticky-nav li a:hover,.sticky-nav li a.active{color:#fff}
+.sticky-nav li a.active{border-bottom:3px solid var(--pink);margin-bottom:-3px}
+
+/* MAIN */
+main{max-width:860px;margin:0 auto;padding:48px 24px}
+
+/* CHAPTER */
+.chapter{margin-bottom:72px;scroll-margin-top:60px}
+.chapter-tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--pink);font-weight:700;margin-bottom:12px;display:block}
+.chapter h2{font-family:'Playfair Display',serif;font-size:38px;color:var(--dark);margin-bottom:6px;line-height:1.2}
+.chapter h2 em{color:var(--petrol-mid);font-style:italic}
+.chapter-divider{width:60px;height:3px;background:var(--petrol-mid);border-radius:2px;margin:16px 0 28px}
+.chapter p{color:#555;line-height:1.85;margin-bottom:16px}
+.chapter h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--dark);margin:28px 0 12px}
+
+/* CARDS */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin:20px 0}
+.card{background:#fff;border-radius:14px;padding:20px;border:1px solid var(--petrol-light);box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+.card-icon{font-size:28px;margin-bottom:10px;display:block}
+.card h4{font-family:'Playfair Display',serif;font-size:17px;color:var(--dark);margin-bottom:8px;font-weight:700}
+.card p{font-size:13px;color:#777;line-height:1.6;margin:0}
+
+/* TIP / WARNING */
+.tip-box{background:var(--petrol-xlight);border-left:4px solid var(--petrol-mid);border-radius:0 12px 12px 0;padding:16px 20px;margin:20px 0}
+.tip-box p{margin:0;font-size:14px;color:#555}
+.warning-box{background:var(--pink-light);border-left:4px solid var(--pink);border-radius:0 12px 12px 0;padding:16px 20px;margin:20px 0}
+.warning-box p{margin:0;font-size:14px;color:#555}
+
+/* PULL QUOTE */
+.pull-quote{background:var(--petrol-dark);border-radius:16px;padding:32px;margin:32px 0;text-align:center}
+.pull-quote blockquote{font-family:'Playfair Display',serif;font-style:italic;font-size:22px;color:#fff;line-height:1.6;margin-bottom:10px}
+.pull-quote cite{font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:2px;text-transform:uppercase}
+
+/* SWAHILI */
+.swahili-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:20px 0}
+.swahili-card{background:#fff;border-radius:10px;padding:14px;border:1px solid var(--petrol-light);text-align:center}
+.swahili-word{font-family:'Playfair Display',serif;font-size:16px;color:var(--petrol-dark);font-weight:700}
+.swahili-meaning{font-size:12px;color:#999;margin-top:4px}
+
+/* STYLED LIST */
+.styled-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin:16px 0}
+.styled-list li{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:#555}
+.styled-list li::before{content:'✦';color:var(--petrol-mid);flex-shrink:0;font-size:11px;margin-top:3px}
+.styled-list.pink li::before{color:var(--pink)}
+
+/* TRANSPORT */
+.transport-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.transport-card{background:#fff;border-radius:14px;padding:20px;border-top:4px solid var(--petrol-mid);box-shadow:0 2px 10px rgba(0,0,0,0.05)}
+.transport-card.pink{border-top-color:var(--pink)}
+.transport-icon{font-size:28px;margin-bottom:8px;display:block}
+.transport-card h4{font-family:'Playfair Display',serif;font-size:17px;color:var(--dark);margin-bottom:8px;font-weight:700}
+.transport-card p{font-size:13px;color:#777;line-height:1.6;margin:0 0 8px}
+.price-tag{display:inline-block;background:var(--petrol-xlight);color:var(--petrol-dark);font-size:12px;font-weight:700;padding:3px 10px;border-radius:10px}
+
+/* HOSPITALS */
+.hospital-list{display:flex;flex-direction:column;gap:12px;margin:16px 0}
+.hospital-item{background:#fff;border-radius:12px;padding:16px 18px;border:1px solid var(--petrol-light);display:flex;gap:14px;align-items:flex-start}
+.hospital-badge{background:var(--petrol-mid);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;letter-spacing:1px;flex-shrink:0;margin-top:2px}
+.hospital-item h5{font-size:14px;font-weight:700;color:var(--dark);margin-bottom:3px}
+.hospital-item p{font-size:13px;color:#777;margin:0}
+
+/* SPOTS */
+.spot-grid{display:flex;flex-direction:column;gap:14px;margin:20px 0}
+.spot-card{background:#fff;border-radius:14px;padding:20px 22px;border-left:4px solid var(--petrol-mid);box-shadow:0 2px 10px rgba(0,0,0,0.04)}
+.spot-card.sunrise{border-left-color:var(--pink)}
+.spot-header{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.spot-emoji{font-size:24px}
+.spot-name{font-family:'Playfair Display',serif;font-size:18px;color:var(--dark);font-weight:700}
+.spot-card p{font-size:14px;color:#666;line-height:1.7;margin-bottom:8px}
+.spot-tip{font-size:13px;color:var(--petrol-mid);font-style:italic;margin:0!important}
+
+/* APPS */
+.app-list{display:flex;flex-direction:column;gap:12px;margin:20px 0}
+.app-item{background:#fff;border-radius:12px;padding:16px 18px;display:flex;gap:16px;align-items:flex-start;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+.app-icon{font-size:28px;flex-shrink:0}
+.app-item h5{font-size:15px;font-weight:700;color:var(--dark);margin-bottom:4px}
+.app-item p{font-size:13px;color:#777;margin:0;line-height:1.6}
+
+/* LODGES */
+.lodge-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.lodge-card{background:#fff;border-radius:14px;padding:20px;border:1px solid var(--petrol-light)}
+.lodge-type{font-size:10px;letter-spacing:2px;color:var(--petrol-mid);font-weight:700;text-transform:uppercase;margin-bottom:6px}
+.lodge-card h4{font-family:'Playfair Display',serif;font-size:17px;color:var(--dark);margin-bottom:8px;font-weight:700}
+.lodge-card p{font-size:13px;color:#777;line-height:1.6;margin:0}
+.price-range{display:inline-block;background:var(--pink-light);color:var(--pink);font-size:12px;font-weight:700;padding:3px 10px;border-radius:10px;margin-top:8px}
+
+/* SECRET */
+.secret-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+.secret-card{background:var(--petrol-dark);border-radius:14px;padding:24px 18px;text-align:center}
+.secret-card .icon{font-size:32px;margin-bottom:12px;display:block}
+.secret-card h4{font-family:'Playfair Display',serif;font-size:17px;color:#fff;margin-bottom:8px;font-weight:700}
+.secret-card p{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.6;margin:0}
+
+/* BARS */
+.bar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:16px 0 28px}
+.bar-card{background:#fff;border-radius:14px;padding:18px;border-top:3px solid var(--pink)}
+.bar-city{font-size:10px;letter-spacing:2px;color:var(--pink);font-weight:700;text-transform:uppercase;margin-bottom:6px}
+.bar-card h4{font-family:'Playfair Display',serif;font-size:16px;color:var(--dark);margin-bottom:8px;font-weight:700}
+.bar-card p{font-size:13px;color:#777;margin:0;line-height:1.6}
+
+/* PHOTO PLACEHOLDER */
+.photo-placeholder{background:var(--petrol-light);border-radius:14px;height:200px;display:flex;align-items:center;justify-content:center;margin:20px 0;border:2px dashed var(--petrol-mid)}
+.photo-placeholder span{color:var(--petrol-mid);font-size:13px;font-style:italic;text-align:center;padding:16px}
+
+/* FOOTER */
+footer{background:var(--petrol-dark);padding:36px 48px;text-align:center}
+footer::before{content:'';display:block;height:4px;background:var(--pink);margin-bottom:28px}
+footer p{color:rgba(255,255,255,0.55);font-size:13px;margin-bottom:4px}
+footer a{color:#7de8d8}
+
+@media(max-width:600px){
+  header{padding:20px}
+  header h1{font-size:32px}
+  main{padding:28px 16px}
+  .chapter h2{font-size:28px}
+  .card-grid,.transport-grid,.lodge-grid,.bar-grid,.secret-grid{grid-template-columns:1fr}
+  footer{padding:28px 20px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">TRAVEL <span>2</span> TRANSFORM</div>
+  <h1>Tanzania <em>Travel Guide</em></h1>
+  <p>Dein persönlicher Begleiter für eine unvergessliche Reise – von Jenny Wierzbicki</p>
+  <div class="header-meta">
+    <span class="meta-badge">🌍 Tanzania & Sansibar</span>
+    <span class="meta-badge">✦ Safari · Strand · Kultur</span>
+    <span class="meta-badge">✦ Wild. Warm. Wundervoll.</span>
+  </div>
+</header>
+
+<nav class="sticky-nav">
+  <ul>
+    <li><a href="#kultur">1. Kultur</a></li>
+    <li><a href="#essen">2. Essen</a></li>
+    <li><a href="#geld">3. Geld</a></li>
+    <li><a href="#technik">4. Technik</a></li>
+    <li><a href="#transport">5. Transport</a></li>
+    <li><a href="#sights">6. Ausflüge</a></li>
+    <li><a href="#sunset">7. Sunset</a></li>
+    <li><a href="#unterkunfte">8. Unterkünfte</a></li>
+    <li><a href="#medizin">9. Medizin</a></li>
+    <li><a href="#sprache">10. Sprache</a></li>
+    <li><a href="#geheimtipps">11. Geheimtipps</a></li>
+    <li><a href="#projekte">12. Projekte</a></li>
+    <li><a href="#sicherheit">13. Sicherheit</a></li>
+    <li><a href="#packliste">14. Packliste</a></li>
+    <li><a href="#goingout">15. Going Out</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<div class="pull-quote" style="margin-bottom:56px">
+  <blockquote>„Jede Reise verändert dich – nicht, weil du neue Orte siehst, sondern weil du mit neuen Augen zurückkehrst."</blockquote>
+  <cite>— Jenny Wierzbicki · Travel 2 Transform</cite>
+</div>
+
+<!-- 1 KULTUR -->
+<div class="chapter" id="kultur">
+  <span class="chapter-tag">KAPITEL 1</span>
+  <h2>Kultur & <em>Menschen</em></h2>
+  <div class="chapter-divider"></div>
+  <p>Tanzania ist ein Land der Vielfalt und Kontraste – über 120 ethnische Gruppen, darunter <strong>Sukuma, Chagga und Maasai</strong>, tragen zu einem bunten kulturellen Mosaik bei.</p>
+  <div class="photo-placeholder"><span>📷 Foto einfügen – Maasai, Markt oder Dorfbesuch</span></div>
+  <p>Die Gastfreundschaft ist legendär. Schon ein „Jambo!" öffnet Herzen und Türen. Besucher werden herzlich eingeladen, an traditionellen Mahlzeiten und Zeremonien teilzunehmen.</p>
+  <h3>Musik, Tanz & Handwerk</h3>
+  <p>Traditionelle Tänze wie der <strong>Ngoma der Sukuma</strong> und die <strong>Maasai-Tänze</strong> sind kulturelle Identität in Bewegung. Auf den Märkten findest du Perlenschmuck, Holzschnitzereien und farbprächtige Stoffe – jedes Stück erzählt eine Geschichte.</p>
+  <div class="tip-box"><p><strong>Jenny's Tipp:</strong> „Tanzanian Time" – Termine laufen etwas entspannter als in Europa. Geduld ist dein wertvollstes Reisegepäck. Genieß es!</p></div>
+</div>
+
+<!-- 2 ESSEN -->
+<div class="chapter" id="essen">
+  <span class="chapter-tag">KAPITEL 2</span>
+  <h2>Essen & <em>Genuss</em></h2>
+  <div class="chapter-divider"></div>
+  <p>Die tansanische Küche verbindet indische, arabische und afrikanische Einflüsse zu einem unverwechselbaren Geschmackserlebnis.</p>
+  <div class="card-grid">
+    <div class="card"><span class="card-icon">🍚</span><h4>Ugali</h4><p>Cremiger Maisbrei – das Grundnahrungsmittel Ostafrikas. Mit Fleisch, Gemüse oder Fisch serviert.</p></div>
+    <div class="card"><span class="card-icon">🥩</span><h4>Nyama Choma</h4><p>Gegrilltes Fleisch über offener Flamme. Das Festgericht schlechthin – rauchig und unvergesslich.</p></div>
+    <div class="card"><span class="card-icon">🍛</span><h4>Pilau</h4><p>Würziger Reis mit Zimt, Kreuzkümmel und Nelken. Ein festliches Gericht in jedem Haushalt.</p></div>
+    <div class="card"><span class="card-icon">🐟</span><h4>Frischer Fisch</h4><p>An der Küste und auf Sansibar – gegrillt, in Currys oder Eintöpfen. Frischer geht's nicht.</p></div>
+    <div class="card"><span class="card-icon">🥞</span><h4>Chapati</h4><p>Weiches Fladenbrot mit indischem Einfluss. Perfekt zum Frühstück auf jedem Markt.</p></div>
+    <div class="card"><span class="card-icon">🍌</span><h4>Matoke</h4><p>Gedämpfte Kochbananen – mild, sättigend und überall zu finden.</p></div>
+  </div>
+  <h3>Restauranttipps Arusha</h3>
+  <div class="photo-placeholder"><span>📷 Foto einfügen – lokales Restaurant oder Streetfood</span></div>
+  <ul class="styled-list">
+    <li><strong>Via Via Restaurant</strong> – Gartenbar, Live-Musik, internationale & lokale Küche</li>
+    <li><strong>Arusha Coffee Lodge</strong> – Frühstück auf einer Kaffeeplantage – ein Muss!</li>
+    <li><strong>Stiggy's Pub & Grill</strong> – Beliebt, gutes Fleisch, gemischtes Publikum</li>
+    <li><strong>Lokale Märkte</strong> – Mandazi, Mishkaki (Grillspieße), frische Säfte</li>
+  </ul>
+  <div class="tip-box"><p><strong>Tipp:</strong> Straßenessen ist lecker! Wähle gut besuchte Stände und vermeide rohes Gemüse an unbekannten Orten.</p></div>
+</div>
+
+<!-- 3 GELD -->
+<div class="chapter" id="geld">
+  <span class="chapter-tag">KAPITEL 3</span>
+  <h2>Geld & <em>Währung</em></h2>
+  <div class="chapter-divider"></div>
+  <p>Offizielle Währung: <strong>Tansanischer Schilling (TZS)</strong>. US-Dollar sind in touristischen Gebieten und Hotels weit akzeptiert.</p>
+  <div class="card-grid">
+    <div class="card"><span class="card-icon">💵</span><h4>USD mitnehmen</h4><p>Neue Scheine ab 2006. Kleine Scheine für Märkte und Trinkgeld.</p></div>
+    <div class="card"><span class="card-icon">💳</span><h4>2 Kreditkarten</h4><p>Immer eine Backup-Karte dabei. Visa ist weiter verbreitet als Mastercard.</p></div>
+    <div class="card"><span class="card-icon">🏦</span><h4>Wechselstube</h4><p>Deutlich bessere Kurse als am Flughafen – in den Städten wechseln!</p></div>
+    <div class="card"><span class="card-icon">👛</span><h4>2 Geldbeutel</h4><p>Trage nur das Bargeld bei dir, das du am jeweiligen Tag wirklich brauchst.</p></div>
+  </div>
+  <div class="warning-box"><p>⚠️ <strong>Kleine Scheine:</strong> Händler können große Banknoten oft nicht wechseln. Immer Kleingeld für Märkte und Straßenstände bereithalten.</p></div>
+</div>
+
+<!-- 4 TECHNIK -->
+<div class="chapter" id="technik">
+  <span class="chapter-tag">KAPITEL 4</span>
+  <h2>Technik, SIM & <em>Apps</em></h2>
+  <div class="chapter-divider"></div>
+  <p>Größte Anbieter: <strong>Vodacom, Airtel und Tigo</strong>. Lokale SIM-Karte kaufen – günstig, einfach, effizient.</p>
+  <div class="warning-box"><p>⚠️ <strong>Nur offizielle Shops!</strong> Keine SIM-Karten an Straßenständen kaufen – du brauchst deinen Reisepass für die Registrierung.</p></div>
+  <div class="app-list">
+    <div class="app-item"><span class="app-icon">🚗</span><div><h5>Bolt & Uber</h5><p>Für sichere Fahrten in Arusha, Dar es Salaam und Sansibar. Immer bevorzugen gegenüber Straßentaxis.</p></div></div>
+    <div class="app-item"><span class="app-icon">🗺️</span><div><h5>Google Maps</h5><p>Offline-Karten vor der Reise herunterladen – unverzichtbar!</p></div></div>
+    <div class="app-item"><span class="app-icon">💱</span><div><h5>XE Currency</h5><p>Aktueller Wechselkurs EUR/USD/TZS – auch offline verfügbar.</p></div></div>
+    <div class="app-item"><span class="app-icon">💬</span><div><h5>WhatsApp</h5><p>Die beliebteste Kommunikationsmethode in Tanzania – von Einheimischen bis zu Tour-Anbietern.</p></div></div>
+    <div class="app-item"><span class="app-icon">⭐</span><div><h5>TripAdvisor</h5><p>Bewertungen für Unterkünfte, Restaurants und Aktivitäten.</p></div></div>
+    <div class="app-item"><span class="app-icon">🌤️</span><div><h5>AccuWeather</h5><p>Das Klima variiert stark nach Region und Jahreszeit – unbedingt checken!</p></div></div>
+  </div>
+  <div class="tip-box"><p><strong>Adapter:</strong> Typ G (britischer Standard). Powerbank mitnehmen – Stromausfälle sind möglich!</p></div>
+</div>
+
+<!-- 5 TRANSPORT -->
+<div class="chapter" id="transport">
+  <span class="chapter-tag">KAPITEL 5</span>
+  <h2>Transportmittel & <em>Fortbewegung</em></h2>
+  <div class="chapter-divider"></div>
+  <p>Jedes Transportmittel bietet authentische Einblicke in das tanzanische Leben – von chaotisch bis komfortabel.</p>
+  <div class="transport-grid">
+    <div class="transport-card"><span class="transport-icon">🚌</span><h4>Dala Dala</h4><p>Der Minibus des Alltags – überfüllt, chaotisch und absolut authentisch.</p><span class="price-tag">400–800 TZS</span></div>
+    <div class="transport-card pink"><span class="transport-icon">🛺</span><h4>Bajaji (Tuk-Tuk)</h4><p>Ideal für kurze Strecken. Preis immer vorher aushandeln!</p><span class="price-tag">1.000–15.000 TZS</span></div>
+    <div class="transport-card"><span class="transport-icon">🚕</span><h4>Taxi / Bolt</h4><p>Bequem und sicher. Bolt-App nutzen – Preis ist fix.</p><span class="price-tag">Bolt empfohlen</span></div>
+    <div class="transport-card pink"><span class="transport-icon">🏍️</span><h4>Picki-Picki</h4><p>Motorradtaxi – schnell aber gefährlich. Nur mit Helm und „Pole Pole"!</p><span class="price-tag">Auf eigene Gefahr</span></div>
+    <div class="transport-card"><span class="transport-icon">✈️</span><h4>Inlandsflüge</h4><p>Precision Air und Air Tanzania verbinden alle wichtigen Ziele.</p><span class="price-tag">Empfohlen</span></div>
+    <div class="transport-card pink"><span class="transport-icon">⛴️</span><h4>Fähre nach Sansibar</h4><p>Von Dar es Salaam – 2–3 Stunden. Tickets online kaufen!</p><span class="price-tag">30–40 USD</span></div>
+  </div>
+  <div class="tip-box"><p><strong>Fähre:</strong> In der Hochsaison im Voraus buchen! Die Fähre ist klimatisiert – leichte Jacke einpacken.</p></div>
+</div>
+
+<!-- 6 SEHENSWÜRDIGKEITEN -->
+<div class="chapter" id="sights">
+  <span class="chapter-tag">KAPITEL 6</span>
+  <h2>Sehenswürdigkeiten & <em>Ausflüge</em></h2>
+  <div class="chapter-divider"></div>
+  <p>Tanzania hat so viel mehr zu bieten als Safari. Hier sind die Must-Sees:</p>
+  <div class="card-grid">
+    <div class="card"><span class="card-icon">🦁</span><h4>Serengeti</h4><p>Heimat der Great Migration. Unendliche Weite, Big Five und magische Sunsets.</p></div>
+    <div class="card"><span class="card-icon">🌋</span><h4>Ngorongoro Krater</h4><p>Größter intakter Vulkankrater der Welt. Außergewöhnlich hohe Tierdichte.</p></div>
+    <div class="card"><span class="card-icon">🐘</span><h4>Tarangire</h4><p>Riesige Elefantenherden und imposante Baobab-Bäume. Weniger Touristen.</p></div>
+    <div class="card"><span class="card-icon">🌊</span><h4>Sansibar</h4><p>Weißer Sand, türkisblaues Wasser. Stone Town ist UNESCO-Welterbe.</p></div>
+    <div class="card"><span class="card-icon">⛰️</span><h4>Kilimanjaro</h4><p>Afrikas höchster Gipfel (5.895m). Ein einmaliges Erlebnis.</p></div>
+    <div class="card"><span class="card-icon">🦒</span><h4>Lake Manyara</h4><p>Baumkletternde Löwen und riesige Flamingoschwärme. Kompakt und artenreich.</p></div>
+    <div class="card"><span class="card-icon">🏛️</span><h4>Stone Town</h4><p>Labyrinthische Gassen, Sultanpaläste und bewegende Geschichte.</p></div>
+    <div class="card"><span class="card-icon">🐠</span><h4>Mnemba Atoll</h4><p>Bestes Schnorchel- und Taucherparadies Ostafrikas. Delfine und Schildkröten.</p></div>
+  </div>
+  <div class="photo-placeholder"><span>📷 Foto einfügen – Safari, Nationalpark oder Sansibar</span></div>
+  <div class="tip-box"><p><strong>Jenny's Empfehlung:</strong> Ausflüge immer über uns oder das Hotel buchen – nicht bei Strandverkäufern. Sicher und zuverlässig!</p></div>
+</div>
+
+<!-- 7 SUNSET -->
+<div class="chapter" id="sunset">
+  <span class="chapter-tag">KAPITEL 7</span>
+  <h2>Sunset & <em>Sunrise</em></h2>
+  <div class="chapter-divider"></div>
+  <p>Tanzania bietet einige der atemberaubendsten Momente der Welt – goldenes Licht über Savanne, Ozean und Gipfeln.</p>
+  <h3>🌅 Sunset Spots</h3>
+  <div class="spot-grid">
+    <div class="spot-card"><div class="spot-header"><span class="spot-emoji">🏝️</span><span class="spot-name">Nungwi Beach, Sansibar</span></div><p>Dhow-Boote gleiten über das Wasser während der Himmel in Orange und Rot leuchtet.</p><p class="spot-tip">→ Tipp: Dhow Sunset Cruise oder Cocktail im Z Hotel Rooftop.</p></div>
+    <div class="spot-card"><div class="spot-header"><span class="spot-emoji">🌊</span><span class="spot-name">Michamvi Kae, Sansibar</span></div><p>Versteckter Ostküstenspot – die spiegelglatte Lagune reflektiert das Farbenspiel.</p><p class="spot-tip">→ Tipp: Kae Funk Beach Bar – Lounge-Musik direkt am Wasser.</p></div>
+    <div class="spot-card"><div class="spot-header"><span class="spot-emoji">🦁</span><span class="spot-name">Serengeti Nationalpark</span></div><p>Giraffen und Elefanten als Silhouetten vor der untergehenden Sonne – das Bild Afrikas.</p><p class="spot-tip">→ Tipp: Sundowner-Drink direkt im Busch mit deinem Safariguide.</p></div>
+  </div>
+  <h3>🌄 Sunrise Spots</h3>
+  <div class="spot-grid">
+    <div class="spot-card sunrise"><div class="spot-header"><span class="spot-emoji">🎈</span><span class="spot-name">Heißluftballon über der Serengeti</span></div><p>Die Savanne erwacht im goldenen Morgengrauen – eines der exklusivsten Erlebnisse Tanzanias.</p><p class="spot-tip">→ Tipp: Mit Champagner-Frühstück buchen – es lohnt sich! (Serengeti Balloon Safaris)</p></div>
+    <div class="spot-card sunrise"><div class="spot-header"><span class="spot-emoji">🌋</span><span class="spot-name">Ngorongoro Kraterrand</span></div><p>Im Morgengrauen wird die mystische Kraterlandschaft von goldenem Licht durchflutet.</p><p class="spot-tip">→ Tipp: Früh aufstehen! Raubtiere sind morgens besonders aktiv.</p></div>
+    <div class="spot-card sunrise"><div class="spot-header"><span class="spot-emoji">🏔️</span><span class="spot-name">Kilimanjaro – Uhuru Peak</span></div><p>Sonnenaufgang über den Wolken vom Dach Afrikas. Unvergesslich für alle, die den Gipfel erreichen.</p><p class="spot-tip">→ Beste Besteigungszeit: Juli–Oktober oder Januar–Februar.</p></div>
+  </div>
+</div>
+
+<!-- 8 UNTERKÜNFTE -->
+<div class="chapter" id="unterkunfte">
+  <span class="chapter-tag">KAPITEL 8</span>
+  <h2>Unterkünfte & <em>Lodges</em></h2>
+  <div class="chapter-divider"></div>
+  <p>Unsere Gruppenreisen nutzen <strong>Mid Range Lodges</strong> – komfortabel, authentisch und nah an der Natur.</p>
+  <h3>Safari – Beispielunterkünfte</h3>
+  <div class="lodge-grid">
+    <div class="lodge-card"><div class="lodge-type">Serengeti · Beispiel</div><h4>Serengeti Sopa Lodge</h4><p>Komfortable Rondavels mit Blick auf die Savanne. Pool, Restaurant, tägliche Safaris.</p><span class="price-range">Beispielunterkunft</span></div>
+    <div class="lodge-card"><div class="lodge-type">Ngorongoro · Beispiel</div><h4>Ngorongoro Sopa Lodge</h4><p>Direkt am Kraterrand – atemberaubender Blick in den Krater. Warme Atmosphäre.</p><span class="price-range">Beispielunterkunft</span></div>
+    <div class="lodge-card"><div class="lodge-type">Tarangire · Beispiel</div><h4>Tarangire Safari Lodge</h4><p>Zwischen Baobab-Bäumen am Fluss. Tägliche Elefantenbesuche garantiert.</p><span class="price-range">Beispielunterkunft</span></div>
+    <div class="lodge-card"><div class="lodge-type">Arusha · Beispiel</div><h4>Lokale Guesthouses</h4><p>Zentral gelegen, gute Anbindung, lokale Atmosphäre. Idealer Ausgangspunkt.</p><span class="price-range">Beispielunterkunft</span></div>
+  </div>
+  <h3>Sansibar – Beispielunterkünfte</h3>
+  <div class="lodge-grid">
+    <div class="lodge-card"><div class="lodge-type">Nungwi · Beispiel</div><h4>Bahari Beach Bungalows</h4><p>Direkt am weißen Strand, Pool, traumhafte Sunsets. Entspannte Atmosphäre in Nungwi.</p><span class="price-range">Beispielunterkunft</span></div>
+    <div class="lodge-card"><div class="lodge-type">Paje · Beispiel</div><h4>Paje by Night</h4><p>Ruhig, entspannt, authentisches Sansibar-Feeling. Ideal für Kitesurfer und Ruhesuchende.</p><span class="price-range">Beispielunterkunft</span></div>
+    <div class="lodge-card"><div class="lodge-type">Stone Town · Beispiel</div><h4>Zanzibar Coffee House</h4><p>Historisches Boutique-Hotel im Herzen von Stone Town. Kulturerlebnis pur.</p><span class="price-range">Beispielunterkunft</span></div>
+    <div class="lodge-card"><div class="lodge-type">Kendwa · Beispiel</div><h4>Kendwa Rocks Hotel</h4><p>Direkt am Strand, berühmt für die Full-Moon-Party. Lebhaftes Beach-Club-Feeling.</p><span class="price-range">Beispielunterkunft</span></div>
+  </div>
+  <div class="tip-box"><p>⭐ <strong>Hinweis:</strong> Die genannten Unterkünfte sind Beispiele. Deine konkreten Unterkünfte erhältst du nach der Buchung – angepasst an deine Reise und Reisedaten.</p></div>
+  <div class="photo-placeholder"><span>📷 Foto einfügen – Lodge oder Strandhotel</span></div>
+</div>
+
+<!-- 9 MEDIZIN -->
+<div class="chapter" id="medizin">
+  <span class="chapter-tag">KAPITEL 9</span>
+  <h2>Medizin & <em>Gesundheit</em></h2>
+  <div class="chapter-divider"></div>
+  <p>Eine gute Vorbereitung ist essenziell. Besuche vor der Reise einen Tropenmediziner.</p>
+  <h3>Empfohlene Impfungen</h3>
+  <ul class="styled-list">
+    <li><strong>Gelbfieber</strong> – Pflicht nur bei Einreise aus Gelbfiebergebiet</li>
+    <li><strong>Hepatitis A & B, Typhus, Tollwut</strong> – Empfohlen</li>
+    <li><strong>Meningokokken, Masern, Tetanus, Diphtherie, Polio</strong> – Auffrischen</li>
+    <li><strong>Malaria-Prophylaxe</strong> – Für Serengeti & Küste empfohlen (Tabletten, keine Impfung)</li>
+  </ul>
+  <h3>Empfohlene Krankenhäuser</h3>
+  <div class="hospital-list">
+    <div class="hospital-item"><span class="hospital-badge">ARUSHA</span><div><h5>Aga Khan Hospital</h5><p>Modernste Versorgung mit internationalen Standards.</p></div></div>
+    <div class="hospital-item"><span class="hospital-badge">SANSIBAR</span><div><h5>Urban Care Clinic (Fumba Town)</h5><p>Privatklinik mit deutscher Ärztin – ideal für deutschsprachige Reisende.</p></div></div>
+    <div class="hospital-item"><span class="hospital-badge">SANSIBAR</span><div><h5>Global Hospital</h5><p>Gute Notfallversorgung auf der Insel.</p></div></div>
+    <div class="hospital-item"><span class="hospital-badge">DAR ES SALAAM</span><div><h5>Aga Khan Hospital</h5><p>Modernes Krankenhaus mit gut ausgestatteten Fachabteilungen.</p></div></div>
+  </div>
+  <div class="warning-box">
+    <p>⚠️ <strong>Zanzibar Versicherung Pflicht!</strong> Seit 01.10.2024 müssen alle Reisenden bei Ankunft eine lokale Krankenversicherung vorweisen.<br>
+    <a href="https://zanzibar-insurance.earrivalform.com/?sub2=zanzibar%20travel%20insurance&sub3=b&sub4=192073629973&sub5=808477745004&sub6=23492608734&sub7=m&sub8=&sub9=g&sub10=&ref_id=CjwKCAjw8uTQBhAdEiwAVvtJym2nxfN4444c0Eaxr7X30n55U-pmrIMvZFGy6hZIGtVhCSCYXzuHdxoCYAEQAvD_BwE" target="_blank" style="color:var(--petrol-mid);font-weight:700">→ Jetzt Zanzibar Versicherung abschließen</a></p>
+  </div>
+  <h3>Hygiene & Schutz</h3>
+  <ul class="styled-list pink">
+    <li>Kein Leitungswasser – auch nicht zum Zähneputzen</li>
+    <li>Lange Kleidung + DEET-Spray (50%+) abends gegen Malaria-Mücken</li>
+    <li>Moskitonetz in einfacheren Unterkünften nutzen</li>
+    <li>Reiseapotheke: Schmerzmittel, Elektrolyte, Pflaster, Durchfallmittel</li>
+  </ul>
+</div>
+
+<!-- 10 SPRACHE -->
+<div class="chapter" id="sprache">
+  <span class="chapter-tag">KAPITEL 10</span>
+  <h2>Sprache & <em>Swahili</em></h2>
+  <div class="chapter-divider"></div>
+  <p>Kiswahili ist die Amtssprache. Englisch ist in touristischen Gegenden weit verbreitet. Schon wenige Swahili-Worte öffnen Herzen!</p>
+  <div class="swahili-grid">
+    <div class="swahili-card"><div class="swahili-word">Jambo!</div><div class="swahili-meaning">Hallo!</div></div>
+    <div class="swahili-card"><div class="swahili-word">Asante</div><div class="swahili-meaning">Danke</div></div>
+    <div class="swahili-card"><div class="swahili-word">Karibu</div><div class="swahili-meaning">Willkommen</div></div>
+    <div class="swahili-card"><div class="swahili-word">Pole pole</div><div class="swahili-meaning">Langsam, ruhig</div></div>
+    <div class="swahili-card"><div class="swahili-word">Hakuna Matata</div><div class="swahili-meaning">Keine Sorgen</div></div>
+    <div class="swahili-card"><div class="swahili-word">Hapana</div><div class="swahili-meaning">Nein</div></div>
+    <div class="swahili-card"><div class="swahili-word">Sihitaji</div><div class="swahili-meaning">Das brauche ich nicht</div></div>
+    <div class="swahili-card"><div class="swahili-word">Habari?</div><div class="swahili-meaning">Wie geht's?</div></div>
+    <div class="swahili-card"><div class="swahili-word">Nzuri</div><div class="swahili-meaning">Gut / Schön</div></div>
+    <div class="swahili-card"><div class="swahili-word">Tafadhali</div><div class="swahili-meaning">Bitte</div></div>
+    <div class="swahili-card"><div class="swahili-word">Samahani</div><div class="swahili-meaning">Entschuldigung</div></div>
+    <div class="swahili-card"><div class="swahili-word">Kwaheri</div><div class="swahili-meaning">Auf Wiedersehen</div></div>
+  </div>
+  <div class="pull-quote" style="margin-top:28px"><blockquote>„Pole pole ndio mwendo" – Langsam ist die Art zu gehen.</blockquote><cite>Swahili-Sprichwort</cite></div>
+</div>
+
+<!-- 11 GEHEIMTIPPS -->
+<div class="chapter" id="geheimtipps">
+  <span class="chapter-tag">KAPITEL 11</span>
+  <h2>Geheimtipps & <em>verborgene Schätze</em></h2>
+  <div class="chapter-divider"></div>
+  <p>Abseits der Touristenpfade liegt das wahre Tanzania. Jenny's persönliche Geheimtipps:</p>
+  <div class="secret-grid">
+    <div class="secret-card"><span class="icon">🦈</span><h4>Mafia Island</h4><p>Walhai-Beobachtungen Oktober–März. Unberührt, ruhig, Taucherparadies.</p></div>
+    <div class="secret-card"><span class="icon">🏖️</span><h4>Pangani</h4><p>Unberührte Strände, kaum Touristen. Das ursprüngliche Sansibar-Feeling.</p></div>
+    <div class="secret-card"><span class="icon">🦩</span><h4>Lake Natron</h4><p>Tausende Flamingos, surreale rote Landschaft. Am Fuß des Maasai-Vulkans.</p></div>
+    <div class="secret-card"><span class="icon">🌳</span><h4>Udzungwa Mountains</h4><p>Tropischer Regenwald, Wasserfälle, endemische Tierarten. Abseits aller Touristenrouten.</p></div>
+    <div class="secret-card"><span class="icon">🏛️</span><h4>Bagamoyo</h4><p>Historische Hafenstadt, einst Zentrum Ostafrikas. Unglaubliche Geschichte.</p></div>
+    <div class="secret-card"><span class="icon">🌊</span><h4>Pemba Island</h4><p>Ursprünglicher als Sansibar – Korallenwälder, türkisblaues Wasser, echte Ruhe.</p></div>
+  </div>
+</div>
+
+<!-- 12 SOZIALE PROJEKTE -->
+<div class="chapter" id="projekte">
+  <span class="chapter-tag">KAPITEL 12</span>
+  <h2>Soziale <em>Projekte</em></h2>
+  <div class="chapter-divider"></div>
+  <p>Reisen bedeutet Verantwortung. Travel 2 Transform unterstützt lokale Projekte die das Leben in Tanzania nachhaltig verbessern.</p>
+  <div class="card-grid">
+    <div class="card"><span class="card-icon">🏫</span><h4>UCDC – Unique Choice Daycare</h4><p>Tagespflegezentrum in Arusha für Kinder aus einkommensschwachen Familien. Wir besuchen es auf unseren Gruppenreisen.</p></div>
+    <div class="card"><span class="card-icon">👩‍🏫</span><h4>Bildungsprojekte</h4><p>Unterstützung lokaler Schulen durch Schulmaterialien und direkte Förderung von Lehrenden.</p></div>
+    <div class="card"><span class="card-icon">🌿</span><h4>Nachhaltiger Tourismus</h4><p>Wir buchen bewusst bei lokalen Anbietern – damit das Geld direkt in der Region bleibt.</p></div>
+  </div>
+  <div class="photo-placeholder"><span>📷 Foto einfügen – UCDC Projektbesuch, Kinder oder soziales Engagement</span></div>
+  <div class="tip-box"><p><strong>Wie du helfen kannst:</strong> Bring Schulmaterial, Bücher oder Sportartikel mit – wir übergeben es direkt vor Ort. Frag Jenny nach der aktuellen Wunschliste!</p></div>
+</div>
+
+<!-- 13 SICHERHEIT -->
+<div class="chapter" id="sicherheit">
+  <span class="chapter-tag">KAPITEL 13</span>
+  <h2>Sicherheit & <em>Tipps</em></h2>
+  <div class="chapter-divider"></div>
+  <p>Tanzania ist relativ sicher – mit den richtigen Verhaltensweisen reist du entspannt und sorgenfrei.</p>
+  <div class="card-grid">
+    <div class="card"><span class="card-icon">💍</span><h4>Keine Wertsachen zeigen</h4><p>Teuren Schmuck zuhause lassen. Kamera und Handy unauffällig tragen.</p></div>
+    <div class="card"><span class="card-icon">🌙</span><h4>Nachts aufmerksam</h4><p>Seitliche Straßen im Dunkeln meiden. Immer Bolt statt zu Fuß gehen.</p></div>
+    <div class="card"><span class="card-icon">🚕</span><h4>Nur offizielle Taxis</h4><p>Immer Bolt nutzen oder Taxis vom Hotel bestellen.</p></div>
+    <div class="card"><span class="card-icon">📸</span><h4>Fotos immer fragen</h4><p>Bei Menschen stets um Erlaubnis bitten – besonders bei Maasai.</p></div>
+    <div class="card"><span class="card-icon">🛍️</span><h4>Kein Plastik</h4><p>Plastiktüten sind in Tanzania gesetzlich verboten! Stoffbeutel mitbringen.</p></div>
+    <div class="card"><span class="card-icon">🏄</span><h4>Ausflüge seriös buchen</h4><p>Keine Touren von Strandverkäufern – immer über uns oder das Hotel!</p></div>
+  </div>
+</div>
+
+<!-- 14 PACKLISTE -->
+<div class="chapter" id="packliste">
+  <span class="chapter-tag">KAPITEL 14</span>
+  <h2>Packliste & <em>Ausrüstung</em></h2>
+  <div class="chapter-divider"></div>
+  <p>Deine vollständige, interaktive Packliste und Checkliste – direkt am Handy abhaken:</p>
+  <div style="background:var(--petrol-dark);border-radius:16px;padding:32px;text-align:center;margin:20px 0">
+    <div style="font-size:48px;margin-bottom:14px">🎒</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:24px;color:#fff;margin-bottom:10px">Interaktive Packliste</h3>
+    <p style="color:rgba(255,255,255,0.6);font-size:14px;margin-bottom:22px">Safari · Sansibar · Soul-Vibes – alles zum Abhaken</p>
+    <a href="packliste.html" style="background:var(--pink);color:#fff;padding:13px 28px;border-radius:25px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;display:inline-block">PACKLISTE ÖFFNEN →</a>
+  </div>
+  <div style="background:var(--petrol-xlight);border-radius:16px;padding:24px;text-align:center">
+    <div style="font-size:36px;margin-bottom:12px">✅</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:22px;color:var(--dark);margin-bottom:8px">Kurz-Checkliste</h3>
+    <p style="color:#666;font-size:14px;margin-bottom:18px">Vor der Reise, vor Ort & Sicherheitstipps</p>
+    <a href="checkliste.html" style="background:var(--petrol-mid);color:#fff;padding:12px 24px;border-radius:25px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;display:inline-block">CHECKLISTE ÖFFNEN →</a>
+  </div>
+</div>
+
+<!-- 15 GOING OUT -->
+<div class="chapter" id="goingout">
+  <span class="chapter-tag">KAPITEL 15</span>
+  <h2>Going Out & <em>Nightlife</em></h2>
+  <div class="chapter-divider"></div>
+  <p>Von entspannten Bars mit Live-Musik bis zu lebhaften Beach Clubs – Tanzania hat eine lebendige Ausgehszene.</p>
+  <h3>🏙️ Arusha</h3>
+  <div class="bar-grid">
+    <div class="bar-card"><div class="bar-city">BAR · GARTEN</div><h4>Via Via</h4><p>Gartenbar, Live-Musik am Wochenende, internationales Publikum. Der Treffpunkt für Reisende.</p></div>
+    <div class="bar-card"><div class="bar-city">NIGHTCLUB</div><h4>Zeze Club</h4><p>Afrobeats und lokale Musik in Arusha's beliebtestem Club.</p></div>
+    <div class="bar-card"><div class="bar-city">LOCAL BARS</div><h4>Bougalu / Babylon</h4><p>Authentische Atmosphäre – hier triffst du Einheimische und erlebst das echte Arusha.</p></div>
+  </div>
+  <h3>🏝️ Sansibar</h3>
+  <div class="bar-grid">
+    <div class="bar-card"><div class="bar-city">BEACH CLUB</div><h4>Kendwa Rocks</h4><p>Monatliche Full-Moon-Party am Strand – legendär! Tagsüber entspannter Beach Club.</p></div>
+    <div class="bar-card"><div class="bar-city">BEACH BAR</div><h4>6 Degrees South</h4><p>Lebhafter Club in Nungwi – Cocktails, Musik, Blick aufs Meer.</p></div>
+    <div class="bar-card"><div class="bar-city">ROOFTOP</div><h4>Z Hotel Rooftop</h4><p>Bester Sunset auf Sansibar – elegant und entspannt.</p></div>
+  </div>
+  <h3>🌆 Dar es Salaam</h3>
+  <div class="bar-grid">
+    <div class="bar-card"><div class="bar-city">NIGHTCLUB</div><h4>Shamak</h4><p>Einer der beliebtesten Clubs – Afrobeats, internationale DJs.</p></div>
+    <div class="bar-card"><div class="bar-city">BEACH</div><h4>Coco Beach Bars</h4><p>Am Wochenende bei Einheimischen beliebt. Lokale Küche und Strandatmosphäre.</p></div>
+    <div class="bar-card"><div class="bar-city">AM WASSER</div><h4>Slipway Centre</h4><p>Restaurants und Bars mit Hafenblick – ideal für einen entspannten Abend.</p></div>
+  </div>
+  <div class="warning-box"><p>⚠️ <strong>Sicherheit nachts:</strong> Immer Bolt statt zu Fuß. Seitliche Straßen im Dunkeln meiden.</p></div>
+</div>
+
+<!-- FINAL QUOTE -->
+<div class="pull-quote">
+  <blockquote>„Tanzania hat mich verändert – und ich möchte das mit dir teilen. Lass dich von diesem Land verzaubern. Du wirst es nie vergessen."</blockquote>
+  <cite>— Jenny Wierzbicki · Travel 2 Transform · www.travel2transform.de</cite>
+</div>
+
+</main>
+
+<footer>
+  <p>© 2025 Travel 2 Transform · Jenny Wierzbicki · Tanzania</p>
+  <p><a href="https://www.travel2transform.de">www.travel2transform.de</a> · <a href="mailto:infotravel2transform@gmail.com">infotravel2transform@gmail.com</a> · <a href="https://wa.me/4917624238972">+49 176 24238972</a></p>
+</footer>
+
+<script>
+const chapters = document.querySelectorAll('.chapter');
+const navLinks = document.querySelectorAll('.sticky-nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  chapters.forEach(ch => { if(window.scrollY >= ch.offsetTop - 80) current = ch.id; });
+  navLinks.forEach(l => { l.classList.remove('active'); if(l.getAttribute('href')==='#'+current) l.classList.add('active'); });
+});
+</script>
+
+</body>
+</html>

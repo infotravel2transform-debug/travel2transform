@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tansania Checkliste – Travel 2 Transform</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --petrol:#1a7a6e;--petrol-dark:#0f5a51;--petrol-mid:#2a9d8f;
+    --petrol-light:#e0f2ef;--petrol-xlight:#f0faf8;
+    --pink:#e8829a;--pink-light:#fdf0f3;--cream:#faf8f5;--dark:#1a2e2a;
+  }
+  body{font-family:'Lato',sans-serif;background:var(--cream);color:#333;line-height:1.6}
+
+  /* HEADER */
+  header{background:var(--petrol-dark);padding:28px 40px;text-align:center;position:relative}
+  header::after{content:'';display:block;width:100%;height:5px;background:var(--pink);position:absolute;bottom:0;left:0}
+  .brand{font-family:'Lato',sans-serif;font-size:13px;letter-spacing:4px;color:rgba(255,255,255,0.65);margin-bottom:6px}
+  .brand span{color:var(--pink);font-weight:700}
+  header h1{font-family:'Playfair Display',serif;font-size:36px;color:#fff;font-style:italic;line-height:1.2}
+  header h1 em{color:#7de8d8;font-style:normal}
+  header p{color:rgba(255,255,255,0.65);font-size:14px;margin-top:8px;font-style:italic}
+
+  /* PROGRESS */
+  .progress-section{background:var(--petrol-xlight);padding:20px 40px;text-align:center;border-bottom:1px solid #d0eae6}
+  .progress-label{font-size:13px;color:var(--petrol);margin-bottom:10px;font-weight:700;letter-spacing:1px}
+  .progress-bar-wrap{background:#d0eae6;border-radius:20px;height:12px;max-width:400px;margin:0 auto 6px;overflow:hidden}
+  .progress-bar{background:var(--pink);height:12px;border-radius:20px;transition:width 0.4s ease;width:0%}
+  .progress-count{font-size:13px;color:#888;font-style:italic}
+
+  /* MAIN */
+  main{max-width:900px;margin:0 auto;padding:40px 20px}
+
+  /* SECTION */
+  .section{margin-bottom:36px}
+  .section-header{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--petrol-light)}
+  .section-icon{font-size:26px}
+  .section-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--dark);font-weight:700}
+  .section-count{font-size:12px;color:#aaa;margin-left:auto;font-style:italic}
+
+  /* ITEMS */
+  .items-list{display:flex;flex-direction:column;gap:8px}
+
+  /* ITEM */
+  .item{background:#fff;border-radius:12px;padding:14px 18px;display:flex;align-items:flex-start;gap:14px;cursor:pointer;transition:all 0.2s;border:1.5px solid transparent;box-shadow:0 1px 6px rgba(0,0,0,0.05)}
+  .item:hover{border-color:var(--petrol-mid);box-shadow:0 3px 14px rgba(42,157,143,0.12)}
+  .item.checked{background:var(--petrol-xlight);border-color:var(--petrol-mid)}
+  .item.checked .item-text{color:#aaa}
+  .item.checked .item-title{text-decoration:line-through}
+  .checkbox{width:22px;height:22px;border-radius:6px;border:2px solid #ccc;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.2s;background:#fff;margin-top:2px}
+  .item.checked .checkbox{background:var(--petrol-mid);border-color:var(--petrol-mid)}
+  .checkmark{display:none;color:#fff;font-size:14px;font-weight:700}
+  .item.checked .checkmark{display:block}
+  .item-content{flex:1}
+  .item-title{font-size:14px;font-weight:700;color:var(--dark);display:block;margin-bottom:2px}
+  .item-desc{font-size:13px;color:#777;line-height:1.5}
+  .item-link{font-size:12px;color:var(--petrol-mid);font-weight:700;word-break:break-all}
+
+  /* INFO BOX */
+  .info-box{background:var(--petrol-xlight);border-left:4px solid var(--petrol-mid);border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:36px}
+  .info-box h3{font-family:'Playfair Display',serif;font-size:17px;color:var(--dark);margin-bottom:10px}
+  .info-box ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+  .info-box li{font-size:14px;color:#555;display:flex;gap:10px}
+  .info-box li::before{content:'→';color:var(--petrol-mid);flex-shrink:0;font-weight:700}
+
+  /* SWAHILI BOX */
+  .swahili-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:4px}
+  .swahili-item{background:#fff;border-radius:10px;padding:12px 16px;border:1px solid var(--petrol-light)}
+  .swahili-word{font-weight:700;color:var(--petrol-dark);font-size:15px}
+  .swahili-meaning{font-size:13px;color:#888;margin-top:2px}
+
+  /* TIP CARD */
+  .tip-card{background:var(--pink-light);border-left:4px solid var(--pink);border-radius:0 12px 12px 0;padding:14px 18px;margin-bottom:8px;font-size:14px;color:#555;line-height:1.6}
+  .tip-card strong{color:var(--dark)}
+
+  /* RESET */
+  .actions{text-align:center;margin:30px 0 10px}
+  .btn-reset{background:transparent;border:2px solid var(--petrol-mid);color:var(--petrol-mid);padding:10px 28px;border-radius:20px;font-size:13px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase;transition:all 0.2s}
+  .btn-reset:hover{background:var(--petrol-mid);color:#fff}
+
+  footer{background:var(--petrol-dark);padding:32px 40px;text-align:center}
+  footer::before{content:'';display:block;width:100%;height:4px;background:var(--pink);margin-bottom:24px}
+  footer p{color:rgba(255,255,255,0.55);font-size:13px;margin-bottom:4px}
+  footer a{color:#7de8d8;text-decoration:none}
+
+  @media(max-width:600px){
+    header{padding:20px}
+    header h1{font-size:26px}
+    main{padding:24px 16px}
+    .swahili-grid{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">TRAVEL <span>2</span> TRANSFORM</div>
+  <h1>Kurz-Checkliste <em>Tansania</em></h1>
+  <p>Alles, was du vor und während deiner Reise wissen musst ✨</p>
+</header>
+
+<div class="progress-section">
+  <div class="progress-label">DEIN FORTSCHRITT</div>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="progressBar"></div></div>
+  <div class="progress-count" id="progressCount">0 von <span id="totalCount">0</span> erledigt</div>
+</div>
+
+<main>
+
+  <!-- VOR DER REISE -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🛂</span>
+      <span class="section-title">Vor der Reise</span>
+      <span class="section-count" id="count-vor"></span>
+    </div>
+    <div class="items-list" id="vor">
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Flug buchen</span>
+          <span class="item-desc">Am besten frühzeitig – ggf. Gabelflug. Empfehlenswerte Airlines: Condor, Emirates, KLM, Qatar Airways, Turkish Airlines.</span>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Visum beantragen</span>
+          <span class="item-desc">Online e-Visa empfohlen (besser als bei Ankunft) · 50 USD</span>
+          <a class="item-link" href="https://visa.immigration.go.tz/" target="_blank" onclick="event.stopPropagation()">→ visa.immigration.go.tz</a>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Reisepass prüfen</span>
+          <span class="item-desc">Mind. 6 Monate gültig, mit freiem Visumfeld.</span>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Impfungen prüfen</span>
+          <span class="item-desc">Empfohlen: Gelbfieber, Hepatitis A/B, Typhus, Tollwut, Malaria-Prophylaxe → Reise- und Sicherheitshinweise Auswärtiges Amt.</span>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Reiseversicherung abschließen</span>
+          <span class="item-desc">Inkl. Krankenrücktransport + evtl. Reiserücktrittsversicherung.</span>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Geld vorbereiten</span>
+          <span class="item-desc">USD in Bar mitnehmen (neue Scheine ab 2006) + Kreditkarte. Empfohlen: 2 Geldbeutel – nur das Bargeld mit dabei, das du an dem Tag wirklich brauchst.</span>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Geduld einpacken 🌿</span>
+          <span class="item-desc">Die Kultur vor Ort bringt dich automatisch in einen stressfreien Modus. „Go with the flow" – alles kann etwas länger dauern als in Europa.</span>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Zanzibar Versicherung abschließen</span>
+          <span class="item-desc">Für den Aufenthalt auf Sansibar eine separate Zanzibar Versicherung abschließen – wird vor Ort verlangt.</span>
+          <a class="item-link" href="https://zanzibar-insurance.earrivalform.com/?sub2=zanzibar%20travel%20insurance&sub3=b&sub4=192073629973&sub5=808477745004&sub6=23492608734&sub7=m&sub8=&sub9=g&sub10=&ref_id=CjwKCAjw8uTQBhAdEiwAVvtJym2nxfN4444c0Eaxr7X30n55U-pmrIMvZFGy6hZIGtVhCSCYXzuHdxoCYAEQAvD_BwE&gad_source=1&gad_campaignid=23492608734&gbraid=0AAAABBl-vV6Lf9ftQ8SMh7w1dJsFlQ0Qx&gclid=CjwKCAjw8uTQBhAdEiwAVvtJym2nxfN4444c0Eaxr7X30n55U-pmrIMvZFGy6hZIGtVhCSCYXzuHdxoCYAEQAvD_BwE" target="_blank" onclick="event.stopPropagation()">→ Jetzt Zanzibar Versicherung abschließen</a>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Reiseapotheke mitnehmen</span>
+          <span class="item-desc">Schmerzmittel, Elektrolyte, Pflaster, Durchfallmittel, ggf. Antibiotikum.</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- VOR ORT -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">📍</span>
+      <span class="section-title">Vor Ort</span>
+      <span class="section-count" id="count-vorort"></span>
+    </div>
+    <div class="items-list" id="vorort">
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Sicherheit beachten</span>
+          <span class="item-desc">Keinen wertvollen Schmuck tragen, Wertsachen nicht offen zeigen.</span>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Nur abgefülltes Wasser trinken</span>
+          <span class="item-desc">Nur Wasser aus Shops kaufen – kein Leitungswasser, auch nicht zum Zähneputzen.</span>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Lokale Gesetze & Kultur respektieren</span>
+          <span class="item-desc">Kleidung auf Sansibar konservativ – Schultern & Knie bedecken in Städten & bei Moscheen.</span>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">SIM-Karte kaufen</span>
+          <span class="item-desc">Kein Kauf an Straßenständen! Direkt am Flughafen oder im offiziellen Shop in der Stadt. Empfohlen: Vodacom oder Airtel.</span>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Krankenversorgung kennen</span>
+          <span class="item-desc">Sansibar: Fumba Town – Urban Care Clinic. Arusha: lokale Ärzte am Standort.</span>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Keine Plastiktüten mitbringen</span>
+          <span class="item-desc">Gesetzlich verboten in Tansania!</span>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Keine Drohnen ohne Genehmigung</span>
+          <span class="item-desc">In Nationalparks teils streng verboten.</span>
+        </div>
+      </div>
+
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Ausflüge nur über uns oder das Hotel buchen</span>
+          <span class="item-desc">Strand-Verkäufer sind oft keine echten Anbieter – Preise klingen verlockend, sind aber nicht abgesichert.</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SAFARI & NATUR -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🐘</span>
+      <span class="section-title">Safari & Natur</span>
+      <span class="section-count" id="count-safari"></span>
+    </div>
+    <div class="items-list" id="safari">
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Fernglas mitnehmen</span>
+          <span class="item-desc">Lohnt sich sehr – gibt es aber auch in den Safariautos.</span>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Zwiebelprinzip bei Kleidung</span>
+          <span class="item-desc">Morgens kalt, tagsüber heiß – Layering ist Key auf Safari.</span>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Mückenschutz</span>
+          <span class="item-desc">Lange Kleidung + DEET-haltiges Spray (z.B. Nobite) – extrem wichtig!</span>
+        </div>
+      </div>
+      <div class="item" onclick="toggle(this)">
+        <div class="checkbox"><span class="checkmark">✓</span></div>
+        <div class="item-content">
+          <span class="item-title">Sonnenschutz</span>
+          <span class="item-desc">Hut, Sonnencreme (50+), Sonnenbrille – die Sonne ist sehr stark!</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SWAHILI -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🗣</span>
+      <span class="section-title">Sprache – Swahili Basics</span>
+    </div>
+    <p style="font-size:14px;color:#777;margin-bottom:16px">Grundkenntnisse helfen sehr – Englisch ist in touristischen Gegenden weit verbreitet.</p>
+    <div class="swahili-grid">
+      <div class="swahili-item"><div class="swahili-word">Jambo!</div><div class="swahili-meaning">Hallo</div></div>
+      <div class="swahili-item"><div class="swahili-word">Asante</div><div class="swahili-meaning">Danke</div></div>
+      <div class="swahili-item"><div class="swahili-word">Karibu</div><div class="swahili-meaning">Willkommen</div></div>
+      <div class="swahili-item"><div class="swahili-word">Pole pole</div><div class="swahili-meaning">Langsam, ruhig</div></div>
+      <div class="swahili-item"><div class="swahili-word">Hakuna Matata</div><div class="swahili-meaning">Keine Sorgen</div></div>
+      <div class="swahili-item"><div class="swahili-word">Hapana</div><div class="swahili-meaning">Nein</div></div>
+      <div class="swahili-item"><div class="swahili-word">Sihitaji</div><div class="swahili-meaning">Das brauche ich nicht</div></div>
+    </div>
+  </div>
+
+  <!-- VERHALTEN & KULTUR -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🌍</span>
+      <span class="section-title">Verhalten & Kultur</span>
+    </div>
+    <div class="tip-card"><strong>Kleidung:</strong> Besonders auf Sansibar – Schultern & Knie bedecken in Städten/bei Moscheen. Am Strand & in Touristengegenden normale Kleidung.</div>
+    <div class="tip-card"><strong>Höflichkeit:</strong> Direkte Kritik oder Hektik wirken unhöflich. Ruhig & freundlich bleiben.</div>
+    <div class="tip-card"><strong>Handeln:</strong> Auf Märkten und bei Souvenirs erlaubt – aber immer freundlich!</div>
+    <div class="tip-card"><strong>Fotos:</strong> Immer um Erlaubnis fragen – besonders bei Menschen!</div>
+  </div>
+
+  <!-- ZEIT & STROM -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-icon">🕒</span>
+      <span class="section-title">Zeit & Strom</span>
+    </div>
+    <div class="info-box">
+      <h3>Praktische Infos</h3>
+      <ul>
+        <li>Zeitzone: MEZ +2 / MESZ +1 (keine Sommerzeit in Tansania)</li>
+        <li>Steckdosen: Adapter Typ G (britischer Standard)</li>
+        <li>Stromausfälle möglich → Powerbank unbedingt mitnehmen!</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn-reset" onclick="resetAll()">Alle zurücksetzen</button>
+  </div>
+
+</main>
+
+<footer>
+  <p>© 2025 Travel 2 Transform · Jenny Wierzbicki</p>
+  <p><a href="https://www.travel2transform.de">www.travel2transform.de</a> · <a href="mailto:infotravel2transform@gmail.com">infotravel2transform@gmail.com</a></p>
+</footer>
+
+<script>
+  const sections = ['vor','vorort','safari'];
+
+  function updateProgress(){
+    const all = document.querySelectorAll('.item');
+    const checked = document.querySelectorAll('.item.checked');
+    const total = all.length;
+    const done = checked.length;
+    document.getElementById('totalCount').textContent = total;
+    document.getElementById('progressCount').textContent = done + ' von ' + total + ' erledigt';
+    document.getElementById('progressBar').style.width = (total ? (done/total*100) : 0) + '%';
+    sections.forEach(id => {
+      const sec = document.getElementById(id);
+      if(!sec) return;
+      const t = sec.querySelectorAll('.item').length;
+      const d = sec.querySelectorAll('.item.checked').length;
+      const el = document.getElementById('count-'+id);
+      if(el) el.textContent = d + '/' + t + ' erledigt';
+    });
+  }
+
+  function toggle(el){
+    el.classList.toggle('checked');
+    updateProgress();
+  }
+
+  function resetAll(){
+    document.querySelectorAll('.item.checked').forEach(el => el.classList.remove('checked'));
+    updateProgress();
+  }
+
+  updateProgress();
+</script>
+</body>
+</html>

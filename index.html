@@ -274,6 +274,7 @@ footer{background:#0a1f1b;padding:64px}
     <a href="#">Retreat</a>
     <a href="#">Freiwilligenarbeit</a>
     <a href="#">Wellness</a>
+    <a href="#reisebereich" style="color:#7de8d8;font-weight:700">🔐 Reisebereich</a>
   </div>
   <div style="display:flex;align-items:center;gap:12px">
     <a href="#kontakt" class="nav-cta">ANFRAGEN</a>
@@ -554,6 +555,102 @@ function toggleMenu(){
     </div>
   </div>
 </section>
+
+
+<!-- REISEBEREICH -->
+<section id="reisebereich" style="background:#0f5a51;padding:88px 64px">
+  <div style="max-width:700px;margin:0 auto;text-align:center">
+    <span style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);font-weight:700;display:block;margin-bottom:16px">NUR FÜR REISENDE</span>
+    <h2 style="font-family:'Playfair Display',serif;font-size:48px;color:#fff;line-height:1.2;margin-bottom:12px">Mein <em style="color:#7de8d8;font-style:italic">Reisebereich</em></h2>
+    <p style="color:rgba(255,255,255,0.65);font-size:15px;margin-bottom:40px;line-height:1.8">Dein persönlicher Bereich mit Packliste, Checkliste und Travel Guide – exklusiv für alle die mit mir reisen. 🌍</p>
+
+    <!-- LOGIN BOX -->
+    <div id="loginBox" style="background:rgba(255,255,255,0.07);border:1px solid rgba(125,232,216,0.3);border-radius:18px;padding:36px">
+      <p style="color:rgba(255,255,255,0.6);font-size:14px;margin-bottom:20px;font-style:italic">Bitte gib dein Passwort ein, das du nach der Buchung erhalten hast:</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <input type="password" id="pwInput" placeholder="Passwort eingeben..." onkeydown="if(event.key==='Enter')checkPw()" style="padding:13px 20px;border-radius:25px;border:1.5px solid rgba(125,232,216,0.4);background:rgba(255,255,255,0.08);color:#fff;font-size:14px;font-family:'Lato',sans-serif;outline:none;width:260px">
+        <button onclick="checkPw()" style="background:#e8829a;color:#fff;border:none;padding:13px 28px;border-radius:25px;font-size:13px;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase">EINLOGGEN</button>
+      </div>
+      <p id="pwError" style="color:#e8829a;font-size:13px;margin-top:14px;display:none">Falsches Passwort. Bitte nochmal versuchen.</p>
+    </div>
+
+    <!-- CONTENT (hidden) -->
+    <div id="reiseContent" style="display:none">
+      <p style="color:rgba(255,255,255,0.7);font-size:15px;margin-bottom:32px;font-style:italic">Willkommen in deinem Reisebereich! 🌿 Hier findest du alles für deine Tanzania-Reise.</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+
+        <!-- Packliste -->
+        <a href="packliste.html" style="text-decoration:none">
+          <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(125,232,216,0.3);border-radius:16px;padding:28px 20px;transition:transform 0.2s;cursor:pointer" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+            <div style="font-size:36px;margin-bottom:12px">🎒</div>
+            <div style="font-family:'Playfair Display',serif;font-size:18px;color:#fff;margin-bottom:8px;font-weight:700">Packliste</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.55);line-height:1.5">Alles was du einpacken musst – interaktiv zum Abhaken</div>
+            <div style="margin-top:14px;font-size:12px;color:#7de8d8;font-weight:700;letter-spacing:1px">ÖFFNEN →</div>
+          </div>
+        </a>
+
+        <!-- Checkliste -->
+        <a href="checkliste.html" style="text-decoration:none">
+          <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(125,232,216,0.3);border-radius:16px;padding:28px 20px;transition:transform 0.2s;cursor:pointer" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+            <div style="font-size:36px;margin-bottom:12px">✅</div>
+            <div style="font-family:'Playfair Display',serif;font-size:18px;color:#fff;margin-bottom:8px;font-weight:700">Checkliste</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.55);line-height:1.5">Kurz-Checkliste vor & während der Reise</div>
+            <div style="margin-top:14px;font-size:12px;color:#7de8d8;font-weight:700;letter-spacing:1px">ÖFFNEN →</div>
+          </div>
+        </a>
+
+        <!-- Travel Guide -->
+        <div style="background:rgba(255,255,255,0.05);border:1px dashed rgba(125,232,216,0.2);border-radius:16px;padding:28px 20px;opacity:0.6">
+          <div style="font-size:36px;margin-bottom:12px">🗺</div>
+          <div style="font-family:'Playfair Display',serif;font-size:18px;color:#fff;margin-bottom:8px;font-weight:700">Travel Guide</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.55);line-height:1.5">Dein persönlicher Guide für Tanzania</div>
+          <div style="margin-top:14px;font-size:12px;color:rgba(255,255,255,0.3);font-weight:700;letter-spacing:1px">KOMMT BALD</div>
+        </div>
+
+      </div>
+
+      <!-- Logout -->
+      <button onclick="logout()" style="margin-top:28px;background:transparent;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.4);padding:8px 20px;border-radius:15px;font-size:12px;cursor:pointer;letter-spacing:1px">Ausloggen</button>
+    </div>
+  </div>
+</section>
+
+<style>
+#pwInput::placeholder{color:rgba(255,255,255,0.3)}
+@media(max-width:768px){
+  #reisebereich{padding:56px 24px !important}
+  #reiseContent > div{grid-template-columns:1fr !important}
+  #reisebereich h2{font-size:34px !important}
+}
+</style>
+
+<script>
+function checkPw(){
+  const val = document.getElementById('pwInput').value;
+  if(val === 'Reisentz'){
+    document.getElementById('loginBox').style.display='none';
+    document.getElementById('reiseContent').style.display='block';
+    sessionStorage.setItem('t2t_auth','1');
+  } else {
+    document.getElementById('pwError').style.display='block';
+    document.getElementById('pwInput').value='';
+  }
+}
+function logout(){
+  sessionStorage.removeItem('t2t_auth');
+  document.getElementById('loginBox').style.display='block';
+  document.getElementById('reiseContent').style.display='none';
+  document.getElementById('pwInput').value='';
+}
+// Auto-login if already authenticated in this session
+if(sessionStorage.getItem('t2t_auth')==='1'){
+  document.addEventListener('DOMContentLoaded',function(){
+    document.getElementById('loginBox').style.display='none';
+    document.getElementById('reiseContent').style.display='block';
+  });
+}
+</script>
+
 
 <!-- FOOTER / KONTAKT -->
 <footer id="kontakt">
