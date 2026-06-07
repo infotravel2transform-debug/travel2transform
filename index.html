@@ -25,11 +25,11 @@ img{display:block;width:100%;height:100%;object-fit:cover}
 a{text-decoration:none}
 
 /* NAV */
-nav{position:sticky;top:0;background:rgba(15,90,81,0.97);backdrop-filter:blur(8px);z-index:100;padding:14px 48px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{color:#fff;font-family:'Playfair Display',serif;font-size:13px;letter-spacing:2px;text-transform:uppercase}
+nav{position:sticky;top:0;background:#fff;backdrop-filter:blur(8px);z-index:100;padding:14px 48px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f0eeec;box-shadow:0 1px 12px rgba(0,0,0,0.06)}
+.nav-logo{color:var(--petrol-dark);font-family:'Playfair Display',serif;font-size:13px;letter-spacing:2px;text-transform:uppercase}
 .nav-links{display:flex;gap:30px}
-.nav-links a{color:rgba(255,255,255,0.8);text-decoration:none;font-size:12px;letter-spacing:0.5px;transition:color 0.2s}
-.nav-links a:hover{color:#fff}
+.nav-links a{color:var(--petrol-dark);opacity:0.75;text-decoration:none;font-size:12px;letter-spacing:0.5px;transition:color 0.2s}
+.nav-links a:hover{color:var(--petrol-dark);opacity:1}
 .nav-cta{background:var(--pink);color:#fff;padding:9px 22px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:1px;text-decoration:none;text-transform:uppercase}
 
 /* HERO */
@@ -48,10 +48,10 @@ nav{position:sticky;top:0;background:rgba(15,90,81,0.97);backdrop-filter:blur(8p
 .btn-outline-white{background:transparent;color:#fff;border:2px solid rgba(255,255,255,0.6);padding:11px 30px;border-radius:25px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;display:inline-block}
 
 /* TICKER */
-.ticker{background:var(--petrol-dark);padding:13px 0;overflow:hidden;white-space:nowrap}
+.ticker{background:var(--pink);padding:13px 0;overflow:hidden;white-space:nowrap}
 .ticker-inner{display:inline-flex;gap:48px;animation:ticker 40s linear infinite}
-.ticker-item{color:rgba(255,255,255,0.65);font-size:11px;letter-spacing:2px;text-transform:uppercase}
-.ticker-sep{color:var(--petrol-mid);margin:0 4px}
+.ticker-item{color:rgba(255,255,255,0.85);font-size:11px;letter-spacing:2px;text-transform:uppercase}
+.ticker-sep{color:rgba(255,255,255,0.5);margin:0 4px}
 @keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
 /* STATS */
@@ -69,12 +69,12 @@ nav{position:sticky;top:0;background:rgba(15,90,81,0.97);backdrop-filter:blur(8p
 .intro-left h2{font-family:'Playfair Display',serif;font-size:44px;line-height:1.15;margin-bottom:20px;color:var(--dark)}
 .intro-left h2 em{color:var(--petrol-mid);font-style:italic}
 .intro-left p{color:#666;line-height:1.9;margin-bottom:18px;font-size:15px}
-.intro-right{background:var(--petrol-xlight);border-radius:18px;padding:36px;border-left:4px solid var(--petrol-mid)}
+.intro-right{background:var(--pink-light);border-radius:18px;padding:36px;border-left:4px solid var(--pink)}
 .quote-text{font-family:'Playfair Display',serif;font-style:italic;font-size:18px;color:var(--dark);margin-bottom:24px;line-height:1.65}
 .feature-list{list-style:none}
 .feature-list li{padding:10px 0;font-size:14px;color:#555;border-bottom:1px solid rgba(26,122,110,0.12);display:flex;align-items:center;gap:10px}
 .feature-list li:last-child{border-bottom:none}
-.feature-list li::before{content:'✦';color:var(--petrol-mid);font-size:11px;flex-shrink:0}
+.feature-list li::before{content:'✦';color:var(--pink);font-size:11px;flex-shrink:0}
 
 /* TRIPS */
 .trips-section{background:var(--cream);padding:88px 64px}
@@ -88,7 +88,7 @@ nav{position:sticky;top:0;background:rgba(15,90,81,0.97);backdrop-filter:blur(8p
 .trip-img{height:165px;position:relative;overflow:hidden}
 .trip-img img{transition:transform 0.4s}
 .trip-card:hover .trip-img img{transform:scale(1.05)}
-.trip-badge{position:absolute;top:12px;left:12px;background:var(--petrol-mid);color:#fff;font-size:10px;font-weight:700;letter-spacing:1px;padding:4px 10px;border-radius:10px;text-transform:uppercase;z-index:2}
+.trip-badge{position:absolute;top:12px;left:12px;background:var(--pink);color:#fff;font-size:10px;font-weight:700;letter-spacing:1px;padding:4px 10px;border-radius:10px;text-transform:uppercase;z-index:2}
 .trip-badge.pink{background:var(--pink)}
 .trip-badge.coming{background:rgba(80,80,80,0.85)}
 .trip-badge.new{background:#e8894a}
@@ -102,23 +102,23 @@ nav{position:sticky;top:0;background:rgba(15,90,81,0.97);backdrop-filter:blur(8p
 .trip-link{font-size:11px;color:var(--petrol-mid);font-weight:700;letter-spacing:0.5px;text-transform:uppercase}
 
 /* DATES */
-.dates-section{background:var(--petrol-xlight);padding:72px 64px}
+.dates-section{background:#fff;border-top:1px solid #f0eeec;border-bottom:1px solid #f0eeec;padding:72px 64px}
 .dates-header{text-align:center;margin-bottom:44px}
 .dates-header h2{font-family:'Playfair Display',serif;font-size:42px;color:var(--dark)}
 .dates-header h2 em{color:var(--petrol-mid);font-style:italic}
 .dates-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;max-width:720px;margin:0 auto}
-.date-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 2px 14px rgba(0,0,0,0.05);border-top:4px solid var(--petrol-mid)}
+.date-card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 2px 14px rgba(0,0,0,0.06);border-top:4px solid var(--pink)}
 .date-card.pink-border{border-top-color:var(--pink)}
-.date-type{font-size:10px;color:var(--petrol-mid);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.date-type{font-size:10px;color:var(--pink);font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
 .date-card.pink-border .date-type{color:var(--pink)}
 .date-emoji{font-size:30px;margin-bottom:12px;display:block}
 .date-range{font-size:16px;font-weight:700;color:var(--dark);font-family:'Playfair Display',serif;margin-bottom:6px}
 .date-sub{font-size:12px;color:#999;margin-bottom:18px}
-.btn-small{background:var(--petrol-mid);color:#fff;padding:10px 22px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border:none;cursor:pointer;display:inline-block}
+.btn-small{background:var(--pink);color:#fff;padding:10px 22px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border:none;cursor:pointer;display:inline-block}
 .btn-small.pink{background:var(--pink)}
 
 /* MISSION */
-.mission-section{background:var(--petrol-dark);padding:88px 64px;text-align:center}
+.mission-section{background:linear-gradient(135deg,#0f5a51 0%,#1a7a6e 100%);padding:88px 64px;text-align:center}
 .mission-section .section-tag{color:rgba(255,255,255,0.5)}
 .mission-section h2{font-family:'Playfair Display',serif;font-size:52px;color:#fff;line-height:1.15;margin-bottom:22px}
 .mission-section h2 em{font-style:italic;display:block;color:#7de8d8}
@@ -149,7 +149,7 @@ nav{position:sticky;top:0;background:rgba(15,90,81,0.97);backdrop-filter:blur(8p
 .btn-outline-teal{background:transparent;color:#7de8d8;border:2px solid rgba(125,232,216,0.4);padding:11px 30px;border-radius:25px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;display:inline-block}
 
 /* FOOTER */
-footer{background:#0a1f1b;padding:64px}
+footer{background:#0f2e29;padding:64px}
 .footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px}
 .footer-left .section-tag{color:rgba(255,255,255,0.35)}
 .footer-left h3{font-family:'Playfair Display',serif;font-size:36px;color:#fff;line-height:1.2;margin:10px 0 18px}
@@ -265,8 +265,8 @@ footer{background:#0a1f1b;padding:64px}
 <!-- NAV -->
 <nav>
   <div style="display:flex;flex-direction:column;line-height:1.2">
-    <div style="color:rgba(255,255,255,0.45);font-size:9px;letter-spacing:3px;text-transform:uppercase">Tanzania & Sansibar</div>
-    <div style="font-family:'Lato',sans-serif;font-size:14px;letter-spacing:2.5px;font-weight:700;text-transform:uppercase"><span style="color:#7de8d8">TRAVEL</span> <span style="color:#e8829a">2</span> <span style="color:#7de8d8">TRANSFORM</span></div>
+    <div style="color:var(--petrol-mid);font-size:9px;letter-spacing:3px;text-transform:uppercase">Tanzania & Sansibar</div>
+    <div style="font-family:'Lato',sans-serif;font-size:14px;letter-spacing:2.5px;font-weight:700;text-transform:uppercase"><span style="color:var(--petrol-dark)">TRAVEL</span> <span style="color:var(--pink)">2</span> <span style="color:var(--petrol-dark)">TRANSFORM</span></div>
   </div>
   <div class="nav-links" id="navLinks">
     <a href="#">Safari</a>
@@ -292,8 +292,8 @@ footer{background:#0a1f1b;padding:64px}
 }
 @media(max-width:768px){
   #burgerBtn{display:flex !important}
-  #navLinks{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(15,90,81,0.98);flex-direction:column;align-items:center;justify-content:center;gap:32px;z-index:200;transform:translateX(100%);transition:transform 0.35s ease;display:flex !important}
-  #navLinks a{font-size:22px;letter-spacing:2px;color:#fff}
+  #navLinks{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(255,255,255,0.98);flex-direction:column;align-items:center;justify-content:center;gap:32px;z-index:200;transform:translateX(100%);transition:transform 0.35s ease;display:flex !important}
+  #navLinks a{font-size:22px;letter-spacing:2px;color:var(--petrol-dark)}
   #navLinks.open{transform:translateX(0)}
 }
 </style>
