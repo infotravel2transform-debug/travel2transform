@@ -372,13 +372,13 @@ const questions = [
 
   // Q1
   { phase: { en:'Your everyday life', de:'Dein Alltag' },
-    en: { t:'When you wake up in the morning – what's the first feeling?', s:'Honest. No right or wrong.' },
+    en: { t:'When you wake up in the morning – what\'s the first feeling?', s:'Honest. No right or wrong.' },
     de: { t:'Wenn du morgens aufwachst – was ist das erste Gefühl?', s:'Ehrlich. Kein Richtig oder Falsch.' },
     opts: [
       { en:'Ugh – another day of the same',              de:'Och nein – nochmal derselbe Tag',                 d:'kapha', c:'root',    y:'restorative' },
-      { en:'Already stressed before I've even started', de:'Schon gestresst bevor es überhaupt losgeht',      d:'pitta', c:'solar',   y:'strength'    },
+      { en:'Already stressed before I\'ve even started', de:'Schon gestresst bevor es überhaupt losgeht',      d:'pitta', c:'solar',   y:'strength'    },
       { en:'Okay – but somehow not really alive',         de:'Okay – aber irgendwie nicht wirklich lebendig',  d:'vata',  c:'heart',   y:'balance'     },
-      { en:'Something pulls me – I just don't know where', de:'Etwas zieht mich – ich weiß nur noch nicht wohin', d:'vata', c:'crown', y:'spiritual' },
+      { en:'Something pulls me – I just don\'t know where', de:'Etwas zieht mich – ich weiß nur noch nicht wohin', d:'vata', c:'crown', y:'spiritual' },
     ], type:'all' },
 
   // Q2
@@ -386,9 +386,9 @@ const questions = [
     en: { t:'Which sentence hits closest to home right now?', s:'' },
     de: { t:'Welcher Satz trifft gerade am ehesten zu?', s:'' },
     opts: [
-      { en:'I function – but I'm not really living',     de:'Ich funktioniere – aber ich lebe nicht wirklich',          d:'vata',  c:'root',   y:'restorative' },
+      { en:'I function – but I\'m not really living',     de:'Ich funktioniere – aber ich lebe nicht wirklich',          d:'vata',  c:'root',   y:'restorative' },
       { en:'I long for real moments again',               de:'Ich sehne mich wieder nach echten Momenten',               d:'kapha', c:'heart',  y:'balance'     },
-      { en:'I know there's more – I just don't know how', de:'Ich weiß dass da mehr ist – ich weiß nur nicht wie',    d:'pitta', c:'crown',  y:'spiritual'   },
+      { en:'I know there\'s more – I just don\'t know how', de:'Ich weiß dass da mehr ist – ich weiß nur nicht wie',    d:'pitta', c:'crown',  y:'spiritual'   },
       { en:'I want to feel alive again – really alive',   de:'Ich will wieder lebendig fühlen – wirklich lebendig',      d:'vata',  c:'sacral', y:'strength'    },
     ], type:'all' },
 
@@ -400,7 +400,7 @@ const questions = [
       { en:'Flat – like something slowly drains me',          de:'Flach – als würde etwas mich langsam leerlaufen lassen',  d:'kapha', c:'solar',    y:'restorative' },
       { en:'In my head – I think a lot, feel little',         de:'Im Kopf – ich denke viel, fühle wenig',                   d:'vata',  c:'thirdeye', y:'balance'     },
       { en:'Scattered – I start things but lose momentum',    de:'Verstreut – ich fange Dinge an aber verliere den Schwung', d:'pitta', c:'throat',  y:'strength'    },
-      { en:'Blocked – like there's more in me that wants out', de:'Blockiert – als wäre da mehr in mir das raus will',     d:'vata',  c:'heart',   y:'spiritual'   },
+      { en:'Blocked – like there\'s more in me that wants out', de:'Blockiert – als wäre da mehr in mir das raus will',     d:'vata',  c:'heart',   y:'spiritual'   },
     ], type:'all' },
 
   // Q4
@@ -410,13 +410,13 @@ const questions = [
     opts: [
       { en:'Real moments – no notifications, no rush',          de:'Echte Momente – keine Benachrichtigungen, keine Hast',    d:'vata',  c:'root',  y:'restorative' },
       { en:'The feeling that what I do actually matters',       de:'Das Gefühl dass das was ich tue wirklich zählt',           d:'pitta', c:'crown', y:'spiritual'   },
-      { en:'Pure joy – doing something just because it's fun', de:'Reine Freude – etwas tun nur weil es Spaß macht',        d:'kapha', c:'sacral',y:'balance'     },
+      { en:'Pure joy – doing something just because it\'s fun', de:'Reine Freude – etwas tun nur weil es Spaß macht',        d:'kapha', c:'sacral',y:'balance'     },
       { en:'Space to breathe – and think clearly',              de:'Raum zum Durchatmen – und klar zu denken',                d:'vata',  c:'solar', y:'strength'    },
     ], type:'all' },
 
   // Q5
   { phase: { en:'The honest one', de:'Die ehrliche Frage' },
-    en: { t:'What do you tell yourself most often – and then don't actually do?', s:'Really honest now.' },
+    en: { t:'What do you tell yourself most often – and then don\'t actually do?', s:'Really honest now.' },
     de: { t:'Was sagst du dir selbst am häufigsten – und tust es dann doch nicht?', s:'Wirklich ehrlich jetzt.' },
     opts: [
       { en:'"I need more time for myself."',              de:'„Ich brauche mehr Zeit für mich."',              d:'vata',  c:'root',  y:'restorative' },
@@ -501,26 +501,26 @@ function showResult() {
 
   // Emotional state names – NO Ayurveda jargon shown to user
   const stateNames = {
-    vata:  { en:"You're functioning more than you're living. 💭",   de:"Du funktionierst gerade mehr, als dass du wirklich lebst. 💭" },
+    vata:  { en:"You\'re functioning more than you\'re living. 💭",   de:"Du funktionierst gerade mehr, als dass du wirklich lebst. 💭" },
     pitta: { en:"A part of you is longing for more real moments. 🔥", de:"Ein Teil von dir sehnt sich gerade nach mehr Ruhe & echten Momenten. 🔥" },
-    kapha: { en:"Something in you wants to come alive – and it's ready. 🌿", de:"Etwas in dir will endlich lebendig werden – und es ist bereit. 🌿" }
+    kapha: { en:"Something in you wants to come alive – and it\'s ready. 🌿", de:"Etwas in dir will endlich lebendig werden – und es ist bereit. 🌿" }
   };
 
   const stateDesc = {
     vata:  { en:"You do a lot. You deliver. But somewhere along the way you forgot to ask: does this feel like ME? There is actually a much bigger life waiting for you.",
              de:"Du machst viel. Du lieferst. Aber irgendwo dazwischen hast du vergessen zu fragen: fühlt sich das nach MIR an? Da wartet eigentlich ein viel größeres Leben auf dich." },
-    pitta: { en:"You know exactly what you want – and yet. Something pulls you down when you look at your everyday life. It's not about doing more. It's about living more.",
+    pitta: { en:"You know exactly what you want – and yet. Something pulls you down when you look at your everyday life. It\'s not about doing more. It\'s about living more.",
              de:"Du weißt eigentlich genau was du willst – und trotzdem. Irgendwas zieht dich runter wenn du auf deinen Alltag schaust. Es geht nicht ums Mehr-Tun. Sondern ums Mehr-Leben." },
-    kapha: { en:"You feel it. That quiet pull. That \"there must be more than this.\". You're right. And you don't have to turn everything upside down to get there.",
+    kapha: { en:"You feel it. That quiet pull. That \"there must be more than this.\". You\'re right. And you don\'t have to turn everything upside down to get there.",
              de:"Du spürst es. Dieses leise Ziehen. Dieses \"es muss doch mehr als das geben\". Du hast Recht. Und du musst dafür nicht alles auf den Kopf stellen." }
   };
 
   const stateNeed = {
-    vata:  { en:"Your next step isn't working more or optimising more. Your next step is: feel more. Live more. Be more you. The T2T Club & the journeys are exactly that space.",
+    vata:  { en:"Your next step isn\'t working more or optimising more. Your next step is: feel more. Live more. Be more you. The T2T Club & the journeys are exactly that space.",
              de:"Dein nächster Schritt ist nicht mehr arbeiten oder mehr optimieren. Dein nächster Schritt ist: mehr fühlen. Mehr erleben. Mehr du werden. Der T2T Club & die Reisen sind genau dieser Raum." },
-    pitta: { en:"You don't need another plan. You need real moments that remind you of what life actually feels like. Small daily shifts – and one big experience that changes everything.",
+    pitta: { en:"You don\'t need another plan. You need real moments that remind you of what life actually feels like. Small daily shifts – and one big experience that changes everything.",
              de:"Du brauchst keinen weiteren Plan. Du brauchst echte Momente, die dich daran erinnern wie sich Leben eigentlich anfühlt. Kleine tägliche Shifts – und ein großes Erlebnis das alles verändert." },
-    kapha: { en:"You're not stuck – you're ready. Ready for something that truly moves you. For new energy, new people, new experiences. The T2T Club is where it starts.",
+    kapha: { en:"You\'re not stuck – you\'re ready. Ready for something that truly moves you. For new energy, new people, new experiences. The T2T Club is where it starts.",
              de:"Du steckst nicht fest – du bist bereit. Bereit für etwas das dich wirklich bewegt. Für neue Energie, neue Menschen, neue Erfahrungen. Der T2T Club ist der Anfang davon." }
   };
 
@@ -622,7 +622,7 @@ function showSuccessPage() {
 
     // Retreat recommendation
     const recTexts = {
-      vata: { en:'Your result shows: you're ready for a real experience. Tanzania is exactly that – nature, new energy, life. Perfect for you.',
+      vata: { en:'Your result shows: you\'re ready for a real experience. Tanzania is exactly that – nature, new energy, life. Perfect for you.',
               de:'Dein Ergebnis zeigt: du bist bereit für ein echtes Erlebnis. Tansania ist genau das – Natur, neue Energie, Leben. Perfekt für dich.' },
       pitta: { en:'Your energy needs space and nature to breathe. Our journeys give you exactly that – far from everyday life, deep into yourself.',
                de:'Deine Energie braucht Raum und Natur zum Atmen. Unsere Reisen geben dir genau das – weg vom Alltag, tief in dich hinein.' },
