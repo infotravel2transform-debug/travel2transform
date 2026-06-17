@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel 2 Transform Insider Add-On</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --petrol: #0f5a51;
+    --petrol-mid: #2a9d8f;
+    --pink: #e8829a;
+    --cream: #faf8f5;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--cream);
+    color: #2c2c2c;
+    line-height: 1.7;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--petrol);
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--petrol) 0%, var(--petrol-mid) 100%);
+    color: #fff;
+    padding: 70px 24px 60px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    color: #fff;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    margin-bottom: 10px;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 24px;
+  }
+
+  .intro-text {
+    background: #fff;
+    border-left: 5px solid var(--pink);
+    border-radius: 12px;
+    padding: 32px 36px;
+    font-size: 1.05rem;
+    box-shadow: 0 4px 20px rgba(15,90,81,0.06);
+    margin-bottom: 40px;
+  }
+
+  .intro-text p { margin-bottom: 16px; }
+  .intro-text p:last-child { margin-bottom: 0; }
+
+  .highlight-box {
+    background: linear-gradient(135deg, var(--petrol) 0%, var(--petrol-mid) 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 28px 36px;
+    text-align: center;
+    margin-bottom: 50px;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+  }
+
+  .highlight-box p { margin: 6px 0; }
+
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .pricing-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 640px) {
+    .pricing-section { grid-template-columns: 1fr; }
+  }
+
+  .price-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 36px 28px;
+    text-align: center;
+    box-shadow: 0 6px 24px rgba(15,90,81,0.08);
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .price-card.premium {
+    border-color: var(--pink);
+    position: relative;
+  }
+
+  .price-card.premium::before {
+    content: "✨ Empfehlung";
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--pink);
+    color: #fff;
+    font-size: 0.8rem;
+    padding: 5px 18px;
+    border-radius: 30px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  .price-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+  }
+
+  .price-card .package-tagline {
+    font-size: 0.95rem;
+    color: #777;
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+
+  .price-card .price {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    color: var(--petrol-mid);
+    font-style: normal;
+    margin: 12px 0 4px;
+  }
+
+  .price-card .price-label {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 20px;
+  }
+
+  .price-card ul {
+    list-style: none;
+    text-align: left;
+    margin: 0 auto;
+    flex-grow: 1;
+  }
+
+  .price-card.premium ul.extra {
+    border-top: 1px solid #f0e6e8;
+    padding-top: 18px;
+    margin-top: 6px;
+  }
+
+  .price-card li {
+    padding: 6px 0;
+    font-size: 0.95rem;
+  }
+
+  .price-card li::before {
+    content: "✓ ";
+    color: var(--petrol-mid);
+    font-weight: 700;
+  }
+
+  .price-card.premium li::before {
+    color: var(--pink);
+  }
+
+  .package-closing {
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid #f0e6e8;
+    font-size: 0.95rem;
+    color: #555;
+    text-align: center;
+  }
+
+  .package-closing strong {
+    color: var(--petrol);
+  }
+
+  .closing-text {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 1.05rem;
+  }
+
+  .closing-text p { margin-bottom: 12px; }
+
+  .closing-text .final-line {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: var(--petrol);
+    margin-top: 20px;
+  }
+
+  .cta {
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .cta-button {
+    display: inline-block;
+    background: var(--pink);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    padding: 16px 44px;
+    border-radius: 30px;
+    font-size: 1.05rem;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .cta-button:hover {
+    background: var(--petrol);
+    transform: translateY(-2px);
+  }
+
+  .cta p {
+    margin-top: 16px;
+    color: #888;
+    font-size: 0.95rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>🌍 Travel 2 Transform Insider Add-On</h1>
+</div>
+
+<div class="container">
+
+  <div class="intro-text">
+    <p>Du reist früher an oder möchtest nach der Reise noch länger bleiben?</p>
+    <p>Dann ist das Travel 2 Transform Insider Add-On genau das Richtige für dich.</p>
+    <p>Du bekommst nicht einfach einen Reiseführer oder ein paar Links aus dem Internet.</p>
+    <p>Du bekommst meine <strong>persönlichen Empfehlungen</strong>, <strong>Geheimtipps</strong> und mein Wissen aus vielen Jahren vor Ort in Tansania und Sansibar.</p>
+    <p><strong>Und das Beste:</strong><br>Du hast mich die ganze Zeit dabei.</p>
+    <p>Wenn du Fragen hast. Wenn du nicht weiterweißt. Wenn du spontan etwas unternehmen möchtest.<br>Bin ich nur eine <strong>WhatsApp-Nachricht</strong> entfernt.</p>
+    <p>So kannst du deine Zeit vor Ort entspannt genießen, ohne stundenlang zu recherchieren oder auf fragwürdige Empfehlungen aus dem Internet zu vertrauen.</p>
+    <p>Betrachte es als dein persönliches <strong>Reise-Backup</strong>.</p>
+  </div>
+
+  <div class="highlight-box">
+    <p>Mehr Sicherheit. Mehr Freiheit. Mehr echte Insider-Tipps.</p>
+    <p>Und weniger Stress.</p>
+  </div>
+
+  <h2>Wähle dein Paket</h2>
+
+  <div class="pricing-section">
+    <div class="price-card">
+      <h3>🌴 Basic Paket</h3>
+      <p class="package-tagline">Für alle, die die besten Empfehlungen direkt an die Hand bekommen möchten.</p>
+      <div class="price">79 €</div>
+      <div class="price-label">einmalig</div>
+      <ul>
+        <li>Persönlicher Travel 2 Transform Guide</li>
+        <li>Meine Lieblingsrestaurants</li>
+        <li>Beach Bars & Cafés</li>
+        <li>Ausflugsempfehlungen</li>
+        <li>Die schönsten Strände</li>
+        <li>Geheimtipps abseits der Touristenpfade</li>
+        <li>Orte, die ich selbst immer wieder besuche</li>
+        <li>Insider-Wissen, das du nicht einfach bei Google findest</li>
+      </ul>
+      <div class="package-closing">
+        Kurz gesagt:<br>
+        <strong>Jenny Vibes. Jenny Empfehlungen. Jenny Insider-Wissen.</strong>
+      </div>
+    </div>
+
+    <div class="price-card premium">
+      <h3>✨ VIP Paket</h3>
+      <p class="package-tagline">Für alle, die ihr persönliches Reise-Backup immer dabei haben möchten.</p>
+      <div class="price">177 €</div>
+      <div class="price-label">Premium</div>
+      <ul>
+        <li>Alles aus dem Basic Paket</li>
+      </ul>
+      <ul class="extra">
+        <li>Persönlicher WhatsApp-Kontakt zu Jenny</li>
+        <li>Unterstützung bei Fragen während deiner Reise</li>
+        <li>Hilfe bei spontanen Änderungen</li>
+        <li>Hilfe bei Problemen</li>
+        <li>Persönliche Kontakte zu Fahrern & Transfers</li>
+        <li>Unterstützung bei Organisation und Planung</li>
+        <li>Persönliche Empfehlungen passend zu deinen Interessen</li>
+        <li>Direkter Draht zu jemandem, der sich vor Ort auskennt</li>
+      </ul>
+      <div class="package-closing">
+        Du musst nicht alles alleine herausfinden.<br>
+        Du hast jemanden an deiner Seite, der Tansania kennt und dir weiterhilft, wenn du Unterstützung brauchst.
+      </div>
+    </div>
+  </div>
+
+  <div class="closing-text">
+    <p>So kannst du dich voll und ganz auf das konzentrieren, worum es eigentlich geht:</p>
+    <p class="final-line">Erleben. Entdecken. Genießen. Und unvergessliche Erinnerungen sammeln.</p>
+  </div>
+
+  <div class="cta">
+    <a href="#" class="cta-button">Jetzt Insider Add-On sichern</a>
+    <p>Holy shit, das Leben ist schön — entdecke Tansania wie ein Insider.</p>
+  </div>
+
+</div>
+
+</body>
+</html>
