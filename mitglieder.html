@@ -3,288 +3,364 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dein Bereich · Travel 2 Transform</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Travel 2 Transform Experience · Mein Bereich</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--teal:#2d7a72;--tl:#3a9990;--pink:#d4548a;--gold:#c8a96e;--dark:#1a2e2c;--text:#2c3e3b;--muted:#6b8a87;--bg:#f8fbfa;--tpale:#e8f4f3;--ppale:#fce8f0;--border:rgba(45,122,114,0.13);--purple:#6b4c8c;--purpale:rgba(107,76,140,.08)}
-html{scroll-behavior:smooth}
-body{background:#0a0f0e;color:#e8f0ee;font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+:root{
+  --petrol:#0f5a51;
+  --petrol-mid:#2a9d8f;
+  --pink:#e8829a;
+  --pink-light:#fce8f0;
+  --cream:#faf8f5;
+  --dark:#0b1a17;
+  --dark2:#111f1c;
+  --text:#e2eeec;
+  --muted:rgba(226,238,236,.45);
+  --border:rgba(42,157,143,.15);
+  --border-light:rgba(255,255,255,.06);
+  --card-bg:rgba(255,255,255,.03);
+}
 
-/* ── LAYOUT ── */
-.layout{display:grid;grid-template-columns:240px 1fr;min-height:100vh}
+/* Touch-Fixes für iOS/Android */
+a,button{-webkit-tap-highlight-color:transparent}
+input,button,select,textarea{touch-action:manipulation}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--text);font-family:'Lato',sans-serif;min-height:100vh;overflow-x:hidden}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
 @media(max-width:768px){.layout{grid-template-columns:1fr}}
 
-/* ── SIDEBAR ── */
-.sidebar{background:rgba(255,255,255,.02);border-right:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
-.sb-top{padding:20px 16px 14px;border-bottom:1px solid rgba(255,255,255,.05)}
-.sb-logo{font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;color:var(--tl);text-transform:uppercase;margin-bottom:2px}
-.sb-tagline{font-size:10px;color:rgba(255,255,255,.2);font-style:italic;font-family:'Cormorant Garamond',serif}
-.sb-state{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;transition:background .2s}
-.sb-state:hover{background:rgba(255,255,255,.03)}
-.sb-state-label{font-size:10px;color:rgba(255,255,255,.25);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
-.sb-state-val{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:white}
-.sb-nav{padding:12px 8px;flex:1}
-.sb-group{font-family:'Cinzel',serif;font-size:7px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.18);padding:10px 8px 4px}
-.sb-item{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:8px;cursor:pointer;transition:all .2s;color:rgba(255,255,255,.35);font-size:13px;border:none;background:transparent;width:100%;text-align:left;position:relative}
-.sb-item:hover{background:rgba(255,255,255,.04);color:rgba(255,255,255,.7)}
-.sb-item.active{background:rgba(45,122,114,.12);color:var(--tl)}
-.sb-item .ico{font-size:15px;flex-shrink:0;width:20px;text-align:center}
-.sb-bottom{padding:12px;border-top:1px solid rgba(255,255,255,.04)}
+/* SIDEBAR */
+.sidebar{background:rgba(0,0,0,.25);border-right:1px solid var(--border-light);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}
+.sb-top{padding:22px 18px 16px;border-bottom:1px solid var(--border-light)}
+.sb-logo{font-family:'Playfair Display',serif;font-size:13px;font-style:italic;color:var(--petrol-mid);margin-bottom:3px}
+.sb-tagline{font-size:10px;color:rgba(255,255,255,.2);font-style:italic}
+.sb-nav{padding:14px 10px;flex:1}
+.sb-group{font-family:'Lato',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.2);padding:12px 8px 5px;font-weight:700}
+.sb-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;cursor:pointer;transition:all .2s;color:rgba(255,255,255,.4);font-size:13px;border:none;background:transparent;width:100%;text-align:left;font-family:'Lato',sans-serif}
+.sb-item:hover{background:rgba(255,255,255,.04);color:rgba(255,255,255,.75)}
+.sb-item.active{background:rgba(42,157,143,.12);color:var(--petrol-mid)}
+.sb-item .ico{font-size:16px;flex-shrink:0;width:22px;text-align:center}
+.sb-bottom{padding:12px;border-top:1px solid var(--border-light)}
 .lang-sw{display:flex;background:rgba(255,255,255,.04);border-radius:50px;padding:3px;gap:2px;margin-bottom:8px}
-.lb{padding:4px 12px;border-radius:50px;border:none;background:transparent;cursor:pointer;font-size:11px;color:rgba(255,255,255,.3);transition:all .2s;font-family:'DM Sans',sans-serif}
-.lb.active{background:var(--teal);color:white}
-.sb-btn{width:100%;background:transparent;border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:7px;color:rgba(255,255,255,.25);font-size:11px;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif;margin-bottom:3px}
-.sb-btn:hover{color:rgba(255,255,255,.55);border-color:rgba(255,255,255,.12)}
+.lb{padding:5px 14px;border-radius:50px;border:none;background:transparent;cursor:pointer;font-size:11px;color:rgba(255,255,255,.3);transition:all .2s;font-family:'Lato',sans-serif;font-weight:700}
+.lb.active{background:var(--petrol);color:white}
+.sb-btn{width:100%;background:transparent;border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:8px;color:rgba(255,255,255,.25);font-size:11px;cursor:pointer;transition:all .2s;font-family:'Lato',sans-serif;margin-bottom:4px}
+.sb-btn:hover{color:rgba(255,255,255,.6);border-color:rgba(255,255,255,.15)}
 
-/* ── MOBILE HEADER ── */
-.mob-header{display:none;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(10,15,14,.97);border-bottom:1px solid rgba(255,255,255,.06);position:sticky;top:0;z-index:50;backdrop-filter:blur(8px)}
-.mob-brand{font-family:'Cinzel',serif;font-size:10px;letter-spacing:2px;color:var(--tl)}
-.hamburger{background:none;border:none;color:rgba(255,255,255,.4);font-size:20px;cursor:pointer}
-@media(max-width:768px){.sidebar{display:none;position:fixed;left:0;top:0;bottom:0;z-index:200;width:240px;box-shadow:4px 0 32px rgba(0,0,0,.6)}.sidebar.open{display:flex}.mob-header{display:flex}}
+/* MOBILE HEADER */
+.mob-header{display:none;align-items:center;justify-content:space-between;padding:14px 20px;background:rgba(11,26,23,.97);border-bottom:1px solid var(--border-light);position:sticky;top:0;z-index:50;backdrop-filter:blur(8px)}
+.mob-brand{font-family:'Playfair Display',serif;font-size:12px;font-style:italic;color:var(--petrol-mid)}
+.hamburger{background:none;border:none;color:rgba(255,255,255,.4);font-size:22px;cursor:pointer}
+@media(max-width:768px){.sidebar{display:none;position:fixed;left:0;top:0;bottom:0;z-index:200;width:248px;box-shadow:4px 0 40px rgba(0,0,0,.7)}.sidebar.open{display:flex}.mob-header{display:flex}}
 
-/* ── MAIN ── */
+/* MAIN */
 .main{overflow-y:auto}
 
-/* ── SECTIONS ── */
+/* SECTIONS */
 .sec{display:none;min-height:100vh}.sec.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.sec.active{animation:fadeUp .3s ease forwards}
 
-/* ── HOME ── */
-.home-hero{padding:48px 32px 32px;background:linear-gradient(160deg,#0a0f0e 0%,#111a18 60%,#0e0a14 100%);position:relative;overflow:hidden;min-height:55vh;display:flex;flex-direction:column;justify-content:center}
-.home-hero::before{content:'';position:absolute;top:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(45,122,114,.07),transparent 65%);pointer-events:none}
-.home-hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(107,76,140,.06),transparent 65%);pointer-events:none}
-.home-tag{font-family:'Cinzel',serif;font-size:8px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;opacity:.7;position:relative;z-index:1}
-.home-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,6vw,54px);font-weight:300;line-height:1.1;color:white;margin-bottom:10px;position:relative;z-index:1}
-.home-h1 em{font-style:italic;color:var(--tl)}
-.home-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,3vw,20px);font-style:italic;color:rgba(255,255,255,.4);max-width:500px;line-height:1.8;position:relative;z-index:1}
-.home-content{padding:28px 32px}
-@media(max-width:768px){.home-hero{padding:32px 20px}.home-content{padding:24px 20px}}
+/* PAGE HERO */
+.page-hero{padding:44px 36px 32px;border-bottom:1px solid var(--border-light);position:relative;overflow:hidden;background:linear-gradient(160deg,#0b1a17,#0f231e)}
+.page-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,var(--pg,rgba(42,157,143,.07)),transparent 65%);pointer-events:none}
+.pg-eyebrow{font-family:'Lato',sans-serif;font-size:9px;letter-spacing:4px;text-transform:uppercase;color:var(--pink);margin-bottom:12px;font-weight:700;opacity:.9;position:relative;z-index:1}
+.pg-h1{font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,44px);font-weight:400;line-height:1.15;margin-bottom:8px;position:relative;z-index:1;color:white}
+.pg-h1 em{font-style:italic;color:var(--petrol-mid)}
+.pg-sub{font-family:'Playfair Display',serif;font-size:16px;font-style:italic;color:rgba(255,255,255,.38);line-height:1.7;position:relative;z-index:1;max-width:520px}
+.page-content{padding:32px 36px}
+@media(max-width:600px){.page-hero{padding:28px 20px}.page-content{padding:22px 18px}}
 
-/* ── TOOL GRID ── */
-.tool-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:28px}
-.tool-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:20px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
-.tool-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--card-accent, rgba(45,122,114,.06)),transparent 60%);opacity:0;transition:opacity .3s}
-.tool-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.12)}.tool-card:hover::before{opacity:1}
-.tool-card.active-card{border-color:var(--card-accent-border, rgba(45,122,114,.3));background:rgba(45,122,114,.06)}
-.tc-emoji{font-size:28px;margin-bottom:10px;display:block}
-.tc-title{font-size:14px;font-weight:500;color:rgba(255,255,255,.85);margin-bottom:4px}
-.tc-desc{font-size:12px;color:rgba(255,255,255,.35);line-height:1.5}
-.tc-tag{position:absolute;top:12px;right:12px;font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);opacity:.6}
-@media(max-width:480px){.tool-grid{grid-template-columns:1fr}}
+/* HOME HERO */
+.home-hero{padding:52px 36px 36px;background:linear-gradient(160deg,#0b1a17 0%,#111f1c 55%,#0e1a16 100%);position:relative;overflow:hidden;min-height:50vh;display:flex;flex-direction:column;justify-content:flex-end}
+.home-hero::before{content:'';position:absolute;top:-100px;right:-100px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(42,157,143,.07),transparent 65%);pointer-events:none}
+.home-hero::after{content:'';position:absolute;bottom:-60px;left:-60px;width:280px;height:280px;border-radius:50%;background:radial-gradient(circle,rgba(232,130,154,.05),transparent 65%);pointer-events:none}
+.h-eyebrow{font-family:'Lato',sans-serif;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:rgba(232,130,154,.7);margin-bottom:18px;font-weight:700;position:relative;z-index:1}
+.home-h1{font-family:'Playfair Display',serif;font-size:clamp(30px,6vw,54px);font-weight:400;line-height:1.1;color:white;margin-bottom:12px;position:relative;z-index:1}
+.home-h1 em{font-style:italic;color:var(--petrol-mid)}
+.home-sub{font-family:'Playfair Display',serif;font-size:clamp(15px,2.5vw,19px);font-style:italic;color:rgba(255,255,255,.38);max-width:480px;line-height:1.75;position:relative;z-index:1}
+.home-content{padding:32px 36px}
+@media(max-width:600px){.home-hero{padding:36px 20px 28px}.home-content{padding:24px 18px}}
 
-/* ── PAGE HEADER ── */
-.page-hero{padding:40px 32px 28px;background:linear-gradient(160deg,#0a0f0e,#111a18);border-bottom:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden}
-.page-hero::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,var(--page-glow,rgba(45,122,114,.08)),transparent 65%);pointer-events:none}
-.pg-tag{font-family:'Cinzel',serif;font-size:8px;letter-spacing:4px;text-transform:uppercase;color:var(--pink);margin-bottom:10px;opacity:.7}
-.pg-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,5vw,42px);font-weight:300;line-height:1.2;margin-bottom:6px;position:relative;z-index:1}
-.pg-h1 em{font-style:italic;color:var(--tl)}
-.pg-sub{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:rgba(255,255,255,.38);line-height:1.7;position:relative;z-index:1}
-.page-content{padding:28px 32px}
-@media(max-width:768px){.page-hero{padding:28px 20px}.page-content{padding:20px}}
+/* CARD GRID */
+.card-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:28px}
+@media(max-width:480px){.card-grid{grid-template-columns:1fr}}
 
-/* ── CONTENT BLOCKS ── */
-.block{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:22px;margin-bottom:14px;transition:all .2s}
+/* CLUB CARD */
+.club-card{background:var(--card-bg);border:1px solid var(--border-light);border-radius:16px;padding:22px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.club-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--cc-top,var(--petrol));opacity:.6;transition:opacity .3s}
+.club-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.1);background:rgba(255,255,255,.04)}
+.club-card:hover::before{opacity:1}
+.cc-icon{font-size:28px;margin-bottom:12px;display:block}
+.cc-title{font-size:14px;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:5px}
+.cc-desc{font-size:12px;color:rgba(255,255,255,.35);line-height:1.55}
+.cc-badge{position:absolute;top:14px;right:14px;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(42,157,143,.7);font-weight:700}
+
+/* CONTENT BLOCK */
+.block{background:var(--card-bg);border:1px solid var(--border-light);border-radius:14px;padding:22px;margin-bottom:14px;transition:all .2s}
 .block:hover{background:rgba(255,255,255,.04)}
-.block-tag{font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;opacity:.7}
-.block-h{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:white;margin-bottom:6px;line-height:1.3}
-.block-h em{font-style:italic;color:var(--tl)}
-.block-body{font-size:14px;color:rgba(255,255,255,.5);line-height:1.8}
+.block-eyebrow{font-family:'Lato',sans-serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--petrol-mid);margin-bottom:8px;font-weight:700}
+.block-h{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:white;margin-bottom:8px;line-height:1.3}
+.block-h em{font-style:italic;color:var(--petrol-mid)}
+.block-body{font-size:14px;color:rgba(255,255,255,.5);line-height:1.85}
 .block-body em{color:rgba(255,255,255,.75);font-style:italic}
 
-/* ── GOLD QUOTE ── */
-.gold-quote{background:rgba(200,169,110,.05);border-left:3px solid var(--gold);border-radius:0 12px 12px 0;padding:16px 20px;margin-bottom:16px}
-.gold-quote p{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:rgba(200,169,110,.85);line-height:1.75}
+/* QUOTE */
+.quote-block{background:rgba(42,157,143,.06);border-left:3px solid var(--petrol-mid);border-radius:0 12px 12px 0;padding:18px 22px;margin-bottom:18px}
+.quote-block p{font-family:'Playfair Display',serif;font-size:17px;font-style:italic;color:rgba(42,157,143,.9);line-height:1.75}
 
-/* ── KREATION STEPS ── */
-.k-steps{display:flex;flex-direction:column;gap:8px;margin:16px 0}
-.k-step{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;transition:all .2s}
-.k-step:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1)}
-.ks-num{width:24px;height:24px;border-radius:50%;background:var(--teal);color:white;display:flex;align-items:center;justify-content:center;font-size:10px;font-family:'Cinzel',serif;flex-shrink:0;margin-top:1px}
-.ks-text{font-size:14px;color:rgba(255,255,255,.6);line-height:1.65}
-.ks-text strong{color:rgba(255,255,255,.85)}
-.ks-text em{color:var(--tl);font-style:italic}
-
-/* ── AUDIO ── */
-.audio-block{background:rgba(45,122,114,.06);border:1px solid rgba(45,122,114,.18);border-radius:14px;padding:20px;margin:16px 0}
-.ab-header{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+/* AUDIO */
+.audio-block{background:rgba(42,157,143,.06);border:1px solid rgba(42,157,143,.18);border-radius:14px;padding:22px;margin:16px 0}
+.ab-header{display:flex;align-items:center;gap:14px;margin-bottom:16px}
 .ab-icon{font-size:28px}
-.ab-info strong{display:block;font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;color:white;margin-bottom:2px}
+.ab-info strong{display:block;font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:white;margin-bottom:3px}
 .ab-info span{font-size:12px;color:rgba(255,255,255,.3)}
 .ab-player{width:100%;border-radius:8px;height:42px;outline:none}
 .ab-note{font-size:11px;color:rgba(255,255,255,.25);margin-top:8px;font-style:italic}
 
-/* ── VIDEO ── */
-.video-block{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.09);border-radius:14px;overflow:hidden;margin:16px 0}
-.video-block iframe{width:100%;display:block;aspect-ratio:9/16;border:none}
-.vb-cap{padding:14px 18px;border-top:1px solid rgba(255,255,255,.06)}
-.vb-cap strong{font-size:14px;color:rgba(255,255,255,.65);font-weight:400}
+/* VIDEO */
+.video-block{background:rgba(0,0,0,.3);border:1px solid var(--border-light);border-radius:14px;overflow:hidden;margin:16px 0}
+.video-block iframe{width:100%;display:block;aspect-ratio:16/9;border:none}
+.vb-cap{padding:14px 18px;border-top:1px solid var(--border-light);font-size:13px;color:rgba(255,255,255,.55)}
 
-/* ── UPGRADE HINT ── */
-.up-hint{display:flex;align-items:flex-start;gap:12px;background:rgba(212,84,138,.04);border:1px solid rgba(212,84,138,.12);border-radius:10px;padding:14px 16px;margin:14px 0}
-.up-hint .ico{font-size:18px;flex-shrink:0}
-.up-hint .txt{font-size:13px;color:rgba(255,255,255,.45);line-height:1.65;font-style:italic}
-.up-hint .txt a{color:rgba(212,84,138,.75);text-decoration:none;font-style:normal;border-bottom:1px solid rgba(212,84,138,.25)}
-.up-hint .txt strong{color:rgba(255,255,255,.7);font-style:normal}
+/* STEPS */
+.steps{display:flex;flex-direction:column;gap:8px;margin:14px 0}
+.step{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:rgba(255,255,255,.02);border:1px solid var(--border-light);border-radius:10px;transition:all .2s}
+.step:hover{background:rgba(255,255,255,.04)}
+.step-num{width:26px;height:26px;border-radius:50%;background:var(--petrol);color:white;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;margin-top:1px}
+.step-text{font-size:14px;color:rgba(255,255,255,.6);line-height:1.65}
+.step-text strong{color:rgba(255,255,255,.85)}
+.step-text em{color:var(--petrol-mid);font-style:italic}
 
-/* ── WA BUTTON ── */
-.wa-btn{display:inline-flex;align-items:center;gap:10px;background:#25d366;color:white;padding:13px 26px;border-radius:50px;font-size:13px;font-weight:500;text-decoration:none;transition:all .2s}
-.wa-btn:hover{opacity:.9;transform:translateY(-1px)}
-.wa-frame{text-align:center;padding:24px;border:1px solid rgba(255,255,255,.06);border-radius:14px;margin:14px 0}
-.wa-frame p{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;color:rgba(255,255,255,.4);margin-bottom:14px;line-height:1.7}
-
-/* ── DOWNLOAD ROW ── */
-.dl-row{display:flex;align-items:center;justify-content:space-between;gap:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 18px;margin-bottom:10px;transition:all .2s}
-.dl-row:hover{background:rgba(255,255,255,.05)}
+/* DOWNLOADS */
+.dl-row{display:flex;align-items:center;justify-content:space-between;gap:14px;background:var(--card-bg);border:1px solid var(--border-light);border-radius:12px;padding:14px 18px;margin-bottom:10px;transition:all .2s}
+.dl-row:hover{background:rgba(255,255,255,.04)}
 .dl-left{display:flex;align-items:center;gap:12px}
 .dl-ico{font-size:22px}
 .dl-info strong{display:block;font-size:14px;color:rgba(255,255,255,.8);margin-bottom:2px}
 .dl-info span{font-size:12px;color:rgba(255,255,255,.3)}
-.dl-btn{background:var(--teal);color:white;padding:8px 18px;border-radius:50px;font-size:12px;font-weight:500;text-decoration:none;white-space:nowrap;transition:all .2s}
-.dl-btn:hover{background:var(--tl)}
+.dl-btn{background:var(--petrol);color:white;padding:8px 18px;border-radius:50px;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;transition:all .2s}
+.dl-btn:hover{background:var(--petrol-mid)}
 @media(max-width:480px){.dl-row{flex-direction:column;align-items:flex-start;gap:8px}}
 
-/* ── NEXT BTN ── */
-.next-btn{width:100%;background:var(--teal);color:white;border:none;border-radius:50px;padding:15px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;margin-top:16px;display:flex;align-items:center;justify-content:center;gap:8px}
-.next-btn:hover{background:var(--tl);transform:translateY(-1px)}
+/* WA */
+.wa-btn{display:inline-flex;align-items:center;gap:10px;background:#25d366;color:white;padding:14px 28px;border-radius:50px;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s}
+.wa-btn:hover{opacity:.9;transform:translateY(-1px)}
+.wa-frame{text-align:center;padding:28px;border:1px solid var(--border-light);border-radius:14px;margin:14px 0}
+.wa-frame p{font-family:'Playfair Display',serif;font-size:18px;font-style:italic;color:rgba(255,255,255,.4);margin-bottom:16px;line-height:1.7}
 
-/* ── QUIZ 2 TEASER ── */
-.quiz2-card{background:linear-gradient(135deg,rgba(107,76,140,.1),rgba(45,122,114,.08));border:1px solid rgba(107,76,140,.25);border-radius:16px;padding:26px;margin-bottom:16px;text-align:center;cursor:pointer;transition:all .25s}
-.quiz2-card:hover{transform:translateY(-2px);border-color:rgba(107,76,140,.4)}
-.q2-emoji{font-size:40px;margin-bottom:12px;display:block}
-.q2-h{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:white;margin-bottom:6px;line-height:1.3}
-.q2-h em{font-style:italic;color:#a07fd4}
-.q2-sub{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:16px;line-height:1.6}
-.q2-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(107,76,140,.2);color:#a07fd4;border:1px solid rgba(107,76,140,.3);padding:10px 24px;border-radius:50px;font-size:13px;font-weight:500;transition:all .2s;font-family:'DM Sans',sans-serif;cursor:pointer;border:none}
-.q2-btn:hover{background:rgba(107,76,140,.3)}
+/* NEXT BTN */
+.next-btn{width:100%;background:var(--petrol);color:white;border:none;border-radius:50px;padding:16px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Lato',sans-serif;transition:all .2s;margin-top:18px;display:flex;align-items:center;justify-content:center;gap:8px}
+.next-btn:hover{background:var(--petrol-mid);transform:translateY(-1px)}
 
-/* ── TABS ── */
-.tabs{display:flex;gap:4px;background:rgba(255,255,255,.04);border-radius:10px;padding:4px;margin-bottom:22px;overflow-x:auto}
-.tab{padding:8px 16px;border-radius:7px;border:none;background:transparent;cursor:pointer;font-size:12px;color:rgba(255,255,255,.4);transition:all .2s;font-family:'DM Sans',sans-serif;white-space:nowrap}
-.tab.active{background:rgba(45,122,114,.2);color:var(--tl)}
-.tab-c{display:none}.tab-c.active{display:block}
+/* CHALLENGE CARD */
+.challenge-card{background:linear-gradient(135deg,rgba(232,130,154,.08),rgba(42,157,143,.06));border:1px solid rgba(232,130,154,.2);border-radius:16px;padding:28px;margin-bottom:16px;text-align:center}
+.ch-icon{font-size:44px;margin-bottom:14px;display:block}
+.ch-h{font-family:'Playfair Display',serif;font-size:24px;font-weight:400;color:white;margin-bottom:8px;line-height:1.3}
+.ch-h em{font-style:italic;color:var(--pink)}
+.ch-sub{font-size:14px;color:rgba(255,255,255,.45);margin-bottom:20px;line-height:1.65}
+.ch-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(232,130,154,.15);color:var(--pink);border:1px solid rgba(232,130,154,.25);padding:11px 26px;border-radius:50px;font-size:13px;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Lato',sans-serif}
+.ch-btn:hover{background:rgba(232,130,154,.25)}
 
-/* ── CHECKLIST ── */
-.ck-item{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer}
-.ck-box{width:20px;height:20px;border-radius:5px;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;transition:all .2s}
-.ck-box.done{background:var(--teal);border-color:var(--teal)}
-.ck-text{font-size:14px;color:rgba(255,255,255,.55)}
+/* RETREAT CARDS */
+.retreat-cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.rcard{background:rgba(255,255,255,.03);border:1px solid var(--border-light);border-radius:16px;padding:26px;text-decoration:none;display:block;transition:all .3s}
+.rcard:hover{background:rgba(255,255,255,.06);transform:translateY(-3px)}
+.rcard-flag{font-size:30px;margin-bottom:12px}
+.rcard-dest{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:white;margin-bottom:4px}
+.rcard-when{font-size:11px;color:rgba(255,255,255,.3);letter-spacing:1px;margin-bottom:14px}
+.rcard-tags{display:flex;flex-wrap:wrap;gap:6px}
+.rcard-tag{font-size:10px;padding:3px 10px;border-radius:50px;border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.4)}
+.rcard-cta{font-size:12px;color:var(--petrol-mid);margin-top:14px;display:block}
+@media(max-width:480px){.retreat-cards{grid-template-columns:1fr}}
 
-/* ── LANG ── */
+/* LANG */
 .de{display:none}.en{display:block}
 body.lang-de .de{display:block}body.lang-de .en{display:none}
 body.lang-en .de{display:none}body.lang-en .en{display:block}
 
-/* ── ANIMATIONS ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-.sec.active{animation:fadeUp .35s ease forwards}
+/* MONTHLY GRID */
+.monthly-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+@media(max-width:480px){.monthly-grid{grid-template-columns:1fr}}
+.monthly-item{background:var(--card-bg);border:1px solid var(--border-light);border-radius:12px;padding:18px;cursor:pointer;transition:all .2s}
+.monthly-item:hover{background:rgba(255,255,255,.04);transform:translateY(-2px)}
+.mi-icon{font-size:24px;margin-bottom:10px}
+.mi-title{font-size:14px;font-weight:700;color:rgba(255,255,255,.8);margin-bottom:4px}
+.mi-desc{font-size:12px;color:rgba(255,255,255,.35);line-height:1.55}
+
+/* TABS */
+.tabs{display:flex;gap:4px;background:rgba(255,255,255,.04);border-radius:10px;padding:4px;margin-bottom:22px;overflow-x:auto}
+.tab{padding:9px 18px;border-radius:7px;border:none;background:transparent;cursor:pointer;font-size:12px;color:rgba(255,255,255,.4);transition:all .2s;font-family:'Lato',sans-serif;white-space:nowrap;font-weight:700}
+.tab.active{background:rgba(42,157,143,.18);color:var(--petrol-mid)}
+.tab-c{display:none}.tab-c.active{display:block}
 
 @media(max-width:480px){.home-h1{font-size:28px}}
+
+/* ── MOBILE OPTIMIERUNG ──────────────────────────────── */
+@media(max-width:480px){
+  /* MOB HEADER */
+  .mob-header{padding:12px 16px}
+  .mob-brand{font-size:11px}
+  .hamburger{font-size:20px;padding:4px}
+
+  /* HOME HERO */
+  .home-hero{padding:28px 18px 24px;min-height:auto}
+  .home-h1{font-size:26px;line-height:1.15}
+  .home-sub{font-size:14px}
+  .home-content{padding:20px 16px}
+
+  /* PAGE HERO */
+  .page-hero{padding:24px 18px 20px}
+  .pg-h1{font-size:24px;line-height:1.2}
+  .pg-sub{font-size:14px}
+  .page-content{padding:18px 16px}
+
+  /* CARD GRID */
+  .card-grid{grid-template-columns:1fr;gap:10px}
+  .club-card{padding:18px}
+  .cc-icon{font-size:24px;margin-bottom:8px}
+  .cc-title{font-size:13px}
+  .cc-desc{font-size:11px}
+
+  /* MONTHLY GRID */
+  .monthly-grid{grid-template-columns:1fr;gap:10px}
+  .monthly-item{padding:14px}
+  .mi-icon{font-size:20px;margin-bottom:6px}
+  .mi-title{font-size:13px}
+  .mi-desc{font-size:11px}
+
+  /* RETREAT CARDS */
+  .retreat-cards{grid-template-columns:1fr;gap:10px}
+  .rcard{padding:18px}
+  .rcard-dest{font-size:17px}
+
+  /* BLOCKS */
+  .block{padding:16px}
+  .block-h{font-size:18px}
+  .quote-block{padding:14px 16px}
+  .quote-block p{font-size:15px}
+
+  /* AUDIO */
+  .audio-block{padding:16px}
+  .ab-header{gap:10px}
+  .ab-icon{font-size:22px}
+  .ab-info strong{font-size:15px}
+  .ab-player{height:36px}
+
+  /* STEPS */
+  .step{padding:12px 14px}
+  .step-text{font-size:13px}
+
+  /* DOWNLOADS */
+  .dl-row{flex-direction:column;align-items:flex-start;gap:10px;padding:14px}
+  .dl-btn{width:100%;text-align:center;padding:10px}
+
+  /* WA */
+  .wa-btn{width:100%;justify-content:center;padding:13px 20px;font-size:13px}
+  .wa-frame{padding:20px 16px}
+  .wa-frame p{font-size:15px}
+
+  /* CHALLENGE */
+  .challenge-card{padding:22px 16px}
+  .ch-icon{font-size:36px}
+  .ch-h{font-size:20px}
+  .ch-sub{font-size:13px}
+  .ch-btn{width:100%;justify-content:center;padding:12px}
+
+  /* NEXT BTN */
+  .next-btn{padding:14px;font-size:13px}
+
+  /* SIDEBAR (already hidden on mobile, but ensure overlay works) */
+  .sidebar{width:80vw;max-width:280px}
+}
+
+/* Auch bei 768px (Tablets) besser) */
+@media(max-width:768px){
+  .home-content{padding:24px 20px}
+  .page-content{padding:22px 20px}
+}
 </style>
 </head>
 <body class="lang-de">
 
 <div class="mob-header">
-  <span class="mob-brand">T2T</span>
+  <span class="mob-brand">Travel 2 Transform Club</span>
   <button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('open')">☰</button>
 </div>
 
 <div class="layout">
 
-<!-- ══ SIDEBAR ══════════════════════════════════════════════ -->
+<!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="sb-top">
     <div class="sb-logo">Travel 2 Transform</div>
     <div class="sb-tagline de">dein geiles Leben beginnt hier</div>
     <div class="sb-tagline en">your amazing life starts here</div>
   </div>
-  <div class="sb-state" onclick="show('profil')">
-    <div class="sb-state-label de">Dein Zustand</div>
-    <div class="sb-state-label en">Your state</div>
-    <div class="sb-state-val" id="sb-state">🌿</div>
-  </div>
   <nav class="sb-nav">
-    <div class="sb-group de">Start</div><div class="sb-group en">Start</div>
-    <button class="sb-item active" onclick="show('home')"><span class="ico">✨</span><span class="de">Kreiere dein Leben</span><span class="en">Create your life</span></button>
-
-    <div class="sb-group de">Deine Tools</div><div class="sb-group en">Your Tools</div>
-    <button class="sb-item" onclick="show('energie')"><span class="ico">⚡</span><span class="de">Energie-Arbeit</span><span class="en">Energy Work</span></button>
-    <button class="sb-item" onclick="show('koerper')"><span class="ico">🧭</span><span class="de">Körpertest & Entscheidungen</span><span class="en">Body Test & Decisions</span></button>
-    <button class="sb-item" onclick="show('kreation')"><span class="ico">🌍</span><span class="de">Kreationsraum</span><span class="en">Creation Space</span></button>
-    <button class="sb-item" onclick="show('plaene')"><span class="ico">📋</span><span class="de">Deine Pläne</span><span class="en">Your Plans</span></button>
-
+    <div class="sb-group de">Club</div><div class="sb-group en">Club</div>
+    <button class="sb-item active" onclick="show('home')"><span class="ico">✦</span><span class="de">Mein Club</span><span class="en">My Club</span></button>
+    <button class="sb-item" onclick="show('energy-session')"><span class="ico">⚡</span><span class="de">Monthly Energy Session</span><span class="en">Monthly Energy Session</span></button>
+    <button class="sb-item" onclick="show('community')"><span class="ico">🌍</span><span class="de">Reise Community</span><span class="en">Travel Community</span></button>
+    <button class="sb-item" onclick="show('audios')"><span class="ico">🎧</span><span class="de">Abenteuer für den Kopf</span><span class="en">Adventures for the Mind</span></button>
+    <button class="sb-item" onclick="show('create')"><span class="ico">✨</span><span class="de">Dein nächstes Kapitel</span><span class="en">Your Next Chapter</span></button>
+    <button class="sb-item" onclick="show('challenge')"><span class="ico">🔥</span><span class="de">Raus aus der Komfortzone</span><span class="en">Out of the Comfort Zone</span></button>
     <div class="sb-group de">Tiefer</div><div class="sb-group en">Deeper</div>
-    <button class="sb-item" onclick="show('begleitung-hint')"><span class="ico">🔥</span><span class="de">Begleitung</span><span class="en">Guidance</span></button>
-    <button class="sb-item" onclick="show('retreats')"><span class="ico">🌍</span><span class="de">Retreats</span><span class="en">Retreats</span></button>
+    <button class="sb-item" onclick="show('energie-arbeit')"><span class="ico">✨</span><span class="de">Energie-Arbeit</span><span class="en">Energy Work</span></button>
+    <button class="sb-item" onclick="show('koerper')"><span class="ico">🧭</span><span class="de">Körpertest</span><span class="en">Body Test</span></button>
+    <button class="sb-item" onclick="show('plaene')"><span class="ico">📋</span><span class="de">Deine Pläne</span><span class="en">Your Plans</span></button>
+    <div class="sb-group de">Bonus</div><div class="sb-group en">Bonus</div>
+    <button class="sb-item" onclick="show('bonus-alltag')"><span class="ico">🌱</span><span class="de">Mehr Abenteuer im Alltag</span><span class="en">More adventure daily</span></button>
   </nav>
   <div class="sb-bottom">
     <div class="lang-sw">
       <button class="lb active" id="btn-de" onclick="setLang('de')">DE</button>
       <button class="lb" id="btn-en" onclick="setLang('en')">EN</button>
     </div>
-    <button class="sb-btn" onclick="changeProfile()"><span class="de">✏️ Profil ändern</span><span class="en">✏️ Change profile</span></button>
     <button class="sb-btn" onclick="logout()"><span class="de">🚪 Ausloggen</span><span class="en">🚪 Log out</span></button>
   </div>
 </aside>
 
-<!-- ══ MAIN ══════════════════════════════════════════════════ -->
+<!-- MAIN -->
 <main class="main">
 
-<!-- ── HOME ──────────────────────────────────────────────── -->
+<!-- HOME -->
 <div id="sec-home" class="sec active">
   <div class="home-hero">
-    <div class="home-tag de">✦ Dein Bereich</div>
-    <div class="home-tag en">✦ Your space</div>
-    <h1 class="home-h1 de">Du bist hier,<br>um dein Leben<br><em>zu kreieren.</em></h1>
-    <h1 class="home-h1 en">You're here<br>to create your<br><em>amazing life.</em></h1>
-    <p class="home-sub de">Nicht irgendwann. Nicht wenn alles perfekt ist. Jetzt.</p>
-    <p class="home-sub en">Not someday. Not when everything is perfect. Now.</p>
+    <div class="h-eyebrow de">✦ Dein Club</div><div class="h-eyebrow en">✦ Your Club</div>
+    <h1 class="home-h1 de">Willkommen im Club für Menschen,<br>die spüren: <em>Da wartet noch mehr auf mich.</em></h1>
+    <h1 class="home-h1 en">Welcome to the Club for people<br>who feel: <em>There's more waiting for me.</em></h1>
+    <p class="home-sub de">Mehr Leben. Mehr Abenteuer. Mehr von dem, woran du dich später erinnern wirst.</p>
+    <p class="home-sub en">More life. More adventure. More of what you'll remember later.</p>
   </div>
-
   <div class="home-content">
-
-    <!-- Quiz 2 Teaser -->
-    <div class="quiz2-card" onclick="show('quiz2')">
-      <span class="q2-emoji">🔮</span>
-      <h3 class="q2-h de">Lass uns <em>tiefer gehen.</em></h3>
-      <h3 class="q2-h en">Let's go <em>deeper.</em></h3>
-      <p class="q2-sub de">5 Fragen – damit deine Pläne und Tools genau auf dich abgestimmt sind.</p>
-      <p class="q2-sub en">5 questions – so your plans and tools are perfectly tailored to you.</p>
-      <button class="q2-btn de">Quiz starten →</button>
-      <button class="q2-btn en">Start quiz →</button>
-    </div>
-
-    <!-- Tool Grid -->
-    <div style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:14px" class="de">Deine Tools</div>
-    <div style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-bottom:14px" class="en">Your Tools</div>
-
-    <div class="tool-grid">
-      <div class="tool-card" style="--card-accent:rgba(45,122,114,.06);--card-accent-border:rgba(45,122,114,.3)" onclick="show('energie')">
-        <span class="tc-emoji">⚡</span>
-        <div class="tc-title de">Energie-Arbeit</div><div class="tc-title en">Energy Work</div>
-        <div class="tc-desc de">Barrieren lösen. Ausdehnen. Sofort wirksam.</div>
-        <div class="tc-desc en">Release barriers. Expand. Works immediately.</div>
+    <div class="card-grid">
+      <div class="club-card" style="--cc-top:var(--petrol-mid)" onclick="show('energy-session')">
+        <span class="cc-icon">⚡</span>
+        <div class="cc-title de">Live Experience</div><div class="cc-title en">Live Experience</div>
+        <div class="cc-desc de">Monatlicher Live Call mit Jenny</div><div class="cc-desc en">Monthly Live Call with Jenny</div>
+        <div class="cc-badge de">Live</div><div class="cc-badge en">Live</div>
       </div>
-      <div class="tool-card" style="--card-accent:rgba(107,76,140,.06);--card-accent-border:rgba(107,76,140,.3)" onclick="show('koerper')">
-        <span class="tc-emoji">🧭</span>
-        <div class="tc-title de">Körpertest</div><div class="tc-title en">Body Test</div>
-        <div class="tc-desc de">Raus aus dem Verstand. Entscheidungen sofort.</div>
-        <div class="tc-desc en">Out of the mind. Decisions immediately.</div>
+      <div class="club-card" style="--cc-top:var(--pink)" onclick="show('audios')">
+        <span class="cc-icon">🎧</span>
+        <div class="cc-title de">Abenteuer für den Kopf</div><div class="cc-title en">Adventures for the Mind</div>
+        <div class="cc-desc de">Mut · Entscheidungen · Mehr Leben fühlen</div><div class="cc-desc en">Courage · Decisions · Feel more alive</div>
       </div>
-      <div class="tool-card" style="--card-accent:rgba(200,169,110,.06);--card-accent-border:rgba(200,169,110,.3)" onclick="show('kreation')">
-        <span class="tc-emoji">🌍</span>
-        <div class="tc-title de">Kreationsraum</div><div class="tc-title en">Creation Space</div>
-        <div class="tc-desc de">Dein Leben aktiv wählen. Jetzt.</div>
-        <div class="tc-desc en">Actively choose your life. Now.</div>
+      <div class="club-card" style="--cc-top:rgba(200,169,110,.7)" onclick="show('create')">
+        <span class="cc-icon">🌍</span>
+        <div class="cc-title de">Dein nächstes Kapitel</div><div class="cc-title en">Your Next Chapter</div>
+        <div class="cc-desc de">Vision · Bucket List · Ziele die wirklich DEINE sind</div><div class="cc-desc en">Vision · Bucket List · Goals that are truly YOURS</div>
       </div>
-      <div class="tool-card" style="--card-accent:rgba(212,84,138,.06);--card-accent-border:rgba(212,84,138,.3)" onclick="show('plaene')">
-        <span class="tc-emoji">📋</span>
-        <div class="tc-title de">Deine Pläne</div><div class="tc-title en">Your Plans</div>
-        <div class="tc-desc de">Ernährung, Energie, Bewegung – auf dich abgestimmt.</div>
-        <div class="tc-desc en">Nutrition, energy, movement – tailored to you.</div>
+      <div class="club-card" style="--cc-top:var(--pink)" onclick="show('challenge')">
+        <span class="cc-icon">🔥</span>
+        <div class="cc-title de">Raus aus der Komfortzone</div><div class="cc-title en">Out of the Comfort Zone</div>
+        <div class="cc-desc de">Jeden Monat ein mutiges Ja · Jeden Monat mehr Leben</div><div class="cc-desc en">A brave yes every month · More life every month</div>
+        <div class="cc-badge de">Neu</div><div class="cc-badge en">New</div>
       </div>
     </div>
-
-    <!-- WA -->
     <div class="wa-frame">
       <p class="de">„Schreib mir was gerade hochkommt.<br>Ich antworte dir persönlich."</p>
       <p class="en">"Write to me what's coming up.<br>I answer personally."</p>
@@ -296,283 +372,311 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
   </div>
 </div>
 
-<!-- ── QUIZ 2 ──────────────────────────────────────────────── -->
-<div id="sec-quiz2" class="sec">
-  <div class="page-hero" style="--page-glow:rgba(107,76,140,.1)">
-    <div class="pg-tag de">Quiz 2 · Tiefer gehen</div>
-    <div class="pg-tag en">Quiz 2 · Go deeper</div>
-    <h1 class="pg-h1 de">5 Fragen,<br><em>die alles personalisieren.</em></h1>
-    <h1 class="pg-h1 en">5 questions that<br><em>personalise everything.</em></h1>
-    <p class="pg-sub de">Damit deine Pläne und Tools wirklich auf dich abgestimmt sind.</p>
-    <p class="pg-sub en">So your plans and tools are truly tailored to you.</p>
+<!-- MONTHLY ENERGY SESSION -->
+<div id="sec-energy-session" class="sec">
+  <div class="page-hero" style="--pg:rgba(42,157,143,.08)">
+    <div class="pg-eyebrow de">Säule 1 · Live Experience</div><div class="pg-eyebrow en">Pillar 1 · Live Experience</div>
+    <h1 class="pg-h1 de">Neue Perspektiven. Neue Impulse.<br><em>Jeden 1. Sonntag.</em></h1>
+    <h1 class="pg-h1 en">New perspectives. New impulses.<br><em>Every 1st Sunday.</em></h1>
+    <p class="pg-sub de">Neue Perspektiven. Neue Impulse. Neue Entscheidungen.</p>
+    <p class="pg-sub en">New perspectives. New impulses. New decisions.</p>
   </div>
   <div class="page-content">
-    <div id="q2-container">
-      <!-- Questions rendered by JS -->
+    <div class="quote-block">
+      <p class="de">„Jeden ersten Sonntag im Monat gehst du einen Schritt näher an das Leben das du wirklich willst."</p>
+      <p class="en">"Every first Sunday of the month you take one step closer to the life you truly want."</p>
     </div>
-    <div id="q2-result" style="display:none">
-      <div class="gold-quote">
-        <p id="q2-result-text" class="de"></p>
-      </div>
-      <button class="next-btn" onclick="show('home')">
-        <span class="de">Weiter zum Bereich →</span><span class="en">Continue →</span>
-      </button>
+    <div class="monthly-grid">
+      <div class="monthly-item"><div class="mi-icon">🌟</div><div class="mi-title de">Fülle</div><div class="mi-title en">Abundance</div><div class="mi-desc de">Öffne dich für mehr – in allen Bereichen deines Lebens</div><div class="mi-desc en">Open yourself to more – in all areas of your life</div></div>
+      <div class="monthly-item"><div class="mi-icon">💎</div><div class="mi-title de">Selbstwert</div><div class="mi-title en">Self-worth</div><div class="mi-desc de">Erkenne wie wertvoll du wirklich bist</div><div class="mi-desc en">Recognise how truly valuable you are</div></div>
+      <div class="monthly-item"><div class="mi-icon">🕊️</div><div class="mi-title de">Vertrauen</div><div class="mi-title en">Trust</div><div class="mi-desc de">Dem Leben vertrauen – auch wenn du nicht weißt wie</div><div class="mi-desc en">Trust in life – even when you don't know how</div></div>
+      <div class="monthly-item"><div class="mi-icon">🌊</div><div class="mi-title de">Loslassen</div><div class="mi-title en">Release</div><div class="mi-desc de">Was hält dich? Was darf gehen?</div><div class="mi-desc en">What holds you? What can go?</div></div>
+      <div class="monthly-item"><div class="mi-icon">✨</div><div class="mi-title de">Weibliche Energie</div><div class="mi-title en">Feminine energy</div><div class="mi-desc de">Kraft und Sanftheit vereint</div><div class="mi-desc en">Power and softness united</div></div>
+      <div class="monthly-item"><div class="mi-icon">🚀</div><div class="mi-title de">Neue Version von dir</div><div class="mi-title en">New version of you</div><div class="mi-desc de">Wer ist die Person die dieses Leben lebt?</div><div class="mi-desc en">Who is the person living this life?</div></div>
+    </div>
+    <div class="wa-frame">
+      <p class="de">„Nächste Session: 6. Juli 2026<br>Meld dich damit ich dir den Link schicke."</p>
+      <p class="en">"Next session: 6 July 2026<br>Write me so I can send you the link."</p>
+      <a class="wa-btn" id="wa-session" href="#" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="de">Session-Link anfragen →</span><span class="en">Request session link →</span>
+      </a>
     </div>
   </div>
 </div>
 
-<!-- ── ENERGIE-ARBEIT ─────────────────────────────────────── -->
-<div id="sec-energie" class="sec">
-  <div class="page-hero" style="--page-glow:rgba(45,122,114,.1)">
-    <div class="pg-tag de">Tool 1 · Energie-Arbeit</div>
-    <div class="pg-tag en">Tool 1 · Energy Work</div>
+<!-- AUDIO BIBLIOTHEK -->
+<div id="sec-audios" class="sec">
+  <div class="page-hero" style="--pg:rgba(232,130,154,.07)">
+    <div class="pg-eyebrow de">Säule 2 · Abenteuer für den Kopf</div><div class="pg-eyebrow en">Pillar 2 · Adventures for the Mind</div>
+    <h1 class="pg-h1 de">Mut. Entscheidungen.<br><em>Mehr Leben fühlen.</em></h1>
+    <h1 class="pg-h1 en">Courage. Decisions.<br><em>Feel more alive.</em></h1>
+    <p class="pg-sub de">Raus aus der Routine. Loslassen was dich klein hält. Abenteuer für den Kopf.</p>
+    <p class="pg-sub en">Break out of routine. Release what holds you small. Adventures for the mind.</p>
+  </div>
+  <div class="page-content">
+    <div class="audio-block">
+      <div class="ab-header">
+        <span class="ab-icon">🌅</span>
+        <div class="ab-info">
+          <strong class="de">Morgenenergie</strong><strong class="en">Morning energy</strong>
+          <span class="de">Starte den Tag mit Energie und Klarheit</span><span class="en">Start the day with energy and clarity</span>
+        </div>
+      </div>
+      <audio controls class="ab-player" preload="metadata">
+        <source src="morgenenergie.m4a" type="audio/mp4">
+      </audio>
+      <p class="ab-note de">🎧 5–10 Minuten · morgens · vor dem Handy</p>
+      <p class="ab-note en">🎧 5–10 minutes · mornings · before the phone</p>
+    </div>
+    <div class="audio-block">
+      <div class="ab-header">
+        <span class="ab-icon">🌊</span>
+        <div class="ab-info">
+          <strong class="de">Barrieren senken & Ausdehnen</strong><strong class="en">Lower barriers & expand</strong>
+          <span class="de">Lass los was nicht mehr dient – dehne dich aus</span><span class="en">Release what no longer serves – expand</span>
+        </div>
+      </div>
+      <audio controls class="ab-player" preload="metadata">
+        <source src="Barrieren_senken-ausdehnen.m4a" type="audio/mp4">
+      </audio>
+      <p class="ab-note de">🎧 15–20 Minuten · Kopfhörer · hinlegen</p>
+      <p class="ab-note en">🎧 15–20 minutes · headphones · lie down</p>
+    </div>
+    <div class="audio-block">
+      <div class="ab-header">
+        <span class="ab-icon">✨</span>
+        <div class="ab-info">
+          <strong class="de">Deine Welt 2.0</strong><strong class="en">Your World 2.0</strong>
+          <span class="de">Rein in den Kreationsraum – dein geiles Leben kreieren</span><span class="en">Into the creation space – create your amazing life</span>
+        </div>
+      </div>
+      <audio controls class="ab-player" preload="metadata">
+        <source src="Deine_Welt.m4a" type="audio/mp4">
+      </audio>
+      <p class="ab-note de">🎧 Nach der Barrieren-Übung · Vision bereit haben</p>
+      <p class="ab-note en">🎧 After the barriers exercise · have your vision ready</p>
+    </div>
+    <div class="block" style="margin-top:20px">
+      <div class="block-eyebrow de">Bald mehr</div><div class="block-eyebrow en">More coming soon</div>
+      <div class="block-h de">Die Bibliothek <em>wächst.</em></div>
+      <div class="block-h en">The library <em>is growing.</em></div>
+      <div class="block-body de">Selbstvertrauen · Reiseenergie · Expansion · Fülle · Verstrickungen lösen</div>
+      <div class="block-body en">Self-confidence · Travel energy · Expansion · Abundance · Untangling</div>
+    </div>
+  </div>
+</div>
+
+<!-- CREATE YOUR LIFE -->
+<div id="sec-create" class="sec">
+  <div class="page-hero" style="--pg:rgba(200,169,110,.07)">
+    <div class="pg-eyebrow de">Säule 3 · Dein nächstes Kapitel</div><div class="pg-eyebrow en">Pillar 3 · Your Next Chapter</div>
+    <h1 class="pg-h1 de">Vision. Bucket List.<br><em>Dein Traumleben.</em></h1>
+    <h1 class="pg-h1 en">Vision. Bucket List.<br><em>Your dream life.</em></h1>
+    <p class="pg-sub de">Ziele die wirklich DEINE sind. Abenteuerliste. Dein nächstes Kapitel beginnt jetzt.</p>
+    <p class="pg-sub en">Goals that are truly YOURS. Adventure list. Your next chapter starts now.</p>
+  </div>
+  <div class="page-content">
+    <div class="quote-block">
+      <p class="de">„Das Traumleben wartet nicht darauf dass du bereit bist. Du wählst es – und wirst dabei bereit."</p>
+      <p class="en">"The dream life doesn't wait for you to be ready. You choose it – and become ready in the process."</p>
+    </div>
+    <div class="block">
+      <div class="block-eyebrow de">Täglich kreieren</div><div class="block-eyebrow en">Daily creation</div>
+      <div class="block-h de">So kreierst du <em>jeden Tag.</em></div>
+      <div class="block-h en">How to create <em>every day.</em></div>
+      <div class="steps">
+        <div class="step"><span class="step-num">1</span><div class="step-text de"><strong>Verstand aus</strong> – kein Analysieren, kein Abwägen</div><div class="step-text en"><strong>Mind off</strong> – no analysing, no weighing up</div></div>
+        <div class="step"><span class="step-num">2</span><div class="step-text de"><strong>Vision rein</strong> – spür wie es wäre wenn es bereits so ist</div><div class="step-text en"><strong>Vision in</strong> – feel how it would be if it's already so</div></div>
+        <div class="step"><span class="step-num">3</span><div class="step-text de"><strong>Wählen</strong> – sag laut: „Ich wähle das. Ich bin bereit."</div><div class="step-text en"><strong>Choose</strong> – say aloud: "I choose this. I am ready."</div></div>
+        <div class="step"><span class="step-num">4</span><div class="step-text de"><strong>Handle</strong> – als ob es bereits wahr ist</div><div class="step-text en"><strong>Act</strong> – as if it's already true</div></div>
+      </div>
+    </div>
+    <div class="monthly-grid" style="margin-top:20px">
+      <div class="monthly-item"><div class="mi-icon">🎯</div><div class="mi-title de">Vision-Workbook</div><div class="mi-title en">Vision workbook</div><div class="mi-desc de">Dein Traumleben in Worte fassen</div><div class="mi-desc en">Put your dream life into words</div></div>
+      <div class="monthly-item"><div class="mi-icon">🆓</div><div class="mi-title de">Freiheit designen</div><div class="mi-title en">Design freedom</div><div class="mi-desc de">Wie sieht deine Freiheit aus?</div><div class="mi-desc en">What does your freedom look like?</div></div>
+      <div class="monthly-item"><div class="mi-icon">🪞</div><div class="mi-title de">Identität</div><div class="mi-title en">Identity</div><div class="mi-desc de">Wer bist du wenn du das lebst?</div><div class="mi-desc en">Who are you when you live this?</div></div>
+      <div class="monthly-item"><div class="mi-icon">⚡</div><div class="mi-title de">Entscheidungen</div><div class="mi-title en">Decisions</div><div class="mi-desc de">Klar entscheiden ohne Zweifel</div><div class="mi-desc en">Decide clearly without doubt</div></div>
+    </div>
+    <div class="dl-row" style="margin-top:20px;border-color:rgba(200,169,110,.2);background:rgba(200,169,110,.04)">
+      <div class="dl-left"><div class="dl-ico">📖</div><div class="dl-info"><strong class="de">Mini-Guide</strong><strong class="en">Mini-Guide</strong><span class="de">Visionsarbeit · Audio · Video · Kreationsraum</span><span class="en">Vision work · Audio · Video · Creation space</span></div></div>
+      <a href="miniguide.html" class="dl-btn" style="background:rgba(200,169,110,.2);color:#c8a96e;border:1px solid rgba(200,169,110,.3)" target="_blank"><span class="de">Öffnen ↗</span><span class="en">Open ↗</span></a>
+    </div>
+  </div>
+</div>
+
+<!-- MONTHLY CHALLENGE -->
+<div id="sec-challenge" class="sec">
+  <div class="page-hero" style="--pg:rgba(232,130,154,.08)">
+    <div class="pg-eyebrow de">Säule 4 · Monthly Challenge</div><div class="pg-eyebrow en">Pillar 4 · Monthly Challenge</div>
+    <h1 class="pg-h1 de">Raus.<br><em>Jeden Monat neu.</em></h1>
+    <h1 class="pg-h1 en">Out there.<br><em>New every month.</em></h1>
+    <p class="pg-sub de">Einfach. Motivierend. Lebensnah. Kein Muss – ein Wollen.</p>
+    <p class="pg-sub en">Simple. Motivating. Real. Not a must – a want.</p>
+  </div>
+  <div class="page-content">
+    <div class="challenge-card">
+      <span class="ch-icon">🌟</span>
+      <h3 class="ch-h de">Juli: <em>More Life Challenge</em></h3>
+      <h3 class="ch-h en">July: <em>More Life Challenge</em></h3>
+      <p class="ch-sub de">Tue jeden Tag eine Sache die sich nach mehr Leben anfühlt. Klein oder groß. Kein Plan – einfach fühlen und handeln.</p>
+      <p class="ch-sub en">Do one thing every day that feels like more life. Small or big. No plan – just feel and act.</p>
+      <button class="ch-btn de" onclick="show('community')">Community beitreten →</button>
+      <button class="ch-btn en" onclick="show('community')">Join the community →</button>
+    </div>
+    <div class="block">
+      <div class="block-eyebrow de">Weitere Challenges</div><div class="block-eyebrow en">More challenges</div>
+      <div class="block-h de">Was <em>noch kommt.</em></div>
+      <div class="block-h en">What <em>is coming.</em></div>
+      <div class="block-body de">Main Character Challenge · Freedom Challenge · Summer Energy Challenge · New Version Challenge · Expansion Challenge</div>
+      <div class="block-body en">Main Character Challenge · Freedom Challenge · Summer Energy Challenge · New Version Challenge · Expansion Challenge</div>
+    </div>
+  </div>
+</div>
+
+<!-- COMMUNITY & REISEN -->
+<div id="sec-community" class="sec">
+  <div class="page-hero" style="--pg:rgba(42,157,143,.08)">
+    <div class="pg-eyebrow de">Säule 5 · Community & Reisen</div><div class="pg-eyebrow en">Pillar 5 · Community & Travels</div>
+    <h1 class="pg-h1 de">Die Heimat.<br><em>Und das echte Erlebnis.</em></h1>
+    <h1 class="pg-h1 en">The home.<br><em>And the real experience.</em></h1>
+    <p class="pg-sub de">Online wachsen. Offline erleben. Zusammen ankommen.</p>
+    <p class="pg-sub en">Grow online. Experience offline. Arrive together.</p>
+  </div>
+  <div class="page-content">
+    <div class="block">
+      <div class="block-eyebrow de">WhatsApp Community</div><div class="block-eyebrow en">WhatsApp Community</div>
+      <div class="block-h de">Deine <em>Leute.</em></div>
+      <div class="block-h en">Your <em>people.</em></div>
+      <div class="block-body de">Reiseupdates · Behind the Scenes · Frühbucherinfos · Challenges · gegenseitige Inspiration. Der Ort wo wir uns wirklich begegnen.</div>
+      <div class="block-body en">Travel updates · behind the scenes · early bird info · challenges · mutual inspiration. The place where we truly meet.</div>
+    </div>
+    <div class="wa-frame">
+      <p class="de">„Bist du noch nicht in der Community?<br>Schreib mir – ich füge dich sofort hinzu."</p>
+      <p class="en">"Not in the community yet?<br>Write me – I'll add you immediately."</p>
+      <a class="wa-btn" id="wa-community" href="#" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="de">Community beitreten →</span><span class="en">Join the community →</span>
+      </a>
+    </div>
+    <div class="block" style="margin-top:8px">
+      <div class="block-eyebrow de">Reisen 2026</div><div class="block-eyebrow en">Travels 2026</div>
+      <div class="block-h de">Tansania & <em>Sansibar</em></div>
+      <div class="block-h en">Tanzania & <em>Zanzibar</em></div>
+    </div>
+    <div class="wa-frame" style="margin-top:8px">
+      <p class="de">„Neue Reisedaten kommen bald.<br>Schreib mir – ich halte dich auf dem Laufenden."</p>
+      <p class="en">"New travel dates coming soon.<br>Write me – I'll keep you updated."</p>
+      <a class="wa-btn" id="wa-ret1" href="https://wa.me/4917624238972?text=Hallo%20Jenny!%20Ich%20m%C3%B6chte%20mehr%20%C3%BCber%20die%20Reisen%20erfahren." target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="de">Reisen anfragen →</span><span class="en">Enquire about travels →</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ENERGIE-ARBEIT -->
+<div id="sec-energie-arbeit" class="sec">
+  <div class="page-hero" style="--pg:rgba(42,157,143,.1)">
+    <div class="pg-eyebrow de">Tiefer · Energie-Arbeit</div><div class="pg-eyebrow en">Deeper · Energy Work</div>
     <h1 class="pg-h1 de">Lass los was<br><em>dich hält.</em></h1>
     <h1 class="pg-h1 en">Release what<br><em>holds you.</em></h1>
     <p class="pg-sub de">Nicht analysieren. Direkt ins Energiefeld. Sofort spürbar.</p>
     <p class="pg-sub en">No analysing. Directly into the energy field. Immediately felt.</p>
   </div>
   <div class="page-content">
-    <div class="gold-quote">
-      <p class="de">Mach die Barrieren-Übung wenn du merkst: ich komme nicht weiter, ich stecke fest, etwas zieht mich zurück. Das ist der Moment.</p>
-      <p class="en">Do the barriers exercise when you notice: I'm not moving forward, I'm stuck, something is pulling me back. That's the moment.</p>
+    <div class="quote-block">
+      <p class="de">Mach die Barrieren-Übung wenn du merkst: ich komme nicht weiter, ich stecke fest. Das ist der Moment.</p>
+      <p class="en">Do the barriers exercise when you notice: I'm not moving forward, I'm stuck. That's the moment.</p>
     </div>
-
     <div class="audio-block">
-      <div class="ab-header">
-        <span class="ab-icon">🎵</span>
-        <div class="ab-info">
-          <strong class="de">Barrieren senken & Ausdehnen</strong>
-          <strong class="en">Lower Barriers & Expand</strong>
-          <span class="de">Lass los was nicht mehr dient – dehne dich aus</span>
-          <span class="en">Release what no longer serves – expand</span>
-        </div>
+      <div class="ab-header"><span class="ab-icon">🎵</span>
+        <div class="ab-info"><strong class="de">Barrieren senken & Ausdehnen</strong><strong class="en">Lower Barriers & Expand</strong><span class="de">Lass los was nicht mehr dient</span><span class="en">Release what no longer serves</span></div>
       </div>
-      <audio controls class="ab-player" preload="metadata">
-        <source src="Barrieren_senken-ausdehnen.m4a" type="audio/x-m4a">
-        <source src="https://www.travel2transform.de/Barrieren_senken-ausdehnen.m4a" type="audio/mp4">
-      </audio>
-      <p class="ab-note de">🎧 Leg dich hin · Kopfhörer · 15–20 Minuten</p>
-      <p class="ab-note en">🎧 Lie down · Headphones · 15–20 minutes</p>
+      <audio controls class="ab-player" preload="metadata"><source src="Barrieren_senken-ausdehnen.m4a" type="audio/mp4"></audio>
+      <p class="ab-note de">🎧 Leg dich hin · Kopfhörer · 15–20 Minuten</p><p class="ab-note en">🎧 Lie down · Headphones · 15–20 minutes</p>
     </div>
-
     <div class="block">
-      <div class="block-tag de">Danach</div><div class="block-tag en">After</div>
-      <div class="block-h de">Was jetzt <em>möglich ist.</em></div>
-      <div class="block-h en">What is now <em>possible.</em></div>
-      <div class="block-body de">Wenn sich etwas gelöst hat – geh direkt in den Kreationsraum. Jetzt ist dein Energiefeld offen. Jetzt kannst du wählen was rein kommt.</div>
-      <div class="block-body en">When something has released – go directly into the creation space. Now your energy field is open. Now you can choose what comes in.</div>
+      <div class="block-eyebrow de">Danach</div><div class="block-eyebrow en">After</div>
+      <div class="block-h de">Was jetzt <em>möglich ist.</em></div><div class="block-h en">What is now <em>possible.</em></div>
+      <div class="block-body de">Wenn sich etwas gelöst hat – geh direkt in Create Your Life. Jetzt ist dein Energiefeld offen.</div>
+      <div class="block-body en">When something has released – go directly to Create Your Life. Now your energy field is open.</div>
     </div>
-
-    <div class="up-hint">
-      <span class="ico">🔥</span>
-      <div class="txt de"><strong>Du willst das mit Jenny machen?</strong><br>In der Begleitung gehen wir direkt zusammen ins Energiefeld. <a href="begleitung.html">Zur Begleitung →</a></div>
-      <div class="txt en"><strong>Want to do this with Jenny?</strong><br>In the guidance we go directly into the energy field together. <a href="begleitung.html">About guidance →</a></div>
-    </div>
-
-    <button class="next-btn" onclick="show('koerper')">
-      <span class="de">Weiter → Körpertest</span><span class="en">Next → Body Test</span>
-    </button>
+    <button class="next-btn" onclick="show('create')"><span class="de">Weiter → Create Your Life</span><span class="en">Next → Create Your Life</span></button>
   </div>
 </div>
 
-<!-- ── KÖRPERTEST ─────────────────────────────────────────── -->
+<!-- KÖRPERTEST -->
 <div id="sec-koerper" class="sec">
-  <div class="page-hero" style="--page-glow:rgba(107,76,140,.1)">
-    <div class="pg-tag de">Tool 2 · Körpertest</div>
-    <div class="pg-tag en">Tool 2 · Body Test</div>
+  <div class="page-hero" style="--pg:rgba(232,130,154,.08)">
+    <div class="pg-eyebrow de">Tiefer · Körpertest</div><div class="pg-eyebrow en">Deeper · Body Test</div>
     <h1 class="pg-h1 de">Raus aus dem Verstand.<br><em>Rein in die Wahrheit.</em></h1>
     <h1 class="pg-h1 en">Out of the mind.<br><em>Into the truth.</em></h1>
-    <p class="pg-sub de">Dein Körper weiß die Antwort. Immer. Du musst nur lernen wie du fragst.</p>
-    <p class="pg-sub en">Your body knows the answer. Always. You just need to learn how to ask.</p>
+    <p class="pg-sub de">Dein Körper weiß die Antwort. Immer.</p>
+    <p class="pg-sub en">Your body knows the answer. Always.</p>
   </div>
   <div class="page-content">
-    <div class="gold-quote">
-      <p class="de">Nutze den Körpertest für jede Entscheidung – groß oder klein. Nicht nur einmal. Täglich.</p>
-      <p class="en">Use the body test for every decision – big or small. Not just once. Daily.</p>
-    </div>
-
     <div class="video-block">
       <iframe src="https://www.youtube.com/embed/ypP8mWpcTwY" title="Körpertest" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-      <div class="vb-cap">
-        <strong class="de">📹 Körpertest – Anleitung von Jenny</strong>
-        <strong class="en">📹 Body Test – Guide by Jenny</strong>
-      </div>
+      <div class="vb-cap"><span class="de">📹 Körpertest – Anleitung von Jenny</span><span class="en">📹 Body Test – Guide by Jenny</span></div>
     </div>
-
     <div class="block">
-      <div class="block-tag de">Entscheidungen sofort</div><div class="block-tag en">Instant decisions</div>
-      <div class="block-h de">So nutzt du ihn <em>täglich.</em></div>
-      <div class="block-h en">How to use it <em>daily.</em></div>
-      <div class="k-steps">
-        <div class="k-step"><span class="ks-num">1</span><div class="ks-text de">Entscheidung halten – <em>ohne nachzudenken</em></div><div class="ks-text en">Hold the decision – <em>without thinking</em></div></div>
-        <div class="k-step"><span class="ks-num">2</span><div class="ks-text de">Körper spüren: <strong>vorwärts = ja / zurück = nein</strong></div><div class="ks-text en">Feel the body: <strong>forward = yes / back = no</strong></div></div>
-        <div class="k-step"><span class="ks-num">3</span><div class="ks-text de">Sofort handeln – <em>kein Verstand dazwischen</em></div><div class="ks-text en">Act immediately – <em>no mind in between</em></div></div>
+      <div class="block-eyebrow de">Täglich nutzen</div><div class="block-eyebrow en">Use daily</div>
+      <div class="block-h de">So nutzt du ihn <em>täglich.</em></div><div class="block-h en">How to use it <em>daily.</em></div>
+      <div class="steps">
+        <div class="step"><span class="step-num">1</span><div class="step-text de">Entscheidung halten – <em>ohne nachzudenken</em></div><div class="step-text en">Hold the decision – <em>without thinking</em></div></div>
+        <div class="step"><span class="step-num">2</span><div class="step-text de">Körper spüren: <strong>vorwärts = ja / zurück = nein</strong></div><div class="step-text en">Feel the body: <strong>forward = yes / back = no</strong></div></div>
+        <div class="step"><span class="step-num">3</span><div class="step-text de">Sofort handeln – <em>kein Verstand dazwischen</em></div><div class="step-text en">Act immediately – <em>no mind in between</em></div></div>
       </div>
     </div>
-
-    <button class="next-btn" onclick="show('kreation')">
-      <span class="de">Weiter → Kreationsraum</span><span class="en">Next → Creation Space</span>
-    </button>
   </div>
 </div>
 
-<!-- ── KREATIONSRAUM ──────────────────────────────────────── -->
-<div id="sec-kreation" class="sec">
-  <div class="page-hero" style="--page-glow:rgba(200,169,110,.08)">
-    <div class="pg-tag de">Tool 3 · Kreationsraum</div>
-    <div class="pg-tag en">Tool 3 · Creation Space</div>
-    <h1 class="pg-h1 de">Du kreierst dein Leben.<br><em>Jetzt. Hier. Sofort.</em></h1>
-    <h1 class="pg-h1 en">You create your life.<br><em>Now. Here. Immediately.</em></h1>
-    <p class="pg-sub de">Nicht warten bis sich etwas ändert. Du bist der Ursprung.</p>
-    <p class="pg-sub en">Not waiting for things to change. You are the source.</p>
-  </div>
-  <div class="page-content">
-    <div class="gold-quote">
-      <p class="de">Der Kreationsraum ist der Ort jenseits des Verstandes – wo Energie noch formbar ist. Hier triffst du echte Entscheidungen. Hier kreierst du.</p>
-      <p class="en">The creation space is the place beyond the mind – where energy is still shapeable. Here you make real decisions. Here you create.</p>
-    </div>
-
-    <div class="audio-block">
-      <div class="ab-header">
-        <span class="ab-icon">🎵</span>
-        <div class="ab-info">
-          <strong class="de">Deine Welt 2.0</strong>
-          <strong class="en">Your World 2.0</strong>
-          <span class="de">Rein in den Kreationsraum – dein geiles Leben kreieren</span>
-          <span class="en">Into the creation space – create your amazing life</span>
-        </div>
-      </div>
-      <audio controls class="ab-player" preload="metadata">
-        <source src="Deine_Welt.m4a" type="audio/x-m4a">
-        <source src="https://www.travel2transform.de/Deine_Welt.m4a" type="audio/mp4">
-      </audio>
-      <p class="ab-note de">🎧 Mach diese Audio nach der Barrieren-Übung · Deine Vision bereit haben</p>
-      <p class="ab-note en">🎧 Do this after the barriers exercise · Have your vision ready</p>
-    </div>
-
-    <div class="block">
-      <div class="block-tag de">Täglich</div><div class="block-tag en">Daily</div>
-      <div class="block-h de">So kreierst du <em>jeden Tag.</em></div>
-      <div class="block-h en">How to create <em>every day.</em></div>
-      <div class="k-steps">
-        <div class="k-step"><span class="ks-num">1</span><div class="ks-text de"><strong>Verstand aus</strong> – kein Analysieren, kein Abwägen</div><div class="ks-text en"><strong>Mind off</strong> – no analysing, no weighing up</div></div>
-        <div class="k-step"><span class="ks-num">2</span><div class="ks-text de"><strong>Vision rein</strong> – spür wie es wäre wenn es bereits so ist</div><div class="ks-text en"><strong>Vision in</strong> – feel how it would be if it's already so</div></div>
-        <div class="k-step"><span class="ks-num">3</span><div class="ks-text de"><strong>Wählen</strong> – laut sagen: „Ich wähle das. Ich bin bereit."</div><div class="ks-text en"><strong>Choose</strong> – say aloud: "I choose this. I am ready."</div></div>
-        <div class="k-step"><span class="ks-num">4</span><div class="ks-text de"><strong>Handle</strong> – als ob es bereits wahr ist</div><div class="ks-text en"><strong>Act</strong> – as if it is already true</div></div>
-      </div>
-    </div>
-
-    <button class="next-btn" onclick="show('plaene')">
-      <span class="de">Weiter → Deine Pläne</span><span class="en">Next → Your Plans</span>
-    </button>
-  </div>
-</div>
-
-<!-- ── PLÄNE ──────────────────────────────────────────────── -->
+<!-- PLÄNE -->
 <div id="sec-plaene" class="sec">
-  <div class="page-hero" style="--page-glow:rgba(212,84,138,.08)">
-    <div class="pg-tag de">Deine Pläne</div>
-    <div class="pg-tag en">Your Plans</div>
+  <div class="page-hero" style="--pg:rgba(232,130,154,.08)">
+    <div class="pg-eyebrow de">Deine Pläne</div><div class="pg-eyebrow en">Your Plans</div>
     <h1 class="pg-h1 de">Alles auf<br><em>dich abgestimmt.</em></h1>
     <h1 class="pg-h1 en">Everything tailored<br><em>to you.</em></h1>
-    <p class="pg-sub de" id="plans-ayurveda-note-de"></p>
-    <p class="pg-sub en" id="plans-ayurveda-note-en"></p>
   </div>
   <div class="page-content">
-    <div id="dl-dosha-row" class="dl-row">
-      <div class="dl-left"><div class="dl-ico">🌿</div><div class="dl-info"><strong id="dl-dosha-t-de" class="de">Dein Ernährungsplan</strong><strong id="dl-dosha-t-en" class="en">Your Nutrition Plan</strong><span class="de">2 Wochen · auf deinen Zustand abgestimmt</span><span class="en">2 weeks · tailored to your state</span></div></div>
-      <a id="dl-dosha" href="#" class="dl-btn" target="_blank" download><span class="de">Laden ↓</span><span class="en">Download ↓</span></a>
-    </div>
-    <div id="dl-chakra-row" class="dl-row">
-      <div class="dl-left"><div class="dl-ico">✨</div><div class="dl-info"><strong class="de">Dein Energie-Plan</strong><strong class="en">Your Energy Plan</strong><span class="de">4 Wochen · Rituale, Affirmationen</span><span class="en">4 weeks · rituals, affirmations</span></div></div>
-      <a id="dl-chakra" href="#" class="dl-btn" target="_blank" download><span class="de">Laden ↓</span><span class="en">Download ↓</span></a>
-    </div>
-    <div id="dl-yoga-row" class="dl-row">
-      <div class="dl-left"><div class="dl-ico">🧘</div><div class="dl-info"><strong id="dl-yoga-t-de" class="de">Dein Bewegungsplan</strong><strong id="dl-yoga-t-en" class="en">Your Movement Plan</strong><span class="de">4 Wochen · tägliche Sequenzen</span><span class="en">4 weeks · daily sequences</span></div></div>
-      <a id="dl-yoga" href="#" class="dl-btn" target="_blank" download><span class="de">Laden ↓</span><span class="en">Download ↓</span></a>
-    </div>
-    <div class="dl-row" style="border-color:rgba(200,169,110,.2);background:rgba(200,169,110,.04)">
-      <div class="dl-left"><div class="dl-ico">📖</div><div class="dl-info"><strong class="de">Mini-Guide</strong><strong class="en">Mini-Guide</strong><span class="de">Visionsarbeit · Audio · Video · Kreationsraum</span><span class="en">Vision work · Audio · Video · Creation Space</span></div></div>
-      <a href="miniguide.html" class="dl-btn" target="_blank" style="background:rgba(200,169,110,.2);color:var(--gold);border:1px solid rgba(200,169,110,.3)"><span class="de">Öffnen ↗</span><span class="en">Open ↗</span></a>
-    </div>
-
-    <div class="up-hint" style="margin-top:20px">
-      <span class="ico">✨</span>
-      <div class="txt de">„Die Pläne zeigen das <strong>Was</strong>. Die Begleitung zeigt warum es noch nicht klappt – und ändert es." <a href="begleitung.html">Zur Begleitung →</a></div>
-      <div class="txt en">"The plans show the <strong>what</strong>. The guidance shows why it's not working yet – and changes it." <a href="begleitung.html">About guidance →</a></div>
-    </div>
+    <div class="dl-row"><div class="dl-left"><div class="dl-ico">🌿</div><div class="dl-info"><strong class="de">Dein Ernährungsplan</strong><strong class="en">Your Nutrition Plan</strong><span class="de">2 Wochen · auf dich abgestimmt</span><span class="en">2 weeks · tailored to you</span></div></div><a id="dl-dosha" href="#" class="dl-btn"><span class="de">Laden ↓</span><span class="en">Download ↓</span></a></div>
+    <div class="dl-row"><div class="dl-left"><div class="dl-ico">✨</div><div class="dl-info"><strong class="de">Dein Energie-Plan</strong><strong class="en">Your Energy Plan</strong><span class="de">4 Wochen · Rituale & Affirmationen</span><span class="en">4 weeks · rituals & affirmations</span></div></div><a id="dl-chakra" href="#" class="dl-btn"><span class="de">Laden ↓</span><span class="en">Download ↓</span></a></div>
+    <div class="dl-row"><div class="dl-left"><div class="dl-ico">🧘</div><div class="dl-info"><strong class="de">Dein Bewegungsplan</strong><strong class="en">Your Movement Plan</strong><span class="de">4 Wochen · tägliche Sequenzen</span><span class="en">4 weeks · daily sequences</span></div></div><a id="dl-yoga" href="#" class="dl-btn"><span class="de">Laden ↓</span><span class="en">Download ↓</span></a></div>
+    <div class="dl-row" style="border-color:rgba(200,169,110,.2);background:rgba(200,169,110,.04)"><div class="dl-left"><div class="dl-ico">📖</div><div class="dl-info"><strong class="de">Mini-Guide</strong><strong class="en">Mini-Guide</strong><span class="de">Visionsarbeit · Kreationsraum</span><span class="en">Vision work · Creation space</span></div></div><a href="miniguide.html" class="dl-btn" style="background:rgba(200,169,110,.2);color:#c8a96e" target="_blank"><span class="de">Öffnen ↗</span><span class="en">Open ↗</span></a></div>
   </div>
 </div>
 
-<!-- ── BEGLEITUNG HINT ────────────────────────────────────── -->
-<div id="sec-begleitung-hint" class="sec">
-  <div class="page-hero" style="--page-glow:rgba(212,84,138,.1)">
-    <div class="pg-tag de">Tiefer gehen</div>
-    <div class="pg-tag en">Go deeper</div>
-    <h1 class="pg-h1 de">Wenn du bereit bist<br><em>wirklich loszulegen.</em></h1>
-    <h1 class="pg-h1 en">When you're ready<br><em>to truly go all in.</em></h1>
-    <p class="pg-sub de">4 Wochen direkte Begleitung. Energiearbeit. Persönlich.</p>
-    <p class="pg-sub en">4 weeks direct guidance. Energy work. Personal.</p>
+<!-- BONUS YOGA -->
+<div id="sec-bonus-yoga" class="sec">
+  <div class="page-hero"><div class="pg-eyebrow de">Bonus · Mehr Körper</div><div class="pg-eyebrow en">Bonus · More Body</div>
+    <h1 class="pg-h1 de">Yoga für<br><em>mehr Energie.</em></h1><h1 class="pg-h1 en">Yoga for<br><em>more energy.</em></h1>
+    <p class="pg-sub de">Sanft am Morgen. Kraftvoll zwischendurch. Loslassen am Abend.</p><p class="pg-sub en">Gentle in the morning. Powerful in between. Release in the evening.</p>
   </div>
   <div class="page-content">
-    <div class="gold-quote">
-      <p class="de">„Alleine kannst du viel. Zusammen geht es schneller, tiefer und nachhaltiger."</p>
-      <p class="en">"Alone you can do a lot. Together it goes faster, deeper and more lasting."</p>
+    <div class="monthly-grid">
+      <div class="monthly-item"><div class="mi-icon">🌅</div><div class="mi-title de">Morgen-Yoga</div><div class="mi-title en">Morning Yoga</div><div class="mi-desc de">Sanft & aufweckend · 15–20 Min</div><div class="mi-desc en">Gentle & awakening · 15–20 min</div></div>
+      <div class="monthly-item"><div class="mi-icon">⚡</div><div class="mi-title de">Energie-Yoga</div><div class="mi-title en">Energy Yoga</div><div class="mi-desc de">Kraftvoll & aktivierend · 30 Min</div><div class="mi-desc en">Powerful & activating · 30 min</div></div>
+      <div class="monthly-item"><div class="mi-icon">🌙</div><div class="mi-title de">Abend-Yoga</div><div class="mi-title en">Evening Yoga</div><div class="mi-desc de">Loslassen & entspannen · 20 Min</div><div class="mi-desc en">Release & relax · 20 min</div></div>
+      <div class="monthly-item"><div class="mi-icon">✨</div><div class="mi-title de">Bald mehr</div><div class="mi-title en">More coming soon</div><div class="mi-desc de">Videos werden ergänzt</div><div class="mi-desc en">Videos being added</div></div>
     </div>
-    <div class="block">
-      <div class="block-tag">297€ · 4 Wochen</div>
-      <div class="block-h de">Was du <em>bekommst.</em></div>
-      <div class="block-h en">What you <em>get.</em></div>
-      <div class="k-steps" style="margin-top:12px">
-        <div class="k-step"><span class="ks-num">⚡</span><div class="ks-text de">Direkte Energiearbeit – wir gehen gemeinsam ins Energiefeld</div><div class="ks-text en">Direct energy work – we go into the energy field together</div></div>
-        <div class="k-step"><span class="ks-num">💬</span><div class="ks-text de">WhatsApp täglich – ich antworte persönlich, kein Skript</div><div class="ks-text en">WhatsApp daily – I answer personally, no script</div></div>
-        <div class="k-step"><span class="ks-num">🗺️</span><div class="ks-text de">Klare Struktur – du weißt immer was als nächstes kommt</div><div class="ks-text en">Clear structure – you always know what comes next</div></div>
-        <div class="k-step"><span class="ks-num">📞</span><div class="ks-text de">Optional: gemeinsamer Call – wenn du ihn brauchst</div><div class="ks-text en">Optional: shared call – when you need it</div></div>
-      </div>
-    </div>
-    <div class="wa-frame">
-      <p class="de">„Wenn du spürst: ja, ich bin bereit –<br>dann schreib mir einfach."</p>
-      <p class="en">"When you feel: yes, I'm ready –<br>just write to me."</p>
-      <a class="wa-btn" id="wa-beg" href="#" target="_blank">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        <span class="de">Jenny schreiben →</span><span class="en">Write to Jenny →</span>
-      </a>
-    </div>
+    <div class="block"><div class="block-eyebrow de">Bald verfügbar</div><div class="block-eyebrow en">Coming soon</div><div class="block-h de">Die <em>Videos kommen.</em></div><div class="block-h en">The <em>videos are coming.</em></div><div class="block-body de">Jenny filmt die Sequenzen gerade. Du bekommst eine Nachricht in der Community sobald sie live sind.</div><div class="block-body en">Jenny is filming the sequences now. You'll get a message in the community as soon as they're live.</div></div>
   </div>
 </div>
 
-<!-- ── RETREATS ───────────────────────────────────────────── -->
-<div id="sec-retreats" class="sec">
-  <div class="page-hero" style="--page-glow:rgba(45,122,114,.1)">
-    <div class="pg-tag">Retreats 2026</div>
-    <h1 class="pg-h1 de">Komm mit mir.<br><em>Raus. Weit weg. Tief rein.</em></h1>
-    <h1 class="pg-h1 en">Come with me.<br><em>Away. Far out. Deep in.</em></h1>
-    <p class="pg-sub de">Wenn du spürst dass dich das ruft – vertrau dem.</p>
-    <p class="pg-sub en">If you feel this calling you – trust that.</p>
+<!-- BONUS ALLTAG -->
+<div id="sec-bonus-alltag" class="sec">
+  <div class="page-hero"><div class="pg-eyebrow de">Bonus · Mehr Abenteuer im Alltag</div><div class="pg-eyebrow en">Bonus · More Adventure Daily</div>
+    <h1 class="pg-h1 de">Klein anfangen.<br><em>Groß fühlen.</em></h1><h1 class="pg-h1 en">Start small.<br><em>Feel big.</em></h1>
   </div>
   <div class="page-content">
-    <div class="block" style="--card-accent:rgba(45,122,114,.06)">
-      <div class="tc-emoji" style="font-size:32px;margin-bottom:10px">🌍</div>
-      <div class="block-h de">Tansania & <em>Sansibar</em></div>
-      <div class="block-h en">Tanzania & <em>Zanzibar</em></div>
-      <div class="block-body de" style="margin:8px 0">11. Juli – 25. Juli 2026</div>
-      <div class="block-body en" style="margin:8px 0">11 Jul – 25 Jul 2026</div>
+    <div class="monthly-grid">
+      <div class="monthly-item"><div class="mi-icon">🌿</div><div class="mi-title de">Ayurveda Basics</div><div class="mi-title en">Ayurveda Basics</div><div class="mi-desc de">Was ist dein Typ? Was bringt dir Energie?</div><div class="mi-desc en">What's your type? What gives you energy?</div></div>
+      <div class="monthly-item"><div class="mi-icon">🍵</div><div class="mi-title de">Einfache Rezepte</div><div class="mi-title en">Simple Recipes</div><div class="mi-desc de">Frühstück & Snacks die dich nähren</div><div class="mi-desc en">Breakfast & snacks that nourish you</div></div>
+      <div class="monthly-item"><div class="mi-icon">☀️</div><div class="mi-title de">Morgen-Ritual</div><div class="mi-title en">Morning ritual</div><div class="mi-desc de">5 Minuten die alles ändern</div><div class="mi-desc en">5 minutes that change everything</div></div>
+      <div class="monthly-item"><div class="mi-icon">🔋</div><div class="mi-title de">Energie-Hacks</div><div class="mi-title en">Energy hacks</div><div class="mi-desc de">Sofort mehr Energie im Alltag</div><div class="mi-desc en">Instant more energy in daily life</div></div>
     </div>
-    <div class="block">
-      <div class="tc-emoji" style="font-size:32px;margin-bottom:10px">🦁</div>
-      <div class="block-h de">Yoga trifft <em>Wildnis</em></div>
-      <div class="block-h en">Yoga meets <em>Wilderness</em></div>
-      <div class="block-body de" style="margin:8px 0">19. Oktober – 23. Oktober 2026</div>
-      <div class="block-body en" style="margin:8px 0">19 Oct – 23 Oct 2026</div>
-    </div>
-    <div class="wa-frame">
-      <p class="de">„Anfragen, Fragen, einfach melden –<br>ich antworte dir persönlich."</p>
-      <p class="en">"Questions, enquiries, just reach out –<br>I'll answer personally."</p>
-      <a class="wa-btn" id="wa-retreat" href="#" target="_blank">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        <span class="de">Retreat anfragen →</span><span class="en">Enquire about retreat →</span>
-      </a>
-    </div>
+    <div class="block"><div class="block-eyebrow de">Bald verfügbar</div><div class="block-eyebrow en">Coming soon</div><div class="block-h de">Inhalte <em>kommen bald.</em></div><div class="block-h en">Content <em>coming soon.</em></div><div class="block-body de">Jenny befüllt diese Bereiche gerade. Community-Mitglieder erfahren es zuerst.</div><div class="block-body en">Jenny is filling these areas now. Community members hear first.</div></div>
   </div>
 </div>
 
@@ -580,186 +684,60 @@ body.lang-en .de{display:none}body.lang-en .en{display:block}
 </div>
 
 <script>
-// ── AUTH ────────────────────────────────────────────────────
 (function(){if(!localStorage.getItem('t2t-member')){window.location.href='login.html';}})();
 
 const BASE='https://www.travel2transform.de/';
-const PDF_MAP={dosha:{vata:'plan_vata',pitta:'plan_pitta',kapha:'plan_kapha'},chakra:{lower:'chakra_lower',middle:'chakra_middle',upper:'chakra_upper'},yoga:{restorative:'yoga_restorative',strength:'yoga_vinyasa',balance:'yoga_hatha',spiritual:'yoga_kundalini'}};
 let lang='de';
 
-// ── LANG ────────────────────────────────────────────────────
-function setLang(l){lang=l;document.body.className='lang-'+l;document.getElementById('btn-de').classList.toggle('active',l==='de');document.getElementById('btn-en').classList.toggle('active',l==='en');localStorage.setItem('t2t-lang',l);updateWA();loadProfile();}
+function setLang(l){
+  lang=l;
+  document.body.className='lang-'+l;
+  document.getElementById('btn-de').classList.toggle('active',l==='de');
+  document.getElementById('btn-en').classList.toggle('active',l==='en');
+  localStorage.setItem('t2t-lang',l);
+  updateWA();
+}
 
-// ── NAV ─────────────────────────────────────────────────────
 function show(id){
   document.querySelectorAll('.sec').forEach(s=>s.classList.remove('active'));
   const el=document.getElementById('sec-'+id);
-  if(el){el.classList.add('active');el.scrollIntoView?el.scrollIntoView({block:'start'}):null;}
+  if(el){el.classList.add('active');}
   document.querySelectorAll('.sb-item').forEach(b=>b.classList.remove('active'));
   document.querySelectorAll('.sb-item').forEach(b=>{if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes("'"+id+"'"))b.classList.add('active');});
   window.scrollTo(0,0);
   document.querySelector('.sidebar').classList.remove('open');
 }
 
-// ── QUIZ 2 ──────────────────────────────────────────────────
-const Q2 = [
-  {
-    de:'Wie bewegst du dich am liebsten?',
-    en:'How do you most love to move?',
-    opts:[
-      {de:'Sanft & fließend – ich brauche Ruhe',    en:'Soft & flowing – I need calm',      y:'restorative'},
-      {de:'Kraftvoll & intensiv – ich will schwitzen', en:'Powerful & intense – I want to sweat', y:'strength'},
-      {de:'Ruhig & präzise – mit Fokus',             en:'Calm & precise – with focus',        y:'balance'},
-      {de:'Spirituell & tief – Verbindung pur',      en:'Spiritual & deep – pure connection', y:'spiritual'},
-    ]
-  },
-  {
-    de:'Was brauchst du gerade am meisten?',
-    en:'What do you need most right now?',
-    opts:[
-      {de:'Erdung & Wärme',           en:'Grounding & warmth',        d:'vata'},
-      {de:'Abkühlung & Loslassen',    en:'Cooling & releasing',       d:'pitta'},
-      {de:'Aktivierung & Feuer',      en:'Activation & fire',         d:'kapha'},
-      {de:'Tiefe & Verbindung',       en:'Depth & connection',        d:'vata'},
-    ]
-  },
-  {
-    de:'Wie schläfst du?',
-    en:'How do you sleep?',
-    opts:[
-      {de:'Schlecht – viele Gedanken nachts',  en:'Badly – lots of thoughts at night', d:'vata'},
-      {de:'Zu heiß – ich wache schwitzig auf', en:'Too hot – I wake up sweaty',        d:'pitta'},
-      {de:'Zu viel – ich könnte ewig schlafen', en:'Too much – I could sleep forever', d:'kapha'},
-      {de:'Tief aber seltsame Träume',         en:'Deep but strange dreams',           d:'vata'},
-    ]
-  },
-  {
-    de:'Was passiert wenn du unter Stress stehst?',
-    en:'What happens when you\'re under stress?',
-    opts:[
-      {de:'Ich werde ängstlich & rastlos',    en:'I become anxious & restless',      d:'vata',  c:'root'},
-      {de:'Ich werde gereizt & kritisch',     en:'I become irritable & critical',    d:'pitta', c:'solar'},
-      {de:'Ich ziehe mich zurück & esse',     en:'I withdraw & eat',                 d:'kapha', c:'sacral'},
-      {de:'Ich verliere die Verbindung zu mir', en:'I lose connection to myself',     d:'vata',  c:'crown'},
-    ]
-  },
-  {
-    de:'Was zieht dich am meisten an?',
-    en:'What attracts you most?',
-    opts:[
-      {de:'Meditation & Stille',              en:'Meditation & silence',             c:'crown',   y:'spiritual'},
-      {de:'Bewegung & Schwitzen',             en:'Movement & sweating',              c:'solar',   y:'strength'},
-      {de:'Kreativität & Ausdruck',           en:'Creativity & expression',          c:'sacral',  y:'balance'},
-      {de:'Heilung & Verbindung',             en:'Healing & connection',             c:'heart',   y:'restorative'},
-    ]
-  },
-];
-
-let q2Idx=0;
-let q2Scores={vata:0,pitta:0,kapha:0,root:0,sacral:0,solar:0,heart:0,crown:0,restorative:0,strength:0,balance:0,spiritual:0};
-
-function renderQ2(){
-  const c=document.getElementById('q2-container');
-  if(!c)return;
-  if(q2Idx>=Q2.length){finishQ2();return;}
-  const q=Q2[q2Idx];
-  const l=lang;
-  c.innerHTML=`
-    <div style="font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;text-transform:uppercase;color:var(--pink);margin-bottom:12px;opacity:.7">${q2Idx+1} / ${Q2.length}</div>
-    <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;color:white;margin-bottom:20px;line-height:1.3">${q[l]}</div>
-    <div style="display:flex;flex-direction:column;gap:8px">
-      ${q.opts.map((o,i)=>`
-        <button onclick="pickQ2(${i})" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:14px 18px;text-align:left;cursor:pointer;color:rgba(255,255,255,.65);font-size:14px;font-family:'DM Sans',sans-serif;transition:all .2s;line-height:1.5" onmouseover="this.style.background='rgba(45,122,114,.08)';this.style.borderColor='rgba(45,122,114,.25)'" onmouseout="this.style.background='rgba(255,255,255,.03)';this.style.borderColor='rgba(255,255,255,.08)'">${o[l]}</button>
-      `).join('')}
-    </div>`;
+function updateWA(){
+  const b='https://wa.me/4917624238972?text=';
+  const waMap={
+    'wa-home': lang==='de'?'Hallo%20Jenny!%20Ich%20wollte%20dir%20etwas%20mitteilen.':'Hello%20Jenny!%20I%20wanted%20to%20share%20something.',
+    'wa-session': lang==='de'?'Hallo%20Jenny!%20Ich%20m%C3%B6chte%20den%20Link%20f%C3%BCr%20die%20n%C3%A4chste%20Energy%20Session.':'Hello%20Jenny!%20I%27d%20like%20the%20link%20for%20the%20next%20Energy%20Session.',
+    'wa-community': lang==='de'?'Hallo%20Jenny!%20Bitte%20f%C3%BCg%20mich%20zur%20Community%20hinzu.':'Hello%20Jenny!%20Please%20add%20me%20to%20the%20community.',
+    'wa-ret1': lang==='de'?'Hallo%20Jenny!%20Ich%20interessiere%20mich%20f%C3%BCr%20das%20Juli-Retreat.':'Hello%20Jenny!%20I%27m%20interested%20in%20the%20July%20retreat.',
+    'wa-ret2': lang==='de'?'Hallo%20Jenny!%20Ich%20interessiere%20mich%20f%C3%BCr%20das%20Oktober-Retreat.':'Hello%20Jenny!%20I%27m%20interested%20in%20the%20October%20retreat.'
+  };
+  Object.entries(waMap).forEach(([id,msg])=>{const el=document.getElementById(id);if(el)el.href=b+msg;});
 }
 
-function pickQ2(i){
-  const q=Q2[q2Idx];
-  const o=q.opts[i];
-  if(o.d)q2Scores[o.d]=(q2Scores[o.d]||0)+1;
-  if(o.c)q2Scores[o.c]=(q2Scores[o.c]||0)+1;
-  if(o.y)q2Scores[o.y]=(q2Scores[o.y]||0)+1;
-  q2Idx++;
-  renderQ2();
-}
-
-function finishQ2(){
-  // Get top scores
-  const dosha=Object.entries({vata:q2Scores.vata,pitta:q2Scores.pitta,kapha:q2Scores.kapha}).sort((a,b)=>b[1]-a[1])[0][0];
-  const chakraMap={root:'lower',sacral:'lower',solar:'lower',heart:'middle',throat:'middle',thirdeye:'upper',crown:'upper'};
-  const chakra=Object.entries({root:q2Scores.root,sacral:q2Scores.sacral,solar:q2Scores.solar,heart:q2Scores.heart,crown:q2Scores.crown}).sort((a,b)=>b[1]-a[1])[0][0];
-  const yoga=Object.entries({restorative:q2Scores.restorative,strength:q2Scores.strength,balance:q2Scores.balance,spiritual:q2Scores.spiritual}).sort((a,b)=>b[1]-a[1])[0][0];
-
-  // Save to profile
+function setDownloads(){
   const p=JSON.parse(localStorage.getItem('t2t-profile')||'{}');
-  p.dosha=dosha;p.chakra=chakra;p.chakraGroup=chakraMap[chakra]||'lower';p.yoga=yoga;
-  localStorage.setItem('t2t-profile',JSON.stringify(p));
-
-  document.getElementById('q2-container').style.display='none';
-  document.getElementById('q2-result').style.display='block';
-
-  const stateDE={vata:'Im Kopf 💭',pitta:'Trägt viel 🔥',kapha:'Energie aufwecken 🌿'};
-  const stateEN={vata:'In the head 💭',pitta:'Carrying a lot 🔥',kapha:'Energy needs a spark 🌿'};
-  document.getElementById('q2-result-text').textContent=lang==='de'
-    ?`Perfekt – deine Pläne sind jetzt auf dich abgestimmt. Dein Zustand: ${stateDE[dosha]}. Deine Pläne und Übungen passen jetzt genau dazu.`
-    :`Perfect – your plans are now tailored to you. Your state: ${stateEN[dosha]}. Your plans and exercises now fit exactly.`;
-
-  loadProfile();
-  updateSidebarState();
-}
-
-// ── PROFILE & DOWNLOADS ─────────────────────────────────────
-function loadProfile(){
-  const p=JSON.parse(localStorage.getItem('t2t-profile')||'{}');
+  const pdfMap={dosha:{vata:'plan_vata',pitta:'plan_pitta',kapha:'plan_kapha'},chakra:{lower:'chakra_lower',middle:'chakra_middle',upper:'chakra_upper'},yoga:{restorative:'yoga_restorative',strength:'yoga_vinyasa',balance:'yoga_hatha',spiritual:'yoga_kundalini'}};
   const l=localStorage.getItem('t2t-lang')||'de';
-  if(!p.dosha)return;
-
-  // Update plan links
   const dd=document.getElementById('dl-dosha');
   const dc=document.getElementById('dl-chakra');
   const dy=document.getElementById('dl-yoga');
-  if(dd&&p.dosha)dd.href=BASE+PDF_MAP.dosha[p.dosha]+'_'+l+'.pdf';
-  if(dc&&p.chakra)dc.href=BASE+(PDF_MAP.chakra[p.chakraGroup||'lower']||'chakra_lower')+'.pdf';
-  if(dy&&p.yoga)dy.href=BASE+PDF_MAP.yoga[p.yoga]+'.pdf';
-
-  // Ayurveda context note in plans
-  const noteDE={vata:'Dein Zustand entspricht dem Vata-Typ 🌬️ – Luft & Äther. Deine Pläne bringen Wärme, Erdung und Struktur.',pitta:'Dein Zustand entspricht dem Pitta-Typ 🔥 – Feuer & Wasser. Deine Pläne kühlen, beruhigen und öffnen.',kapha:'Dein Zustand entspricht dem Kapha-Typ 🌿 – Erde & Wasser. Deine Pläne aktivieren, entzünden und bewegen.'};
-  const noteEN={vata:'Your state corresponds to the Vata type 🌬️ – Air & Ether. Your plans bring warmth, grounding and structure.',pitta:'Your state corresponds to the Pitta type 🔥 – Fire & Water. Your plans cool, calm and open.',kapha:'Your state corresponds to the Kapha type 🌿 – Earth & Water. Your plans activate, ignite and move.'};
-  const nDE=document.getElementById('plans-ayurveda-note-de');
-  const nEN=document.getElementById('plans-ayurveda-note-en');
-  if(nDE&&p.dosha)nDE.textContent=noteDE[p.dosha]||'';
-  if(nEN&&p.dosha)nEN.textContent=noteEN[p.dosha]||'';
-
-  updateSidebarState();
+  if(dd&&p.dosha)dd.href=BASE+pdfMap.dosha[p.dosha]+'_'+l+'.pdf';
+  if(dc&&p.chakra)dc.href=BASE+(pdfMap.chakra[p.chakraGroup||'lower']||'chakra_lower')+'.pdf';
+  if(dy&&p.yoga)dy.href=BASE+pdfMap.yoga[p.yoga]+'.pdf';
 }
 
-function updateSidebarState(){
-  const p=JSON.parse(localStorage.getItem('t2t-profile')||'{}');
-  const l=lang;
-  const stateDE={vata:'Im Kopf 💭',pitta:'Trägt viel 🔥',kapha:'Energie aufwecken 🌿'};
-  const stateEN={vata:'In the head 💭',pitta:'Carrying a lot 🔥',kapha:'Energy needs a spark 🌿'};
-  const el=document.getElementById('sb-state');
-  if(el&&p.dosha)el.textContent=l==='de'?stateDE[p.dosha]:stateEN[p.dosha];
-}
-
-// ── WHATSAPP ────────────────────────────────────────────────
-function updateWA(){
-  const b='https://wa.me/4917624238972?text=';
-  const ids={'wa-home':lang==='de'?'Hallo%20Jenny!%20Ich%20wollte%20teilen%20was%20gerade%20hochkommt.':'Hello%20Jenny!%20I%20wanted%20to%20share%20what%27s%20coming%20up%20for%20me.','wa-beg':lang==='de'?'Hallo%20Jenny!%20Ich%20bin%20bereit%20f%C3%BCr%20die%20Begleitung.':'Hello%20Jenny!%20I%27m%20ready%20for%20the%20guidance.','wa-retreat':lang==='de'?'Hallo%20Jenny!%20Ich%20interessiere%20mich%20f%C3%BCr%20das%20Retreat.':'Hello%20Jenny!%20I%27m%20interested%20in%20the%20retreat.'};
-  Object.entries(ids).forEach(([id,msg])=>{const el=document.getElementById(id);if(el)el.href=b+msg;});
-}
-
-function changeProfile(){localStorage.removeItem('t2t-profile');q2Idx=0;q2Scores={vata:0,pitta:0,kapha:0,root:0,sacral:0,solar:0,heart:0,crown:0,restorative:0,strength:0,balance:0,spiritual:0};show('quiz2');renderQ2();}
 function logout(){localStorage.removeItem('t2t-member');window.location.href='login.html';}
 
-// ── INIT ────────────────────────────────────────────────────
-const sl=localStorage.getItem('t2t-lang');if(sl)setLang(sl);else setLang('de');
-loadProfile();updateWA();
-
-// Render Quiz 2 if no profile yet
-const profile=JSON.parse(localStorage.getItem('t2t-profile')||'{}');
-if(!profile.dosha){show('quiz2');renderQ2();}
+const sl=localStorage.getItem('t2t-lang');
+if(sl)setLang(sl);else setLang('de');
+updateWA();
+setDownloads();
 </script>
 </body>
 </html>
