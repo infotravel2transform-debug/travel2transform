@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Willkommen in der Travel 2 Transform Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sand:#EDE3D0;
+    --forest:#1F2E24;
+    --terracotta:#C1633D;
+    --ocean:#1B5E63;
+    --gold:#B8935A;
+    --ink:#2A2420;
+    --cream:#F7F2E7;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    padding:48px 20px 80px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{max-width:640px; margin:0 auto;}
+  .route{display:flex; align-items:center; gap:10px; margin-bottom:32px;}
+  .route .dot{width:6px;height:6px;border-radius:50%;background:var(--terracotta);}
+  .route .line{flex:1;height:1px;background:linear-gradient(90deg, var(--terracotta), var(--gold) 50%, transparent);}
+  .route .pin{font-family:'Cormorant Garamond', serif; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--ocean);}
+
+  .head{margin-bottom:36px;}
+  .eyebrow{font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:var(--terracotta); font-weight:600; margin-bottom:16px;}
+  h1{font-family:'Cormorant Garamond', serif; font-weight:600; font-size:42px; line-height:1.14; color:var(--forest); margin-bottom:18px;}
+  h1 em{font-style:italic; font-weight:500; color:var(--terracotta);}
+  p.lead{font-size:16px; line-height:1.7; color:#4a433d; max-width:56ch;}
+
+  .panel{background:#fff; border:1px solid rgba(42,36,32,.08); border-radius:4px; padding:40px 44px; margin-bottom:22px;}
+
+  label{display:block; font-size:12.5px; letter-spacing:.03em; text-transform:uppercase; color:#8a8177; font-weight:600; margin-bottom:8px;}
+  input, textarea{
+    width:100%; font-family:'Inter', sans-serif; font-size:15px; color:var(--ink);
+    background:var(--cream); border:1px solid rgba(42,36,32,.14); border-radius:2px;
+    padding:12px 14px; outline:none; transition:border-color .2s ease;
+  }
+  input:focus, textarea:focus{border-color:var(--terracotta);}
+  textarea{resize:vertical; min-height:80px;}
+
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .field{margin-bottom:18px;}
+  .field.full{grid-column:1 / -1;}
+  .optional-tag{color:#b3a99b; font-weight:400; text-transform:none; letter-spacing:0;}
+  .honey{position:absolute; left:-9999px;}
+
+  .submit-row{margin-top:6px; display:flex; align-items:center; gap:18px; flex-wrap:wrap;}
+  button.submit{
+    background:var(--forest); color:var(--cream); border:none; cursor:pointer;
+    padding:16px 32px; border-radius:2px; font-size:14px; letter-spacing:.06em;
+    text-transform:uppercase; font-weight:600; transition:background .25s ease, transform .25s ease;
+  }
+  button.submit:hover{background:var(--ocean); transform:translateY(-1px);}
+  button.submit:disabled{opacity:.6; cursor:progress;}
+  .hint{font-size:13px; color:#8a8177;}
+
+  #formMsg{display:none; padding:16px 18px; border-radius:2px; font-size:14.5px; margin-bottom:20px;}
+  #formMsg.ok{display:block; background:rgba(31,46,36,.06); color:var(--forest); border:1px solid rgba(31,46,36,.18);}
+  #formMsg.err{display:block; background:rgba(193,99,61,.08); color:var(--terracotta); border:1px solid rgba(193,99,61,.25);}
+
+  .foot{margin-top:36px; font-size:13px; color:#8a8177; text-align:center;}
+
+  .person{border-top:1px solid rgba(42,36,32,.1); padding-top:26px; margin-top:26px;}
+  .person:first-of-type{border-top:none; margin-top:0; padding-top:0;}
+  .person-label{
+    font-family:'Cormorant Garamond', serif; font-style:italic; font-size:20px;
+    color:var(--terracotta); margin-bottom:16px; display:flex; align-items:center; justify-content:space-between;
+  }
+  .remove-person{
+    font-family:'Inter', sans-serif; font-style:normal; font-size:12px; letter-spacing:.04em;
+    text-transform:uppercase; color:#b3a99b; background:none; border:none; cursor:pointer; font-weight:600;
+  }
+  .remove-person:hover{color:var(--terracotta);}
+
+  .extra-panel{display:flex; justify-content:center;}
+  .add-person{
+    background:var(--sand); color:var(--forest); border:1px solid var(--gold);
+    padding:12px 22px; border-radius:2px; font-size:13px; letter-spacing:.05em;
+    text-transform:uppercase; font-weight:600; cursor:pointer; white-space:nowrap;
+    transition:background .2s ease;
+  }
+  .add-person:hover{background:var(--gold); color:#fff;}
+
+  @media (max-width:600px){
+    .panel{padding:28px 24px;}
+    h1{font-size:32px;}
+    .grid2{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="route">
+    <span class="pin">Zahlung bestätigt</span>
+    <span class="dot"></span>
+    <span class="line"></span>
+    <span class="pin" style="color:var(--forest)">Academy-Zugang</span>
+  </div>
+
+  <div class="head">
+    <div class="eyebrow">Zugang für weitere Personen</div>
+    <h1>Fast geschafft — <em>noch ein Schritt.</em></h1>
+    <p class="lead">Deinen eigenen Zugang hast du bereits automatisch per E-Mail erhalten. Damit auch die weiteren von dir gebuchten Personen ihren Zugang zur Academy bekommen, fülle bitte für jede Person dieses Formular aus.</p>
+  </div>
+
+  <div id="formMsg"></div>
+
+  <form id="academyForm">
+    <div class="panel" id="peopleWrap"></div>
+
+    <div class="panel extra-panel">
+      <button type="button" class="add-person" id="addPersonBtn">+ Weitere Person hinzufügen</button>
+    </div>
+
+    <div class="panel">
+      <!-- Honeypot gegen Spam -->
+      <input type="text" name="_gotcha" class="honey" tabindex="-1" autocomplete="off">
+
+      <div class="submit-row">
+        <button type="submit" class="submit" id="submitBtn">Absenden</button>
+        <span class="hint">Wird an infotravel2transform@gmail.com übermittelt.</span>
+      </div>
+    </div>
+  </form>
+
+  <div class="foot">© Travel 2 Transform · Jenny Wierzbicki · Tansania &amp; Sansibar <span style="margin:0 6px;">·</span> <a href="impressum.html" style="color:#8a8177; text-decoration:underline;">Impressum</a></div>
+</div>
+
+<script>
+/*
+  WICHTIG — vor dem Hochladen einmalig einrichten:
+  Eine reine HTML-Seite kann selbst keine E-Mails verschicken. Dieses Formular
+  nutzt dafür den kostenlosen Dienst Formspree (https://formspree.io).
+
+  1) Kostenlosen Account auf https://formspree.io anlegen
+  2) Neues Formular erstellen, als Empfänger infotravel2transform@gmail.com eintragen
+     und die Bestätigungs-Mail von Formspree in diesem Postfach bestätigen
+  3) Die Formular-ID (z.B. "xreqwxyz") kopieren
+  4) Unten in FORM_ENDPOINT die ID anstelle von "DEINE_FORM_ID" einsetzen
+
+  Hinweis: Falls du dieselbe Formspree-Form bereits für die
+  Gruppenreisen-Seite eingerichtet hast, kannst du dieselbe ID hier
+  wiederverwenden — Formspree leitet einfach an dieselbe Mailadresse weiter.
+*/
+const FORM_ENDPOINT = "https://formspree.io/f/DEINE_FORM_ID";
+
+const peopleWrap = document.getElementById('peopleWrap');
+const addPersonBtn = document.getElementById('addPersonBtn');
+let personCount = 0;
+
+function addPerson(){
+  personCount++;
+  const i = personCount;
+  const block = document.createElement('div');
+  block.className = 'person';
+  block.dataset.person = i;
+  block.innerHTML = `
+    <div class="person-label">
+      <span>Person ${i}</span>
+      ${i === 1 ? '' : '<button type="button" class="remove-person">Entfernen</button>'}
+    </div>
+    <div class="grid2">
+      <div class="field">
+        <label>Vorname</label>
+        <input type="text" name="Person ${i} – Vorname" required>
+      </div>
+      <div class="field">
+        <label>Nachname</label>
+        <input type="text" name="Person ${i} – Nachname" required>
+      </div>
+      <div class="field">
+        <label>E-Mail</label>
+        <input type="email" name="Person ${i} – E-Mail" required>
+      </div>
+      <div class="field">
+        <label>Telefon / Handy</label>
+        <input type="tel" name="Person ${i} – Telefon / Handy">
+      </div>
+      <div class="field full">
+        <label>Firma <span class="optional-tag">(optional)</span></label>
+        <input type="text" name="Person ${i} – Firma">
+      </div>
+      <div class="field full">
+        <label>Notizen <span class="optional-tag">(optional)</span></label>
+        <textarea name="Person ${i} – Notizen"></textarea>
+      </div>
+    </div>
+  `;
+  peopleWrap.appendChild(block);
+  const removeBtn = block.querySelector('.remove-person');
+  if(removeBtn){
+    removeBtn.addEventListener('click', () => block.remove());
+  }
+}
+addPerson(); // erste Person (die buchende Person) ist immer da
+addPersonBtn.addEventListener('click', addPerson);
+
+const form = document.getElementById('academyForm');
+const msg = document.getElementById('formMsg');
+const btn = document.getElementById('submitBtn');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if(FORM_ENDPOINT.includes('DEINE_FORM_ID')){
+    msg.className = 'err';
+    msg.textContent = 'Formular ist noch nicht eingerichtet: Bitte FORM_ENDPOINT im Quellcode ergänzen (siehe Kommentar).';
+    msg.style.display = 'block';
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = 'Wird gesendet …';
+  const data = new FormData(form);
+  data.append('_subject', 'Neue Academy-Anmeldung — Travel 2 Transform');
+  try{
+    const res = await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if(res.ok){
+      msg.className = 'ok';
+      msg.textContent = 'Danke! Deine Daten wurden übermittelt. Ihr erhaltet eure Zugangsdaten in Kürze per E-Mail.';
+      form.reset();
+      peopleWrap.innerHTML = '';
+      personCount = 0;
+      addPerson();
+    } else {
+      throw new Error('send failed');
+    }
+  } catch(err){
+    msg.className = 'err';
+    msg.textContent = 'Da ist etwas schiefgelaufen. Bitte versuch es erneut oder schreib uns direkt an infotravel2transform@gmail.com.';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Absenden';
+    msg.style.display = 'block';
+    msg.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+});
+</script>
+</body>
+</html>
