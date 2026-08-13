@@ -138,22 +138,8 @@
 </div>
 
 <script>
-/*
-  WICHTIG — vor dem Hochladen einmalig einrichten:
-  Eine reine HTML-Seite kann selbst keine E-Mails verschicken. Dieses Formular
-  nutzt dafür den kostenlosen Dienst Formspree (https://formspree.io).
+const RECEIVER_EMAIL = "infotravel2transform@gmail.com";
 
-  1) Kostenlosen Account auf https://formspree.io anlegen
-  2) Neues Formular erstellen, als Empfänger infotravel2transform@gmail.com eintragen
-     und die Bestätigungs-Mail von Formspree in diesem Postfach bestätigen
-  3) Die Formular-ID (z.B. "xreqwxyz") kopieren
-  4) Unten in FORM_ENDPOINT die ID anstelle von "DEINE_FORM_ID" einsetzen
-
-  Hinweis: Falls du dieselbe Formspree-Form bereits für die
-  Gruppenreisen-Seite eingerichtet hast, kannst du dieselbe ID hier
-  wiederverwenden — Formspree leitet einfach an dieselbe Mailadresse weiter.
-*/
-const FORM_ENDPOINT = "https://formspree.io/f/DEINE_FORM_ID";
 
 const peopleWrap = document.getElementById('peopleWrap');
 const addPersonBtn = document.getElementById('addPersonBtn');
@@ -210,43 +196,29 @@ const form = document.getElementById('academyForm');
 const msg = document.getElementById('formMsg');
 const btn = document.getElementById('submitBtn');
 
-form.addEventListener('submit', async (e) => {
+form.addEventListener('submit', (e) => {
   e.preventDefault();
-  if(FORM_ENDPOINT.includes('DEINE_FORM_ID')){
-    msg.className = 'err';
-    msg.textContent = 'Formular ist noch nicht eingerichtet: Bitte FORM_ENDPOINT im Quellcode ergänzen (siehe Kommentar).';
-    msg.style.display = 'block';
-    return;
-  }
-  btn.disabled = true;
-  btn.textContent = 'Wird gesendet …';
+
+  // Alle ausgefüllten Felder einsammeln und zu einem lesbaren Mailtext zusammenbauen
   const data = new FormData(form);
-  data.append('_subject', 'Neue Academy-Anmeldung — Travel 2 Transform');
-  try{
-    const res = await fetch(FORM_ENDPOINT, {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    });
-    if(res.ok){
-      msg.className = 'ok';
-      msg.textContent = 'Danke! Deine Daten wurden übermittelt. Ihr erhaltet eure Zugangsdaten in Kürze per E-Mail.';
-      form.reset();
-      peopleWrap.innerHTML = '';
-      personCount = 0;
-      addPerson();
-    } else {
-      throw new Error('send failed');
-    }
-  } catch(err){
-    msg.className = 'err';
-    msg.textContent = 'Da ist etwas schiefgelaufen. Bitte versuch es erneut oder schreib uns direkt an infotravel2transform@gmail.com.';
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Absenden';
-    msg.style.display = 'block';
-    msg.scrollIntoView({behavior:'smooth', block:'center'});
+  let bodyLines = ['Neue Academy-Anmeldung — weitere Personen', ''];
+  for(const [key, value] of data.entries()){
+    if(key === '_gotcha') continue;
+    if(!value) continue;
+    bodyLines.push(key + ': ' + value);
   }
+  const groupNote = document.getElementById('groupNote') ? document.getElementById('groupNote').value : '';
+
+  const subject = encodeURIComponent('Neue Academy-Anmeldung — Travel 2 Transform');
+  const body = encodeURIComponent(bodyLines.join('\n'));
+  const mailtoLink = `mailto:${RECEIVER_EMAIL}?subject=${subject}&body=${body}`;
+
+  msg.className = 'ok';
+  msg.textContent = 'Es öffnet sich gleich dein E-Mail-Programm mit einer vorausgefüllten Nachricht. Bitte einfach auf „Senden" klicken, damit die Daten ankommen.';
+  msg.style.display = 'block';
+  msg.scrollIntoView({behavior:'smooth', block:'center'});
+
+  window.location.href = mailtoLink;
 });
 </script>
 </body>
