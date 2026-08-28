@@ -3,357 +3,511 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AGB & Terms – Travel 2 Transform</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<title>AGB &amp; Vermittlungsbedingungen — Travel 2 Transform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--petrol:#1a7a6e;--petrol-dark:#0f5a51;--petrol-mid:#2a9d8f;--petrol-light:#e0f2ef;--petrol-xlight:#f0faf8;--pink:#e8829a;--cream:#faf8f5;--dark:#1a2e2a}
-body{font-family:'Lato',sans-serif;background:var(--cream);color:#333;line-height:1.8;font-size:15px}
+  :root{
+    --sand:#EDE3D0;
+    --sand-deep:#E2D5B8;
+    --green:#1F2E24;
+    --green-soft:#2C3D30;
+    --terracotta:#C1633D;
+    --ocean:#1B5E63;
+    --gold:#B8935A;
+    --ink:#2A2420;
+    --paper:#F7F2E7;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    font-weight:300;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,.serif{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:500;
+    letter-spacing:0.01em;
+  }
+  .eyebrow{
+    font-family:'Inter',sans-serif;
+    font-size:0.7rem;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    font-weight:500;
+    opacity:0.75;
+  }
+  a{color:var(--ocean);}
 
-header{background:var(--petrol-dark);padding:32px 48px;position:relative}
-header::after{content:'';display:block;width:100%;height:5px;background:var(--pink);position:absolute;bottom:0;left:0}
-.brand{font-size:12px;letter-spacing:4px;color:rgba(255,255,255,0.5);margin-bottom:8px}.brand span{color:var(--pink);font-weight:700}
-header h1{font-family:'Playfair Display',serif;font-size:42px;color:#fff;line-height:1.1;margin-bottom:8px}
-header h1 em{color:#7de8d8;font-style:italic}
-header p{color:rgba(255,255,255,0.6);font-size:13px;font-style:italic}
+  /* ---------- SUBNAV ---------- */
+  .subnav{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:1.2rem 1.5rem;
+    background:var(--green);
+    color:var(--sand);
+    position:sticky;top:0;z-index:50;
+  }
+  .subnav .logo{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1.15rem;
+    letter-spacing:0.05em;
+    text-decoration:none;
+    color:var(--sand);
+  }
+  .subnav .back{
+    font-size:0.72rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--gold);
+    border-bottom:1px solid rgba(184,147,90,0.5);
+    padding-bottom:2px;
+  }
 
-.sticky-nav{position:sticky;top:0;z-index:100;background:rgba(15,90,81,0.97);backdrop-filter:blur(8px);border-bottom:3px solid var(--pink);overflow-x:auto;white-space:nowrap}
-.sticky-nav ul{display:flex;list-style:none;padding:0 16px;gap:2px}
-.sticky-nav li a{display:block;padding:12px 14px;font-size:11px;color:rgba(255,255,255,0.6);letter-spacing:0.5px;font-weight:700;text-decoration:none}
-.sticky-nav li a:hover{color:#fff}
+  /* ---------- LEGAL CONTENT ---------- */
+  main{padding:3.5rem 0 5rem;}
+  .legal{
+    max-width:760px;
+    margin:0 auto;
+    padding:0 1.5rem;
+  }
+  .legal > .eyebrow{color:var(--terracotta);margin-bottom:0.9rem;}
+  .legal h1{
+    font-size:clamp(1.9rem,5vw,2.6rem);
+    font-style:italic;
+    font-weight:400;
+    line-height:1.2;
+    max-width:22ch;
+    margin-bottom:0.9rem;
+  }
+  .legal .stand{
+    font-size:0.85rem;
+    color:#63594c;
+    margin-bottom:2.6rem;
+    padding-bottom:2.2rem;
+    border-bottom:1px solid rgba(42,36,32,0.12);
+  }
+  .legal section{margin-bottom:2.4rem;}
+  .legal h2{
+    font-size:1.35rem;
+    font-weight:600;
+    font-style:italic;
+    color:var(--green-soft);
+    margin-bottom:0.9rem;
+  }
+  .legal p{
+    font-size:0.97rem;
+    line-height:1.75;
+    color:#3a332b;
+    margin-bottom:0.85rem;
+  }
+  .legal ol.numbered{
+    list-style:none;
+    counter-reset:item;
+  }
+  .legal ol.numbered > li{
+    counter-increment:item;
+    font-size:0.97rem;
+    line-height:1.75;
+    color:#3a332b;
+    margin-bottom:0.85rem;
+    padding-left:1.9rem;
+    position:relative;
+  }
+  .legal ol.numbered > li::before{
+    content:counter(item) ".";
+    position:absolute;left:0;top:0;
+    color:var(--gold);
+    font-weight:600;
+    font-size:0.9rem;
+  }
+  .legal ul.bullets{
+    list-style:none;
+    margin:0.6rem 0 1rem;
+  }
+  .legal ul.bullets > li{
+    font-size:0.95rem;
+    line-height:1.7;
+    color:#3a332b;
+    padding-left:1.3rem;
+    position:relative;
+    margin-bottom:0.4rem;
+  }
+  .legal ul.bullets > li::before{
+    content:"—";
+    position:absolute;left:0;color:var(--gold);
+  }
+  .legal table{
+    width:100%;
+    border-collapse:collapse;
+    margin:1.2rem 0 1.4rem;
+    font-size:0.88rem;
+  }
+  .legal table caption{
+    text-align:left;
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    margin-bottom:0.6rem;
+  }
+  .legal th{
+    background:var(--green);
+    color:var(--sand);
+    text-align:left;
+    padding:0.6rem 0.8rem;
+    font-weight:500;
+    font-size:0.82rem;
+  }
+  .legal th.num, .legal td.num{text-align:right;}
+  .legal td{
+    padding:0.55rem 0.8rem;
+    border-bottom:1px solid rgba(42,36,32,0.1);
+    color:#3a332b;
+  }
+  .legal tbody tr:nth-child(even){background:rgba(226,213,184,0.35);}
+  .legal .note{
+    background:var(--sand);
+    border-left:3px solid var(--terracotta);
+    padding:1rem 1.2rem;
+    font-size:0.9rem;
+    line-height:1.65;
+    color:#463d33;
+    border-radius:0 2px 2px 0;
+    margin-top:0.8rem;
+  }
+  .legal .note strong{color:var(--terracotta);}
+  .legal-card{
+    background:var(--sand);
+    border-radius:3px;
+    padding:1.8rem 1.6rem;
+    margin-top:1rem;
+  }
+  .legal-card p{
+    font-size:0.92rem;
+    line-height:1.7;
+    color:#3a332b;
+    margin-bottom:0.35rem;
+  }
+  .legal-card .company{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.25rem;
+    color:var(--ink);
+    margin-bottom:0.5rem;
+  }
+  .placeholder{color:var(--terracotta);font-style:italic;}
 
-main{max-width:820px;margin:0 auto;padding:48px 24px}
-
-.info-banner{background:var(--petrol-xlight);border-left:4px solid var(--petrol-mid);border-radius:0 14px 14px 0;padding:18px 22px;margin-bottom:40px}
-.info-banner p{font-size:13px;color:#555;margin:0}
-
-.section{margin-bottom:56px;scroll-margin-top:60px}
-.section-tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--pink);font-weight:700;margin-bottom:10px;display:block}
-.section h2{font-family:'Playfair Display',serif;font-size:28px;color:var(--dark);margin-bottom:4px}
-.section h2 em{color:var(--petrol-mid);font-style:italic}
-.divider{width:48px;height:3px;background:var(--petrol-mid);border-radius:2px;margin:14px 0 22px}
-
-.section p{color:#555;line-height:1.85;margin-bottom:14px;font-size:14px}
-.section h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--dark);margin:24px 0 10px}
-
-.rule-list{list-style:none;display:flex;flex-direction:column;gap:10px;margin:14px 0}
-.rule-list li{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:#555;line-height:1.7}
-.rule-list li::before{content:'§';color:var(--petrol-mid);flex-shrink:0;font-weight:700;font-size:13px;margin-top:2px}
-.rule-list.pink li::before{content:'✦';color:var(--pink);font-size:11px;margin-top:4px}
-
-.storno-table{width:100%;border-collapse:collapse;margin:18px 0;border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.06)}
-.storno-table th{background:var(--petrol-dark);color:#fff;padding:13px 16px;font-size:12px;letter-spacing:1px;text-transform:uppercase;text-align:left}
-.storno-table td{padding:12px 16px;font-size:14px;color:#555;border-bottom:1px solid #eef2f0}
-.storno-table tr:last-child td{border-bottom:none}
-.storno-table tr:nth-child(even) td{background:#f7fbfa}
-.storno-badge{display:inline-block;padding:3px 10px;border-radius:10px;font-size:12px;font-weight:700}
-.badge-low{background:#e0f2ef;color:var(--petrol-dark)}
-.badge-mid{background:#fff3cd;color:#856404}
-.badge-high{background:#fde8ed;color:#c0392b}
-.badge-full{background:#fce4e4;color:#c0392b}
-
-.payment-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin:16px 0}
-.payment-card{background:#fff;border-radius:12px;padding:16px;text-align:center;border:1px solid var(--petrol-light);box-shadow:0 1px 6px rgba(0,0,0,0.04)}
-.payment-icon{font-size:28px;margin-bottom:8px;display:block}
-.payment-card h4{font-size:13px;font-weight:700;color:var(--dark);margin-bottom:4px}
-.payment-card p{font-size:12px;color:#aaa;margin:0}
-
-.warning-box{background:#fde8ed;border-left:4px solid var(--pink);border-radius:0 12px 12px 0;padding:16px 20px;margin:16px 0}
-.warning-box p{margin:0;font-size:14px;color:#555}
-
-.tip-box{background:var(--petrol-xlight);border-left:4px solid var(--petrol-mid);border-radius:0 12px 12px 0;padding:16px 20px;margin:16px 0}
-.tip-box p{margin:0;font-size:14px;color:#555}
-
-footer{background:var(--petrol-dark);padding:32px 48px;text-align:center}
-footer::before{content:'';display:block;height:4px;background:var(--pink);margin-bottom:24px}
-footer p{color:rgba(255,255,255,0.5);font-size:13px;margin-bottom:4px}
-footer a{color:#7de8d8;text-decoration:none}
-
-@media(max-width:600px){
-  header{padding:20px}
-  header h1{font-size:28px}
-  main{padding:28px 16px}
-  .storno-table{font-size:12px}
-  .storno-table th,.storno-table td{padding:10px 10px}
-}
+  footer{
+    background:#12160F;
+    color:rgba(247,242,231,0.55);
+    text-align:center;
+    padding:2.2rem 1.5rem;
+    font-size:0.75rem;
+    letter-spacing:0.05em;
+  }
+  footer a{
+    color:rgba(247,242,231,0.75);
+    text-decoration:none;
+    border-bottom:1px solid rgba(247,242,231,0.3);
+    padding-bottom:1px;
+  }
+  footer a:hover{color:#fff;}
+  footer .sep{margin:0 0.6em;opacity:0.4;}
 </style>
 </head>
 <body>
 
-<header>
-  <div class="brand">TRAVEL <span>2</span> TRANSFORM</div>
-  <h1>AGB & <em>Terms</em></h1>
-  <p>Allgemeine Geschäftsbedingungen · Stand: Januar 2025</p>
-</header>
-
-<nav class="sticky-nav">
-  <ul>
-    <li><a href="#anbieter">§1 Anbieter</a></li>
-    <li><a href="#leistungen">§2 Leistungen</a></li>
-    <li><a href="#buchung">§3 Buchung</a></li>
-    <li><a href="#zahlung">§4 Zahlung</a></li>
-    <li><a href="#storno">§5 Stornierung</a></li>
-    <li><a href="#pflichten">§6 Pflichten</a></li>
-    <li><a href="#haftung">§7 Haftung</a></li>
-    <li><a href="#datenschutz">§8 Datenschutz</a></li>
-    <li><a href="#schluss">§9 Schluss</a></li>
-  </ul>
-</nav>
+<div class="subnav">
+  <a class="logo" href="index.html">Travel 2 Transform</a>
+  <a class="back" href="index.html">← Zurück zur Startseite</a>
+</div>
 
 <main>
+  <div class="legal">
+    <p class="eyebrow">Rechtliches</p>
+    <h1>Allgemeine Geschäfts- und Vermittlungsbedingungen</h1>
+    <p class="stand">Stand: 28. August 2026</p>
 
-<div class="info-banner">
-  <p>⚠️ <strong>Hinweis:</strong> Diese AGB wurden für Travel 2 Transform von Jenny Wierzbicki erstellt und dienen als Grundlage für alle Buchungen und Dienstleistungen. Wir empfehlen, diese vor jeder Buchung sorgfältig zu lesen. Bei Fragen stehen wir jederzeit zur Verfügung.</p>
-</div>
+    <section>
+      <h2>§ 1 Geltungsbereich</h2>
+      <ol class="numbered">
+        <li>Diese Allgemeinen Geschäfts- und Vermittlungsbedingungen gelten für sämtliche Leistungen von <strong>Travel 2 Transform</strong> (Jenny Wierzbicki), Martin-Luther-Straße 28, 67454 Haßloch – nachfolgend „Vermittler" genannt – gegenüber Kunden, die Reiseleistungen über den Vermittler anfragen, buchen oder vermitteln lassen.</li>
+        <li>Der Vermittler bietet insbesondere die Vermittlung einzelner Reiseleistungen an. Hierzu gehören insbesondere:
+          <ul class="bullets">
+            <li>Hotel- und Unterkunftsleistungen,</li>
+            <li>Safari- und Erlebnisleistungen,</li>
+            <li>Inlands- und Weiterflüge,</li>
+            <li>Transfers,</li>
+            <li>Mietwagen,</li>
+            <li>Ausflüge und sonstige touristische Leistungen.</li>
+          </ul>
+        </li>
+        <li>Diese Bedingungen gelten unabhängig davon, ob die Buchung über die Website, per E-Mail, telefonisch oder auf anderem Wege erfolgt.</li>
+        <li>Abweichende Vereinbarungen bedürfen der ausdrücklichen Bestätigung durch den Vermittler.</li>
+      </ol>
+    </section>
 
-<!-- §1 ANBIETER -->
-<div class="section" id="anbieter">
-  <span class="section-tag">§ 1</span>
-  <h2>Anbieter & <em>Geltungsbereich</em></h2>
-  <div class="divider"></div>
-  <p>Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für alle Verträge, Buchungen und Dienstleistungen zwischen</p>
-  <div style="background:#fff;border-radius:12px;padding:20px 24px;border:1px solid var(--petrol-light);margin:14px 0 20px">
-    <p style="margin:0;font-size:14px;color:var(--dark);line-height:2">
-      <strong>Travel 2 Transform</strong><br>
-      Inhaberin: Jenny Wierzbicki<br>
-      Gewerbebetrieb / Freiberuflich tätig<br>
-      Deutschland<br>
-      E-Mail: <a href="mailto:infotravel2transform@gmail.com" style="color:var(--petrol-mid)">infotravel2transform@gmail.com</a><br>
-      WhatsApp: <a href="https://wa.me/4917624238972" style="color:var(--petrol-mid)">+49 176 24238972</a><br>
-      Website: <a href="https://www.travel2transform.de" style="color:var(--petrol-mid)">www.travel2transform.de</a>
-    </p>
-  </div>
-  <p>– im Folgenden <strong>„Anbieter"</strong> genannt – und dem Kunden (im Folgenden <strong>„Reisender"</strong>).</p>
-  <p>Die Leistungen werden in Deutschland vertraglich vereinbart und in Tanzania (Ostafrika) durchgeführt. Es gilt deutsches Recht, sofern nichts anderes vereinbart ist.</p>
-</div>
+    <section>
+      <h2>§ 2 Tätigkeit als Reisevermittler</h2>
+      <ol class="numbered">
+        <li>Der Vermittler vermittelt Reiseleistungen verschiedener, rechtlich selbstständiger Leistungsträger. Vertragspartner für die jeweilige Reiseleistung wird grundsätzlich der Kunde und der jeweilige Leistungsträger.</li>
+        <li>Der Vermittler selbst erbringt die vermittelten Reiseleistungen grundsätzlich nicht. Die Durchführung erfolgt durch den jeweiligen Leistungsträger, beispielsweise durch das gebuchte Hotel, den jeweiligen Safari-Anbieter oder die jeweilige Fluggesellschaft.</li>
+        <li>In einzelnen Fällen begleitet Jenny Wierzbicki als Vermittlerin die Reise persönlich vor Ort, beispielsweise als lokale Gastgeberin oder Ansprechpartnerin. Dies ändert nichts an der grundsätzlichen Vermittlerstellung nach dieser Ziffer, sofern sich aus der konkreten Vertragsgestaltung im Einzelfall nicht ausnahmsweise etwas anderes ergibt.</li>
+        <li>Für die Durchführung, Qualität, Verfügbarkeit und ordnungsgemäße Erbringung der vermittelten Reiseleistung ist grundsätzlich der jeweilige Leistungsträger nach dessen eigenen Vertrags- und Geschäftsbedingungen verantwortlich.</li>
+        <li>Der Vermittler informiert den Kunden über die für die jeweilige Leistung geltenden Bedingungen, soweit diese dem Vermittler vorliegen.</li>
+        <li>Sofern durch die konkrete Zusammenstellung und Vertragsgestaltung im Einzelfall gesetzlich eine Pauschalreise oder eine andere besondere rechtliche Einordnung entsteht, gelten die hierfür zwingenden gesetzlichen Bestimmungen. Die Bezeichnung der Leistung als „Vermittlung" allein ist für die rechtliche Einordnung nicht ausschlaggebend.</li>
+      </ol>
+    </section>
 
-<!-- §2 LEISTUNGEN -->
-<div class="section" id="leistungen">
-  <span class="section-tag">§ 2</span>
-  <h2>Leistungen & <em>Angebote</em></h2>
-  <div class="divider"></div>
-  <p>Travel 2 Transform bietet folgende Leistungen an:</p>
-  <ul class="rule-list pink">
-    <li><strong>Gruppenreisen</strong> – Geführte Gruppenreisen nach Tanzania & Sansibar, inkl. Safari, Unterkunft und Begleitung</li>
-    <li><strong>Familienreisen</strong> – Individuell abgestimmte Reisen für Familien nach Tanzania & Sansibar</li>
-    <li><strong>Private Journey</strong> – Vollständig individuell gestaltete Privatreisen, exklusiv mit Jenny</li>
-    <li><strong>Retreat</strong> – Yoga- und Wellness-Retreats in Tanzania</li>
-    <li><strong>Safari-Pakete</strong> – Tages- und Mehrtages-Safaris zu den Nationalparks Tanzanias</li>
-    <li><strong>Online-Coaching</strong> – Digitale Beratung, Reisevorbereitung und Wellness-Coaching</li>
-    <li><strong>Digitale Produkte</strong> – Packlisten, Travel Guides, Checklisten und weitere Informationsmaterialien</li>
-    <li><strong>Tagesausflüge</strong> – Einzelne Ausflüge und Aktivitäten vor Ort in Tanzania & Sansibar</li>
-  </ul>
-  <p>Der genaue Leistungsumfang ergibt sich aus dem jeweiligen Angebot oder der individuellen Buchungsbestätigung. Leistungen Dritter (z.B. Fluggesellschaften, Hotels) sind nur dann Bestandteil des Vertrags, wenn dies ausdrücklich schriftlich vereinbart wurde.</p>
-  <div class="tip-box"><p>ℹ️ Gruppenreisen finden ab mindestens <strong>4 Personen</strong> statt. Bei Nichterreichen der Mindestteilnehmerzahl behält sich der Anbieter vor, die Reise abzusagen oder alternative Termine anzubieten. Bereits geleistete Zahlungen werden in diesem Fall vollständig erstattet.</p></div>
-</div>
+    <section>
+      <h2>§ 3 Angebot und Vertragsschluss</h2>
+      <ol class="numbered">
+        <li>Die Darstellung von Reiseleistungen auf der Website oder in sonstigen Informationsmedien stellt grundsätzlich noch kein verbindliches Vertragsangebot dar.</li>
+        <li>Der Kunde kann dem Vermittler eine verbindliche Buchungsanfrage übermitteln.</li>
+        <li>Ein Vermittlungsvertrag kommt zustande, sobald der Vermittler die Buchung bzw. Vermittlung gegenüber dem Kunden bestätigt.</li>
+        <li>Die Verträge über die einzelnen Reiseleistungen kommen entsprechend den jeweiligen Bedingungen des Leistungsträgers zustande.</li>
+        <li>Die Buchungsbestätigung enthält, soweit verfügbar, insbesondere:
+          <ul class="bullets">
+            <li>die gebuchten Leistungen,</li>
+            <li>den jeweiligen Leistungsträger,</li>
+            <li>den Reisepreis,</li>
+            <li>die Zahlungsfristen,</li>
+            <li>die Höhe der Anzahlung,</li>
+            <li>sowie die für die jeweilige Leistung geltenden Stornierungs- und Änderungsbedingungen.</li>
+          </ul>
+        </li>
+      </ol>
+    </section>
 
-<!-- §3 BUCHUNG -->
-<div class="section" id="buchung">
-  <span class="section-tag">§ 3</span>
-  <h2>Buchung & <em>Vertragsschluss</em></h2>
-  <div class="divider"></div>
-  <h3>Buchungsablauf</h3>
-  <ul class="rule-list">
-    <li>Die Buchung erfolgt schriftlich per E-Mail, WhatsApp oder über das Kontaktformular auf der Website.</li>
-    <li>Mit der Buchungsanfrage gibt der Reisende ein verbindliches Angebot zur Buchung ab.</li>
-    <li>Der Vertrag kommt erst durch die schriftliche Buchungsbestätigung des Anbieters zustande.</li>
-    <li>Die Buchungsbestätigung enthält alle wesentlichen Reiseinformationen, den Gesamtpreis sowie die Zahlungsmodalitäten.</li>
-    <li>Der Reisende ist verpflichtet, die Buchungsbestätigung auf Richtigkeit zu prüfen und Fehler unverzüglich zu melden.</li>
-  </ul>
-  <h3>Mindestalter & Teilnahmebedingungen</h3>
-  <ul class="rule-list">
-    <li>Minderjährige unter 18 Jahren dürfen nur in Begleitung eines Erziehungsberechtigten reisen.</li>
-    <li>Der Reisende ist verantwortlich dafür, dass alle Teilnehmer über gültige Reisedokumente (Reisepass, Visum) verfügen.</li>
-    <li>Besondere gesundheitliche Voraussetzungen (z.B. für Safari oder Wanderungen) werden im Angebot gesondert ausgewiesen.</li>
-  </ul>
-</div>
+    <section>
+      <h2>§ 4 Preise</h2>
+      <ol class="numbered">
+        <li>Alle Preise werden in der jeweiligen Buchungsbestätigung angegeben.</li>
+        <li>Sofern nicht ausdrücklich anders angegeben, verstehen sich die Preise als Gesamtpreis der jeweils gebuchten Leistungen einschließlich der zum Zeitpunkt der Buchung bekannten und anfallenden Steuern und Gebühren.</li>
+        <li>Zusätzliche Kosten, die durch nachträgliche Änderungen des Kunden, optionale Zusatzleistungen oder Gebühren des jeweiligen Leistungsträgers entstehen, können zusätzlich berechnet werden.</li>
+        <li>Bei Leistungen, deren Preis in einer Fremdwährung festgelegt wird, können Wechselkursschwankungen berücksichtigt werden. Maßgeblich ist der im Angebot bzw. in der Buchungsbestätigung ausgewiesene Preis.</li>
+      </ol>
+    </section>
 
-<!-- §4 ZAHLUNG -->
-<div class="section" id="zahlung">
-  <span class="section-tag">§ 4</span>
-  <h2>Preise & <em>Zahlung</em></h2>
-  <div class="divider"></div>
-  <h3>Zahlungsmodalitäten</h3>
-  <div style="background:#fff;border-radius:14px;padding:22px;border:1px solid var(--petrol-light);margin:14px 0 22px">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
-      <div style="border-right:1px solid #eef2f0;padding-right:16px">
-        <p style="font-size:12px;letter-spacing:2px;color:var(--pink);font-weight:700;margin-bottom:8px">ANZAHLUNG</p>
-        <p style="font-size:28px;font-weight:700;color:var(--dark);font-family:'Playfair Display',serif;margin-bottom:4px">20–30 %</p>
-        <p style="font-size:13px;color:#888;margin:0">des Gesamtpreises bei Buchungsbestätigung</p>
-      </div>
-      <div>
-        <p style="font-size:12px;letter-spacing:2px;color:var(--petrol-mid);font-weight:700;margin-bottom:8px">RESTBETRAG</p>
-        <p style="font-size:28px;font-weight:700;color:var(--dark);font-family:'Playfair Display',serif;margin-bottom:4px">3 Monate</p>
-        <p style="font-size:13px;color:#888;margin:0">vor Reisebeginn vollständig fällig</p>
-      </div>
+    <section>
+      <h2>§ 5 Zahlungsbedingungen</h2>
+      <ol class="numbered">
+        <li>Mit der Buchungsbestätigung wird eine Anzahlung fällig.</li>
+        <li>Die Höhe der Anzahlung richtet sich nach Art, Umfang, Wert und den Zahlungsbedingungen der gebuchten Leistungen.</li>
+        <li>Die Anzahlung beträgt grundsätzlich zwischen <strong>30&nbsp;%</strong> und <strong>50&nbsp;%</strong> des Gesamtpreises.</li>
+        <li>Als Orientierung können folgende Anzahlungen gelten:
+          <table>
+            <thead><tr><th>Art der Reiseleistung</th><th class="num">Richtwert Anzahlung</th></tr></thead>
+            <tbody>
+              <tr><td>Camping / einfache Unterkünfte</td><td class="num">ab 30&nbsp;%</td></tr>
+              <tr><td>Standard-Hotels / reguläre Reiseleistungen</td><td class="num">ca. 35&nbsp;%</td></tr>
+              <tr><td>Hochwertige Hotels / individuelle Reisen</td><td class="num">ca. 40&nbsp;%</td></tr>
+              <tr><td>Hochwertige Safaris / Premium-Reisen</td><td class="num">ca. 45&nbsp;%</td></tr>
+              <tr><td>Luxusunterkünfte / exklusive Leistungen</td><td class="num">bis zu 50&nbsp;%</td></tr>
+            </tbody>
+          </table>
+        </li>
+        <li>Die konkrete Anzahlung wird dem Kunden vor Abschluss der Buchung mitgeteilt und in der Buchungsbestätigung ausgewiesen.</li>
+        <li>Für einzelne Leistungen kann aufgrund der Bedingungen des jeweiligen Leistungsträgers eine höhere Anzahlung oder eine vollständige Vorauszahlung erforderlich sein. Dies kann insbesondere bei nicht erstattbaren Leistungen, Luxusunterkünften, individuell reservierten Unterkünften, Safaris, Sondertarifen und Flugleistungen der Fall sein.</li>
+        <li>Bei kurzfristigen Buchungen kann der vollständige Reisepreis unmittelbar nach Buchungsbestätigung fällig werden.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>§ 6 Restzahlung</h2>
+      <ol class="numbered">
+        <li>Sofern keine abweichende Zahlungsfrist vereinbart wurde, ist der verbleibende Restbetrag spätestens <strong>30 Tage vor Beginn</strong> der gebuchten Reiseleistung vollständig zu bezahlen.</li>
+        <li>Bei Buchungen innerhalb von 30 Tagen vor Beginn der Reiseleistung kann der vollständige Betrag unmittelbar nach Buchungsbestätigung fällig werden.</li>
+        <li>Maßgeblich sind die in der jeweiligen Buchungsbestätigung angegebenen Zahlungsfristen.</li>
+        <li>Werden fällige Zahlungen nicht fristgerecht geleistet, ist der Vermittler berechtigt, den Kunden zur Zahlung aufzufordern und – soweit rechtlich zulässig – die Buchung nach erfolgloser Fristsetzung zu stornieren. Hierdurch können Stornokosten nach den Bedingungen der jeweiligen Leistungsträger entstehen.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>§ 7 Stornierung durch den Kunden</h2>
+      <ol class="numbered">
+        <li>Der Kunde kann eine gebuchte bzw. vermittelte Reiseleistung vor deren Beginn stornieren.</li>
+        <li>Die bei einer Stornierung anfallenden Kosten richten sich grundsätzlich nach den <strong>Stornierungsbedingungen des jeweiligen Leistungsträgers</strong>.</li>
+        <li>Da unterschiedliche Leistungsträger unterschiedliche Stornierungsbedingungen verwenden, können die Kosten je nach gebuchter Leistung erheblich voneinander abweichen.</li>
+        <li>Der Kunde wird vor bzw. bei Abschluss der Buchung über die ihm bekannten wesentlichen Stornierungsbedingungen informiert.</li>
+        <li>Insbesondere bei Hotels, Safaris, Flügen und exklusiven Reiseleistungen können bereits bei einer frühen Stornierung erhebliche oder vollständige Kosten entstehen.</li>
+        <li>Die bereits geleistete Anzahlung wird auf die tatsächlich anfallenden Stornierungskosten und sonstigen fälligen Beträge angerechnet.</li>
+        <li>Soweit die vom Leistungsträger erhobenen Stornokosten niedriger sind als die bereits geleistete Zahlung, wird ein sich daraus ergebender Erstattungsbetrag nach Abrechnung der Buchung an den Kunden zurückgezahlt, soweit keine weiteren vertraglich vereinbarten Kosten entgegenstehen.</li>
+        <li>Soweit die tatsächlich anfallenden Stornokosten höher sind als die bereits geleistete Anzahlung, kann der Vermittler die Differenz vom Kunden verlangen.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>§ 8 Richtwerte für Stornierungen</h2>
+      <p>Sofern für eine konkrete Leistung keine abweichenden Stornierungsbedingungen des Leistungsträgers vereinbart wurden, können – abhängig von der jeweiligen Reiseleistung – folgende Richtwerte gelten:</p>
+      <table>
+        <thead><tr><th>Zeitpunkt der Stornierung</th><th class="num">Richtwert Stornokosten</th></tr></thead>
+        <tbody>
+          <tr><td>Mehr als 60 Tage vor Reisebeginn</td><td class="num">ab 20&nbsp;%</td></tr>
+          <tr><td>59–30 Tage vor Reisebeginn</td><td class="num">ab 30&nbsp;%</td></tr>
+          <tr><td>29–15 Tage vor Reisebeginn</td><td class="num">ab 50&nbsp;%</td></tr>
+          <tr><td>14–7 Tage vor Reisebeginn</td><td class="num">ab 70&nbsp;%</td></tr>
+          <tr><td>6–1 Tage vor Reisebeginn</td><td class="num">ab 80–90&nbsp;%</td></tr>
+          <tr><td>Am Tag des Reisebeginns / Nichtantritt</td><td class="num">bis zu 100&nbsp;%</td></tr>
+        </tbody>
+      </table>
+      <div class="note"><strong>Wichtig:</strong> Diese Tabelle dient nur als allgemeiner Richtwert. Für die jeweilige Buchung können die konkreten Bedingungen des Leistungsträgers abweichende Stornokosten vorsehen. Diese konkreten Bedingungen gehen den allgemeinen Richtwerten vor, sofern sie dem Kunden vor bzw. bei Buchung mitgeteilt wurden.</div>
+    </section>
+
+    <section>
+      <h2>§ 9 Nicht erstattbare Leistungen</h2>
+      <ol class="numbered">
+        <li>Bestimmte Reiseleistungen werden von Leistungsträgern zu nicht erstattbaren Tarifen angeboten.</li>
+        <li>Hierzu können insbesondere gehören:
+          <ul class="bullets">
+            <li>nicht erstattbare Flugtarife,</li>
+            <li>Sondertarife von Hotels,</li>
+            <li>Vorauszahlungs- und Frühbucherraten,</li>
+            <li>Luxusunterkünfte,</li>
+            <li>exklusive Villen und Lodges,</li>
+            <li>individuell organisierte Safaris,</li>
+            <li>private Fahrzeuge und Guides,</li>
+            <li>spezielle Ausflüge,</li>
+            <li>Eintrittskarten,</li>
+            <li>Sonderveranstaltungen,</li>
+            <li>sowie sonstige ausdrücklich als „non-refundable" bzw. „nicht erstattbar" gekennzeichnete Leistungen.</li>
+          </ul>
+        </li>
+        <li>Bei solchen Leistungen kann der jeweilige Leistungsträger bei einer Stornierung bis zu <strong>100&nbsp;%</strong> des Leistungspreises einbehalten.</li>
+        <li>Der Kunde wird vor Abschluss der Buchung auf nicht erstattbare Leistungen hingewiesen, soweit diese Information zum Zeitpunkt der Buchung verfügbar ist.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>§ 10 Umbuchungen und Änderungen</h2>
+      <ol class="numbered">
+        <li>Änderungen einer bestehenden Buchung sind grundsätzlich nur möglich, sofern der jeweilige Leistungsträger dies zulässt.</li>
+        <li>Für Umbuchungen können Gebühren des jeweiligen Leistungsträgers sowie Preisunterschiede entstehen.</li>
+        <li>Zusätzlich kann für die Bearbeitung einer Umbuchung eine Service- oder Bearbeitungsgebühr des Vermittlers anfallen, sofern diese dem Kunden vor Durchführung der Änderung mitgeteilt wurde.</li>
+        <li>Eine Umbuchung kann insbesondere bei Flügen, Safaris und nicht erstattbaren Hotelraten ausgeschlossen oder nur eingeschränkt möglich sein.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>§ 11 Flugleistungen</h2>
+      <ol class="numbered">
+        <li>Flugleistungen werden ausschließlich als Vermittlungsleistung angeboten, sofern nicht ausdrücklich etwas anderes vereinbart wurde.</li>
+        <li>Für Flugleistungen gelten die Beförderungsbedingungen und Tarifbestimmungen der jeweiligen Fluggesellschaft.</li>
+        <li>Änderungen, Stornierungen, Flugzeitenänderungen, Flugausfälle und sonstige Maßnahmen der Fluggesellschaft richten sich grundsätzlich nach den Bedingungen und den gesetzlichen Verpflichtungen des jeweiligen Luftfahrtunternehmens.</li>
+        <li>Der Vermittler unterstützt den Kunden im Rahmen seiner Möglichkeiten bei der Kommunikation mit der jeweiligen Fluggesellschaft.</li>
+        <li>Für Umbuchungen, Änderungen oder Stornierungen können Gebühren und Preisunterschiede entstehen.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>§ 12 Safari- und Erlebnisleistungen</h2>
+      <ol class="numbered">
+        <li>Safari-, Tour-, Ausflugs- und Erlebnisleistungen werden durch selbstständige Drittanbieter durchgeführt.</li>
+        <li>Für die Durchführung gelten die jeweiligen Bedingungen des Safari- bzw. Erlebnisanbieters.</li>
+        <li>Der Vermittler übernimmt keine Garantie dafür, dass bestimmte Tiere, Naturereignisse, Wetterbedingungen oder sonstige natürliche Gegebenheiten während einer Safari oder eines Ausflugs tatsächlich beobachtet bzw. erlebt werden können.</li>
+        <li>Änderungen des Ablaufs können aufgrund von Wetter, Naturbedingungen, behördlichen Vorgaben, Sicherheitsgründen oder anderen Umständen erforderlich sein.</li>
+        <li>Soweit solche Änderungen durch den jeweiligen Leistungsträger vorgenommen werden, gelten dessen Vertragsbedingungen und die jeweils anwendbaren gesetzlichen Regelungen.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>§ 13 Hotels und Unterkünfte</h2>
+      <ol class="numbered">
+        <li>Die vermittelten Unterkünfte werden durch die jeweiligen Hotels, Lodges, Camps, Resorts oder sonstigen Unterkunftsanbieter bereitgestellt.</li>
+        <li>Für die Unterkunft gelten die jeweiligen Buchungs- und Geschäftsbedingungen des Leistungsträgers.</li>
+        <li>Besondere Wünsche des Kunden, beispielsweise bestimmte Zimmer, Etagen, Ausblicke, Bettenkonfigurationen oder vergleichbare Wünsche, werden nach Möglichkeit an den Leistungsträger weitergegeben. Eine Garantie für deren Erfüllung besteht nur, wenn diese ausdrücklich bestätigt wurde.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>§ 14 Leistungsänderungen durch Leistungsträger</h2>
+      <ol class="numbered">
+        <li>Leistungsträger können unter bestimmten Umständen Änderungen an einer gebuchten Leistung vornehmen.</li>
+        <li>Hierzu können beispielsweise Änderungen von Flugzeiten, Hotelzimmern, Routen, Safari-Abläufen oder Transferzeiten gehören.</li>
+        <li>Der Vermittler wird den Kunden über ihm bekannt werdende wesentliche Änderungen informieren und – soweit möglich – bei der Kommunikation mit dem jeweiligen Leistungsträger unterstützen.</li>
+        <li>Rechte des Kunden gegenüber dem jeweiligen Leistungsträger oder aufgrund zwingender gesetzlicher Vorschriften bleiben unberührt.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>§ 15 Haftung des Vermittlers</h2>
+      <ol class="numbered">
+        <li>Der Vermittler haftet für die ordnungsgemäße Erbringung seiner eigenen Vermittlungsleistung.</li>
+        <li>Für die tatsächliche Durchführung der vermittelten Reiseleistungen haftet grundsätzlich der jeweilige Leistungsträger im Rahmen seiner gesetzlichen und vertraglichen Verpflichtungen.</li>
+        <li>Der Vermittler haftet nicht für Schäden, Ausfälle, Verspätungen, Änderungen oder sonstige Beeinträchtigungen, die ausschließlich auf die Leistungserbringung eines Drittanbieters zurückzuführen sind, soweit den Vermittler hierfür keine eigene Pflichtverletzung oder gesetzliche Haftung trifft.</li>
+        <li>Die Haftung des Vermittlers für eigene Pflichtverletzungen richtet sich nach den gesetzlichen Vorschriften.</li>
+        <li>Eine Haftungsbeschränkung gilt nicht, soweit zwingend gesetzlich gehaftet wird, insbesondere bei Vorsatz, grober Fahrlässigkeit, Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit sowie in sonstigen gesetzlich zwingenden Fällen.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>§ 16 Mitwirkungspflichten des Kunden</h2>
+      <ol class="numbered">
+        <li>Der Kunde ist verpflichtet, alle für die Buchung erforderlichen Angaben vollständig und richtig zu machen.</li>
+        <li>Hierzu gehören insbesondere:
+          <ul class="bullets">
+            <li>vollständige Namen entsprechend den Reisedokumenten,</li>
+            <li>Geburtsdaten, soweit erforderlich,</li>
+            <li>Kontaktdaten,</li>
+            <li>Zahlungsinformationen,</li>
+            <li>sowie sonstige für die jeweilige Buchung erforderliche Angaben.</li>
+          </ul>
+        </li>
+        <li>Der Kunde ist selbst dafür verantwortlich, über die für seine Reise erforderlichen Reisedokumente, Visa, Einreisegenehmigungen, Impf- oder Gesundheitsnachweise und sonstigen Einreisevoraussetzungen zu verfügen, soweit diese nicht ausdrücklich Bestandteil der vereinbarten Vermittlungsleistung sind.</li>
+        <li>Der Kunde hat die ihm zur Verfügung gestellten Buchungsunterlagen auf Richtigkeit zu überprüfen und erkennbare Fehler unverzüglich mitzuteilen.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>§ 17 Reiseversicherung</h2>
+      <p>Der Abschluss einer geeigneten Reiseversicherung wird ausdrücklich empfohlen.</p>
+      <p>Insbesondere kann der Abschluss einer Reiserücktritts- und Reiseabbruchversicherung sinnvoll sein, da Stornierungskosten – abhängig von den jeweiligen Bedingungen – auch bei kurzfristigem Rücktritt erheblich sein können.</p>
+      <p>Der Abschluss einer Versicherung befreit den Kunden nicht von der Verpflichtung, die vereinbarten Stornierungsbedingungen einzuhalten.</p>
+    </section>
+
+    <section>
+      <h2>§ 18 Kommunikation und Unterlagen</h2>
+      <ol class="numbered">
+        <li>Die Kommunikation mit dem Kunden kann, sofern vereinbart, per E-Mail oder über andere digitale Kommunikationswege erfolgen.</li>
+        <li>Der Kunde ist dafür verantwortlich, die von ihm angegebene E-Mail-Adresse regelmäßig zu überprüfen.</li>
+        <li>Buchungsbestätigungen, Rechnungen, Reiseunterlagen und sonstige wichtige Informationen können elektronisch übermittelt werden.</li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>§ 19 Datenschutz</h2>
+      <p>Personenbezogene Daten des Kunden werden ausschließlich im Rahmen der geltenden Datenschutzbestimmungen verarbeitet.</p>
+      <p>Nähere Informationen zur Verarbeitung personenbezogener Daten ergeben sich aus der gesonderten Datenschutzerklärung des Vermittlers.</p>
+    </section>
+
+    <section>
+      <h2>§ 20 Schlussbestimmungen</h2>
+      <ol class="numbered">
+        <li>Es gilt das Recht der Bundesrepublik Deutschland, soweit dem keine zwingenden gesetzlichen Bestimmungen entgegenstehen.</li>
+        <li>Sollte eine Bestimmung dieser Allgemeinen Geschäfts- und Vermittlungsbedingungen unwirksam sein oder werden, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.</li>
+        <li>An die Stelle der unwirksamen Bestimmung treten die gesetzlichen Vorschriften.</li>
+        <li>Für Verbraucher gelten die gesetzlichen Gerichtsstandsregelungen.</li>
+      </ol>
+    </section>
+
+    <div class="legal-card">
+      <p class="company">Travel 2 Transform</p>
+      <p>Jenny Wierzbicki</p>
+      <p>Einzelunternehmen (Kleinunternehmer gemäß § 19 UStG)</p>
+      <p>Martin-Luther-Straße 28, 67454 Haßloch, Deutschland</p>
+      <p>E-Mail: infotravel2transform@gmail.com</p>
+      <p>Telefon: +49 176 24238972</p>
+      <p>Website: travel2transform.de</p>
+      <p style="margin-top:0.8rem;">Stand: 28. August 2026</p>
     </div>
   </div>
-  <ul class="rule-list">
-    <li>Die genaue Anzahlungshöhe (20 % oder 30 %) wird in der individuellen Buchungsbestätigung festgelegt.</li>
-    <li>Die Anzahlung ist innerhalb von <strong>7 Werktagen</strong> nach Buchungsbestätigung zu leisten.</li>
-    <li>Der Restbetrag ist spätestens <strong>3 Monate vor Reisebeginn</strong> vollständig zu begleichen.</li>
-    <li>Bei Buchungen, die weniger als 3 Monate vor Reisebeginn erfolgen, ist der Gesamtbetrag sofort fällig.</li>
-    <li>Alle Preise verstehen sich in USD oder EUR, wie im Angebot angegeben.</li>
-  </ul>
-  <h3>Akzeptierte Zahlungsmethoden</h3>
-  <div class="payment-grid">
-    <div class="payment-card"><span class="payment-icon">🏦</span><h4>Banküberweisung</h4><p>SEPA & International</p></div>
-    <div class="payment-card"><span class="payment-icon">💙</span><h4>PayPal</h4><p>Schnell & sicher</p></div>
-    <div class="payment-card"><span class="payment-icon">💳</span><h4>Kreditkarte</h4><p>Visa & Mastercard</p></div>
-    <div class="payment-card"><span class="payment-icon">⚡</span><h4>Stripe</h4><p>Online-Zahlung</p></div>
-  </div>
-  <div class="warning-box"><p>⚠️ Bei verspäteter Zahlung behält sich der Anbieter vor, die Buchung zu stornieren und den Platz anderweitig zu vergeben. Der Reisende trägt in diesem Fall die anfallenden Stornokosten gemäß §5.</p></div>
-</div>
-
-<!-- §5 STORNIERUNG -->
-<div class="section" id="storno">
-  <span class="section-tag">§ 5</span>
-  <h2>Stornierung & <em>Rücktritt</em></h2>
-  <div class="divider"></div>
-
-  <h3>Stornierung durch den Reisenden</h3>
-  <p>Eine Stornierung muss schriftlich per E-Mail an <a href="mailto:infotravel2transform@gmail.com" style="color:var(--petrol-mid);font-weight:700">infotravel2transform@gmail.com</a> erfolgen. Maßgeblich ist das Datum des Eingangs der Stornierungserklärung beim Anbieter.</p>
-
-  <table class="storno-table">
-    <thead>
-      <tr>
-        <th>Zeitraum vor Reisebeginn</th>
-        <th>Stornogebühr</th>
-        <th>Bewertung</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Mehr als 6 Monate</strong></td>
-        <td>Anzahlung (20–30 %)</td>
-        <td><span class="storno-badge badge-low">Gering</span></td>
-      </tr>
-      <tr>
-        <td><strong>3–6 Monate</strong></td>
-        <td>50 % des Gesamtpreises</td>
-        <td><span class="storno-badge badge-mid">Mittel</span></td>
-      </tr>
-      <tr>
-        <td><strong>6–12 Wochen</strong></td>
-        <td>75 % des Gesamtpreises</td>
-        <td><span class="storno-badge badge-high">Hoch</span></td>
-      </tr>
-      <tr>
-        <td><strong>Weniger als 6 Wochen</strong></td>
-        <td>90 % des Gesamtpreises</td>
-        <td><span class="storno-badge badge-full">Sehr hoch</span></td>
-      </tr>
-      <tr>
-        <td><strong>Weniger als 2 Wochen / No-Show</strong></td>
-        <td>100 % des Gesamtpreises</td>
-        <td><span class="storno-badge badge-full">Vollständig</span></td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="tip-box"><p>💡 <strong>Tipp:</strong> Wir empfehlen dringend den Abschluss einer <strong>Reiserücktrittsversicherung</strong>. Diese übernimmt im Krankheits- oder Notfall die Stornokosten für dich.</p></div>
-
-  <h3>Umbuchung</h3>
-  <ul class="rule-list">
-    <li>Eine kostenfreie Umbuchung auf einen anderen Termin ist bis <strong>4 Monate</strong> vor Reisebeginn einmalig möglich, sofern Plätze verfügbar sind.</li>
-    <li>Umbuchungen weniger als 4 Monate vor Reisebeginn werden wie eine Stornierung behandelt.</li>
-    <li>Umbuchungsanfragen müssen schriftlich beim Anbieter eingehen.</li>
-  </ul>
-
-  <h3>Stornierung durch den Anbieter</h3>
-  <ul class="rule-list">
-    <li>Der Anbieter behält sich vor, eine Reise abzusagen, wenn die <strong>Mindestteilnehmerzahl von 4 Personen</strong> nicht erreicht wird.</li>
-    <li>Im Falle höherer Gewalt (Naturkatastrophen, politische Unruhen, Pandemien, behördliche Reisewarnungen) kann der Anbieter die Reise kostenfrei stornieren.</li>
-    <li>Bei Absage durch den Anbieter werden alle bereits geleisteten Zahlungen vollständig erstattet.</li>
-    <li>Weitergehende Ansprüche (z.B. Reisekosten, Verdienstausfall) sind ausgeschlossen, sofern die Absage auf höherer Gewalt beruht.</li>
-  </ul>
-</div>
-
-<!-- §6 PFLICHTEN -->
-<div class="section" id="pflichten">
-  <span class="section-tag">§ 6</span>
-  <h2>Pflichten des <em>Reisenden</em></h2>
-  <div class="divider"></div>
-  <ul class="rule-list">
-    <li>Der Reisende ist verantwortlich für die Beschaffung aller notwendigen Reisedokumente (gültiger Reisepass, Visum, Impfnachweise).</li>
-    <li>Eine <strong>Auslandskrankenversicherung</strong> inkl. Krankenrücktransport wird dringend empfohlen und liegt in der Eigenverantwortung des Reisenden.</li>
-    <li>Für Reisen nach Sansibar ist seit dem 01.10.2024 eine <strong>lokale Zanzibar-Versicherung</strong> Pflicht. Der Reisende ist selbst für deren Abschluss verantwortlich.</li>
-    <li>Der Reisende verpflichtet sich, die lokalen Gesetze, Kulturnormen und Verhaltensregeln in Tanzania zu respektieren.</li>
-    <li>Bei Gruppenreisen hat der Reisende das Recht anderer Teilnehmer auf eine ungestörte Reise zu respektieren.</li>
-    <li>Schäden an Unterkünften, Fahrzeugen oder Ausrüstung, die durch den Reisenden verursacht werden, sind vollständig zu ersetzen.</li>
-    <li>Der Reisende ist verpflichtet, den Anbieter über relevante gesundheitliche Einschränkungen zu informieren, die die Durchführung der Reise beeinflussen könnten.</li>
-  </ul>
-</div>
-
-<!-- §7 HAFTUNG -->
-<div class="section" id="haftung">
-  <span class="section-tag">§ 7</span>
-  <h2>Haftung & <em>Gewährleistung</em></h2>
-  <div class="divider"></div>
-  <p>Der Anbieter haftet für die sorgfältige Vorbereitung und Durchführung der vereinbarten Reiseleistungen.</p>
-  <ul class="rule-list">
-    <li>Der Anbieter haftet nicht für Leistungen Dritter (z.B. Fluggesellschaften, Hotels, lokale Transportanbieter), die nicht ausdrücklich Bestandteil des Vertrags sind.</li>
-    <li>Für Schäden, die durch höhere Gewalt entstehen (Naturkatastrophen, politische Unruhen, Streiks, Pandemien), wird jede Haftung ausgeschlossen.</li>
-    <li>Der Anbieter haftet nicht für persönliche Verletzungen, Diebstahl oder Sachschäden, die durch das Verhalten des Reisenden oder Dritter entstehen.</li>
-    <li>Bei Mängeln der Reiseleistung ist der Reisende verpflichtet, diese <strong>unverzüglich</strong> beim Anbieter zu melden, damit Abhilfe geschaffen werden kann.</li>
-    <li>Tanzania ist ein Reiseziel mit besonderen Risiken. Der Reisende akzeptiert mit der Buchung, dass Safari, Wildtiere und Naturerlebnisse ein inhärentes Restrisiko beinhalten.</li>
-    <li>Die Haftung des Anbieters ist auf den Buchungswert der jeweiligen Reise begrenzt, sofern keine grobe Fahrlässigkeit oder Vorsatz vorliegt.</li>
-  </ul>
-  <div class="warning-box"><p>⚠️ <strong>Reisewarnung:</strong> Bitte informiere dich vor Reiseantritt über aktuelle Reise- und Sicherheitshinweise des Auswärtigen Amtes unter <a href="https://www.auswaertiges-amt.de" target="_blank" style="color:var(--petrol-mid);font-weight:700">www.auswaertiges-amt.de</a>.</p></div>
-</div>
-
-<!-- §8 DATENSCHUTZ -->
-<div class="section" id="datenschutz">
-  <span class="section-tag">§ 8</span>
-  <h2>Datenschutz & <em>Kommunikation</em></h2>
-  <div class="divider"></div>
-  <p>Der Schutz deiner persönlichen Daten ist uns wichtig. Wir verarbeiten deine Daten ausschließlich zur Durchführung der gebuchten Leistungen und zur Kommunikation.</p>
-  <ul class="rule-list">
-    <li>Personenbezogene Daten (Name, E-Mail, Telefon, Reisedaten) werden nur im Rahmen der Buchungsabwicklung und gesetzlicher Aufbewahrungspflichten gespeichert.</li>
-    <li>Daten werden nicht an Dritte weitergegeben, außer es ist für die Leistungserbringung notwendig (z.B. an lokale Reisepartner in Tanzania).</li>
-    <li>Der Reisende hat jederzeit das Recht auf Auskunft, Berichtigung und Löschung seiner gespeicherten Daten.</li>
-    <li>Für Fragen zum Datenschutz wende dich an: <a href="mailto:infotravel2transform@gmail.com" style="color:var(--petrol-mid)">infotravel2transform@gmail.com</a></li>
-    <li>Es gilt die Datenschutzgrundverordnung (DSGVO) der Europäischen Union.</li>
-  </ul>
-  <h3>Fotos & Social Media</h3>
-  <ul class="rule-list">
-    <li>Während der Reise können Fotos und Videos erstellt werden, die für Marketing- und Dokumentationszwecke verwendet werden.</li>
-    <li>Der Reisende erklärt mit der Buchung sein Einverständnis zur Nutzung von Reisefotos, auf denen er abgebildet ist, für die Website und Social-Media-Kanäle von Travel 2 Transform.</li>
-    <li>Dieses Einverständnis kann jederzeit schriftlich widerrufen werden.</li>
-  </ul>
-</div>
-
-<!-- §9 SCHLUSSBESTIMMUNGEN -->
-<div class="section" id="schluss">
-  <span class="section-tag">§ 9</span>
-  <h2>Schluss&shy;bestimmungen</h2>
-  <div class="divider"></div>
-  <ul class="rule-list">
-    <li><strong>Anwendbares Recht:</strong> Es gilt das Recht der Bundesrepublik Deutschland.</li>
-    <li><strong>Gerichtsstand:</strong> Für Streitigkeiten aus diesem Vertrag ist das Gericht am Sitz des Anbieters in Deutschland zuständig, sofern der Reisende Kaufmann oder eine juristische Person ist.</li>
-    <li><strong>Salvatorische Klausel:</strong> Sollten einzelne Bestimmungen dieser AGB unwirksam sein, bleiben die übrigen Bestimmungen davon unberührt.</li>
-    <li><strong>Schriftform:</strong> Änderungen und Ergänzungen dieser AGB bedürfen der Schriftform. Mündliche Nebenabreden sind nicht verbindlich.</li>
-    <li><strong>Streitbeilegung:</strong> Wir sind bereit, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen. Weitere Informationen zur Online-Streitbeilegung: <a href="https://ec.europa.eu/consumers/odr" target="_blank" style="color:var(--petrol-mid)">ec.europa.eu/consumers/odr</a></li>
-  </ul>
-
-  <div style="background:var(--petrol-dark);border-radius:16px;padding:28px;text-align:center;margin-top:32px">
-    <p style="font-family:'Playfair Display',serif;font-style:italic;font-size:20px;color:#fff;margin-bottom:14px">Fragen zu unseren AGB?</p>
-    <p style="color:rgba(255,255,255,0.65);font-size:14px;margin-bottom:20px">Wir antworten schnell und unkompliziert.</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-      <a href="mailto:infotravel2transform@gmail.com" style="background:var(--pink);color:#fff;padding:11px 22px;border-radius:20px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase">E-Mail schreiben</a>
-      <a href="https://wa.me/4917624238972" style="background:rgba(255,255,255,0.1);color:#7de8d8;border:1px solid rgba(125,232,216,0.3);padding:11px 22px;border-radius:20px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase">WhatsApp</a>
-    </div>
-  </div>
-
-  <p style="text-align:center;font-size:12px;color:#aaa;margin-top:28px">Stand: Januar 2025 · Travel 2 Transform · Jenny Wierzbicki · Deutschland</p>
-</div>
-
 </main>
 
-<footer>
-  <p>© 2025 Travel 2 Transform · Jenny Wierzbicki</p>
-  <p><a href="https://www.travel2transform.de">www.travel2transform.de</a> · <a href="mailto:infotravel2transform@gmail.com">infotravel2transform@gmail.com</a></p>
-</footer>
+<footer>© Travel 2 Transform · Jenny Wierzbicki · Tansania &amp; Sansibar<span class="sep">·</span><a href="index.html">Startseite</a><span class="sep">·</span><a href="impressum.html">Impressum</a><span class="sep">·</span><a href="agb.html">AGB</a></footer>
 
 </body>
 </html>
